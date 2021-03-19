@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "755780464767",
+    "project_id": "cuppers-mobile",
+    "storage_bucket": "cuppers-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755780464767:android:f507fe675096a1521ecf4a",
+        "android_client_info": {
+          "package_name": "dev.cuppers_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755780464767-kfn4oufirvh95cnm0tlb640nqkpjr22u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgdya8R40MU9mb6bQvMmfnc4unchd2vMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755780464767-kfn4oufirvh95cnm0tlb640nqkpjr22u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "755780464767-l484m1evokuhlj5cga92n7denj50vjqv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.cuppersMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
