@@ -26,6 +26,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  final String params = 'bSToUcjAUQU3B698byZ9'; // ドキュメントID
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,12 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
           onTap: () =>
             Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) {
-                    return CoffeePage();
-                  }
+                  builder: (context) => CoffeePage()
               )
-            )
-          ,
+            ),
           leading: Icon(
             Icons.star_border,
             size: 35,
@@ -91,41 +91,25 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class CoffeePage extends StatefulWidget {
+
   @override
   _CoffeePageState createState() {
     return _CoffeePageState();
   }
 }
 
-class _CoffeePageState extends State<MyHomePage> {
+class _CoffeePageState extends State<CoffeePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Cuppers")),
-      body: _buildBody(),
-    );
-  }
-
-  Widget _buildBody() {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection("coffee").snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        return _buildPage(snapshot.data.docs);
-      },
-    );
-    // return FirebaseFirestore.instance
-    //   .collection("coffees")
-    //   .doc("bSToUcjAUQU3B698byZ9");
-  }
-
-  Widget _buildPage(List<DocumentSnapshot> snapList) {
-    return ListView.builder(
-        padding: const EdgeInsets.all(18.0),
-        itemCount: snapList.length,
-        itemBuilder: (context, i) {
-          return null;
-        }
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('coffee').document('bSToUcjAUQU3B698byZ9').snapshots(),
+        builder: (context, snapshot) {
+          return Text(snapshot.data["name"]);
+        },
+      ),
     );
   }
 }
