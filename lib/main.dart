@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Dog Name Voting",
+      title: "Cuppers",
       home: MyHomePage(),
     );
   }
@@ -29,14 +29,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Dog Name Voting")),
+      appBar: AppBar(title: Text("Cuppers")),
       body: _buildBody(),
     );
   }
 
   Widget _buildBody() {
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
-      stream: FirebaseFirestore.instance.collection("dogs").snapshots(),
+      stream: FirebaseFirestore.instance.collection("coffee").snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
         return _buildList(snapshot.data.docs);
@@ -65,11 +65,67 @@ class _MyHomePageState extends State<MyHomePage> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: ListTile(
+          onTap: () =>
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (context) {
+                    return CoffeePage();
+                  }
+              )
+            )
+          ,
+          leading: Icon(
+            Icons.star_border,
+            size: 35,
+          ),
           title: Text(data["name"]),
-          trailing: Text(data["votes"].toString()),
-          onTap: () => snap.reference.update({"votes": FieldValue.increment(1)}),
+          subtitle: Text("made in " + data["farmer"]),
+          trailing: Text("Score " + data["score"].toString()),
+          // isThreeLine: true,
+          // firestoreのtimestampを表示する方法↓
+          // data["timestamp"].toDate().toString()
         ),
       ),
+    );
+  }
+}
+
+class CoffeePage extends StatefulWidget {
+  @override
+  _CoffeePageState createState() {
+    return _CoffeePageState();
+  }
+}
+
+class _CoffeePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Cuppers")),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection("coffee").snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+        return _buildPage(snapshot.data.docs);
+      },
+    );
+    // return FirebaseFirestore.instance
+    //   .collection("coffees")
+    //   .doc("bSToUcjAUQU3B698byZ9");
+  }
+
+  Widget _buildPage(List<DocumentSnapshot> snapList) {
+    return ListView.builder(
+        padding: const EdgeInsets.all(18.0),
+        itemCount: snapList.length,
+        itemBuilder: (context, i) {
+          return null;
+        }
     );
   }
 }
