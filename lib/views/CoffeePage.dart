@@ -18,11 +18,8 @@ class _CoffeePageState extends State<CoffeePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Cuppers")),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('coffee').document('bSToUcjAUQU3B698byZ9').snapshots(),
-        builder: (context, snapshot) {
-          return Text(snapshot.data["name"]);
-        },
+      body: Center(
+        child: Text('コーヒー詳細画面です')
       ),
     );
   }
