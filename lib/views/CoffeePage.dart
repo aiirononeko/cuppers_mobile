@@ -12,8 +12,29 @@ class CoffeePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Cuppers")),
-      body: Center(
-        child: Text(coffeeInfo.toString())
+      body: Column(
+        children: <Widget>[
+          Text(coffeeInfo['cupped_date'].toDate().toString()),
+          Text(coffeeInfo['coffee_name']),
+          Text('Made in ${coffeeInfo['country']}'),
+          Text('Score ${coffeeInfo['coffee_score']}'),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_cafe_outlined),
+            label: 'Cupping',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star_border_outlined),
+            label: 'Favorite',
+          ),
+        ],
       ),
     );
   }
