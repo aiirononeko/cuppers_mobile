@@ -25,6 +25,7 @@ class MyHomePage extends StatefulWidget {
   }
 }
 
+// マイページ
 class _MyHomePageState extends State<MyHomePage> {
 
   final String params = 'bSToUcjAUQU3B698byZ9'; // ドキュメントID
@@ -90,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+// カッピング情報詳細画面
 class CoffeePage extends StatefulWidget {
 
   @override
