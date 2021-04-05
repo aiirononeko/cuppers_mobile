@@ -4,22 +4,39 @@ import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
 // カッピング情報詳細画面
-class CoffeePage extends StatefulWidget {
+// class CoffeePage extends StatefulWidget {
+//
+//   @override
+//   _CoffeePageState createState() {
+//     return _CoffeePageState();
+//   }
+// }
+//
+// class _CoffeePageState extends State<CoffeePage> {
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text("Cuppers")),
+//       body: Center(
+//         child: Text('コーヒー詳細画面です')
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  _CoffeePageState createState() {
-    return _CoffeePageState();
-  }
-}
+class CoffeePage extends StatelessWidget {
 
-class _CoffeePageState extends State<CoffeePage> {
+  final String paramText;
+
+  CoffeePage({Key key, @required this.paramText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Cuppers")),
       body: Center(
-        child: Text('コーヒー詳細画面です')
+        child: Text(paramText)
       ),
     );
   }

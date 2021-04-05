@@ -79,9 +79,10 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         ),
         child: ListTile(
           onTap: () =>
-              Navigator.of(context).push(
+              Navigator.push(
+                  context,
                   MaterialPageRoute(
-                      builder: (context) => CoffeePage()
+                      builder: (context) => CoffeePage(paramText: "hogehoge")
                   )
               ),
           leading: Icon(
