@@ -82,7 +82,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CoffeePage(paramText: "hogehoge")
+                      builder: (context) => CoffeePage(coffeeInfo: data)
                   )
               ),
           leading: Icon(
