@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
 import './CoffeePage.dart';
+import './CuppingPage.dart';
 
 // カッピングしたコーヒーを一覧表示するページ
 class CoffeeIndexPage extends StatefulWidget {
@@ -19,24 +20,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Cuppers")),
       body: _buildBody(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_cafe_outlined),
-            label: 'Cupping',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star_border_outlined),
-            label: 'Favorite',
-          ),
-        ],
-      ),
     );
   }
 
