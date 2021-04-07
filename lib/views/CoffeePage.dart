@@ -27,22 +27,6 @@ class CoffeePage extends StatelessWidget {
           Text('overall ${coffeeInfo['overall']}'),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_cafe_outlined),
-            label: 'Cupping',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star_border_outlined),
-            label: 'Favorite',
-          ),
-        ],
-      ),
     );
   }
 }
