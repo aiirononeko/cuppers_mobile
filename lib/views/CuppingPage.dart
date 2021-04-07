@@ -20,14 +20,14 @@ class _CuppingPageState extends State<CuppingPage> {
   String _coffeeName = '';
   String _country = '';
   String _process = '';
-  double _sweetness = 6.0;
-  double _acidity = 6.0;
-  double _cleanCup = 6.0;
-  double _mouseFeel = 6.0;
-  double _afterTaste = 6.0;
-  double _balance = 6.0;
-  double _flavor = 6.0;
-  double _overall = 6.0;
+  double _sweetness = 4.0;
+  double _acidity = 4.0;
+  double _cleanCup = 4.0;
+  double _mouseFeel = 4.0;
+  double _afterTaste = 4.0;
+  double _balance = 4.0;
+  double _flavor = 4.0;
+  double _overall = 4.0;
   double _coffeeScore = 0;
 
   void _coffeeNameChanged(String str) => setState(() {_coffeeName = str; });
@@ -63,141 +63,191 @@ class _CuppingPageState extends State<CuppingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Coffee Name',
-              hintText: 'Yirgacheffe Konga'
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _coffeeNameChanged,
-          ),
-          TextField(
-            decoration: InputDecoration(
-                labelText: 'Country',
-                hintText: 'Ethiopia'
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _countryChanged,
-          ),
-          TextField(
-            decoration: InputDecoration(
-                labelText: 'Process',
-                hintText: 'Full Washed'
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _processChanged,
-          ),
-          // Text('クリーンカップ'),
-          // new Slider(
-          //   label: '$_cleanCup',
-          //   min: 0,
-          //   max: 10,
-          //   value: _cleanCup,
-          //   // activeColor: Colors.orange,
-          //   // inactiveColor: Colors.blue,
-          //   divisions: 20,
-          //   onChanged: _slideCleanCup
-          // ),
-          // Text('甘さ'),
-          // new Slider(
-          //     label: '$_sweetness',
-          //     min: 0,
-          //     max: 10,
-          //     value: _sweetness,
-          //     // activeColor: Colors.orange,
-          //     // inactiveColor: Colors.blue,
-          //     divisions: 20,
-          //     onChanged: _slideSweetness
-          // ),
-          // Text('酸'),
-          // new Slider(
-          //     label: '$_acidity',
-          //     min: 0,
-          //     max: 10,
-          //     value: _acidity,
-          //     // activeColor: Colors.orange,
-          //     // inactiveColor: Colors.blue,
-          //     divisions: 20,
-          //     onChanged: _slideAcidity
-          // ),
-          // Text('マウスフィール'),
-          // new Slider(
-          //     label: '$_mouseFeel',
-          //     min: 0,
-          //     max: 10,
-          //     value: _mouseFeel,
-          //     // activeColor: Colors.orange,
-          //     // inactiveColor: Colors.blue,
-          //     divisions: 20,
-          //     onChanged: _slideMouseFeel
-          // ),
-          // Text('アフターテイスト'),
-          // new Slider(
-          //     label: '$_afterTaste',
-          //     min: 0,
-          //     max: 10,
-          //     value: _afterTaste,
-          //     // activeColor: Colors.orange,
-          //     // inactiveColor: Colors.blue,
-          //     divisions: 20,
-          //     onChanged: _slideAfterTaste
-          // ),
-          // Text('フレーバー'),
-          // new Slider(
-          //     label: '$_flavor',
-          //     min: 0,
-          //     max: 10,
-          //     value: _flavor,
-          //     // activeColor: Colors.orange,
-          //     // inactiveColor: Colors.blue,
-          //     divisions: 20,
-          //     onChanged: _slideFlavor
-          // ),
-          // Text('バランス'),
-          // new Slider(
-          //     label: '$_balance',
-          //     min: 0,
-          //     max: 10,
-          //     value: _balance,
-          //     // activeColor: Colors.orange,
-          //     // inactiveColor: Colors.blue,
-          //     divisions: 20,
-          //     onChanged: _slideBalance
-          // ),
-          // Text('オーバーオール'),
-          // new Slider(
-          //     label: '$_overall',
-          //     min: 0,
-          //     max: 10,
-          //     value: _overall,
-          //     // activeColor: Colors.orange,
-          //     // inactiveColor: Colors.blue,
-          //     divisions: 20,
-          //     onChanged: _slideOverall
-          // )
-        ],
-        // child: RaisedButton(
-        //   child: const Text('テストデータ投入'),
-        //   color: Colors.blue,
-        //   textColor: Colors.white,
-        //   onPressed: () {
-        //     _setCuppingData(_dummyCuppingData); // TODO ダミー
-        //     Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //             builder: (context) => CoffeePage(coffeeInfo: _dummyCuppingData) // TODO ダミー
-        //         )
-        //     );
-        //   },
-        // ),
+      body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Coffee Name',
+                    hintText: 'Yirgacheffe Konga'
+                ),
+                keyboardType: TextInputType.text,
+                onChanged: _coffeeNameChanged,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Country',
+                    hintText: 'Ethiopia'
+                ),
+                keyboardType: TextInputType.text,
+                onChanged: _countryChanged,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'Process',
+                    hintText: 'Full Washed'
+                ),
+                keyboardType: TextInputType.text,
+                onChanged: _processChanged,
+              ),
+              Text('クリーンカップ'),
+              new Slider(
+                  label: '$_cleanCup',
+                  min: 0,
+                  max: 8,
+                  value: _cleanCup,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideCleanCup
+              ),
+              Text('甘さ'),
+              new Slider(
+                  label: '$_sweetness',
+                  min: 0,
+                  max: 8,
+                  value: _sweetness,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideSweetness
+              ),
+              Text('酸'),
+              new Slider(
+                  label: '$_acidity',
+                  min: 0,
+                  max: 8,
+                  value: _acidity,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideAcidity
+              ),
+              Text('マウスフィール'),
+              new Slider(
+                  label: '$_mouseFeel',
+                  min: 0,
+                  max: 8,
+                  value: _mouseFeel,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideMouseFeel
+              ),
+              Text('アフターテイスト'),
+              new Slider(
+                  label: '$_afterTaste',
+                  min: 0,
+                  max: 8,
+                  value: _afterTaste,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideAfterTaste
+              ),
+              Text('フレーバー'),
+              new Slider(
+                  label: '$_flavor',
+                  min: 0,
+                  max: 8,
+                  value: _flavor,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideFlavor
+              ),
+              Text('バランス'),
+              new Slider(
+                  label: '$_balance',
+                  min: 0,
+                  max: 8,
+                  value: _balance,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideBalance
+              ),
+              Text('オーバーオール'),
+              new Slider(
+                  label: '$_overall',
+                  min: 0,
+                  max: 8,
+                  value: _overall,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideOverall
+              ),
+              FlatButton(
+                onPressed: () {
+                  _realTimeCuppingData = _setCuppingData();
+                  _writeCuppingData(_realTimeCuppingData);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CoffeePage(coffeeInfo: _realTimeCuppingData)
+                      )
+                  );
+                },
+                color: Colors.blue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0)
+                ),
+                child: Text(
+                  'カッピングデータを保存',
+                  style: TextStyle(
+                      color:Colors.white,
+                      fontSize: 20.0
+                  ),
+                ),
+              )
+            ],
+            // child: RaisedButton(
+            //   child: const Text('テストデータ投入'),
+            //   color: Colors.blue,
+            //   textColor: Colors.white,
+            //   onPressed: () {
+            //     _setCuppingData(_dummyCuppingData); // TODO ダミー
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => CoffeePage(coffeeInfo: _dummyCuppingData) // TODO ダミー
+            //         )
+            //     );
+            //   },
+            // ),
+          )
       )
     );
   }
 
+  // カッピングしたデータをMap型に詰め直すメソッド
+  Map<String, dynamic> _setCuppingData() {
+    Map<String, dynamic> cuppingData = new Map<String, dynamic>();
+
+    cuppingData["coffee_name"] = _coffeeName;
+    cuppingData["country"] = _country;
+    cuppingData["process"] = _process;
+    cuppingData["sweetness"] = _sweetness;
+    cuppingData["acidity"] = _acidity;
+    cuppingData["mousefeel"] = _mouseFeel;
+    cuppingData["aftertaste"] = _afterTaste;
+    cuppingData["cleancup"] = _cleanCup;
+    cuppingData["balance"] = _balance;
+    cuppingData["flavor"] = _flavor;
+    cuppingData["overall"] = _overall;
+    cuppingData["coffee_score"] = _coffeeScore;
+    cuppingData["favorite"] = false;
+    cuppingData["cupped_date"] = Timestamp.fromDate(DateTime.now());
+
+    cuppingData['coffee_score'] =
+      _cleanCup + _sweetness + _acidity + _mouseFeel + _afterTaste +
+      _balance + _flavor + _overall + 36;
+    return cuppingData;
+  }
+
   // Firestoreにデータを登録するメソッド
-  void _setCuppingData(Map<String, dynamic> cuppingData) async {
+  void _writeCuppingData(Map<String, dynamic> cuppingData) async {
     await FirebaseFirestore.instance
         .collection('CuppedCoffee')
         .doc('VjiipudVwojp7B1WWrWH') // TODO 変数を利用する形に変更
