@@ -29,7 +29,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
           .collection('CuppedCoffee')
-          .doc('VjiipudVwojp7B1WWrWH')
+          .doc('VjiipudVwojp7B1WWrWH') // TODO 変数を利用する形に変更
           .collection('CoffeeInfo')
           .snapshots(),
       builder: (context, snapshot) {
