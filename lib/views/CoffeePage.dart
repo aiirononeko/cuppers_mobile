@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_radar_chart/flutter_radar_chart.dart';
+import 'package:intl/intl.dart';
 import 'dart:developer' as developer;
 
 // カッピング情報詳細画面
@@ -17,6 +18,9 @@ class CoffeePage extends StatelessWidget {
     // スコアの値をレイダーチャートに表示するためのリストに詰め替える
     chartValueList.add(getListValue(coffeeInfo));
 
+    // カッピングした日付をフォーマット
+    String cuppedDate = DateFormat('yyyy-MM-dd').format(coffeeInfo['cupped_date'].toDate()).toString();
+
     return Scaffold(
       appBar: AppBar(title: Text("Cuppers")),
       body: Column(
@@ -28,7 +32,7 @@ class CoffeePage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      coffeeInfo['cupped_date'].toDate().toString(),
+                      cuppedDate,
                       style: TextStyle(
                         fontSize: 16
                       ),
@@ -85,8 +89,8 @@ class CoffeePage extends StatelessWidget {
     );
   }
 
-  // レイダーチャートに表示する型に詰め替えるメソッド
   // TODO double型に対応していないため、int型に変換してしまっている
+  // レイダーチャートに表示する型に詰め替えるメソッド
   List<int> getListValue(final Map<String, dynamic> coffeeInfo) {
 
     List<int> valueList = [];
