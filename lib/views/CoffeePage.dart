@@ -20,38 +20,65 @@ class CoffeePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Cuppers")),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(coffeeInfo['cupped_date'].toDate().toString()),
-                  Text('${coffeeInfo['coffee_name']} ${coffeeInfo['process']}'),
-                  Text('Made in ${coffeeInfo['country']}'),
-                ],
-              ),
+              padding: const EdgeInsets.all(20),
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      coffeeInfo['cupped_date'].toDate().toString(),
+                      style: TextStyle(
+                        fontSize: 16
+                      ),
+                    ),
+                    Text(
+                      '${coffeeInfo['coffee_name']} ${coffeeInfo['process']}',
+                      style: TextStyle(
+                        fontSize: 30
+                      ),
+                    ),
+                    Text(
+                      'Made in ${coffeeInfo['country']}',
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ),
             Expanded(
-              child: RadarChart.light(
-                ticks: [2, 4, 6, 8],
-                features: [
-                  "cleancup",
-                  "sweetness",
-                  "acidity",
-                  "mousefeel",
-                  "flavor",
-                  "aftertaste",
-                  "balance",
-                  "overall"
-                ],
-                data: chartValueList,
-              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: Container(
+                    child: RadarChart.light(
+                      ticks: [2, 4, 6, 8],
+                      features: [
+                        "CleanCup",
+                        "Sweetness",
+                        "Acidity",
+                        "MouseFeel",
+                        "Flavor",
+                        "AfterTaste",
+                        "Balance",
+                        "OverAll"
+                      ],
+                      data: chartValueList,
+                    ),
+                  )
+                )
+              )
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text('Score ${coffeeInfo['coffee_score']}')
+            Expanded(
+              child: Text(
+                'Score ${coffeeInfo['coffee_score']}',
+                style: TextStyle(
+                  fontSize: 30
+                ),
+              )
             )
           ],
         ),
