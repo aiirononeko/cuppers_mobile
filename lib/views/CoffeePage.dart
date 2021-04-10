@@ -13,39 +13,65 @@ class CoffeePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // スコアの値をレイダーチャートに表示するためのリストに詰め替える
+    chartValueList.add(getListValue(coffeeInfo));
+
     return Scaffold(
       appBar: AppBar(title: Text("Cuppers")),
-      body: RadarChart.light(
-          ticks: [2, 4, 6, 8],
-          features: [
-            "cleancup",
-            "sweetness",
-            "acidity",
-            "mousefeel",
-            "flavor",
-            "aftertaste",
-            "balance",
-            "overall"
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(coffeeInfo['cupped_date'].toDate().toString()),
+                  Text('${coffeeInfo['coffee_name']} ${coffeeInfo['process']}'),
+                  Text('Made in ${coffeeInfo['country']}'),
+                ],
+              ),
+            ),
+            Expanded(
+              child: RadarChart.light(
+                ticks: [2, 4, 6, 8],
+                features: [
+                  "cleancup",
+                  "sweetness",
+                  "acidity",
+                  "mousefeel",
+                  "flavor",
+                  "aftertaste",
+                  "balance",
+                  "overall"
+                ],
+                data: chartValueList,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text('Score ${coffeeInfo['coffee_score']}')
+            )
           ],
-          data: chartValueList
-      ),
-      // body: SingleChildScrollView(
-      //   child: Column(
-      //     children: <Widget>[
-      //       Text(coffeeInfo['cupped_date'].toDate().toString()),
-      //       Text('${coffeeInfo['coffee_name']} ${coffeeInfo['process']}'),
-      //       Text('Made in ${coffeeInfo['country']}'),
-      //       Text('Score ${coffeeInfo['coffee_score']}'),
-      //       Text('Sweetness ${coffeeInfo['sweetness']}'),
-      //       Text('cleancup ${coffeeInfo['cleancup']}'),
-      //       Text('mousefeel ${coffeeInfo['mousefeel']}'),
-      //       Text('flavor ${coffeeInfo['flavor']}'),
-      //       Text('aftertaste ${coffeeInfo['aftertaste']}'),
-      //       Text('balance ${coffeeInfo['balance']}'),
-      //       Text('overall ${coffeeInfo['overall']}'),
-      //     ],
-      //   ),
-      // )
+        ),
     );
+  }
+
+  // レイダーチャートに表示する型に詰め替えるメソッド
+  // TODO double型に対応していないため、int型に変換してしまっている
+  List<int> getListValue(final Map<String, dynamic> coffeeInfo) {
+
+    List<int> valueList = [];
+    valueList.add(coffeeInfo['cleancup'].toInt());
+    valueList.add(coffeeInfo['sweetness'].toInt());
+    valueList.add(coffeeInfo['acidity'].toInt());
+    valueList.add(coffeeInfo['mousefeel'].toInt());
+    valueList.add(coffeeInfo['flavor'].toInt());
+    valueList.add(coffeeInfo['aftertaste'].toInt());
+    valueList.add(coffeeInfo['balance'].toInt());
+    valueList.add(coffeeInfo['overall'].toInt());
+
+    return valueList;
   }
 }
