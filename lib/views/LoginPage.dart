@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as developer;
 
-// カッピング情報詳細画面
-class LoginPage extends StatelessWidget {
+// ログインページ
+class LoginPage extends StatefulWidget {
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +30,19 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 20
                 ),
+              ),
+              RaisedButton(
+                onPressed: () => {
+                  FirebaseAuth.instance
+                    .authStateChanges()
+                    .listen((User user) {
+                      if (user == null) {
+                        print('User is sign out!');
+                      } else {
+                        print('User is signed in!');
+                      }
+                  })
+                },
               )
             ],
           ),
