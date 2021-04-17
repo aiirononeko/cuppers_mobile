@@ -63,16 +63,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: const Text('新規登録'),
                 onPressed: () async {
                   try {
-                    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+
+                    // ユーザー登録処理
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
                         email: this._email,
                         password: this._password
                     );
+
+                    // ログイン処理
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(email: this._email, password: this._password);
+
+                    // ユーザー画面へ遷移
+                    Navigator.of(context).pushReplacementNamed('/home');
+
                   } on FirebaseAuthException catch(e) {
+
                     if (e.code == 'weak-password') {
                       print('This password is valid.');
                     } else if (e.code == 'email-already-in-use') {
                       print('This account is already exists.');
                     }
+
                   } catch(e) {
                     print(e);
                   }
@@ -90,12 +101,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       style: TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                         Navigator.push(
-                           context,
-                           MaterialPageRoute(
-                             builder: (context) => LoginPage()
-                           )
-                         );
+                          Navigator.of(context).restorablePushNamed('/login');
                         }
                     )
                   ]

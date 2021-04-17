@@ -63,12 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                     );
 
                     // ユーザーページへの遷移
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomePage()
-                        )
-                    );
+                    Navigator.of(context).pushReplacementNamed('/home');
 
                   } on FirebaseAuthException catch(e) {
                     if (e.code == 'user-not-found') {
@@ -93,12 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(color: Colors.blue),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => RegistrationPage()
-                                    )
-                                );
+                                Navigator.of(context).pushReplacementNamed('/registration');
                               }
                         )
                       ]

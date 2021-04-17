@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
-// カッピング情報詳細画面
+// お気に入りリスト表示画面
 class FavoriteListPage extends StatelessWidget {
 
   @override
@@ -13,13 +13,15 @@ class FavoriteListPage extends StatelessWidget {
         body: RaisedButton(
           child: const Text('サインアウト(デバッグ用)'),
           onPressed: () async {
+
+            // サインアウト
             await FirebaseAuth.instance.signOut();
-            Navigator.push(
+
+            Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => LoginPage()
-                )
-            );
+                new MaterialPageRoute(
+                    builder: (context) => new LoginPage()),
+                    (_) => false);
           },
         )
     );
