@@ -11,9 +11,6 @@ import './CuppingPage.dart';
 // カッピングしたコーヒーを一覧表示するページ
 class CoffeeIndexPage extends StatefulWidget {
 
-  // final String _uid;
-  // CoffeeIndexPage(this._uid);
-
   @override
   _CoffeeIndexPageState createState() {
     return _CoffeeIndexPageState();
@@ -73,13 +70,14 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: ListTile(
-          onTap: () =>
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CoffeePage(coffeeInfo: data)
-                  )
-              ),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CoffeePage(coffeeInfo: data)
+                )
+            );
+          },
           leading: Icon(
             Icons.star_border,
             size: 35,

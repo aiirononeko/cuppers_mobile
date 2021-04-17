@@ -172,12 +172,9 @@ class _CuppingPageState extends State<CuppingPage> {
                 onPressed: () {
                   _realTimeCuppingData = _setCuppingData();
                   _writeCuppingData(_realTimeCuppingData, this._uid);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CoffeePage(coffeeInfo: _realTimeCuppingData)
-                      )
-                  );
+
+                  // ユーザー画面へ遷移
+                  Navigator.of(context).pushReplacementNamed('/home');
                 },
                 color: Colors.blue,
                 shape: RoundedRectangleBorder(
