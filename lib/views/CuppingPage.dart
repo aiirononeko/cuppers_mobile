@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import './CoffeePage.dart';
 
 class CuppingPage extends StatefulWidget {
@@ -12,6 +14,8 @@ class CuppingPage extends StatefulWidget {
 
 // カッピング情報詳細画面
 class _CuppingPageState extends State<CuppingPage> {
+
+  String _uid = '';
 
   // データ書き込み処理時に使用するMap型State
   Map<String, dynamic> _realTimeCuppingData = new Map<String, dynamic>();
@@ -44,6 +48,10 @@ class _CuppingPageState extends State<CuppingPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    // ログイン中のユーザーIDを取得
+    _uid = FirebaseAuth.instance.currentUser.uid;
+
     return Scaffold(
       body: SingleChildScrollView(
           child: Column(
@@ -163,7 +171,7 @@ class _CuppingPageState extends State<CuppingPage> {
               FlatButton(
                 onPressed: () {
                   _realTimeCuppingData = _setCuppingData();
-                  _writeCuppingData(_realTimeCuppingData);
+                  _writeCuppingData(_realTimeCuppingData, this._uid);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -215,10 +223,10 @@ class _CuppingPageState extends State<CuppingPage> {
   }
 
   // Firestoreにデータを登録するメソッド
-  void _writeCuppingData(Map<String, dynamic> cuppingData) async {
+  void _writeCuppingData(Map<String, dynamic> cuppingData, String uid) async {
     await FirebaseFirestore.instance
         .collection('CuppedCoffee')
-        .doc('VjiipudVwojp7B1WWrWH') // TODO 変数を利用する形に変更
+        .doc(uid)
         .collection('CoffeeInfo')
         .add(cuppingData);
   }
