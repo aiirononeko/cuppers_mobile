@@ -1,13 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cuppers_mobile/main.dart';
-import 'package:cuppers_mobile/views/CoffeePage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:developer' as developer;
-
-import './LoginPage.dart';
 
 // サインインページ
 class RegistrationPage extends StatefulWidget {

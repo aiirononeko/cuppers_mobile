@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:intl/intl.dart';
-import 'dart:developer' as developer;
 
 // カッピング情報詳細画面
 class CoffeePage extends StatelessWidget {

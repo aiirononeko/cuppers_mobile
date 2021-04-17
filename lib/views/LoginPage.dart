@@ -1,12 +1,7 @@
-import 'package:cuppers_mobile/main.dart';
-import 'package:cuppers_mobile/views/RegistrationPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:developer' as developer;
-
-import './CoffeeIndexPage.dart';
 
 // ログインページ
 class LoginPage extends StatefulWidget {

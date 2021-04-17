@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as developer;
 
 import './CoffeePage.dart';
-import './CuppingPage.dart';
 
 // カッピングしたコーヒーを一覧表示するページ
 class CoffeeIndexPage extends StatefulWidget {
