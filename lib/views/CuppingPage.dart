@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as developer;
-
 import 'package:firebase_auth/firebase_auth.dart';
-
-import './CoffeePage.dart';
 
 class CuppingPage extends StatefulWidget {
 
@@ -172,12 +168,9 @@ class _CuppingPageState extends State<CuppingPage> {
                 onPressed: () {
                   _realTimeCuppingData = _setCuppingData();
                   _writeCuppingData(_realTimeCuppingData, this._uid);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CoffeePage(coffeeInfo: _realTimeCuppingData)
-                      )
-                  );
+
+                  // ユーザー画面へ遷移
+                  Navigator.of(context).pushReplacementNamed('/home');
                 },
                 color: Colors.blue,
                 shape: RoundedRectangleBorder(

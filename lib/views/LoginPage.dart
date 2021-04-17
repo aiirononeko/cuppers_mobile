@@ -1,12 +1,7 @@
-import 'package:cuppers_mobile/main.dart';
-import 'package:cuppers_mobile/views/RegistrationPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:developer' as developer;
-
-import './CoffeeIndexPage.dart';
 
 // ログインページ
 class LoginPage extends StatefulWidget {
@@ -63,12 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                     );
 
                     // ユーザーページへの遷移
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomePage()
-                        )
-                    );
+                    Navigator.of(context).pushReplacementNamed('/home');
 
                   } on FirebaseAuthException catch(e) {
                     if (e.code == 'user-not-found') {
@@ -93,12 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(color: Colors.blue),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => RegistrationPage()
-                                    )
-                                );
+                                Navigator.of(context).pushReplacementNamed('/registration');
                               }
                         )
                       ]
