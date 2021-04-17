@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
+import 'package:firebase_auth/firebase_auth.dart';
 
+import './views/LoginPage.dart';
 import './views/CoffeeIndexPage.dart';
 import './views/CuppingPage.dart';
 import './views/FavoriteListPage.dart';
 
-void main() async{
+void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -21,8 +23,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Cuppers',
-      home: HomePage(),
+      home: _checkCurrentUser()
     );
+  }
+}
+
+// ログイン状態をチェックして表示を切り替え
+StatefulWidget _checkCurrentUser() {
+
+  User user = FirebaseAuth.instance.currentUser;
+  if (user == null) {
+    return LoginPage();
+  } else {
+    return HomePage();
   }
 }
 
@@ -33,6 +46,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   // 表示中の Widget を取り出すための index としての int 型の mutable な stored property
   int _selectedIndex = 0;
 

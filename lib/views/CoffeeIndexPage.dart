@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cuppers_mobile/views/LoginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
@@ -9,6 +11,9 @@ import './CuppingPage.dart';
 // カッピングしたコーヒーを一覧表示するページ
 class CoffeeIndexPage extends StatefulWidget {
 
+  // final String _uid;
+  // CoffeeIndexPage(this._uid);
+
   @override
   _CoffeeIndexPageState createState() {
     return _CoffeeIndexPageState();
@@ -17,8 +22,14 @@ class CoffeeIndexPage extends StatefulWidget {
 
 class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
 
+  String _uid = '';
+
   @override
   Widget build(BuildContext context) {
+
+    // ログイン中のユーザーIDを取得
+    _uid = FirebaseAuth.instance.currentUser.uid;
+
     return Scaffold(
       body: _buildBody(),
     );
@@ -29,7 +40,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
           .collection('CuppedCoffee')
-          .doc('VjiipudVwojp7B1WWrWH') // TODO 変数を利用する形に変更
+          .doc(this._uid)
           .collection('CoffeeInfo')
           .snapshots(),
       builder: (context, snapshot) {
