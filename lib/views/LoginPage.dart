@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as developer;
 
+import './CoffeeIndexPage.dart';
+
 // ログインページ
 class LoginPage extends StatefulWidget {
 
@@ -54,10 +56,20 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text('ログイン'),
                 onPressed: () async {
                   try {
+                    // ログイン処理
                     UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
                         email: this._email,
                         password: this._password
                     );
+
+                    // ユーザーページへの遷移
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage()
+                        )
+                    );
+
                   } on FirebaseAuthException catch(e) {
                     if (e.code == 'user-not-found') {
                       print('No user not found for that email.');
