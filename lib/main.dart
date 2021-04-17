@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
-import './views/LoginPage.dart';
+import './views/RegistrationPage.dart';
 import './views/CoffeeIndexPage.dart';
 import './views/CuppingPage.dart';
 import './views/FavoriteListPage.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Cuppers',
       // home: HomePage(),
-      home: LoginPage()
+      home: RegistrationPage()
     );
   }
 }

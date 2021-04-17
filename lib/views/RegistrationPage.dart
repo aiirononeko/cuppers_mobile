@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as developer;
 
-// ログインページ
-class LoginPage extends StatefulWidget {
+// サインインページ
+class RegistrationPage extends StatefulWidget {
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegistrationPageState createState() => _RegistrationPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistrationPageState extends State<RegistrationPage> {
 
   String _email = '';
   String _password = '';
@@ -77,27 +77,27 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               RichText(
-                  text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: 'すでにアカウントをお持ちの場合 ',
-                            style: TextStyle(color: Colors.black)
-                        ),
-                        TextSpan(
-                            text: 'ログイン',
-                            style: TextStyle(color: Colors.blue),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()
-                                    )
-                                );
-                              }
-                        )
-                      ]
-                  )
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'すでにアカウントをお持ちの場合 ',
+                      style: TextStyle(color: Colors.black)
+                    ),
+                    TextSpan(
+                      text: 'ログイン',
+                      style: TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                             builder: (context) => HomePage()
+                           )
+                         );
+                        }
+                    )
+                  ]
+                )
               )
             ],
           ),
