@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/main.dart';
-import 'package:cuppers_mobile/views/CoffeePage.dart';
+import 'package:cuppers_mobile/views/RegistrationPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -27,13 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'さあ、',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              Text(
-                'カッピングを始めよう！',
+                'ログインしましょう',
                 style: TextStyle(
                     fontSize: 20
                 ),
@@ -58,18 +51,18 @@ class _LoginPageState extends State<LoginPage> {
                 onChanged: _handlePassword,
               ),
               new RaisedButton(
-                child: const Text('新規登録'),
+                child: const Text('ログイン'),
                 onPressed: () async {
                   try {
-                    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
                         email: this._email,
                         password: this._password
                     );
                   } on FirebaseAuthException catch(e) {
-                    if (e.code == 'weak-password') {
-                      print('This password is valid.');
-                    } else if (e.code == 'email-already-in-use') {
-                      print('This account is already exists.');
+                    if (e.code == 'user-not-found') {
+                      print('No user not found for that email.');
+                    } else if (e.code == 'wrong-password') {
+                      print('Wrong password provided for that user.');
                     }
                   } catch(e) {
                     print(e);
@@ -80,18 +73,18 @@ class _LoginPageState extends State<LoginPage> {
                   text: TextSpan(
                       children: [
                         TextSpan(
-                            text: 'すでにアカウントをお持ちの場合 ',
+                            text: 'アカウントをお持ちでない場合 ',
                             style: TextStyle(color: Colors.black)
                         ),
                         TextSpan(
-                            text: 'ログイン',
+                            text: '新規登録',
                             style: TextStyle(color: Colors.blue),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomePage()
+                                        builder: (context) => RegistrationPage()
                                     )
                                 );
                               }

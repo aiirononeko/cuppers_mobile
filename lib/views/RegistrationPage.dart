@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as developer;
 
+import './LoginPage.dart';
+
 // サインインページ
 class RegistrationPage extends StatefulWidget {
 
@@ -91,7 +93,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                          Navigator.push(
                            context,
                            MaterialPageRoute(
-                             builder: (context) => HomePage()
+                             builder: (context) => LoginPage()
                            )
                          );
                         }
