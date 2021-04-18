@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'dart:async';
+
 class CuppingPage extends StatefulWidget {
 
   @override
@@ -11,7 +13,30 @@ class CuppingPage extends StatefulWidget {
 // カッピング情報詳細画面
 class _CuppingPageState extends State<CuppingPage> {
 
+  // ログイン中のユーザー情報格納用変数
   String _uid = '';
+
+  // 表示切り替え機能で使用する変数
+  int _selectIndex = 0;
+
+  // タイマー機能で使用する変数
+  int _countMinute = 0;
+  String _countMinuteStr = '00';
+  int _countSecond = 0;
+  String _countSecondStr = '00';
+  Timer _timer;
+
+  TextEditingController _coffeeNameController;
+  TextEditingController _countryController;
+  TextEditingController _processController;
+
+  @override
+  void initState() {
+    super.initState();
+    _coffeeNameController = new TextEditingController(text: _coffeeName);
+    _countryController = new TextEditingController(text: _country);
+    _processController = new TextEditingController(text: _process);
+  }
 
   // データ書き込み処理時に使用するMap型State
   Map<String, dynamic> _realTimeCuppingData = new Map<String, dynamic>();
@@ -48,145 +73,254 @@ class _CuppingPageState extends State<CuppingPage> {
     // ログイン中のユーザーIDを取得
     _uid = FirebaseAuth.instance.currentUser.uid;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Coffee Name',
-                    hintText: 'Yirgacheffe Konga'
-                ),
-                keyboardType: TextInputType.text,
-                onChanged: _coffeeNameChanged,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Country',
-                    hintText: 'Ethiopia'
-                ),
-                keyboardType: TextInputType.text,
-                onChanged: _countryChanged,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Process',
-                    hintText: 'Full Washed'
-                ),
-                keyboardType: TextInputType.text,
-                onChanged: _processChanged,
-              ),
-              Text('クリーンカップ'),
-              new Slider(
-                  label: '$_cleanCup',
-                  min: 0,
-                  max: 8,
-                  value: _cleanCup,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideCleanCup
-              ),
-              Text('甘さ'),
-              new Slider(
-                  label: '$_sweetness',
-                  min: 0,
-                  max: 8,
-                  value: _sweetness,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideSweetness
-              ),
-              Text('酸'),
-              new Slider(
-                  label: '$_acidity',
-                  min: 0,
-                  max: 8,
-                  value: _acidity,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideAcidity
-              ),
-              Text('マウスフィール'),
-              new Slider(
-                  label: '$_mouseFeel',
-                  min: 0,
-                  max: 8,
-                  value: _mouseFeel,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideMouseFeel
-              ),
-              Text('アフターテイスト'),
-              new Slider(
-                  label: '$_afterTaste',
-                  min: 0,
-                  max: 8,
-                  value: _afterTaste,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideAfterTaste
-              ),
-              Text('フレーバー'),
-              new Slider(
-                  label: '$_flavor',
-                  min: 0,
-                  max: 8,
-                  value: _flavor,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideFlavor
-              ),
-              Text('バランス'),
-              new Slider(
-                  label: '$_balance',
-                  min: 0,
-                  max: 8,
-                  value: _balance,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideBalance
-              ),
-              Text('オーバーオール'),
-              new Slider(
-                  label: '$_overall',
-                  min: 0,
-                  max: 8,
-                  value: _overall,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideOverall
-              ),
-              FlatButton(
-                onPressed: () {
-                  _realTimeCuppingData = _setCuppingData();
-                  _writeCuppingData(_realTimeCuppingData, this._uid);
+    // 表示項目の制御
+    List<Widget> _pageList = [
+      _coffeeInfoField(),
+      _firstCuppingData(),
+      _secondCuppingData()
+    ];
 
-                  // ユーザー画面へ遷移
-                  Navigator.of(context).pushReplacementNamed('/home');
-                },
-                color: Colors.blue,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          _pageList[_selectIndex],
+          Row(
+            children: <Widget>[
+              IconButton(
+                  icon: const Icon(Icons.navigate_before),
+                  onPressed: () {
+                    if(_selectIndex > 0) {
+                      setState(() {
+                        _selectIndex--;
+                      });
+                    }
+                  }
+              ),
+              IconButton(
+                  icon: const Icon(Icons.navigate_next),
+                  onPressed: () {
+                    if(_selectIndex < 2) {
+                      setState(() {
+                        _selectIndex++;
+                      });
+                    }
+                  }
+              ),
+            ],
+          ),
+          Container(
+            child: Row(
+              children: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.stop),
+                    onPressed: () {
+                      _resetTimer();
+                    }
                 ),
-                child: Text(
-                  'カッピングデータを保存',
+                IconButton(
+                    icon: Icon(Icons.pause),
+                    onPressed: () {
+                      setState(() {
+                        this._timer.cancel();
+                      });
+                    }
+                ),
+                Text(
+                  '${this._countMinuteStr}:${this._countSecondStr}',
                   style: TextStyle(
-                      color:Colors.white,
-                      fontSize: 20.0
+                      fontSize: 50
                   ),
                 ),
-              )
-            ],
+                IconButton(
+                  icon: Icon(Icons.play_arrow),
+                  onPressed: () {
+                    setState(() {
+                      this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+                    });
+                  }
+                )
+              ],
+            )
+          ),
+          FlatButton(
+            onPressed: () {
+              _realTimeCuppingData = _setCuppingData();
+              _writeCuppingData(_realTimeCuppingData, this._uid);
+
+              // ユーザー画面へ遷移
+              Navigator.of(context).pushReplacementNamed('/home');
+            },
+            color: Colors.blue,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)
+            ),
+            child: Text(
+              'カッピングデータを保存',
+              style: TextStyle(
+                  color:Colors.white,
+                  fontSize: 20.0
+              ),
+            ),
           )
-      )
+        ],
+      ),
+    );
+  }
+
+  // コーヒー名などを入力する部分
+  Widget _coffeeInfoField() {
+    return Column(
+        children: <Widget>[
+          Text(
+            'カッピング 1/3',
+            style: TextStyle(
+              fontSize: 20
+            ),
+          ),
+          TextField(
+            controller: _coffeeNameController,
+            decoration: InputDecoration(
+              labelText: 'Coffee Name',
+              hintText: 'Yirgacheffe Konga',
+            ),
+            keyboardType: TextInputType.text,
+            onChanged: _coffeeNameChanged,
+          ),
+          TextField(
+            controller: _countryController,
+            decoration: InputDecoration(
+              labelText: 'Country',
+              hintText: 'Ethiopia'
+            ),
+            keyboardType: TextInputType.text,
+            onChanged: _countryChanged,
+          ),
+          TextField(
+            controller: _processController,
+            decoration: InputDecoration(
+              labelText: 'Process',
+              hintText: 'Full Washed'
+            ),
+            keyboardType: TextInputType.text,
+            onChanged: _processChanged,
+          )
+        ]
+    );
+  }
+
+  // カッピング項目入力画面1
+  Widget _firstCuppingData() {
+    return Column(
+      children: <Widget>[
+        Text(
+          'カッピング 2/3',
+          style: TextStyle(
+              fontSize: 20
+          ),
+        ),
+        Text('クリーンカップ'),
+        new Slider(
+            label: '$_cleanCup',
+            min: 0,
+            max: 8,
+            value: _cleanCup,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideCleanCup
+        ),
+        Text('甘さ'),
+        new Slider(
+            label: '$_sweetness',
+            min: 0,
+            max: 8,
+            value: _sweetness,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideSweetness
+        ),
+        Text('酸'),
+        new Slider(
+            label: '$_acidity',
+            min: 0,
+            max: 8,
+            value: _acidity,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideAcidity
+        ),
+        Text('マウスフィール'),
+        new Slider(
+            label: '$_mouseFeel',
+            min: 0,
+            max: 8,
+            value: _mouseFeel,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideMouseFeel
+        ),
+      ],
+    );
+  }
+
+  // カッピング項目入力画面2
+  Widget _secondCuppingData() {
+    return Column(
+      children: <Widget>[
+        Text(
+          'カッピング 3/3',
+          style: TextStyle(
+              fontSize: 20
+          ),
+        ),
+        Text('アフターテイスト'),
+        new Slider(
+            label: '$_afterTaste',
+            min: 0,
+            max: 8,
+            value: _afterTaste,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideAfterTaste
+        ),
+        Text('フレーバー'),
+        new Slider(
+            label: '$_flavor',
+            min: 0,
+            max: 8,
+            value: _flavor,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideFlavor
+        ),
+        Text('バランス'),
+        new Slider(
+            label: '$_balance',
+            min: 0,
+            max: 8,
+            value: _balance,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideBalance
+        ),
+        Text('オーバーオール'),
+        new Slider(
+            label: '$_overall',
+            min: 0,
+            max: 8,
+            value: _overall,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideOverall
+        ),
+      ],
     );
   }
 
@@ -222,5 +356,49 @@ class _CuppingPageState extends State<CuppingPage> {
         .doc(uid)
         .collection('CoffeeInfo')
         .add(cuppingData);
+  }
+
+  // タイマー
+  void _onTimer(Timer timer) {
+    if (_countSecond < 59) {
+      setState(() {
+        this._countSecond++;
+      });
+
+      if (this._countSecond <= 9) {
+        setState(() {
+          this._countSecondStr = '0${this._countSecond}';
+        });
+      } else {
+        setState(() {
+          this._countSecondStr = '${this._countSecond}';
+        });
+      }
+    } else {
+      setState(() {
+        this._countSecond = 0;
+        this._countSecondStr = '00';
+        this._countMinute++;
+      });
+
+      if (this._countMinute <= 9) {
+        setState(() {
+          this._countMinuteStr = '0${this._countMinute}';
+        });
+      } else {
+        setState(() {
+          this._countMinuteStr = '${this._countMinute}';
+        });
+      }
+    }
+  }
+
+  // タイマーをリセットするメソッド
+  void _resetTimer() {
+    setState(() {
+      this._countMinute = 0;
+      this._countSecond = 0;
+      this._countSecondStr = '00';
+    });
   }
 }
