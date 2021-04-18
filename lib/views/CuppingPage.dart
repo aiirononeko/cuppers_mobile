@@ -11,8 +11,18 @@ class CuppingPage extends StatefulWidget {
 // カッピング情報詳細画面
 class _CuppingPageState extends State<CuppingPage> {
 
+  // ログイン中のユーザー情報格納用変数
   String _uid = '';
+
+  // 表示切り替え機能で使用する変数
   int _selectIndex = 0;
+
+  // タイマー機能で使用する変数
+  int _countMinute = 0;
+  int _countSecond = 0;
+
+  // 一時停止アイコンの定義
+  static const IconData pause = IconData(0xe8ec, fontFamily: 'MaterialIcons');
 
   // データ書き込み処理時に使用するMap型State
   Map<String, dynamic> _realTimeCuppingData = new Map<String, dynamic>();
@@ -84,6 +94,36 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
             ],
           ),
+          Container(
+            child: Row(
+              children: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.stop),
+                    onPressed: () {
+
+                    }
+                ),
+                IconButton(
+                    icon: Icon(pause),
+                    onPressed: () {
+
+                    }
+                ),
+                Text(
+                  '0${this._countMinute}:0${this._countSecond}',
+                  style: TextStyle(
+                      fontSize: 50
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.play_arrow),
+                  onPressed: () {
+
+                  }
+                )
+              ],
+            )
+          ),
           FlatButton(
             onPressed: () {
               _realTimeCuppingData = _setCuppingData();
@@ -117,6 +157,12 @@ class _CuppingPageState extends State<CuppingPage> {
   Widget _coffeeInfoField() {
     return Column(
         children: <Widget>[
+          Text(
+            'カッピング 1/3',
+            style: TextStyle(
+              fontSize: 20
+            ),
+          ),
           TextField(
             decoration: InputDecoration(
               labelText: 'Coffee Name',
@@ -149,6 +195,12 @@ class _CuppingPageState extends State<CuppingPage> {
   Widget _firstCuppingData() {
     return Column(
       children: <Widget>[
+        Text(
+          'カッピング 2/3',
+          style: TextStyle(
+              fontSize: 20
+          ),
+        ),
         Text('クリーンカップ'),
         new Slider(
             label: '$_cleanCup',
@@ -197,9 +249,16 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
+  // カッピング項目入力画面2
   Widget _secondCuppingData() {
     return Column(
       children: <Widget>[
+        Text(
+          'カッピング 3/3',
+          style: TextStyle(
+              fontSize: 20
+          ),
+        ),
         Text('アフターテイスト'),
         new Slider(
             label: '$_afterTaste',
