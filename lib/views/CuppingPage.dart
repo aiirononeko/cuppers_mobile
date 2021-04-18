@@ -26,6 +26,18 @@ class _CuppingPageState extends State<CuppingPage> {
   String _countSecondStr = '00';
   Timer _timer;
 
+  TextEditingController _coffeeNameController;
+  TextEditingController _countryController;
+  TextEditingController _processController;
+
+  @override
+  void initState() {
+    super.initState();
+    _coffeeNameController = new TextEditingController(text: _coffeeName);
+    _countryController = new TextEditingController(text: _country);
+    _processController = new TextEditingController(text: _process);
+  }
+
   // データ書き込み処理時に使用するMap型State
   Map<String, dynamic> _realTimeCuppingData = new Map<String, dynamic>();
 
@@ -166,14 +178,16 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           TextField(
+            controller: _coffeeNameController,
             decoration: InputDecoration(
               labelText: 'Coffee Name',
-              hintText: 'Yirgacheffe Konga'
+              hintText: 'Yirgacheffe Konga',
             ),
             keyboardType: TextInputType.text,
             onChanged: _coffeeNameChanged,
           ),
           TextField(
+            controller: _countryController,
             decoration: InputDecoration(
               labelText: 'Country',
               hintText: 'Ethiopia'
@@ -182,6 +196,7 @@ class _CuppingPageState extends State<CuppingPage> {
             onChanged: _countryChanged,
           ),
           TextField(
+            controller: _processController,
             decoration: InputDecoration(
               labelText: 'Process',
               hintText: 'Full Washed'
@@ -349,7 +364,7 @@ class _CuppingPageState extends State<CuppingPage> {
       setState(() {
         this._countSecond++;
       });
-      
+
       if (this._countSecond <= 9) {
         setState(() {
           this._countSecondStr = '0${this._countSecond}';
