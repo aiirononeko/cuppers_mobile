@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'dart:async';
+
 class CuppingPage extends StatefulWidget {
 
   @override
@@ -19,10 +21,10 @@ class _CuppingPageState extends State<CuppingPage> {
 
   // タイマー機能で使用する変数
   int _countMinute = 0;
+  String _countMinuteStr = '00';
   int _countSecond = 0;
-
-  // 一時停止アイコンの定義
-  static const IconData pause = IconData(0xe8ec, fontFamily: 'MaterialIcons');
+  String _countSecondStr = '00';
+  Timer _timer;
 
   // データ書き込み処理時に使用するMap型State
   Map<String, dynamic> _realTimeCuppingData = new Map<String, dynamic>();
@@ -100,17 +102,19 @@ class _CuppingPageState extends State<CuppingPage> {
                 IconButton(
                     icon: Icon(Icons.stop),
                     onPressed: () {
-
+                      _resetTimer();
                     }
                 ),
                 IconButton(
-                    icon: Icon(pause),
+                    icon: Icon(Icons.pause),
                     onPressed: () {
-
+                      setState(() {
+                        this._timer.cancel();
+                      });
                     }
                 ),
                 Text(
-                  '0${this._countMinute}:0${this._countSecond}',
+                  '${this._countMinuteStr}:${this._countSecondStr}',
                   style: TextStyle(
                       fontSize: 50
                   ),
@@ -118,7 +122,9 @@ class _CuppingPageState extends State<CuppingPage> {
                 IconButton(
                   icon: Icon(Icons.play_arrow),
                   onPressed: () {
-
+                    setState(() {
+                      this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+                    });
                   }
                 )
               ],
@@ -146,10 +152,6 @@ class _CuppingPageState extends State<CuppingPage> {
           )
         ],
       ),
-      //
-      //       ],
-      //     )
-      // )
     );
   }
 
@@ -339,5 +341,49 @@ class _CuppingPageState extends State<CuppingPage> {
         .doc(uid)
         .collection('CoffeeInfo')
         .add(cuppingData);
+  }
+
+  // タイマー
+  void _onTimer(Timer timer) {
+    if (_countSecond < 59) {
+      setState(() {
+        this._countSecond++;
+      });
+      
+      if (this._countSecond <= 9) {
+        setState(() {
+          this._countSecondStr = '0${this._countSecond}';
+        });
+      } else {
+        setState(() {
+          this._countSecondStr = '${this._countSecond}';
+        });
+      }
+    } else {
+      setState(() {
+        this._countSecond = 0;
+        this._countSecondStr = '00';
+        this._countMinute++;
+      });
+
+      if (this._countMinute <= 9) {
+        setState(() {
+          this._countMinuteStr = '0${this._countMinute}';
+        });
+      } else {
+        setState(() {
+          this._countMinuteStr = '${this._countMinute}';
+        });
+      }
+    }
+  }
+
+  // タイマーをリセットするメソッド
+  void _resetTimer() {
+    setState(() {
+      this._countMinute = 0;
+      this._countSecond = 0;
+      this._countSecondStr = '00';
+    });
   }
 }
