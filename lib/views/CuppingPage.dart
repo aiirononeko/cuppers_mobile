@@ -12,6 +12,7 @@ class CuppingPage extends StatefulWidget {
 class _CuppingPageState extends State<CuppingPage> {
 
   String _uid = '';
+  int _selectIndex = 0;
 
   // データ書き込み処理時に使用するMap型State
   Map<String, dynamic> _realTimeCuppingData = new Map<String, dynamic>();
@@ -48,145 +49,202 @@ class _CuppingPageState extends State<CuppingPage> {
     // ログイン中のユーザーIDを取得
     _uid = FirebaseAuth.instance.currentUser.uid;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Coffee Name',
-                    hintText: 'Yirgacheffe Konga'
-                ),
-                keyboardType: TextInputType.text,
-                onChanged: _coffeeNameChanged,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Country',
-                    hintText: 'Ethiopia'
-                ),
-                keyboardType: TextInputType.text,
-                onChanged: _countryChanged,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Process',
-                    hintText: 'Full Washed'
-                ),
-                keyboardType: TextInputType.text,
-                onChanged: _processChanged,
-              ),
-              Text('クリーンカップ'),
-              new Slider(
-                  label: '$_cleanCup',
-                  min: 0,
-                  max: 8,
-                  value: _cleanCup,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideCleanCup
-              ),
-              Text('甘さ'),
-              new Slider(
-                  label: '$_sweetness',
-                  min: 0,
-                  max: 8,
-                  value: _sweetness,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideSweetness
-              ),
-              Text('酸'),
-              new Slider(
-                  label: '$_acidity',
-                  min: 0,
-                  max: 8,
-                  value: _acidity,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideAcidity
-              ),
-              Text('マウスフィール'),
-              new Slider(
-                  label: '$_mouseFeel',
-                  min: 0,
-                  max: 8,
-                  value: _mouseFeel,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideMouseFeel
-              ),
-              Text('アフターテイスト'),
-              new Slider(
-                  label: '$_afterTaste',
-                  min: 0,
-                  max: 8,
-                  value: _afterTaste,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideAfterTaste
-              ),
-              Text('フレーバー'),
-              new Slider(
-                  label: '$_flavor',
-                  min: 0,
-                  max: 8,
-                  value: _flavor,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideFlavor
-              ),
-              Text('バランス'),
-              new Slider(
-                  label: '$_balance',
-                  min: 0,
-                  max: 8,
-                  value: _balance,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideBalance
-              ),
-              Text('オーバーオール'),
-              new Slider(
-                  label: '$_overall',
-                  min: 0,
-                  max: 8,
-                  value: _overall,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideOverall
-              ),
-              FlatButton(
-                onPressed: () {
-                  _realTimeCuppingData = _setCuppingData();
-                  _writeCuppingData(_realTimeCuppingData, this._uid);
+    // 表示項目の制御
+    List<Widget> _pageList = [
+      _coffeeInfoField(),
+      _firstCuppingData(),
+      _secondCuppingData()
+    ];
 
-                  // ユーザー画面へ遷移
-                  Navigator.of(context).pushReplacementNamed('/home');
-                },
-                color: Colors.blue,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)
-                ),
-                child: Text(
-                  'カッピングデータを保存',
-                  style: TextStyle(
-                      color:Colors.white,
-                      fontSize: 20.0
-                  ),
-                ),
-              )
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          _pageList[_selectIndex],
+          Row(
+            children: <Widget>[
+              IconButton(
+                  icon: const Icon(Icons.navigate_before),
+                  onPressed: () {
+                    if(_selectIndex > 0) {
+                      setState(() {
+                        _selectIndex--;
+                      });
+                    }
+                  }
+              ),
+              IconButton(
+                  icon: const Icon(Icons.navigate_next),
+                  onPressed: () {
+                    if(_selectIndex < 2) {
+                      setState(() {
+                        _selectIndex++;
+                      });
+                    }
+                  }
+              ),
             ],
+          ),
+          FlatButton(
+            onPressed: () {
+              _realTimeCuppingData = _setCuppingData();
+              _writeCuppingData(_realTimeCuppingData, this._uid);
+
+              // ユーザー画面へ遷移
+              Navigator.of(context).pushReplacementNamed('/home');
+            },
+            color: Colors.blue,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)
+            ),
+            child: Text(
+              'カッピングデータを保存',
+              style: TextStyle(
+                  color:Colors.white,
+                  fontSize: 20.0
+              ),
+            ),
           )
-      )
+        ],
+      ),
+      //
+      //       ],
+      //     )
+      // )
+    );
+  }
+
+  // コーヒー名などを入力する部分
+  Widget _coffeeInfoField() {
+    return Column(
+        children: <Widget>[
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Coffee Name',
+              hintText: 'Yirgacheffe Konga'
+            ),
+            keyboardType: TextInputType.text,
+            onChanged: _coffeeNameChanged,
+          ),
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Country',
+              hintText: 'Ethiopia'
+            ),
+            keyboardType: TextInputType.text,
+            onChanged: _countryChanged,
+          ),
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Process',
+              hintText: 'Full Washed'
+            ),
+            keyboardType: TextInputType.text,
+            onChanged: _processChanged,
+          )
+        ]
+    );
+  }
+
+  // カッピング項目入力画面1
+  Widget _firstCuppingData() {
+    return Column(
+      children: <Widget>[
+        Text('クリーンカップ'),
+        new Slider(
+            label: '$_cleanCup',
+            min: 0,
+            max: 8,
+            value: _cleanCup,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideCleanCup
+        ),
+        Text('甘さ'),
+        new Slider(
+            label: '$_sweetness',
+            min: 0,
+            max: 8,
+            value: _sweetness,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideSweetness
+        ),
+        Text('酸'),
+        new Slider(
+            label: '$_acidity',
+            min: 0,
+            max: 8,
+            value: _acidity,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideAcidity
+        ),
+        Text('マウスフィール'),
+        new Slider(
+            label: '$_mouseFeel',
+            min: 0,
+            max: 8,
+            value: _mouseFeel,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideMouseFeel
+        ),
+      ],
+    );
+  }
+
+  Widget _secondCuppingData() {
+    return Column(
+      children: <Widget>[
+        Text('アフターテイスト'),
+        new Slider(
+            label: '$_afterTaste',
+            min: 0,
+            max: 8,
+            value: _afterTaste,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideAfterTaste
+        ),
+        Text('フレーバー'),
+        new Slider(
+            label: '$_flavor',
+            min: 0,
+            max: 8,
+            value: _flavor,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideFlavor
+        ),
+        Text('バランス'),
+        new Slider(
+            label: '$_balance',
+            min: 0,
+            max: 8,
+            value: _balance,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideBalance
+        ),
+        Text('オーバーオール'),
+        new Slider(
+            label: '$_overall',
+            min: 0,
+            max: 8,
+            value: _overall,
+            // activeColor: Colors.orange,
+            // inactiveColor: Colors.blue,
+            divisions: 16,
+            onChanged: _slideOverall
+        ),
+      ],
     );
   }
 

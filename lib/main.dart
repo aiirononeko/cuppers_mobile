@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
       title: 'Cuppers',
       routes: <String, WidgetBuilder>{
         // '/': (_) => new Splash(),
-        '/home': (_) => new HomePage(),
-        '/login': (_) => new LoginPage(),
-        '/registration': (_) => new RegistrationPage(),
+        '/home': (_) => new HomePage(), // ベースになる画面
+        '/login': (_) => new LoginPage(), // ログイン画面
+        '/registration': (_) => new RegistrationPage(), // アカウント登録画面
       },
       home: _checkCurrentUser()
     );
