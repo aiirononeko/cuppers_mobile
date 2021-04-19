@@ -75,7 +75,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
             );
           },
           leading: Icon(
-            Icons.star_border,
+            _checkFavoriteFlag(data),
             size: 35,
           ),
           title: Text(data["coffee_name"]),
@@ -85,5 +85,14 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         ),
       ),
     );
+  }
+
+  // お気に入りかどうかを判定してアイコンを変更するメソッド
+  IconData _checkFavoriteFlag(Map<String, dynamic> data) {
+    if (data['favorite']) {
+      return Icons.star;
+    } else {
+      return Icons.star_border;
+    }
   }
 }
