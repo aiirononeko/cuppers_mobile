@@ -6,7 +6,7 @@ import './views/RegistrationPage.dart';
 import './views/LoginPage.dart';
 import './views/CoffeeIndexPage.dart';
 import './views/CuppingPage.dart';
-import './views/FavoriteListPage.dart';
+import './views/AccountInfoPage.dart';
 
 void main() async {
 
@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Cuppers',
       routes: <String, WidgetBuilder>{
-        // '/': (_) => new Splash(),
         '/home': (_) => new HomePage(), // ベースになる画面
         '/login': (_) => new LoginPage(), // ログイン画面
         '/registration': (_) => new RegistrationPage(), // アカウント登録画面
@@ -59,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   static List<Widget> _pageList = [
     CoffeeIndexPage(),
     CuppingPage(),
-    FavoriteListPage()
+    AccountInfoPage()
   ];
 
   @override
@@ -78,8 +77,8 @@ class _HomePageState extends State<HomePage> {
             label: 'Cupping',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star_border_outlined),
-            label: 'Favorite',
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Account',
           ),
         ],
         currentIndex: _selectedIndex,

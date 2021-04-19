@@ -58,6 +58,9 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
 
     Map<String, dynamic> data = snap.data();
 
+    // カッピングデータにドキュメントIDを付与
+    data['documentId'] = snap.id;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical:9.0),
       child: Container(
@@ -70,7 +73,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => CoffeePage(coffeeInfo: data)
+                    builder: (context) => CoffeePage(data)
                 )
             );
           },
