@@ -15,6 +15,32 @@ class CoffeeIndexPage extends StatefulWidget {
 
 class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
 
+  List<DropdownMenuItem<int>> _items = [];
+  int _selectItem = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    setItems();
+    _selectItem = _items[0].value;
+  }
+
+  void setItems() {
+    _items
+      ..add(DropdownMenuItem(
+        child: Text('作成日'),
+        value: 1,
+      ))
+      ..add(DropdownMenuItem(
+        child: Text('評価が高い'),
+        value: 2,
+      ))
+      ..add(DropdownMenuItem(
+        child: Text('お気に入り'),
+        value: 3,
+      ));
+  }
+
   String _uid = '';
 
   @override
@@ -24,7 +50,41 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     _uid = FirebaseAuth.instance.currentUser.uid;
 
     return Scaffold(
-      body: _buildBody(),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Container(
+                  width: 150,
+                  height: 35,
+                  child: TextField(
+                    obscureText: true, // 昇順でソート
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Search',
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 150,
+                  height: 35,
+                  child: DropdownButton(
+                    items: _items,
+                    value: _selectItem,
+                    onChanged: (value) => {
+                      setState(() {
+                        _selectItem = value;
+                      }),
+                    },
+                  ),
+                ),
+              ],
+            ),
+            _buildBody()
+          ],
+        )
+      )
     );
   }
 
@@ -35,6 +95,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .collection('CuppedCoffee')
           .doc(this._uid)
           .collection('CoffeeInfo')
+          .orderBy('cupped_date', descending: true)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
@@ -46,6 +107,8 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
   Widget _buildList(List<DocumentSnapshot> snapList) {
 
     return ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.all(18.0),
         itemCount: snapList.length,
         itemBuilder: (context, i) {
