@@ -15,6 +15,36 @@ class CoffeeIndexPage extends StatefulWidget {
 
 class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
 
+  List<DropdownMenuItem<int>> _items = [];
+  int _selectItem = 1;
+
+  // 検索機能で使用する変数
+  // TODO Algoliaを使って実装する必要がありそうなので後回し
+  String _searchValue = '';
+
+  @override
+  void initState() {
+    super.initState();
+    setItems();
+    _selectItem = _items[0].value;
+  }
+
+  void setItems() {
+    _items
+      ..add(DropdownMenuItem(
+        child: Text('作成日'),
+        value: 1,
+      ))
+      ..add(DropdownMenuItem(
+        child: Text('評価が高い'),
+        value: 2,
+      ))
+      ..add(DropdownMenuItem(
+        child: Text('お気に入り'),
+        value: 3,
+      ));
+  }
+
   String _uid = '';
 
   @override
@@ -24,17 +54,101 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     _uid = FirebaseAuth.instance.currentUser.uid;
 
     return Scaffold(
-      body: _buildBody(),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Container(
+                  width: 150,
+                  height: 35,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Search',
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        _searchValue = value;
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  width: 150,
+                  height: 35,
+                  child: DropdownButton(
+                    items: _items,
+                    value: _selectItem,
+                    onChanged: (value) => {
+                      setState(() {
+                        _selectItem = value;
+                      }),
+                    },
+                  ),
+                ),
+              ],
+            ),
+            _buildBody()
+          ],
+        )
+      )
     );
   }
 
   Widget _buildBody() {
+
+    if (_selectItem == 1) {
+      return _buildBodyCreatedAt();
+    } else if (_selectItem == 2) {
+      return _buildBodyScore();
+    }
+    return _buildBodyFavoriteCoffee();
+  }
+
+  // 作成日順で表示する
+  Widget _buildBodyCreatedAt() {
 
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
           .collection('CuppedCoffee')
           .doc(this._uid)
           .collection('CoffeeInfo')
+          .orderBy('cupped_date', descending: true)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return Text('Loading...');
+        return _buildList(snapshot.data.docs);
+      },
+    );
+  }
+
+  // スコア順に表示する
+  Widget _buildBodyScore() {
+
+    return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
+      stream: FirebaseFirestore.instance
+          .collection('CuppedCoffee')
+          .doc(this._uid)
+          .collection('CoffeeInfo')
+          .orderBy('coffee_score', descending: true)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return Text('Loading...');
+        return _buildList(snapshot.data.docs);
+      },
+    );
+  }
+
+  // お気に入りのコーヒーのみ表示する
+  Widget _buildBodyFavoriteCoffee() {
+
+    return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
+      stream: FirebaseFirestore.instance
+          .collection('CuppedCoffee')
+          .doc(this._uid)
+          .collection('CoffeeInfo')
+          .where('favorite', isEqualTo: true)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
@@ -46,6 +160,8 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
   Widget _buildList(List<DocumentSnapshot> snapList) {
 
     return ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.all(18.0),
         itemCount: snapList.length,
         itemBuilder: (context, i) {
