@@ -16,7 +16,11 @@ class CoffeeIndexPage extends StatefulWidget {
 class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
 
   List<DropdownMenuItem<int>> _items = [];
-  int _selectItem = 0;
+  int _selectItem = 1;
+
+  // 検索機能で使用する変数
+  // TODO Algoliaを使って実装する必要がありそうなので後回し
+  String _searchValue = '';
 
   @override
   void initState() {
@@ -59,11 +63,15 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                   width: 150,
                   height: 35,
                   child: TextField(
-                    obscureText: true, // 昇順でソート
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Search',
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        _searchValue = value;
+                      });
+                    },
                   ),
                 ),
                 Container(
@@ -90,12 +98,57 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
 
   Widget _buildBody() {
 
+    if (_selectItem == 1) {
+      return _buildBodyCreatedAt();
+    } else if (_selectItem == 2) {
+      return _buildBodyScore();
+    }
+    return _buildBodyFavoriteCoffee();
+  }
+
+  // 作成日順で表示する
+  Widget _buildBodyCreatedAt() {
+
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
           .collection('CuppedCoffee')
           .doc(this._uid)
           .collection('CoffeeInfo')
           .orderBy('cupped_date', descending: true)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return Text('Loading...');
+        return _buildList(snapshot.data.docs);
+      },
+    );
+  }
+
+  // スコア順に表示する
+  Widget _buildBodyScore() {
+
+    return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
+      stream: FirebaseFirestore.instance
+          .collection('CuppedCoffee')
+          .doc(this._uid)
+          .collection('CoffeeInfo')
+          .orderBy('coffee_score', descending: true)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return Text('Loading...');
+        return _buildList(snapshot.data.docs);
+      },
+    );
+  }
+
+  // お気に入りのコーヒーのみ表示する
+  Widget _buildBodyFavoriteCoffee() {
+
+    return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
+      stream: FirebaseFirestore.instance
+          .collection('CuppedCoffee')
+          .doc(this._uid)
+          .collection('CoffeeInfo')
+          .where('favorite', isEqualTo: true)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
