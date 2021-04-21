@@ -66,43 +66,45 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           ),
         ],
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  width: 150,
-                  height: 35,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Search',
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Container(
+                    width: 150,
+                    height: 35,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Search',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          _searchValue = value;
+                        });
+                      },
                     ),
-                    onChanged: (value) {
-                      setState(() {
-                        _searchValue = value;
-                      });
-                    },
                   ),
-                ),
-                Container(
-                  width: 150,
-                  height: 35,
-                  child: DropdownButton(
-                    items: _items,
-                    value: _selectItem,
-                    onChanged: (value) => {
-                      setState(() {
-                        _selectItem = value;
-                      }),
-                    },
+                  Container(
+                    width: 150,
+                    height: 35,
+                    child: DropdownButton(
+                      items: _items,
+                      value: _selectItem,
+                      onChanged: (value) => {
+                        setState(() {
+                          _selectItem = value;
+                        }),
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-            _buildBody(),
-          ],
+                ],
+              ),
+              _buildBody(),
+            ],
+          )
         )
       )
     );
