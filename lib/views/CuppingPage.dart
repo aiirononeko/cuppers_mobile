@@ -147,8 +147,10 @@ class _CuppingPageState extends State<CuppingPage> {
               _realTimeCuppingData = _setCuppingData();
               _writeCuppingData(_realTimeCuppingData, this._uid);
 
-              // タイマーをストップする
-              this._timer.cancel();
+              if (this._timer != null) {
+                // タイマーをストップする
+                this._timer.cancel();
+              }
 
               // ユーザー画面へ遷移
               Navigator.of(context).pushReplacementNamed('/home');

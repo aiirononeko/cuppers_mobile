@@ -54,6 +54,18 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     _uid = FirebaseAuth.instance.currentUser.uid;
 
     return Scaffold(
+      floatingActionButton: Column(
+        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FloatingActionButton(
+            backgroundColor: Colors.grey,
+            onPressed: () {
+              print("pressed");
+            },
+          ),
+        ],
+      ),
       body: Container(
         child: Column(
           children: <Widget>[
@@ -89,7 +101,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                 ),
               ],
             ),
-            _buildBody()
+            _buildBody(),
           ],
         )
       )
