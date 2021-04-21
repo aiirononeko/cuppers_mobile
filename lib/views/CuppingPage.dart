@@ -81,6 +81,25 @@ class _CuppingPageState extends State<CuppingPage> {
     ];
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Cuppers',
+          style: TextStyle(
+              color: Colors.black54
+          ),
+        ),
+        backgroundColor: Colors.white.withOpacity(0.8),
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+          onPressed: () {
+            if (this._timer != null) {
+              // タイマーをストップする
+              this._timer.cancel();
+            }
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Column(
         children: <Widget>[
           _pageList[_selectIndex],
@@ -147,8 +166,10 @@ class _CuppingPageState extends State<CuppingPage> {
               _realTimeCuppingData = _setCuppingData();
               _writeCuppingData(_realTimeCuppingData, this._uid);
 
-              // タイマーをストップする
-              this._timer.cancel();
+              if (this._timer != null) {
+                // タイマーをストップする
+                this._timer.cancel();
+              }
 
               // ユーザー画面へ遷移
               Navigator.of(context).pushReplacementNamed('/home');

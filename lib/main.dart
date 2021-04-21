@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 import './views/RegistrationPage.dart';
 import './views/LoginPage.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/home': (_) => new HomePage(), // ベースになる画面
         '/login': (_) => new LoginPage(), // ログイン画面
         '/registration': (_) => new RegistrationPage(), // アカウント登録画面
+        '/cupping': (_) => new CuppingPage(), // カッピング画面
       },
       home: _checkCurrentUser()
     );
@@ -57,24 +59,27 @@ class _HomePageState extends State<HomePage> {
   // 表示する Widget の一覧
   static List<Widget> _pageList = [
     CoffeeIndexPage(),
-    CuppingPage(),
     AccountInfoPage()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Cuppers")),
+      appBar: AppBar(
+        title: Text(
+          'Cuppers',
+          style: TextStyle(
+            color: Colors.black54
+          ),
+        ),
+        backgroundColor: Colors.white.withOpacity(0.8),
+      ),
       body: _pageList[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_cafe_outlined),
-            label: 'Cupping',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),

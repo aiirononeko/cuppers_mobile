@@ -17,23 +17,45 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
+      appBar: AppBar(
+        title: Text(
+          'Cuppers',
+          style: TextStyle(
+              color: Colors.black54
+          ),
+        ),
+        backgroundColor: Colors.white.withOpacity(0.8),
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.fromLTRB(30, 100, 30, 0),
+              child: Text(
                 'さあ、',
+                textAlign: TextAlign.left,
                 style: TextStyle(
                   fontSize: 20,
+                  fontWeight: FontWeight.bold
                 ),
               ),
-              Text(
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.fromLTRB(30, 0, 30, 50),
+              child: Text(
                 'カッピングを始めよう！',
+                textAlign: TextAlign.left,
                 style: TextStyle(
-                    fontSize: 20
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
                 ),
               ),
-              new TextField(
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
+              child: new TextField(
                 enabled: true,
                 decoration: const InputDecoration(
                   icon: Icon(Icons.email),
@@ -41,8 +63,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   labelText: 'Email',
                 ),
                 onChanged: _handleEmail,
-              ),
-              new TextField(
+              )
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(30, 0, 30, 50),
+              child: new TextField(
                 enabled: true,
                 obscureText: true,
                 decoration: const InputDecoration(
@@ -51,9 +76,64 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   labelText: 'Password',
                 ),
                 onChanged: _handlePassword,
+              )
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(30, 0, 30, 10),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                        text: '利用規約',
+                        style: TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.of(context).restorablePushNamed('/login'); // TODO 利用規約ページに遷移するように修正
+                          }
+                    ),
+                    TextSpan(
+                        text: '、 ',
+                        style: TextStyle(color: Colors.black)
+                    ),
+                    TextSpan(
+                        text: 'プライバシーポリシー',
+                        style: TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.of(context).restorablePushNamed('/login'); // TODO プライバシーポリシーページに遷移するように修正
+                          }
+                    ),
+                    TextSpan(
+                      text: 'に ',
+                      style: TextStyle(color: Colors.black)
+                    )
+                  ]
+                )
+              )
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
+              child: Text(
+                '同意して新規登録する',
+                textAlign: TextAlign.center,
               ),
-              new RaisedButton(
-                child: const Text('新規登録'),
+            ),
+            Container(
+              width: 300,
+              height: 50,
+              margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
+              child: new ElevatedButton(
+                child: Text(
+                  '新規登録',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 4
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.black87,
+                ),
                 onPressed: () async {
                   try {
 
@@ -82,27 +162,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   }
                 },
               ),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'すでにアカウントをお持ちの場合 ',
-                      style: TextStyle(color: Colors.black)
-                    ),
-                    TextSpan(
-                      text: 'ログイン',
-                      style: TextStyle(color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.of(context).restorablePushNamed('/login');
-                        }
-                    )
-                  ]
-                )
+            ),
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'すでにアカウントをお持ちの場合 ',
+                    style: TextStyle(color: Colors.black)
+                  ),
+                  TextSpan(
+                    text: 'ログイン',
+                    style: TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.of(context).restorablePushNamed('/login');
+                      }
+                  )
+                ]
               )
-            ],
-          ),
-        )
+            )
+          ],
+        ),
+      )
     );
   }
 

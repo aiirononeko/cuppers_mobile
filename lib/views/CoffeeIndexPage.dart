@@ -54,43 +54,58 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     _uid = FirebaseAuth.instance.currentUser.uid;
 
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  width: 150,
-                  height: 35,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Search',
+      floatingActionButton: Column(
+        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FloatingActionButton(
+            backgroundColor: Colors.grey,
+            onPressed: () {
+              Navigator.pushNamed(context, '/cupping');
+            },
+            child: const Icon(Icons.add),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Container(
+                    width: 150,
+                    height: 35,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Search',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          _searchValue = value;
+                        });
+                      },
                     ),
-                    onChanged: (value) {
-                      setState(() {
-                        _searchValue = value;
-                      });
-                    },
                   ),
-                ),
-                Container(
-                  width: 150,
-                  height: 35,
-                  child: DropdownButton(
-                    items: _items,
-                    value: _selectItem,
-                    onChanged: (value) => {
-                      setState(() {
-                        _selectItem = value;
-                      }),
-                    },
+                  Container(
+                    width: 150,
+                    height: 35,
+                    child: DropdownButton(
+                      items: _items,
+                      value: _selectItem,
+                      onChanged: (value) => {
+                        setState(() {
+                          _selectItem = value;
+                        }),
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-            _buildBody()
-          ],
+                ],
+              ),
+              _buildBody(),
+            ],
+          )
         )
       )
     );
