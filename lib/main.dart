@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/home': (_) => new HomePage(), // ベースになる画面
         '/login': (_) => new LoginPage(), // ログイン画面
         '/registration': (_) => new RegistrationPage(), // アカウント登録画面
+        '/cupping': (_) => new CuppingPage(), // カッピング画面
       },
       home: _checkCurrentUser()
     );
@@ -57,7 +58,6 @@ class _HomePageState extends State<HomePage> {
   // 表示する Widget の一覧
   static List<Widget> _pageList = [
     CoffeeIndexPage(),
-    CuppingPage(),
     AccountInfoPage()
   ];
 
@@ -71,10 +71,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_cafe_outlined),
-            label: 'Cupping',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),

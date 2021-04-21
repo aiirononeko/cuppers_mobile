@@ -61,8 +61,9 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           FloatingActionButton(
             backgroundColor: Colors.grey,
             onPressed: () {
-              print("pressed");
+              Navigator.pushNamed(context, '/cupping');
             },
+            child: const Icon(Icons.add),
           ),
         ],
       ),
