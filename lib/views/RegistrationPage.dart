@@ -31,7 +31,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           children: <Widget>[
             Container(
               width: double.infinity,
-              margin: EdgeInsets.fromLTRB(30, 100, 10, 0),
+              margin: EdgeInsets.fromLTRB(30, 100, 30, 0),
               child: Text(
                 'さあ、',
                 textAlign: TextAlign.left,
@@ -43,7 +43,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.fromLTRB(30, 0, 10, 50),
+              margin: EdgeInsets.fromLTRB(30, 0, 30, 50),
               child: Text(
                 'カッピングを始めよう！',
                 textAlign: TextAlign.left,
