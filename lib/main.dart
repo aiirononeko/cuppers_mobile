@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 import './views/RegistrationPage.dart';
 import './views/LoginPage.dart';
@@ -64,7 +65,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Cuppers")),
+      appBar: AppBar(
+        title: Text(
+          'Cuppers',
+          style: TextStyle(
+            color: Colors.black54
+          ),
+        ),
+        backgroundColor: Colors.white.withOpacity(0.8),
+      ),
       body: _pageList[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
