@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import './CoffeePage.dart';
 
@@ -69,6 +70,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
+          margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
           child: Column(
             children: <Widget>[
               Row(
@@ -76,6 +78,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                   Container(
                     width: 150,
                     height: 35,
+                    margin: EdgeInsets.fromLTRB(50, 0, 0, 0),
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -89,8 +92,9 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                     ),
                   ),
                   Container(
-                    width: 150,
-                    height: 35,
+                    width: 105,
+                    height: 40,
+                    margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
                     child: DropdownButton(
                       items: _items,
                       value: _selectItem,
@@ -189,33 +193,109 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
 
     Map<String, dynamic> data = snap.data();
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical:9.0),
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(8.0),
+          color: HexColor('dcdcdc'),
+          boxShadow: [
+            BoxShadow(
+              color: HexColor('dcdcdc'),
+              spreadRadius: 1.0,
+              blurRadius: 10.0,
+              offset: Offset(5, 5),
+            ),
+          ],
         ),
-        child: ListTile(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CoffeePage(snap.id)
+        child: Row(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Icon(
+                _checkFavoriteFlag(data),
+                size: 50,
+              )
+            ),
+            Column(
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    DateFormat('yyyy-MM-dd').format(data['cupped_date'].toDate()).toString()
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    data['coffee_name']
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    'made in ${data['country']}'
+                  ),
                 )
-            );
-          },
-          leading: Icon(
-            _checkFavoriteFlag(data),
-            size: 35,
-          ),
-          title: Text(data["coffee_name"]),
-          subtitle: Text("made in " + data["country"]),
-          trailing: Text("Score " + data["coffee_score"].toString()),
-          isThreeLine: true,
+              ]
+            ),
+            Column(
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    'Score'
+                  )
+                ),
+                Container(
+                    child: Text(
+                      data['coffee_score'].toString()
+                    )
+                ),
+              ],
+            )
+          ],
         ),
-      ),
+      )
     );
+
+    // return Padding(
+    //   padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+    //   child: Container(
+    //     decoration: BoxDecoration(
+    //       borderRadius: BorderRadius.circular(8.0),
+    //       color: HexColor('dcdcdc'),
+    //       boxShadow: [
+    //         BoxShadow(
+    //           color: HexColor('dcdcdc'),
+    //           spreadRadius: 1.0,
+    //           blurRadius: 10.0,
+    //           offset: Offset(5, 5),
+    //         ),
+    //       ],
+    //     ),
+    //     child: Row(
+    //       children: <Widget>[
+
+
+            // ListTile(
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => CoffeePage(snap.id)
+            //         )
+            //     );
+            //   },
+            //   leading: Icon(
+            //     _checkFavoriteFlag(data),
+            //     size: 35,
+            //   ),
+              // title: Text(data["coffee_name"]),
+              // subtitle: Text("made in " + data["country"]),
+              // trailing: Text("Score " + data["coffee_score"].toString()),
+              // isThreeLine: true,
+            // ),
+    //       ],
+    //     )
+    //   )
+    // );
   }
 
   // お気に入りかどうかを判定してアイコンを変更するメソッド
@@ -226,4 +306,17 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       return Icons.star_border;
     }
   }
+}
+
+// カラーコードで色を表示するためのクラス
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll('#', '');
+    if (hexColor.length == 6) {
+      hexColor = 'FF' + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
