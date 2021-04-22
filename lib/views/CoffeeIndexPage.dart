@@ -211,91 +211,70 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         child: Row(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              margin: EdgeInsets.fromLTRB(20, 30, 10, 30),
               child: Icon(
                 _checkFavoriteFlag(data),
-                size: 50,
+                size: 30,
               )
             ),
-            Column(
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    DateFormat('yyyy-MM-dd').format(data['cupped_date'].toDate()).toString()
-                  ),
-                ),
-                Container(
-                  child: Text(
-                    data['coffee_name']
-                  ),
-                ),
-                Container(
-                  child: Text(
-                    'made in ${data['country']}'
-                  ),
-                )
-              ]
-            ),
-            Column(
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    'Score'
-                  )
-                ),
-                Container(
-                    child: Text(
-                      data['coffee_score'].toString()
+            Container(
+              width: 220,
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        DateFormat('yyyy-MM-dd').format(data['cupped_date'].toDate()).toString(),
+                        style: TextStyle(
+                            fontSize: 10
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      child: Text(
+                        data['coffee_name'],
+                        style: TextStyle(
+                            fontSize: 20
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      child: Text(
+                        'made in ${data['country']}',
+                        style: TextStyle(
+                            fontSize: 15
+                        ),
+                      ),
                     )
-                ),
-              ],
+                  ]
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                      child: Text(
+                          'Score'
+                      )
+                  ),
+                  Container(
+                      child: Text(
+                        data['coffee_score'].toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      )
+                  ),
+                ],
+              ),
             )
           ],
         ),
       )
     );
-
-    // return Padding(
-    //   padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-    //   child: Container(
-    //     decoration: BoxDecoration(
-    //       borderRadius: BorderRadius.circular(8.0),
-    //       color: HexColor('dcdcdc'),
-    //       boxShadow: [
-    //         BoxShadow(
-    //           color: HexColor('dcdcdc'),
-    //           spreadRadius: 1.0,
-    //           blurRadius: 10.0,
-    //           offset: Offset(5, 5),
-    //         ),
-    //       ],
-    //     ),
-    //     child: Row(
-    //       children: <Widget>[
-
-
-            // ListTile(
-            //   onTap: () {
-            //     Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => CoffeePage(snap.id)
-            //         )
-            //     );
-            //   },
-            //   leading: Icon(
-            //     _checkFavoriteFlag(data),
-            //     size: 35,
-            //   ),
-              // title: Text(data["coffee_name"]),
-              // subtitle: Text("made in " + data["country"]),
-              // trailing: Text("Score " + data["coffee_score"].toString()),
-              // isThreeLine: true,
-            // ),
-    //       ],
-    //     )
-    //   )
-    // );
   }
 
   // お気に入りかどうかを判定してアイコンを変更するメソッド
