@@ -193,86 +193,96 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
 
     Map<String, dynamic> data = snap.data();
 
-    return Container(
-      margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CoffeePage(snap.id)
+          )
+        );
+      },
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          color: HexColor('dcdcdc'),
-          boxShadow: [
-            BoxShadow(
-              color: HexColor('dcdcdc'),
-              spreadRadius: 1.0,
-              blurRadius: 10.0,
-              offset: Offset(5, 5),
-            ),
-          ],
-        ),
-        child: Row(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.fromLTRB(20, 30, 10, 30),
-              child: Icon(
-                _checkFavoriteFlag(data),
-                size: 30,
-              )
-            ),
-            Container(
-              width: 220,
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: Column(
+        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            color: HexColor('dcdcdc'),
+            boxShadow: [
+              BoxShadow(
+                color: HexColor('dcdcdc'),
+                spreadRadius: 1.0,
+                blurRadius: 10.0,
+                offset: Offset(5, 5),
+              ),
+            ],
+          ),
+          child: Row(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.fromLTRB(20, 30, 10, 30),
+                child: Icon(
+                  _checkFavoriteFlag(data),
+                  size: 30,
+                )
+              ),
+              Container(
+                width: 220,
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: Text(
+                          DateFormat('yyyy-MM-dd').format(data['cupped_date'].toDate()).toString(),
+                          style: TextStyle(
+                              fontSize: 10
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Text(
+                          data['coffee_name'],
+                          style: TextStyle(
+                              fontSize: 20
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Text(
+                          'made in ${data['country']}',
+                          style: TextStyle(
+                              fontSize: 15
+                          ),
+                        ),
+                      )
+                    ]
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                child: Column(
                   children: <Widget>[
                     Container(
-                      child: Text(
-                        DateFormat('yyyy-MM-dd').format(data['cupped_date'].toDate()).toString(),
-                        style: TextStyle(
-                            fontSize: 10
-                        ),
-                      ),
+                        child: Text(
+                            'Score'
+                        )
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      child: Text(
-                        data['coffee_name'],
-                        style: TextStyle(
-                            fontSize: 20
-                        ),
-                      ),
+                        child: Text(
+                          data['coffee_score'].toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        )
                     ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      child: Text(
-                        'made in ${data['country']}',
-                        style: TextStyle(
-                            fontSize: 15
-                        ),
-                      ),
-                    )
-                  ]
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                      child: Text(
-                          'Score'
-                      )
-                  ),
-                  Container(
-                      child: Text(
-                        data['coffee_score'].toString(),
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      )
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
       )
     );
   }
