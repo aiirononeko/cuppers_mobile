@@ -115,6 +115,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     );
   }
 
+  // ボディを作成する親クラス
   Widget _buildBody() {
 
     if (_selectItem == 1) {
