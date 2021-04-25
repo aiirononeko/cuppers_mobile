@@ -70,7 +70,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: Column(
             children: <Widget>[
               Row(
@@ -106,6 +106,12 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                     ),
                   ),
                 ],
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Divider(
+                  color: Colors.black,
+                ),
               ),
               _buildBody(),
             ],
@@ -204,7 +210,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         );
       },
       child: Container(
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
