@@ -93,14 +93,14 @@ class _CoffeePageState extends State<CoffeePage> {
                 )
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Divider(
                   color: Colors.black,
                 ),
               ),
               Container(
                 width: 375,
-                height: 530,
+                height: 580,
                 margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
