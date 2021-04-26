@@ -69,10 +69,13 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           'Cuppers',
           style: TextStyle(
-            color: Colors.black54
+              color: Colors.black54,
+              fontSize: 25
           ),
         ),
-        backgroundColor: Colors.white.withOpacity(0.8),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: _pageList[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
