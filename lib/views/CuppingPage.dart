@@ -77,7 +77,8 @@ class _CuppingPageState extends State<CuppingPage> {
     List<Widget> _pageList = [
       _coffeeInfoField(),
       _firstCuppingData(),
-      _secondCuppingData()
+      _secondCuppingData(),
+      _thirdCuppingData()
     ];
 
     return Scaffold(
@@ -102,7 +103,7 @@ class _CuppingPageState extends State<CuppingPage> {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(15, 0, 15, 200),
+              margin: EdgeInsets.fromLTRB(15, 0, 15, 50),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
                 color: HexColor('e7e7e7'),
@@ -110,53 +111,32 @@ class _CuppingPageState extends State<CuppingPage> {
               child: Column(
                 children: <Widget>[
                   _pageList[_selectIndex],
-                  Row(
-                    children: <Widget>[
-                      IconButton(
-                          icon: const Icon(Icons.navigate_before),
-                          onPressed: () {
-                            if(_selectIndex > 0) {
-                              setState(() {
-                                _selectIndex--;
-                              });
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                            icon: const Icon(Icons.navigate_before),
+                            onPressed: _selectIndex == 0 ? null : () {
+                              if(_selectIndex > 0) {
+                                setState(() {
+                                  _selectIndex--;
+                                });
+                              }
                             }
-                          }
-                      ),
-                      IconButton(
-                          icon: const Icon(Icons.navigate_next),
-                          onPressed: () {
-                            if(_selectIndex < 2) {
-                              setState(() {
-                                _selectIndex++;
-                              });
+                        ),
+                        IconButton(
+                            icon: const Icon(Icons.navigate_next),
+                            onPressed: _selectIndex == 3 ? null: () {
+                              if(_selectIndex < 3) {
+                                setState(() {
+                                  _selectIndex++;
+                                });
+                              }
                             }
-                          }
-                      ),
-                    ],
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      _realTimeCuppingData = _setCuppingData();
-                      _writeCuppingData(_realTimeCuppingData, this._uid);
-
-                      if (this._timer != null) {
-                        // タイマーをストップする
-                        this._timer.cancel();
-                      }
-
-                      // ユーザー画面へ遷移
-                      Navigator.of(context).pushReplacementNamed('/home');
-                    },
-                    color: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)
-                    ),
-                    child: Text(
-                      'カッピングデータを保存',
-                      style: TextStyle(
-                          color:Colors.white,
-                          fontSize: 20.0
-                      ),
+                        ),
+                      ],
                     ),
                   )
                 ],
@@ -212,39 +192,61 @@ class _CuppingPageState extends State<CuppingPage> {
   Widget _coffeeInfoField() {
     return Column(
         children: <Widget>[
-          Text(
-            'カッピング 1/3',
-            style: TextStyle(
-              fontSize: 20
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+            child: Text(
+              'カッピング 1/4',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          TextField(
-            controller: _coffeeNameController,
-            decoration: InputDecoration(
-              labelText: 'Coffee Name',
-              hintText: 'Yirgacheffe Konga',
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Text(
+              '各項目を評価してください',
+              style: TextStyle(
+                fontSize: 12
+              ),
             ),
-            keyboardType: TextInputType.text,
-            onChanged: _coffeeNameChanged,
           ),
-          TextField(
-            controller: _countryController,
-            decoration: InputDecoration(
-              labelText: 'Country',
-              hintText: 'Ethiopia'
+          Container(
+            margin: EdgeInsets.fromLTRB(50, 79, 50, 0),
+            child: TextField(
+              controller: _coffeeNameController,
+              decoration: InputDecoration(
+                labelText: 'Coffee Name',
+                hintText: 'Yirgacheffe Konga',
+              ),
+              keyboardType: TextInputType.text,
+              onChanged: _coffeeNameChanged,
             ),
-            keyboardType: TextInputType.text,
-            onChanged: _countryChanged,
           ),
-          TextField(
-            controller: _processController,
-            decoration: InputDecoration(
-              labelText: 'Process',
-              hintText: 'Full Washed'
+          Container(
+            margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+            child: TextField(
+              controller: _countryController,
+              decoration: InputDecoration(
+                  labelText: 'Country',
+                  hintText: 'Ethiopia'
+              ),
+              keyboardType: TextInputType.text,
+              onChanged: _countryChanged,
             ),
-            keyboardType: TextInputType.text,
-            onChanged: _processChanged,
-          )
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(50, 10, 50, 50),
+            child: TextField(
+              controller: _processController,
+              decoration: InputDecoration(
+                  labelText: 'Process',
+                  hintText: 'Full Washed'
+              ),
+              keyboardType: TextInputType.text,
+              onChanged: _processChanged,
+            ),
+          ),
         ]
     );
   }
@@ -253,55 +255,96 @@ class _CuppingPageState extends State<CuppingPage> {
   Widget _firstCuppingData() {
     return Column(
       children: <Widget>[
-        Text(
-          'カッピング 2/3',
-          style: TextStyle(
-              fontSize: 20
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          child: Text(
+            'カッピング 2/4',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        Text('クリーンカップ'),
-        new Slider(
-            label: '$_cleanCup',
-            min: 0,
-            max: 8,
-            value: _cleanCup,
-            // activeColor: Colors.orange,
-            // inactiveColor: Colors.blue,
-            divisions: 16,
-            onChanged: _slideCleanCup
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          child: Text(
+            '各項目を評価してください',
+            style: TextStyle(
+                fontSize: 12
+            ),
+          ),
         ),
-        Text('甘さ'),
-        new Slider(
-            label: '$_sweetness',
-            min: 0,
-            max: 8,
-            value: _sweetness,
-            // activeColor: Colors.orange,
-            // inactiveColor: Colors.blue,
-            divisions: 16,
-            onChanged: _slideSweetness
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('クリーンカップ'),
+              new Slider(
+                  label: '$_cleanCup',
+                  min: 0,
+                  max: 8,
+                  value: _cleanCup,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideCleanCup
+              ),
+            ],
+          )
         ),
-        Text('酸'),
-        new Slider(
-            label: '$_acidity',
-            min: 0,
-            max: 8,
-            value: _acidity,
-            // activeColor: Colors.orange,
-            // inactiveColor: Colors.blue,
-            divisions: 16,
-            onChanged: _slideAcidity
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('甘さ'),
+              new Slider(
+                  label: '$_sweetness',
+                  min: 0,
+                  max: 8,
+                  value: _sweetness,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideSweetness
+              ),
+            ],
+          ),
         ),
-        Text('マウスフィール'),
-        new Slider(
-            label: '$_mouseFeel',
-            min: 0,
-            max: 8,
-            value: _mouseFeel,
-            // activeColor: Colors.orange,
-            // inactiveColor: Colors.blue,
-            divisions: 16,
-            onChanged: _slideMouseFeel
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('酸'),
+              new Slider(
+                  label: '$_acidity',
+                  min: 0,
+                  max: 8,
+                  value: _acidity,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideAcidity
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('マウスフィール'),
+              new Slider(
+                  label: '$_mouseFeel',
+                  min: 0,
+                  max: 8,
+                  value: _mouseFeel,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideMouseFeel
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -311,56 +354,153 @@ class _CuppingPageState extends State<CuppingPage> {
   Widget _secondCuppingData() {
     return Column(
       children: <Widget>[
-        Text(
-          'カッピング 3/3',
-          style: TextStyle(
-              fontSize: 20
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          child: Text(
+            'カッピング 3/4',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        Text('アフターテイスト'),
-        new Slider(
-            label: '$_afterTaste',
-            min: 0,
-            max: 8,
-            value: _afterTaste,
-            // activeColor: Colors.orange,
-            // inactiveColor: Colors.blue,
-            divisions: 16,
-            onChanged: _slideAfterTaste
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          child: Text(
+            '各項目を評価してください',
+            style: TextStyle(
+                fontSize: 12
+            ),
+          ),
         ),
-        Text('フレーバー'),
-        new Slider(
-            label: '$_flavor',
-            min: 0,
-            max: 8,
-            value: _flavor,
-            // activeColor: Colors.orange,
-            // inactiveColor: Colors.blue,
-            divisions: 16,
-            onChanged: _slideFlavor
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('アフターテイスト'),
+              new Slider(
+                  label: '$_afterTaste',
+                  min: 0,
+                  max: 8,
+                  value: _afterTaste,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideAfterTaste
+              ),
+            ],
+          ),
         ),
-        Text('バランス'),
-        new Slider(
-            label: '$_balance',
-            min: 0,
-            max: 8,
-            value: _balance,
-            // activeColor: Colors.orange,
-            // inactiveColor: Colors.blue,
-            divisions: 16,
-            onChanged: _slideBalance
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('フレーバー'),
+              new Slider(
+                  label: '$_flavor',
+                  min: 0,
+                  max: 8,
+                  value: _flavor,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideFlavor
+              ),
+            ],
+          ),
         ),
-        Text('オーバーオール'),
-        new Slider(
-            label: '$_overall',
-            min: 0,
-            max: 8,
-            value: _overall,
-            // activeColor: Colors.orange,
-            // inactiveColor: Colors.blue,
-            divisions: 16,
-            onChanged: _slideOverall
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('バランス'),
+              new Slider(
+                  label: '$_balance',
+                  min: 0,
+                  max: 8,
+                  value: _balance,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideBalance
+              ),
+            ],
+          ),
         ),
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('オーバーオール'),
+              new Slider(
+                  label: '$_overall',
+                  min: 0,
+                  max: 8,
+                  value: _overall,
+                  // activeColor: Colors.orange,
+                  // inactiveColor: Colors.blue,
+                  divisions: 16,
+                  onChanged: _slideOverall
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  // カッピング項目入力画面3
+  Widget _thirdCuppingData() {
+    return Column(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          child: Text(
+            'カッピング 4/4',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          child: Text(
+            '各項目を評価してください',
+            style: TextStyle(
+                fontSize: 12
+            ),
+          ),
+        ),
+        Container(
+          height: 50,
+          margin: EdgeInsets.fromLTRB(0, 170, 0, 106),
+          child: FlatButton(
+            onPressed: () {
+              _realTimeCuppingData = _setCuppingData();
+              _writeCuppingData(_realTimeCuppingData, this._uid);
+
+              if (this._timer != null) {
+                // タイマーをストップする
+                this._timer.cancel();
+              }
+
+              // ユーザー画面へ遷移
+              Navigator.of(context).pushReplacementNamed('/home');
+            },
+            color: HexColor('313131'),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)
+            ),
+            child: Text(
+              'カッピングデータを保存',
+              style: TextStyle(
+                  color:Colors.white,
+                  fontSize: 20.0
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
