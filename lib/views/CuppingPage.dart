@@ -279,7 +279,17 @@ class _CuppingPageState extends State<CuppingPage> {
           child: Column(
             children: <Widget>[
               Text('クリーンカップ'),
-              new Slider(
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
                   label: '$_cleanCup',
                   min: 0,
                   max: 8,
@@ -288,7 +298,8 @@ class _CuppingPageState extends State<CuppingPage> {
                   // inactiveColor: Colors.blue,
                   divisions: 16,
                   onChanged: _slideCleanCup
-              ),
+                ),
+              )
             ],
           )
         ),
@@ -297,7 +308,17 @@ class _CuppingPageState extends State<CuppingPage> {
           child: Column(
             children: <Widget>[
               Text('甘さ'),
-              new Slider(
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
                   label: '$_sweetness',
                   min: 0,
                   max: 8,
@@ -306,7 +327,8 @@ class _CuppingPageState extends State<CuppingPage> {
                   // inactiveColor: Colors.blue,
                   divisions: 16,
                   onChanged: _slideSweetness
-              ),
+                ),
+              )
             ],
           ),
         ),
@@ -315,7 +337,17 @@ class _CuppingPageState extends State<CuppingPage> {
           child: Column(
             children: <Widget>[
               Text('酸'),
-              new Slider(
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
                   label: '$_acidity',
                   min: 0,
                   max: 8,
@@ -324,7 +356,8 @@ class _CuppingPageState extends State<CuppingPage> {
                   // inactiveColor: Colors.blue,
                   divisions: 16,
                   onChanged: _slideAcidity
-              ),
+                ),
+              )
             ],
           ),
         ),
@@ -333,7 +366,17 @@ class _CuppingPageState extends State<CuppingPage> {
           child: Column(
             children: <Widget>[
               Text('マウスフィール'),
-              new Slider(
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
                   label: '$_mouseFeel',
                   min: 0,
                   max: 8,
@@ -342,7 +385,8 @@ class _CuppingPageState extends State<CuppingPage> {
                   // inactiveColor: Colors.blue,
                   divisions: 16,
                   onChanged: _slideMouseFeel
-              ),
+                ),
+              )
             ],
           ),
         ),
@@ -378,7 +422,17 @@ class _CuppingPageState extends State<CuppingPage> {
           child: Column(
             children: <Widget>[
               Text('アフターテイスト'),
-              new Slider(
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
                   label: '$_afterTaste',
                   min: 0,
                   max: 8,
@@ -387,7 +441,8 @@ class _CuppingPageState extends State<CuppingPage> {
                   // inactiveColor: Colors.blue,
                   divisions: 16,
                   onChanged: _slideAfterTaste
-              ),
+                ),
+              )
             ],
           ),
         ),
@@ -396,7 +451,17 @@ class _CuppingPageState extends State<CuppingPage> {
           child: Column(
             children: <Widget>[
               Text('フレーバー'),
-              new Slider(
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
                   label: '$_flavor',
                   min: 0,
                   max: 8,
@@ -405,7 +470,8 @@ class _CuppingPageState extends State<CuppingPage> {
                   // inactiveColor: Colors.blue,
                   divisions: 16,
                   onChanged: _slideFlavor
-              ),
+                ),
+              )
             ],
           ),
         ),
@@ -414,7 +480,17 @@ class _CuppingPageState extends State<CuppingPage> {
           child: Column(
             children: <Widget>[
               Text('バランス'),
-              new Slider(
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
                   label: '$_balance',
                   min: 0,
                   max: 8,
@@ -423,7 +499,8 @@ class _CuppingPageState extends State<CuppingPage> {
                   // inactiveColor: Colors.blue,
                   divisions: 16,
                   onChanged: _slideBalance
-              ),
+                ),
+              )
             ],
           ),
         ),
@@ -432,7 +509,17 @@ class _CuppingPageState extends State<CuppingPage> {
           child: Column(
             children: <Widget>[
               Text('オーバーオール'),
-              new Slider(
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
                   label: '$_overall',
                   min: 0,
                   max: 8,
@@ -441,7 +528,8 @@ class _CuppingPageState extends State<CuppingPage> {
                   // inactiveColor: Colors.blue,
                   divisions: 16,
                   onChanged: _slideOverall
-              ),
+                ),
+              )
             ],
           ),
         ),
