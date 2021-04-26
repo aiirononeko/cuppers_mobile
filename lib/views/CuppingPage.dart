@@ -82,15 +82,12 @@ class _CuppingPageState extends State<CuppingPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Cuppers',
-          style: TextStyle(
-              color: Colors.black54
-          ),
-        ),
-        backgroundColor: Colors.white.withOpacity(0.8),
+        title: Text(''),
+        backgroundColor: HexColor('313131'),
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.black),
         leading: new IconButton(
-          icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+          icon: new Icon(Icons.close, color: Colors.white),
           onPressed: () {
             if (this._timer != null) {
               // タイマーをストップする
@@ -100,94 +97,114 @@ class _CuppingPageState extends State<CuppingPage> {
           },
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          _pageList[_selectIndex],
-          Row(
-            children: <Widget>[
-              IconButton(
-                  icon: const Icon(Icons.navigate_before),
-                  onPressed: () {
-                    if(_selectIndex > 0) {
-                      setState(() {
-                        _selectIndex--;
-                      });
-                    }
-                  }
+      body: Container(
+        color: HexColor('313131'),
+        child: Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(15, 0, 15, 200),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: HexColor('e7e7e7'),
               ),
-              IconButton(
-                  icon: const Icon(Icons.navigate_next),
-                  onPressed: () {
-                    if(_selectIndex < 2) {
-                      setState(() {
-                        _selectIndex++;
-                      });
-                    }
-                  }
+              child: Column(
+                children: <Widget>[
+                  _pageList[_selectIndex],
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                          icon: const Icon(Icons.navigate_before),
+                          onPressed: () {
+                            if(_selectIndex > 0) {
+                              setState(() {
+                                _selectIndex--;
+                              });
+                            }
+                          }
+                      ),
+                      IconButton(
+                          icon: const Icon(Icons.navigate_next),
+                          onPressed: () {
+                            if(_selectIndex < 2) {
+                              setState(() {
+                                _selectIndex++;
+                              });
+                            }
+                          }
+                      ),
+                    ],
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      _realTimeCuppingData = _setCuppingData();
+                      _writeCuppingData(_realTimeCuppingData, this._uid);
+
+                      if (this._timer != null) {
+                        // タイマーをストップする
+                        this._timer.cancel();
+                      }
+
+                      // ユーザー画面へ遷移
+                      Navigator.of(context).pushReplacementNamed('/home');
+                    },
+                    color: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)
+                    ),
+                    child: Text(
+                      'カッピングデータを保存',
+                      style: TextStyle(
+                          color:Colors.white,
+                          fontSize: 20.0
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ],
-          ),
-          Container(
-            child: Row(
-              children: <Widget>[
-                IconButton(
-                    icon: Icon(Icons.stop),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.stop, color: HexColor('e7e7e7')),
                     onPressed: () {
                       _resetTimer();
                     }
-                ),
-                IconButton(
-                    icon: Icon(Icons.pause),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.pause, color: HexColor('e7e7e7')),
                     onPressed: () {
                       setState(() {
                         this._timer.cancel();
                       });
                     }
-                ),
-                Text(
-                  '${this._countMinuteStr}:${this._countSecondStr}',
-                  style: TextStyle(
-                      fontSize: 50
                   ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.play_arrow),
-                  onPressed: () {
-                    setState(() {
-                      this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
-                    });
-                  }
-                )
-              ],
-            )
-          ),
-          FlatButton(
-            onPressed: () {
-              _realTimeCuppingData = _setCuppingData();
-              _writeCuppingData(_realTimeCuppingData, this._uid);
-
-              if (this._timer != null) {
-                // タイマーをストップする
-                this._timer.cancel();
-              }
-
-              // ユーザー画面へ遷移
-              Navigator.of(context).pushReplacementNamed('/home');
-            },
-            color: Colors.blue,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)
+                  Text(
+                    '${this._countMinuteStr}:${this._countSecondStr}',
+                    style: TextStyle(
+                      fontSize: 60,
+                      color: HexColor('e7e7e7')
+                    ),
+                  ),
+                  Container(
+                    width: 20,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.play_arrow, color: HexColor('e7e7e7')),
+                    onPressed: () {
+                      setState(() {
+                        this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+                      });
+                    }
+                  )
+                ],
+              )
             ),
-            child: Text(
-              'カッピングデータを保存',
-              style: TextStyle(
-                  color:Colors.white,
-                  fontSize: 20.0
-              ),
-            ),
-          )
-        ],
-      ),
+          ],
+        )
+      )
     );
   }
 
@@ -425,4 +442,17 @@ class _CuppingPageState extends State<CuppingPage> {
       this._countSecondStr = '00';
     });
   }
+}
+
+// カラーコードで色を表示するためのクラス
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll('#', '');
+    if (hexColor.length == 6) {
+      hexColor = 'FF' + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
