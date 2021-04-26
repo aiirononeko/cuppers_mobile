@@ -21,10 +21,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
         title: Text(
           'Cuppers',
           style: TextStyle(
-              color: Colors.black54
+              color: Colors.black54,
+              fontSize: 25
           ),
         ),
-        backgroundColor: Colors.white.withOpacity(0.8),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: Container(
         child: Column(
