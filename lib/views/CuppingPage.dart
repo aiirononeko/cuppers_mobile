@@ -563,7 +563,7 @@ class _CuppingPageState extends State<CuppingPage> {
         Container(
           height: 50,
           margin: EdgeInsets.fromLTRB(0, 170, 0, 106),
-          child: FlatButton(
+          child: ElevatedButton(
             onPressed: () {
               _realTimeCuppingData = _setCuppingData();
               _writeCuppingData(_realTimeCuppingData, this._uid);
@@ -576,9 +576,11 @@ class _CuppingPageState extends State<CuppingPage> {
               // ユーザー画面へ遷移
               Navigator.of(context).pushReplacementNamed('/home');
             },
-            color: HexColor('313131'),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)
+            style: ElevatedButton.styleFrom(
+              primary: HexColor('313131'),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)
+              ),
             ),
             child: Text(
               'カッピングデータを保存',
