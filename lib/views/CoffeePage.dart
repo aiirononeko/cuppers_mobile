@@ -104,7 +104,7 @@ class _CoffeePageState extends State<CoffeePage> {
                 margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: HexColor('dcdcdc'),
+                  color: HexColor('e7e7e7'),
                   boxShadow: [
                     BoxShadow(
                       color: HexColor('dcdcdc'),

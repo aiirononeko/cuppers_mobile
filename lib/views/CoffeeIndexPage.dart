@@ -214,7 +214,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
-            color: HexColor('dcdcdc'),
+            color: HexColor('e7e7e7'),
             boxShadow: [
               BoxShadow(
                 color: HexColor('dcdcdc'),
