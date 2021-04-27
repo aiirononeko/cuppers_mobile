@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class MyFirebaseAuth {
 
@@ -43,9 +44,38 @@ class MyFirebaseAuth {
     } on FirebaseAuthException catch(e) {
 
       if (e.code == 'user-not-found') {
-        print('No user not found for that email.');
+        
+        showDialog(
+          context: context,
+          builder: (context) {
+            return SimpleDialog(
+              title: Text('info'),
+              children: <Widget>[
+                SimpleDialogOption(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text('メールアドレスが間違っています'),
+                ),
+              ],
+            );
+          },
+        );
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+
+        // TODO パスワードを忘れた時の救済措置を用意する
+        showDialog(
+          context: context,
+          builder: (context) {
+            return SimpleDialog(
+              title: Text('info'),
+              children: <Widget>[
+                SimpleDialogOption(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text('パスワードが間違っています'),
+                ),
+              ],
+            );
+          },
+        );
       }
 
     } catch(e) {
