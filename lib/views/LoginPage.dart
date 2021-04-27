@@ -90,9 +90,6 @@ class _LoginPageState extends State<LoginPage> {
                         if (value.isEmpty) {
                           return 'パスワードを入力してください';
                         }
-                        if (value.length < 8) {
-                          return 'パスワードは8文字以上で設定してください';
-                        }
                         return null;
                       },
                     )

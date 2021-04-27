@@ -44,7 +44,7 @@ class MyFirebaseAuth {
     } on FirebaseAuthException catch(e) {
 
       if (e.code == 'user-not-found') {
-        
+
         showDialog(
           context: context,
           builder: (context) {
