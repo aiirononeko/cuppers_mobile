@@ -599,20 +599,31 @@ class _CuppingPageState extends State<CuppingPage> {
   Map<String, dynamic> _setCuppingData() {
     Map<String, dynamic> cuppingData = new Map<String, dynamic>();
 
-    cuppingData["coffee_name"] = _coffeeName;
-    cuppingData["country"] = _country;
-    cuppingData["process"] = _process;
-    cuppingData["sweetness"] = _sweetness;
-    cuppingData["acidity"] = _acidity;
-    cuppingData["mousefeel"] = _mouseFeel;
-    cuppingData["aftertaste"] = _afterTaste;
-    cuppingData["cleancup"] = _cleanCup;
-    cuppingData["balance"] = _balance;
-    cuppingData["flavor"] = _flavor;
-    cuppingData["overall"] = _overall;
-    cuppingData["coffee_score"] = _coffeeScore;
-    cuppingData["favorite"] = false;
-    cuppingData["cupped_date"] = Timestamp.fromDate(DateTime.now());
+    cuppingData['coffee_name'] = _coffeeName;
+    cuppingData['country'] = _country;
+    cuppingData['process'] = _process;
+    cuppingData['sweetness'] = _sweetness;
+    cuppingData['acidity'] = _acidity;
+    cuppingData['mousefeel'] = _mouseFeel;
+    cuppingData['aftertaste'] = _afterTaste;
+    cuppingData['cleancup'] = _cleanCup;
+    cuppingData['balance'] = _balance;
+    cuppingData['flavor'] = _flavor;
+    cuppingData['overall'] = _overall;
+    cuppingData['coffee_score'] = _coffeeScore;
+    cuppingData['favorite'] = false;
+    cuppingData['cupped_date'] = Timestamp.fromDate(DateTime.now());
+
+    // 値が未入力だった場合
+    if (cuppingData['coffee_name'] == '') {
+      cuppingData['coffee_name'] = 'Some Coffee';
+    }
+    if (cuppingData['country'] == '') {
+      cuppingData['country'] = 'Some Country';
+    }
+    if (cuppingData['process'] == '') {
+      cuppingData['process'] = 'Some Process';
+    }
 
     cuppingData['coffee_score'] =
       _cleanCup + _sweetness + _acidity + _mouseFeel + _afterTaste +
