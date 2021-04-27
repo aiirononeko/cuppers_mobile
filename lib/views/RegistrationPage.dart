@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:cuppers_mobile/services/Validate.dart';
+import 'package:cuppers_mobile/services/MyFirebaseAuth.dart';
 
 // サインインページ
 class RegistrationPage extends StatefulWidget {
@@ -17,7 +17,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  Validate _validate = new Validate();
+  // FirebaseAuthの処理を記述したサービスクラス
+  MyFirebaseAuth _myFirebaseAuth = new MyFirebaseAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -169,9 +170,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         if (_formKey.currentState.validate()) {
 
                           // ユーザー登録処理
-                          await _validate.createUserAndLogin(this._email, this._password);
+                          await _myFirebaseAuth.createUserAndLogin(
+                            this._email,
+                            this._password
+                          );
                           // ログイン処理
-                          await _validate.loginAndMoveUserPage(this._email, this._password, context);
+                          await _myFirebaseAuth.loginAndMoveUserPage(
+                            this._email,
+                            this._password,
+                            context
+                          );
                         }
                       },
                     ),

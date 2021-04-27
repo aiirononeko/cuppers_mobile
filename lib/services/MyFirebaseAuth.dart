@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
-class Validate {
+class MyFirebaseAuth {
 
   // ユーザー登録処理をするメソッド
   Future createUserAndLogin(String email, String password) async {
