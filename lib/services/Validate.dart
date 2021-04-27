@@ -28,7 +28,7 @@ class Validate {
   }
 
   // ログイン処理をしてユーザー画面に遷移するメソッド
-  void loginAndMoveUserPage(String email, String password, BuildContext context) async {
+  Future loginAndMoveUserPage(String email, String password, BuildContext context) async {
 
     try {
 
