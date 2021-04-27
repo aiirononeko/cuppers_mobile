@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class MyFirebaseAuth {
 
-  // ユーザー登録処理をするメソッド
-  Future createUserAndLogin(String email, String password) async {
+  // ユーザー登録処理・ログイン処理をするメソッド
+  Future createUserAndLogin(String email, String password, BuildContext context) async {
 
     try {
 
@@ -15,12 +15,29 @@ class MyFirebaseAuth {
           password: password
       );
 
+      // ログイン処理
+      await loginAndMoveUserPage(email, password, context);
+
     } on FirebaseAuthException catch(e) {
 
       if (e.code == 'weak-password') {
         print('This password is valid.');
       } else if (e.code == 'email-already-in-use') {
-        print('This account is already exists.');
+
+        showDialog(
+          context: context,
+          builder: (context) {
+            return SimpleDialog(
+              title: Text('info'),
+              children: <Widget>[
+                SimpleDialogOption(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text('ユーザーはすでに存在します'),
+                ),
+              ],
+            );
+          },
+        );
       }
 
     } catch(e) {

@@ -169,13 +169,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                         if (_formKey.currentState.validate()) {
 
-                          // ユーザー登録処理
+                          // ユーザー登録・ログイン処理
                           await _myFirebaseAuth.createUserAndLogin(
-                            this._email,
-                            this._password
-                          );
-                          // ログイン処理
-                          await _myFirebaseAuth.loginAndMoveUserPage(
                             this._email,
                             this._password,
                             context
