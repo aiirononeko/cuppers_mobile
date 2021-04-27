@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cuppers_mobile/services/Validate.dart';
 
 // ログインページ
 class LoginPage extends StatefulWidget {
@@ -14,6 +14,8 @@ class _LoginPageState extends State<LoginPage> {
 
   String _email = '';
   String _password = '';
+
+  Validate _validate = new Validate();
 
   @override
   Widget build(BuildContext context) {
@@ -85,26 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.black87,
                 ),
-                onPressed: () async {
-                  try {
-                    // ログイン処理
-                    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: this._email,
-                        password: this._password
-                    );
-
-                    // ユーザーページへの遷移
-                    Navigator.of(context).pushReplacementNamed('/home');
-
-                  } on FirebaseAuthException catch(e) {
-                    if (e.code == 'user-not-found') {
-                      print('No user not found for that email.');
-                    } else if (e.code == 'wrong-password') {
-                      print('Wrong password provided for that user.');
-                    }
-                  } catch(e) {
-                    print(e);
-                  }
+                onPressed: () {
+                  _validate.loginAndMoveUserPage(this._email, this._password, context);
                 },
               ),
             ),

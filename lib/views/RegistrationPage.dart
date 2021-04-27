@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:cuppers_mobile/services/Validate.dart';
 
 // サインインページ
 class RegistrationPage extends StatefulWidget {
@@ -13,6 +14,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   String _email = '';
   String _password = '';
+
+  Validate _validate = new Validate();
 
   @override
   Widget build(BuildContext context) {
@@ -138,31 +141,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   primary: Colors.black87,
                 ),
                 onPressed: () async {
-                  try {
 
-                    // ユーザー登録処理
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: this._email,
-                        password: this._password
-                    );
+                  // ユーザー登録処理
+                  await _validate.createUserAndLogin(this._email, this._password);
 
-                    // ログイン処理
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(email: this._email, password: this._password);
+                  // ログイン処理
+                  _validate.loginAndMoveUserPage(this._email, this._password, context);
 
-                    // ユーザー画面へ遷移
-                    Navigator.of(context).pushReplacementNamed('/home');
-
-                  } on FirebaseAuthException catch(e) {
-
-                    if (e.code == 'weak-password') {
-                      print('This password is valid.');
-                    } else if (e.code == 'email-already-in-use') {
-                      print('This account is already exists.');
-                    }
-
-                  } catch(e) {
-                    print(e);
-                  }
                 },
               ),
             ),
