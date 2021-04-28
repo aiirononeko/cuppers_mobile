@@ -103,7 +103,7 @@ class _CuppingPageState extends State<CuppingPage> {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(15, 0, 15, 50),
+              margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
                 color: HexColor('e7e7e7'),
@@ -112,7 +112,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 children: <Widget>[
                   _pageList[_selectIndex],
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -141,6 +141,31 @@ class _CuppingPageState extends State<CuppingPage> {
                   )
                 ],
               ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 15),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.looks_one,
+                        color: Colors.white,
+                        size: 40
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.looks_two,
+                        color: Colors.white,
+                        size: 40
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ),
             Container(
               margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
