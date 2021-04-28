@@ -155,7 +155,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ],
               ),
             ),
-            _coffeeIndex[_selectCoffeeIndex],
+            _coffeeIndex[_selectCoffeeIndex], // カッピングするコーヒーを切り替え
             Container(
               margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: Row(
@@ -376,7 +376,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 0, 50, 4),
           child: Column(
             children: <Widget>[
               Text('マウスフィール'),
@@ -519,7 +519,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 0, 50, 4),
           child: Column(
             children: <Widget>[
               Text('オーバーオール'),
