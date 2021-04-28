@@ -114,11 +114,9 @@ class _CuppingPageState extends State<CuppingPage> {
       _coffeeInfoField(), // 0
       _firstCuppingData(), // 1
       _secondCuppingData(), // 2
-      _thirdCuppingData(), // 3
-      _coffeeInfoFieldSecond(), // 4
-      _firstCuppingDataSecond(), // 5
-      _secondCuppingDataSecond(), // 6
-      _thirdCuppingDataSecond() // 7
+      _coffeeInfoFieldSecond(), // 3
+      _firstCuppingDataSecond(), // 4
+      _secondCuppingDataSecond(), // 5
     ];
 
     // カッピングコーヒーの制御
@@ -168,7 +166,7 @@ class _CuppingPageState extends State<CuppingPage> {
                       children: <Widget>[
                         IconButton(
                             icon: const Icon(Icons.navigate_before),
-                            onPressed: _selectIndex == 0 || _selectIndex == 4 ? null : () {
+                            onPressed: _selectIndex == 0 || _selectIndex == 3 ? null : () {
                               if(_selectIndex > 0) {
                                 setState(() {
                                   _selectIndex--;
@@ -178,8 +176,8 @@ class _CuppingPageState extends State<CuppingPage> {
                         ),
                         IconButton(
                             icon: const Icon(Icons.navigate_next),
-                            onPressed: _selectIndex == 3 || _selectIndex == 7 ? null: () {
-                              if(_selectIndex < 7) {
+                            onPressed: _selectIndex == 2 || _selectIndex == 5 ? null: () {
+                              if(_selectIndex < 5) {
                                 setState(() {
                                   _selectIndex++;
                                 });
@@ -246,7 +244,7 @@ class _CuppingPageState extends State<CuppingPage> {
           Container(
             margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
             child: Text(
-              'カッピング 1/4',
+              'カッピング 1/3',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -309,7 +307,7 @@ class _CuppingPageState extends State<CuppingPage> {
         Container(
           margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: Text(
-            'カッピング 2/4',
+            'カッピング 2/3',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -452,7 +450,7 @@ class _CuppingPageState extends State<CuppingPage> {
         Container(
           margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: Text(
-            'カッピング 3/4',
+            'カッピング 3/3',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -653,7 +651,7 @@ class _CuppingPageState extends State<CuppingPage> {
           Container(
             margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
             child: Text(
-              'カッピング 1/4',
+              'カッピング 1/3',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -716,7 +714,7 @@ class _CuppingPageState extends State<CuppingPage> {
         Container(
           margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: Text(
-            'カッピング 2/4',
+            'カッピング 2/3',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -859,7 +857,7 @@ class _CuppingPageState extends State<CuppingPage> {
         Container(
           margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: Text(
-            'カッピング 3/4',
+            'カッピング 3/3',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -1088,7 +1086,7 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 4;
+                  this._selectIndex = 3;
                   this._selectCoffeeIndex = 1;
                 });
               },
@@ -1106,11 +1104,51 @@ class _CuppingPageState extends State<CuppingPage> {
                       // ボタン領域
                       ElevatedButton(
                         child: Text('Cancel'),
+                        style: ElevatedButton.styleFrom(
+                          primary: HexColor('313131'),
+                        ),
                         onPressed: () => Navigator.pop(context),
                       ),
                       ElevatedButton(
                         child: Text('OK'),
-                        onPressed: () => Navigator.pop(context),
+                        style: ElevatedButton.styleFrom(
+                          primary: HexColor('313131'),
+                        ),
+                        onPressed: () {
+
+                          // 1杯目のカッピング情報を登録
+                          _realTimeCuppingData = _setCuppingData();
+                          _writeCuppingData(_realTimeCuppingData, this._uid);
+
+                          // 2杯目のコーヒーがカッピングされていた場合
+                          if (
+                          this._coffeeNameSecond != '' &&
+                              this._countrySecond != '' &&
+                              this._processSecond != '' &&
+                              this._cleanCupSecond != 4 &&
+                              this._sweetnessSecond != 4 &&
+                              this._aciditySecond != 4 &&
+                              this._mouseFeelSecond != 4 &&
+                              this._afterTasteSecond != 4 &&
+                              this._flavorSecond != 4 &&
+                              this._balanceSecond != 4 &&
+                              this._overallSecond != 4
+                          ) {
+                            // 2杯目のカッピング情報を登録
+                            _realTimeCuppingDataSecond = _setCuppingDataSecond();
+                            _writeCuppingData(_realTimeCuppingDataSecond, this._uid);
+                          }
+
+                          // タイマーが起動していた場合
+                          if (this._timer != null) {
+                            // タイマーをストップする
+                            this._timer.cancel();
+                          }
+
+                          // ユーザー画面へ遷移
+                          Navigator.of(context).pushReplacementNamed('/home');
+
+                        },
                       ),
                     ],
                   );
@@ -1175,6 +1213,81 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
               )
           ),
+          InkWell(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (_) {
+                    return AlertDialog(
+                      // title: Text("タイトル"),
+                      content: Text('カッピングを終了しますか？'),
+                      actions: <Widget>[
+                        // ボタン領域
+                        ElevatedButton(
+                          child: Text('Cancel'),
+                          style: ElevatedButton.styleFrom(
+                            primary: HexColor('313131'),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                        ElevatedButton(
+                          child: Text('OK'),
+                          style: ElevatedButton.styleFrom(
+                            primary: HexColor('313131'),
+                          ),
+                          onPressed: () {
+
+                            // 1杯目のカッピング情報を登録
+                            _realTimeCuppingData = _setCuppingData();
+                            _writeCuppingData(_realTimeCuppingData, this._uid);
+
+                            // 2杯目のコーヒーがカッピングされていた場合
+                            if (
+                              this._coffeeNameSecond != '' &&
+                              this._countrySecond != '' &&
+                              this._processSecond != '' &&
+                              this._cleanCupSecond != 4 &&
+                              this._sweetnessSecond != 4 &&
+                              this._aciditySecond != 4 &&
+                              this._mouseFeelSecond != 4 &&
+                              this._afterTasteSecond != 4 &&
+                              this._flavorSecond != 4 &&
+                              this._balanceSecond != 4 &&
+                              this._overallSecond != 4
+                            ) {
+                              // 2杯目のカッピング情報を登録
+                              _realTimeCuppingDataSecond = _setCuppingDataSecond();
+                              _writeCuppingData(_realTimeCuppingDataSecond, this._uid);
+                            }
+
+                            // タイマーが起動していた場合
+                            if (this._timer != null) {
+                              // タイマーをストップする
+                              this._timer.cancel();
+                            }
+
+                            // ユーザー画面へ遷移
+                            Navigator.of(context).pushReplacementNamed('/home');
+
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.fromLTRB(120, 0, 0, 0),
+                child: Text(
+                  'Cupping Done',
+                  style: TextStyle(
+                      color: HexColor('e7e7e7'),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15
+                  ),
+                ),
+              )
+          )
         ],
       )
     );
