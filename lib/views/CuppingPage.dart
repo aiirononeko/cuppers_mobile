@@ -1094,6 +1094,41 @@ class _CuppingPageState extends State<CuppingPage> {
               },
             ),
           ),
+          InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return AlertDialog(
+                    // title: Text("タイトル"),
+                    content: Text('カッピングを終了しますか？'),
+                    actions: <Widget>[
+                      // ボタン領域
+                      ElevatedButton(
+                        child: Text('Cancel'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                      ElevatedButton(
+                        child: Text('OK'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.fromLTRB(120, 0, 0, 0),
+                child: Text(
+                  'Cupping Done',
+                  style: TextStyle(
+                    color: HexColor('e7e7e7'),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15
+                  ),
+                ),
+            )
+          )
         ],
       )
     );
