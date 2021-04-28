@@ -16,8 +16,11 @@ class _CuppingPageState extends State<CuppingPage> {
   // ログイン中のユーザー情報格納用変数
   String _uid = '';
 
-  // 表示切り替え機能で使用する変数
+  // カッピングページ表示切り替え機能で使用する変数
   int _selectIndex = 0;
+
+  // カッピングコーヒー切り替え機能で使用する変数
+  int _selectCoffeeIndex = 0;
 
   // タイマー機能で使用する変数
   int _countMinute = 0;
@@ -73,12 +76,18 @@ class _CuppingPageState extends State<CuppingPage> {
     // ログイン中のユーザーIDを取得
     _uid = FirebaseAuth.instance.currentUser.uid;
 
-    // 表示項目の制御
+    // カッピングページ表示項目の制御
     List<Widget> _pageList = [
       _coffeeInfoField(),
       _firstCuppingData(),
       _secondCuppingData(),
       _thirdCuppingData()
+    ];
+
+    // カッピングコーヒーの制御
+    List<Widget> _coffeeIndex = [
+      _buttonOneAble(),
+      _buttonTwoAble(),
     ];
 
     return Scaffold(
@@ -105,7 +114,11 @@ class _CuppingPageState extends State<CuppingPage> {
             Container(
               margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
                 color: HexColor('e7e7e7'),
               ),
               child: Column(
@@ -142,31 +155,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 15),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.looks_one,
-                        color: Colors.white,
-                        size: 40
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.looks_two,
-                        color: Colors.white,
-                        size: 40
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ),
+            _coffeeIndex[_selectCoffeeIndex],
             Container(
               margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: Row(
@@ -617,6 +606,98 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         )
       ],
+    );
+  }
+
+  Widget _buttonOneAble() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 0, 15, 15),
+      child: Row(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+              ),
+              color: HexColor('e7e7e7'),
+            ),
+            child: Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 8, 8),
+              child: IconButton(
+                icon: Icon(
+                  Icons.looks_one,
+                  color: HexColor('313131'),
+                  size: 40
+                ),
+                onPressed: () {},
+              ),
+            )
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 8, 8),
+            child: IconButton(
+              icon: Icon(
+                Icons.looks_two,
+                  color: HexColor('e7e7e7'),
+                size: 40
+              ),
+              onPressed: () {
+                setState(() {
+                  this._selectCoffeeIndex = 1;
+                });
+              },
+            ),
+          ),
+        ],
+      )
+    );
+  }
+
+  Widget _buttonTwoAble() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 0, 15, 15),
+      child: Row(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 8, 8),
+            child: IconButton(
+              icon: Icon(
+                Icons.looks_one,
+                color: HexColor('e7e7e7'),
+                size: 40
+              ),
+              onPressed: () {
+                setState(() {
+                  this._selectCoffeeIndex = 0;
+                });
+              },
+            ),
+          ),
+          Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+                color: HexColor('e7e7e7'),
+              ),
+              child: Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 8, 8),
+                child: IconButton(
+                  icon: Icon(
+                      Icons.looks_two,
+                      color: HexColor('313131'),
+                      size: 40
+                  ),
+                  onPressed: () {
+                    // TODO ボタンを押下した時の処理を追加
+                  },
+                ),
+              )
+          ),
+        ],
+      )
     );
   }
 
