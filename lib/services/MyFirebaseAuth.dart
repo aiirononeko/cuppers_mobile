@@ -28,7 +28,6 @@ class MyFirebaseAuth {
           context: context,
           builder: (context) {
             return SimpleDialog(
-              title: Text('info'),
               children: <Widget>[
                 SimpleDialogOption(
                   onPressed: () => Navigator.pop(context),
@@ -66,7 +65,6 @@ class MyFirebaseAuth {
           context: context,
           builder: (context) {
             return SimpleDialog(
-              title: Text('info'),
               children: <Widget>[
                 SimpleDialogOption(
                   onPressed: () => Navigator.pop(context),
