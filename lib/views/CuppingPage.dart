@@ -1098,7 +1098,6 @@ class _CuppingPageState extends State<CuppingPage> {
                 context: context,
                 builder: (_) {
                   return AlertDialog(
-                    // title: Text("タイトル"),
                     content: Text('カッピングを終了しますか？'),
                     actions: <Widget>[
                       // ボタン領域
