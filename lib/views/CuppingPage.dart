@@ -1121,17 +1121,9 @@ class _CuppingPageState extends State<CuppingPage> {
 
                           // 2杯目のコーヒーがカッピングされていた場合
                           if (
-                          this._coffeeNameSecond != '' &&
-                              this._countrySecond != '' &&
-                              this._processSecond != '' &&
-                              this._cleanCupSecond != 4 &&
-                              this._sweetnessSecond != 4 &&
-                              this._aciditySecond != 4 &&
-                              this._mouseFeelSecond != 4 &&
-                              this._afterTasteSecond != 4 &&
-                              this._flavorSecond != 4 &&
-                              this._balanceSecond != 4 &&
-                              this._overallSecond != 4
+                            this._coffeeNameSecond != '' &&
+                            this._countrySecond != '' &&
+                            this._processSecond != ''
                           ) {
                             // 2杯目のカッピング情報を登録
                             _realTimeCuppingDataSecond = _setCuppingDataSecond();
@@ -1244,15 +1236,7 @@ class _CuppingPageState extends State<CuppingPage> {
                             if (
                               this._coffeeNameSecond != '' &&
                               this._countrySecond != '' &&
-                              this._processSecond != '' &&
-                              this._cleanCupSecond != 4 &&
-                              this._sweetnessSecond != 4 &&
-                              this._aciditySecond != 4 &&
-                              this._mouseFeelSecond != 4 &&
-                              this._afterTasteSecond != 4 &&
-                              this._flavorSecond != 4 &&
-                              this._balanceSecond != 4 &&
-                              this._overallSecond != 4
+                              this._processSecond != ''
                             ) {
                               // 2杯目のカッピング情報を登録
                               _realTimeCuppingDataSecond = _setCuppingDataSecond();
