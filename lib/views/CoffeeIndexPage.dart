@@ -167,7 +167,9 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .collection('CuppedCoffee')
           .doc(this._uid)
           .collection('CoffeeInfo')
-          .where('coffee_name', isEqualTo: this._searchValue)
+          .orderBy('coffee_name')
+          .startAt([this._searchValue])
+          .endAt([this._searchValue + '\uf8ff'])
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
@@ -200,7 +202,9 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .collection('CuppedCoffee')
           .doc(this._uid)
           .collection('CoffeeInfo')
-          .where('coffee_name', isEqualTo: this._searchValue)
+          .orderBy('coffee_name')
+          .startAt([this._searchValue])
+          .endAt([this._searchValue + '\uf8ff'])
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
@@ -233,7 +237,9 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .collection('CuppedCoffee')
           .doc(this._uid)
           .collection('CoffeeInfo')
-          .where('coffee_name', isEqualTo: this._searchValue)
+          .orderBy('coffee_name')
+          .startAt([this._searchValue])
+          .endAt([this._searchValue + '\uf8ff'])
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
