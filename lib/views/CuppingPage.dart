@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cuppers_mobile/main.dart';
+import 'package:cuppers_mobile/views/CoffeeIndexPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -138,7 +140,7 @@ class _CuppingPageState extends State<CuppingPage> {
               // タイマーをストップする
               this._timer.cancel();
             }
-            Navigator.of(context).pop();
+            Navigator.pop(context);
           },
         ),
       ),
@@ -1137,7 +1139,11 @@ class _CuppingPageState extends State<CuppingPage> {
                           }
 
                           // ユーザー画面へ遷移
-                          Navigator.of(context).pushReplacementNamed('/home');
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new HomePage()),
+                                  (_) => false);
 
                         },
                       ),
@@ -1250,7 +1256,11 @@ class _CuppingPageState extends State<CuppingPage> {
                             }
 
                             // ユーザー画面へ遷移
-                            Navigator.of(context).pushReplacementNamed('/home');
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (context) => new HomePage()),
+                                    (_) => false);
 
                           },
                         ),

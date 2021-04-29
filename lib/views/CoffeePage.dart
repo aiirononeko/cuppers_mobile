@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:intl/intl.dart';
 
+import '../main.dart';
+
 // カッピング情報詳細画面
 class CoffeePage extends StatefulWidget {
 
@@ -127,7 +129,11 @@ class _CoffeePageState extends State<CoffeePage> {
                                       .delete();
 
                                   // ユーザー画面へ遷移
-                                  Navigator.of(context).pushReplacementNamed('/home');
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      new MaterialPageRoute(
+                                          builder: (context) => new HomePage()),
+                                          (_) => false);
                                 },
                               ),
                             ],
