@@ -270,7 +270,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CoffeePage(snap.id)
+            builder: (context) => CoffeePage(data, snap.id)
           )
         );
       },
