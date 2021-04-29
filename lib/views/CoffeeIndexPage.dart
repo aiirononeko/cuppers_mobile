@@ -62,7 +62,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           FloatingActionButton(
-            backgroundColor: Colors.grey,
+            backgroundColor: HexColor('313131'),
             onPressed: () {
               Navigator.pushNamed(context, '/cupping');
             },
@@ -120,7 +120,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
               Container(
                 margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Divider(
-                  color: Colors.black,
+                  color: HexColor('313131'),
                 ),
               ),
               _buildBody(),
@@ -307,7 +307,8 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         child: Text(
                           DateFormat('yyyy-MM-dd').format(data['cupped_date'].toDate()).toString(),
                           style: TextStyle(
-                              fontSize: 10
+                            fontSize: 10,
+                            color: HexColor('313131')
                           ),
                         ),
                       ),
@@ -316,7 +317,8 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         child: Text(
                           data['coffee_name'],
                           style: TextStyle(
-                              fontSize: 20
+                            fontSize: 20,
+                            color: HexColor('313131')
                           ),
                         ),
                       ),
@@ -325,7 +327,8 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         child: Text(
                           'made in ${data['country']}',
                           style: TextStyle(
-                              fontSize: 15
+                            fontSize: 15,
+                            color: HexColor('313131')
                           ),
                         ),
                       )
@@ -338,7 +341,10 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                   children: <Widget>[
                     Container(
                         child: Text(
-                            'Score'
+                          'Score',
+                          style: TextStyle(
+                            color: HexColor('313131')
+                          ),
                         )
                     ),
                     Container(
@@ -346,6 +352,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                           data['coffee_score'].toString(),
                           style: TextStyle(
                             fontSize: 20,
+                            color: HexColor('313131')
                           ),
                         )
                     ),

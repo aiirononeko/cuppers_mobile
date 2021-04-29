@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class MyFirebaseAuth {
 
   // ユーザー登録処理・ログイン処理をするメソッド
@@ -55,7 +57,11 @@ class MyFirebaseAuth {
       );
 
       // ユーザー画面へ遷移
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.pushAndRemoveUntil(
+          context,
+          new MaterialPageRoute(
+              builder: (context) => new HomePage()),
+              (_) => false);
 
     } on FirebaseAuthException catch(e) {
 

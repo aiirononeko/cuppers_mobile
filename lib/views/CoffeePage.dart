@@ -64,11 +64,11 @@ class _CoffeePageState extends State<CoffeePage> {
         title: Text(
           'Cuppers',
           style: TextStyle(
-            color: Colors.black54,
+            color: HexColor('313131'),
             fontSize: 25
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white24,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black),
       ),
