@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 class MyFirebaseAuth {
 
@@ -14,6 +17,12 @@ class MyFirebaseAuth {
           email: email,
           password: password
       );
+
+      // TODO FirebaseFunctionsで自動実行されるようにする
+      // ユーザー情報をFirestoreに登録
+      await FirebaseFirestore.instance
+        .collection('Users')
+        .add({'email': email});
 
       // ログイン処理
       await loginAndMoveUserPage(email, password, context);
@@ -55,7 +64,11 @@ class MyFirebaseAuth {
       );
 
       // ユーザー画面へ遷移
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.pushAndRemoveUntil(
+          context,
+          new MaterialPageRoute(
+              builder: (context) => new HomePage()),
+              (_) => false);
 
     } on FirebaseAuthException catch(e) {
 

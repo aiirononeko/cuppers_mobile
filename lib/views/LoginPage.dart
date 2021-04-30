@@ -1,3 +1,4 @@
+import 'package:cuppers_mobile/main.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -27,11 +28,11 @@ class _LoginPageState extends State<LoginPage> {
         title: Text(
           'Cuppers',
           style: TextStyle(
-              color: Colors.black54,
+              color: HexColor('313131'),
               fontSize: 25
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white24,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black),
       ),

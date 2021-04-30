@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 
 import './views/RegistrationPage.dart';
 import './views/LoginPage.dart';
@@ -69,11 +68,11 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           'Cuppers',
           style: TextStyle(
-              color: Colors.black54,
+              color: HexColor('313131'),
               fontSize: 25
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white24,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black),
       ),
@@ -101,4 +100,17 @@ class _HomePageState extends State<HomePage> {
       _selectedIndex = index;
     });
   }
+}
+
+// カラーコードで色を表示するためのサービスクラス
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll('#', '');
+    if (hexColor.length == 6) {
+      hexColor = 'FF' + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
