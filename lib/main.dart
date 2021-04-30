@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
         '/registration': (_) => new RegistrationPage(), // アカウント登録画面
         '/cupping': (_) => new CuppingPage(), // カッピング画面
       },
-      home: _checkCurrentUser()
+      home: _checkCurrentUser(),
+      debugShowCheckedModeBanner: false
     );
   }
 }
