@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,12 @@ class MyFirebaseAuth {
           email: email,
           password: password
       );
+
+      // TODO FirebaseFunctionsで自動実行されるようにする
+      // ユーザー情報をFirestoreに登録
+      await FirebaseFirestore.instance
+        .collection('Users')
+        .add({'email': email});
 
       // ログイン処理
       await loginAndMoveUserPage(email, password, context);
