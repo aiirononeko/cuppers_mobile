@@ -211,7 +211,8 @@ class _CoffeePageState extends State<CoffeePage> {
                         padding: const EdgeInsets.all(16),
                         child: Center(
                             child: Container(
-                              child: RadarChart.light(
+                              child: RadarChart(
+                                graphColors: [HexColor('313131')],
                                 ticks: [2, 4, 6, 8],
                                 features: [
                                   "CleanCup",
@@ -231,7 +232,7 @@ class _CoffeePageState extends State<CoffeePage> {
                 ),
                 Container(
                   // width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(220, 10, 0, 0),
+                    margin: EdgeInsets.fromLTRB(220, 0, 0, 0),
                     child: Column(
                       children: <Widget>[
                         Container(
