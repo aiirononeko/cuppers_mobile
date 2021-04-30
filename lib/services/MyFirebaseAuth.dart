@@ -13,7 +13,7 @@ class MyFirebaseAuth {
     try {
 
       // ユーザー登録処理
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
           password: password
       );
@@ -22,7 +22,7 @@ class MyFirebaseAuth {
       // ユーザー情報をFirestoreに登録
       await FirebaseFirestore.instance
         .collection('Users')
-        .add({'email': email});
+        .add({'uid': credential.user.uid, 'email': email});
 
       // ログイン処理
       await loginAndMoveUserPage(email, password, context);
