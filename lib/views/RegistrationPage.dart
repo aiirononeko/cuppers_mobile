@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cuppers_mobile/services/MyFirebaseAuth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // サインインページ
 class RegistrationPage extends StatefulWidget {
@@ -120,8 +121,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                       text: '利用規約',
                                       style: TextStyle(color: Colors.blue),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.of(context).restorablePushNamed('/login'); // TODO 利用規約ページに遷移するように修正
+                                        ..onTap = () async {
+                                          // await launch('https://cuppers-mobile.web.app/');
                                         }
                                   ),
                                   TextSpan(
@@ -132,8 +133,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                       text: 'プライバシーポリシー',
                                       style: TextStyle(color: Colors.blue),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.of(context).restorablePushNamed('/login'); // TODO プライバシーポリシーページに遷移するように修正
+                                        ..onTap = () async {
+                                          if (await canLaunch('https://cuppers-mobile.web.app/')) {
+                                            await launch('https://cuppers-mobile.web.app/');
+                                          }
                                         }
                                   ),
                                   TextSpan(
