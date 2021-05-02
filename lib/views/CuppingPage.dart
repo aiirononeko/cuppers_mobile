@@ -33,11 +33,13 @@ class _CuppingPageState extends State<CuppingPage> {
   TextEditingController _coffeeNameController;
   TextEditingController _countryController;
   TextEditingController _processController;
+  TextEditingController _flavorTextController;
   TextEditingController _commentController;
 
   TextEditingController _coffeeNameControllerSecond;
   TextEditingController _countryControllerSecond;
   TextEditingController _processControllerSecond;
+  TextEditingController _flavorTextControllerSecond;
   TextEditingController _commentControllerSecond;
 
   @override
@@ -46,11 +48,13 @@ class _CuppingPageState extends State<CuppingPage> {
     _coffeeNameController = new TextEditingController(text: _coffeeName);
     _countryController = new TextEditingController(text: _country);
     _processController = new TextEditingController(text: _process);
+    _flavorTextController = new TextEditingController(text: _flavorText);
     _commentController = new TextEditingController(text: _comment);
 
     _coffeeNameControllerSecond = new TextEditingController(text: _coffeeNameSecond);
     _countryControllerSecond = new TextEditingController(text: _countrySecond);
     _processControllerSecond = new TextEditingController(text: _processSecond);
+    _flavorTextControllerSecond = new TextEditingController(text: _flavorTextSecond);
     _commentControllerSecond = new TextEditingController(text: _commentSecond);
   }
 
@@ -70,6 +74,7 @@ class _CuppingPageState extends State<CuppingPage> {
   double _balance = 4.0;
   double _flavor = 4.0;
   double _overall = 4.0;
+  String _flavorText = '';
   String _comment = '';
 
   void _coffeeNameChanged(String str) => setState(() { _coffeeName = str; });
@@ -83,6 +88,7 @@ class _CuppingPageState extends State<CuppingPage> {
   void _slideBalance(double e) => setState(() { _balance = e; });
   void _slideFlavor(double e) => setState(() { _flavor = e; });
   void _slideOverall(double e) => setState(() { _overall = e; });
+  void _flavorTextChanged(String str) => setState(() { _flavorText = str; });
   void _commentChanged(String str) => setState(() { _comment = str; });
 
   // カッピング項目のState_2
@@ -97,6 +103,7 @@ class _CuppingPageState extends State<CuppingPage> {
   double _balanceSecond = 4.0;
   double _flavorSecond = 4.0;
   double _overallSecond = 4.0;
+  String _flavorTextSecond = '';
   String _commentSecond = '';
 
   void _coffeeNameSecondChanged(String str) => setState(() { _coffeeNameSecond = str; });
@@ -110,7 +117,8 @@ class _CuppingPageState extends State<CuppingPage> {
   void _slideBalanceSecond(double e) => setState(() { _balanceSecond = e; });
   void _slideFlavorSecond(double e) => setState(() { _flavorSecond = e; });
   void _slideOverallSecond(double e) => setState(() { _overallSecond = e; });
-  void _commentChangedSecond(String str) => setState(() { _commentSecond = str; });
+  void _flavorTextSecondChanged(String str) => setState(() { _flavorTextSecond = str; });
+  void _commentSecondChanged(String str) => setState(() { _commentSecond = str; });
 
   @override
   Widget build(BuildContext context) {
@@ -621,17 +629,34 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, 120, 0, 0),
-          child: Text(
-            'コメント'
-          )
+            margin: EdgeInsets.fromLTRB(0, 82, 0, 0),
+            child: Text(
+                'フレーバーテキスト'
+            )
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 20, 50, 121),
+          margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+          child: TextField(
+            controller: _flavorTextController,
+            decoration: InputDecoration(
+              hintText: 'Lemon, Peach, Strawberry',
+            ),
+            keyboardType: TextInputType.text,
+            onChanged: _flavorTextChanged,
+          ),
+        ),
+        Container(
+            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+            child: Text(
+                'コメント'
+            )
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 10, 50, 60),
           child: TextField(
             controller: _commentController,
             decoration: InputDecoration(
-              hintText: 'Silky, WellBalance, BrightAcidity',
+              hintText: 'Silky, Complex, BrightAcidity',
             ),
             keyboardType: TextInputType.text,
             onChanged: _commentChanged,
@@ -1014,20 +1039,37 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 120, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 82, 0, 0),
+            child: Text(
+                'フレーバーテキスト'
+            )
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+          child: TextField(
+            controller: _flavorTextControllerSecond,
+            decoration: InputDecoration(
+              hintText: 'Lemon, Peach, Strawberry',
+            ),
+            keyboardType: TextInputType.text,
+            onChanged: _flavorTextSecondChanged,
+          ),
+        ),
+        Container(
+            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
             child: Text(
                 'コメント'
             )
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 20, 50, 121),
+          margin: EdgeInsets.fromLTRB(50, 10, 50, 60),
           child: TextField(
             controller: _commentControllerSecond,
             decoration: InputDecoration(
-              hintText: 'Silky, WellBalance, BrightAcidity',
+              hintText: 'Silky, Complex, BrightAcidity',
             ),
             keyboardType: TextInputType.text,
-            onChanged: _commentChangedSecond,
+            onChanged: _commentSecondChanged,
           ),
         )
       ],
@@ -1282,6 +1324,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingData['balance'] = _balance;
     cuppingData['flavor'] = _flavor;
     cuppingData['overall'] = _overall;
+    cuppingData['flavor_text'] = _flavorText;
     cuppingData['comment'] = _comment;
     cuppingData['favorite'] = false;
     cuppingData['cupped_date'] = Timestamp.fromDate(DateTime.now());
@@ -1295,6 +1338,9 @@ class _CuppingPageState extends State<CuppingPage> {
     }
     if (cuppingData['process'] == '') {
       cuppingData['process'] = 'Some Process';
+    }
+    if (cuppingData['flavor_text'] == '') {
+      cuppingData['flavor_text'] = 'No Flavor Text';
     }
     if (cuppingData['comment'] == '') {
       cuppingData['comment'] = 'No Comment';
@@ -1321,6 +1367,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['balance'] = _balanceSecond;
     cuppingDataSecond['flavor'] = _flavorSecond;
     cuppingDataSecond['overall'] = _overallSecond;
+    cuppingDataSecond['flavor_text'] = _flavorTextSecond;
     cuppingDataSecond['comment'] = _commentSecond;
     cuppingDataSecond['favorite'] = false;
     cuppingDataSecond['cupped_date'] = Timestamp.fromDate(DateTime.now());
@@ -1334,6 +1381,9 @@ class _CuppingPageState extends State<CuppingPage> {
     }
     if (cuppingDataSecond['process'] == '') {
       cuppingDataSecond['process'] = 'Some Process';
+    }
+    if (cuppingDataSecond['flavor_text'] == '') {
+      cuppingDataSecond['flavor_text'] = 'No Flavor Text';
     }
     if (cuppingDataSecond['comment'] == '') {
       cuppingDataSecond['comment'] = 'No Comment';
