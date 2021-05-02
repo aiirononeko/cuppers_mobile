@@ -286,7 +286,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 10, 50, 50),
+            margin: EdgeInsets.fromLTRB(50, 10, 50, 54),
             child: TextField(
               controller: _processController,
               decoration: InputDecoration(
@@ -693,7 +693,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 10, 50, 50),
+            margin: EdgeInsets.fromLTRB(50, 10, 50, 54),
             child: TextField(
               controller: _processControllerSecond,
               decoration: InputDecoration(
