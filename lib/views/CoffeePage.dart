@@ -24,6 +24,8 @@ class _CoffeePageState extends State<CoffeePage> {
 
   String _coffeeName;
   String _country;
+  String _variety;
+  double _elevation;
   String _process;
   double _cleanCup;
   double _sweetness;
@@ -185,7 +187,7 @@ class _CoffeePageState extends State<CoffeePage> {
                     width: double.infinity,
                     margin: EdgeInsets.fromLTRB(30, 5, 0, 0),
                     child: Text(
-                      '$_coffeeName $_process',
+                      '$_coffeeName $_process $_variety [${_elevation}m]',
                       style: TextStyle(
                           fontSize: 30
                       ),
@@ -307,6 +309,8 @@ class _CoffeePageState extends State<CoffeePage> {
     setState(() {
       _coffeeName = widget.snapshot['coffee_name'];
       _country = widget.snapshot['country'];
+      _variety = widget.snapshot['variety'];
+      _elevation = widget.snapshot['elevation'];
       _process = widget.snapshot['process'];
       _cleanCup = widget.snapshot['cleancup'];
       _sweetness = widget.snapshot['sweetness'];
