@@ -300,7 +300,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
               ),
               Container(
                 width: 220,
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Column(
                     children: <Widget>[
                       Container(
@@ -323,7 +323,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
                         child: Text(
                           'made in ${data['country']}',
                           style: TextStyle(
