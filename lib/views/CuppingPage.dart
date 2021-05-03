@@ -33,12 +33,14 @@ class _CuppingPageState extends State<CuppingPage> {
   TextEditingController _coffeeNameController;
   TextEditingController _countryController;
   TextEditingController _processController;
+  TextEditingController _varietyController;
   TextEditingController _flavorTextController;
   TextEditingController _commentController;
 
   TextEditingController _coffeeNameControllerSecond;
   TextEditingController _countryControllerSecond;
   TextEditingController _processControllerSecond;
+  TextEditingController _varietyControllerSecond;
   TextEditingController _flavorTextControllerSecond;
   TextEditingController _commentControllerSecond;
 
@@ -48,12 +50,14 @@ class _CuppingPageState extends State<CuppingPage> {
     _coffeeNameController = new TextEditingController(text: _coffeeName);
     _countryController = new TextEditingController(text: _country);
     _processController = new TextEditingController(text: _process);
+    _varietyController =  new TextEditingController(text: _variety);
     _flavorTextController = new TextEditingController(text: _flavorText);
     _commentController = new TextEditingController(text: _comment);
 
     _coffeeNameControllerSecond = new TextEditingController(text: _coffeeNameSecond);
     _countryControllerSecond = new TextEditingController(text: _countrySecond);
     _processControllerSecond = new TextEditingController(text: _processSecond);
+    // _varietyController =  new TextEditingController(text: _varietySecond);
     _flavorTextControllerSecond = new TextEditingController(text: _flavorTextSecond);
     _commentControllerSecond = new TextEditingController(text: _commentSecond);
   }
@@ -65,6 +69,8 @@ class _CuppingPageState extends State<CuppingPage> {
   // カッピング項目のState_1
   String _coffeeName = '';
   String _country = '';
+  String _variety = '';
+  double _elevation = 1500;
   String _process = '';
   double _sweetness = 4.0;
   double _acidity = 4.0;
@@ -79,6 +85,8 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _coffeeNameChanged(String str) => setState(() { _coffeeName = str; });
   void _countryChanged(String str) => setState(() { _country = str; });
+  void _varietyChanged(String str) => setState(() { _variety = str; });
+  void _slideElevation(double e) => setState(() { _elevation = e; });
   void _processChanged(String str) => setState(() { _process = str; });
   void _slideSweetness(double e) => setState(() { _sweetness = e; });
   void _slideAcidity(double e) => setState(() { _acidity = e; });
@@ -94,6 +102,8 @@ class _CuppingPageState extends State<CuppingPage> {
   // カッピング項目のState_2
   String _coffeeNameSecond = '';
   String _countrySecond = '';
+  String _varietySecond = '';
+  double _elevationSecond = 1500;
   String _processSecond = '';
   double _sweetnessSecond = 4.0;
   double _aciditySecond = 4.0;
@@ -108,6 +118,8 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _coffeeNameSecondChanged(String str) => setState(() { _coffeeNameSecond = str; });
   void _countrySecondChanged(String str) => setState(() { _countrySecond = str; });
+  void _varietySecondChanged(String str) => setState(() { _varietySecond = str; });
+  void _slideElevationSecond(double e) => setState(() { _elevationSecond = e; });
   void _processSecondChanged(String str) => setState(() { _processSecond = str; });
   void _slideSweetnessSecond(double e) => setState(() { _sweetnessSecond = e; });
   void _slideAciditySecond(double e) => setState(() { _aciditySecond = e; });
@@ -280,7 +292,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 79, 50, 0),
+            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
             child: TextField(
               controller: _coffeeNameController,
               decoration: InputDecoration(
@@ -304,7 +316,48 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 10, 50, 54),
+            margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+            child: TextField(
+              controller: _varietyController,
+              decoration: InputDecoration(
+                  labelText: 'Variety',
+                  hintText: 'Bourbon'
+              ),
+              keyboardType: TextInputType.text,
+              onChanged: _varietyChanged,
+            ),
+          ),
+          Container(
+              margin: EdgeInsets.fromLTRB(50, 20, 0, 0),
+              child: Row(
+                children: <Widget>[
+                  Text('Elevation'),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      trackHeight: 10,
+                      thumbColor: HexColor('313131'),
+                      overlayColor: HexColor('808080').withAlpha(80),
+                      activeTrackColor: HexColor('313131'),
+                      inactiveTrackColor: HexColor('cccccc'),
+                      inactiveTickMarkColor: HexColor('313131'),
+                      activeTickMarkColor: HexColor('313131'),
+                    ),
+                    child: Slider(
+                        label: '$_elevation',
+                        min: 0,
+                        max: 3000,
+                        value: _elevation,
+                        // activeColor: Colors.orange,
+                        // inactiveColor: Colors.blue,
+                        divisions: 30,
+                        onChanged: _slideElevation
+                    ),
+                  )
+                ],
+              )
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(50, 1, 50, 0),
             child: TextField(
               controller: _processController,
               decoration: InputDecoration(
@@ -372,7 +425,7 @@ class _CuppingPageState extends State<CuppingPage> {
           )
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('甘さ'),
@@ -401,7 +454,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('酸'),
@@ -430,7 +483,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 4),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 4),
           child: Column(
             children: <Widget>[
               Text('マウスフィール'),
@@ -515,7 +568,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('フレーバー'),
@@ -544,7 +597,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('バランス'),
@@ -573,7 +626,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 4),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 4),
           child: Column(
             children: <Widget>[
               Text('オーバーオール'),
@@ -629,7 +682,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 82, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 90, 0, 0),
             child: Text(
                 'フレーバーテキスト'
             )
@@ -646,7 +699,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 37, 0, 0),
             child: Text(
                 'コメント'
             )
@@ -690,7 +743,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 79, 50, 0),
+            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
             child: TextField(
               controller: _coffeeNameControllerSecond,
               decoration: InputDecoration(
@@ -714,7 +767,48 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 10, 50, 54),
+            margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+            child: TextField(
+              controller: _varietyControllerSecond,
+              decoration: InputDecoration(
+                  labelText: 'Variety',
+                  hintText: 'Bourbon'
+              ),
+              keyboardType: TextInputType.text,
+              onChanged: _varietySecondChanged,
+            ),
+          ),
+          Container(
+              margin: EdgeInsets.fromLTRB(50, 20, 0, 0),
+              child: Row(
+                children: <Widget>[
+                  Text('Elevation'),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      trackHeight: 10,
+                      thumbColor: HexColor('313131'),
+                      overlayColor: HexColor('808080').withAlpha(80),
+                      activeTrackColor: HexColor('313131'),
+                      inactiveTrackColor: HexColor('cccccc'),
+                      inactiveTickMarkColor: HexColor('313131'),
+                      activeTickMarkColor: HexColor('313131'),
+                    ),
+                    child: Slider(
+                        label: '$_elevationSecond',
+                        min: 0,
+                        max: 3000,
+                        value: _elevationSecond,
+                        // activeColor: Colors.orange,
+                        // inactiveColor: Colors.blue,
+                        divisions: 30,
+                        onChanged: _slideElevationSecond
+                    ),
+                  )
+                ],
+              )
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(50, 1, 50, 0),
             child: TextField(
               controller: _processControllerSecond,
               decoration: InputDecoration(
@@ -782,7 +876,7 @@ class _CuppingPageState extends State<CuppingPage> {
             )
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('甘さ'),
@@ -811,7 +905,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('酸'),
@@ -840,7 +934,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 4),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 4),
           child: Column(
             children: <Widget>[
               Text('マウスフィール'),
@@ -925,7 +1019,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('フレーバー'),
@@ -954,7 +1048,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('バランス'),
@@ -983,7 +1077,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 0, 50, 4),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 4),
           child: Column(
             children: <Widget>[
               Text('オーバーオール'),
@@ -1039,7 +1133,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 82, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 90, 0, 0),
             child: Text(
                 'フレーバーテキスト'
             )
@@ -1056,7 +1150,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 37, 0, 0),
             child: Text(
                 'コメント'
             )
