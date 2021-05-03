@@ -1409,6 +1409,8 @@ class _CuppingPageState extends State<CuppingPage> {
 
     cuppingData['coffee_name'] = _coffeeName;
     cuppingData['country'] = _country;
+    cuppingData['variety'] = _variety;
+    cuppingData['elevation'] = _elevation;
     cuppingData['process'] = _process;
     cuppingData['sweetness'] = _sweetness;
     cuppingData['acidity'] = _acidity;
@@ -1429,6 +1431,9 @@ class _CuppingPageState extends State<CuppingPage> {
     }
     if (cuppingData['country'] == '') {
       cuppingData['country'] = 'Some Country';
+    }
+    if (cuppingData['variety'] == '') {
+      cuppingData['variety'] = 'Some Variety';
     }
     if (cuppingData['process'] == '') {
       cuppingData['process'] = 'Some Process';
@@ -1452,6 +1457,8 @@ class _CuppingPageState extends State<CuppingPage> {
 
     cuppingDataSecond['coffee_name'] = _coffeeNameSecond;
     cuppingDataSecond['country'] = _countrySecond;
+    cuppingDataSecond['variety'] = _varietySecond;
+    cuppingDataSecond['elevation'] = _elevationSecond;
     cuppingDataSecond['process'] = _processSecond;
     cuppingDataSecond['sweetness'] = _sweetnessSecond;
     cuppingDataSecond['acidity'] = _aciditySecond;
@@ -1472,6 +1479,9 @@ class _CuppingPageState extends State<CuppingPage> {
     }
     if (cuppingDataSecond['country'] == '') {
       cuppingDataSecond['country'] = 'Some Country';
+    }
+    if (cuppingDataSecond['variety'] == '') {
+      cuppingDataSecond['variety'] = 'Some Variety';
     }
     if (cuppingDataSecond['process'] == '') {
       cuppingDataSecond['process'] = 'Some Process';
