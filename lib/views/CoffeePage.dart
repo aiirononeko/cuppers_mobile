@@ -265,7 +265,7 @@ class _CoffeePageState extends State<CoffeePage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: Text(
                       '$_flavorText',
                       style: TextStyle(
@@ -284,7 +284,7 @@ class _CoffeePageState extends State<CoffeePage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 50),
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 50),
                     child: Text(
                       '$_comment',
                       style: TextStyle(
