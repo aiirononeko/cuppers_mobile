@@ -24,10 +24,16 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    // 画面サイズを取得
+    final Size size = MediaQuery.of(context).size;
+    final double _width = size.width;
+    final double _height = size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          margin:EdgeInsets.all(90.0),
+          margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
           child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,
@@ -40,12 +46,12 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.fromLTRB(30, 130, 30, 50),
+                margin: EdgeInsets.fromLTRB(_width / 12, _width / 2.8, _width / 12, _width / 7),
                 child: Text(
                   'ログインしましょう',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: _width / 18,
                       fontWeight: FontWeight.bold
                   ),
                 ),
@@ -55,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                          margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
+                          margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
                           child: TextFormField(
                             enabled: true,
                             decoration: const InputDecoration(
@@ -76,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                           )
                       ),
                       Container(
-                          margin: EdgeInsets.fromLTRB(30, 0, 30, 50),
+                          margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 7),
                           child: TextFormField(
                             enabled: true,
                             obscureText: true,
@@ -95,15 +101,16 @@ class _LoginPageState extends State<LoginPage> {
                           )
                       ),
                       Container(
-                        width: 300,
-                        height: 50,
-                        margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
+                        width: _width / 1.3,
+                        height: _height / 15,
+                        margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
                         child: new ElevatedButton(
                           child: Text(
                             'ログイン',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 3
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 3,
+                              fontSize: _width / 25
                             ),
                           ),
                           style: ElevatedButton.styleFrom(

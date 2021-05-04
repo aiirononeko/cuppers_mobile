@@ -25,10 +25,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    // 画面サイズを取得
+    final Size size = MediaQuery.of(context).size;
+    final double _width = size.width;
+    final double _height = size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          margin:EdgeInsets.all(90.0),
+          margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
           child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,
@@ -41,24 +47,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
             children: <Widget>[
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.fromLTRB(30, 100, 30, 0),
+                margin: EdgeInsets.fromLTRB(_width / 12, _width / 3.8, _width / 12, 0),
                 child: Text(
                   'さあ、',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: _width / 18,
                       fontWeight: FontWeight.bold
                   ),
                 ),
               ),
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.fromLTRB(30, 0, 30, 50),
+                margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 7),
                 child: Text(
                   'カッピングを始めよう！',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: _width / 18,
                       fontWeight: FontWeight.bold
                   ),
                 ),
@@ -68,7 +74,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                        margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
+                        margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
                         child: TextFormField(
                           enabled: true,
                           decoration: const InputDecoration(
@@ -89,7 +95,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         )
                     ),
                     Container(
-                        margin: EdgeInsets.fromLTRB(30, 0, 30, 50),
+                        margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 7),
                         child: TextFormField(
                           enabled: true,
                           obscureText: true,
@@ -111,7 +117,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         )
                     ),
                     Container(
-                        margin: EdgeInsets.fromLTRB(30, 0, 30, 10),
+                        margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 50),
                         child: RichText(
                             text: TextSpan(
                                 children: [
@@ -147,7 +153,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                     Container(
                       width: double.infinity,
-                      margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
+                      margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
                       child: Text(
                         '同意して新規登録する',
                         textAlign: TextAlign.center,
@@ -156,13 +162,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     Container(
                       width: 300,
                       height: 50,
-                      margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
+                      margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
                       child: ElevatedButton(
                         child: Text(
                           '新規登録',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 4
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 4,
+                            fontSize: _width / 23
                           ),
                         ),
                         style: ElevatedButton.styleFrom(

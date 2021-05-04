@@ -64,6 +64,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    // 画面サイズを取得
+    final Size size = MediaQuery.of(context).size;
+    final double width = size.width;
+    final double height = size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Container(
