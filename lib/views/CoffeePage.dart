@@ -25,7 +25,7 @@ class _CoffeePageState extends State<CoffeePage> {
   String _coffeeName;
   String _country;
   String _variety;
-  double _elevation;
+  int _elevation;
   String _process;
   double _cleanCup;
   double _sweetness;
@@ -158,7 +158,7 @@ class _CoffeePageState extends State<CoffeePage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 color: HexColor('e7e7e7'),
@@ -185,9 +185,9 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(30, 5, 0, 0),
+                    margin: EdgeInsets.fromLTRB(30, 10, 0, 0),
                     child: Text(
-                      '$_coffeeName $_process $_variety [${_elevation}m]',
+                      '$_coffeeName $_process $_variety',
                       style: TextStyle(
                           fontSize: 30
                       ),
@@ -195,7 +195,17 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(30, 5, 0, 0),
+                    margin: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                    child: Text(
+                      'Elevation: ${_elevation}m',
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 10, 0, 0),
                     child: Text(
                       'Made in $_country',
                       style: TextStyle(
@@ -310,7 +320,7 @@ class _CoffeePageState extends State<CoffeePage> {
       _coffeeName = widget.snapshot['coffee_name'];
       _country = widget.snapshot['country'];
       _variety = widget.snapshot['variety'];
-      _elevation = widget.snapshot['elevation'];
+      _elevation = widget.snapshot['elevation'].round(); // double型をint型に変換
       _process = widget.snapshot['process'];
       _cleanCup = widget.snapshot['cleancup'];
       _sweetness = widget.snapshot['sweetness'];
