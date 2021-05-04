@@ -267,7 +267,8 @@ class _CoffeePageState extends State<CoffeePage> {
                       )
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 40, 0, 0),
                     child: Text(
                       'フレーバーテキスト',
                       style: TextStyle(
@@ -277,7 +278,8 @@ class _CoffeePageState extends State<CoffeePage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 10, 20, 0),
                     child: Text(
                       '$_flavorText',
                       style: TextStyle(
@@ -286,7 +288,8 @@ class _CoffeePageState extends State<CoffeePage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 30, 0, 0),
                     child: Text(
                       'カッピングコメント',
                       style: TextStyle(
@@ -296,7 +299,8 @@ class _CoffeePageState extends State<CoffeePage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(20, 10, 20, 50),
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 10, 20, 50),
                     child: Text(
                       '$_comment',
                       style: TextStyle(
