@@ -24,6 +24,8 @@ class _CoffeePageState extends State<CoffeePage> {
 
   String _coffeeName;
   String _country;
+  String _variety;
+  int _elevation;
   String _process;
   double _cleanCup;
   double _sweetness;
@@ -36,6 +38,8 @@ class _CoffeePageState extends State<CoffeePage> {
   DateTime _cuppedDate;
   bool _favorite;
   double _coffeeScore;
+  String _flavorText;
+  String _comment;
 
   List<List<int>> _chartValueList = [];
 
@@ -72,192 +76,239 @@ class _CoffeePageState extends State<CoffeePage> {
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 5, 15, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  child: IconButton(
-                    icon: Icon(Icons.ios_share),
-                    onPressed: () {
-                      // TODO ボタンを押下した際の処理を追加
-                    },
-                  ),
-                ),
-                Container(
-                  child: IconButton(
-                    icon: _getFavoriteFlag(_favorite),
-                    onPressed: () {
-                      _switchFavoriteFlag(_favorite, widget.documentId, _uid);
-                    }
-                  )
-                ),
-                Container(
-                  child: IconButton(
-                    icon: Icon(Icons.delete_outline_sharp),
-                    onPressed: () {
-
-                      showDialog(
-                        context: context,
-                        builder: (_) {
-                          return AlertDialog(
-                            content: Text('カッピング情報を削除しますか？'),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                child: Text('Cancel'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: HexColor('313131'),
-                                ),
-                                onPressed: () => Navigator.pop(context),
-                              ),
-                              ElevatedButton(
-                                child: Text('OK'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: HexColor('313131'),
-                                ),
-                                onPressed: () {
-
-                                  // カッピングデータを削除
-                                  FirebaseFirestore.instance
-                                      .collection('CuppedCoffee')
-                                      .doc(_uid)
-                                      .collection('CoffeeInfo')
-                                      .doc(widget.documentId)
-                                      .delete();
-
-                                  // ユーザー画面へ遷移
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      new MaterialPageRoute(
-                                          builder: (context) => new HomePage()),
-                                          (_) => false);
-                                },
-                              ),
-                            ],
-                          );
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+                margin: EdgeInsets.fromLTRB(0, 5, 15, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      child: IconButton(
+                        icon: Icon(Icons.ios_share),
+                        onPressed: () {
+                          // TODO ボタンを押下した際の処理を追加
                         },
-                      );
-                    },
-                  )
-                )
-              ],
-            )
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Divider(
-              color: Colors.black,
-            ),
-          ),
-          Container(
-            width: 375,
-            height: 580,
-            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              color: HexColor('e7e7e7'),
-              boxShadow: [
-                BoxShadow(
-                  color: HexColor('dcdcdc'),
-                  spreadRadius: 1.0,
-                  blurRadius: 10.0,
-                  offset: Offset(5, 5),
-                ),
-              ],
-            ),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(30, 30, 0, 0),
-                  child: Text(
-                    _cuppedDateStr,
-                    style: TextStyle(
-                        fontSize: 16
+                      ),
                     ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(30, 5, 0, 0),
-                  child: Text(
-                    '$_coffeeName $_process',
-                    style: TextStyle(
-                        fontSize: 30
+                    Container(
+                        child: IconButton(
+                            icon: _getFavoriteFlag(_favorite),
+                            onPressed: () {
+                              _switchFavoriteFlag(_favorite, widget.documentId, _uid);
+                            }
+                        )
                     ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(30, 5, 0, 0),
-                  child: Text(
-                    'Made in $_country',
-                    style: TextStyle(
-                        fontSize: 20
-                    ),
-                  ),
-                ),
-                // 余白が作れないため、コンテナウィジェットで代用
-                Container(
-                    height: 10
-                ),
-                Container(
-                    width: 300,
-                    height: 300,
-                    child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Center(
-                            child: Container(
-                              child: RadarChart(
-                                graphColors: [HexColor('313131')],
-                                ticks: [2, 4, 6, 8],
-                                features: [
-                                  "CleanCup",
-                                  "Sweetness",
-                                  "Acidity",
-                                  "MouseFeel",
-                                  "Flavor",
-                                  "AfterTaste",
-                                  "Balance",
-                                  "OverAll"
-                                ],
-                                data: _chartValueList,
-                              ),
-                            )
+                    Container(
+                        child: IconButton(
+                          icon: Icon(Icons.delete_outline_sharp),
+                          onPressed: () {
+
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return AlertDialog(
+                                  content: Text('カッピング情報を削除しますか？'),
+                                  actions: <Widget>[
+                                    ElevatedButton(
+                                      child: Text('Cancel'),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: HexColor('313131'),
+                                      ),
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
+                                    ElevatedButton(
+                                      child: Text('OK'),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: HexColor('313131'),
+                                      ),
+                                      onPressed: () {
+
+                                        // カッピングデータを削除
+                                        FirebaseFirestore.instance
+                                            .collection('CuppedCoffee')
+                                            .doc(_uid)
+                                            .collection('CoffeeInfo')
+                                            .doc(widget.documentId)
+                                            .delete();
+
+                                        // ユーザー画面へ遷移
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            new MaterialPageRoute(
+                                                builder: (context) => new HomePage()),
+                                                (_) => false);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                         )
                     )
-                ),
-                Container(
-                  // width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(220, 0, 0, 0),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          child: Text(
-                            'Score',
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            '$_coffeeScore',
-                            style: TextStyle(
-                                fontSize: 40
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+                  ],
                 )
-              ],
             ),
-          )
-        ],
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Divider(
+                color: Colors.black,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: HexColor('e7e7e7'),
+                boxShadow: [
+                  BoxShadow(
+                    color: HexColor('dcdcdc'),
+                    spreadRadius: 1.0,
+                    blurRadius: 10.0,
+                    offset: Offset(5, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 30, 0, 0),
+                    child: Text(
+                      _cuppedDateStr,
+                      style: TextStyle(
+                          fontSize: 16
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                    child: Text(
+                      '$_coffeeName $_process $_variety',
+                      style: TextStyle(
+                          fontSize: 30
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                    child: Text(
+                      'Elevation: ${_elevation}m',
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(30, 10, 0, 0),
+                    child: Text(
+                      'Made in $_country',
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
+                    ),
+                  ),
+                  // 余白が作れないため、コンテナウィジェットで代用
+                  Container(
+                      height: 10
+                  ),
+                  Container(
+                      width: 300,
+                      height: 300,
+                      child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Center(
+                              child: Container(
+                                child: RadarChart(
+                                  graphColors: [HexColor('313131')],
+                                  ticks: [2, 4, 6, 8],
+                                  features: [
+                                    "CleanCup",
+                                    "Sweetness",
+                                    "Acidity",
+                                    "MouseFeel",
+                                    "Flavor",
+                                    "AfterTaste",
+                                    "Balance",
+                                    "OverAll"
+                                  ],
+                                  data: _chartValueList,
+                                ),
+                              )
+                          )
+                      )
+                  ),
+                  Container(
+                      margin: EdgeInsets.fromLTRB(220, 0, 0, 0),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              'Score',
+                              style: TextStyle(
+                                  fontSize: 20
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: Text(
+                              '$_coffeeScore',
+                              style: TextStyle(
+                                  fontSize: 40
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
+                    child: Text(
+                      'フレーバーテキスト',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                    child: Text(
+                      '$_flavorText',
+                      style: TextStyle(
+                        fontSize: 20
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    child: Text(
+                      'カッピングコメント',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 50),
+                    child: Text(
+                      '$_comment',
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        )
       )
     );
   }
@@ -265,17 +316,11 @@ class _CoffeePageState extends State<CoffeePage> {
   // カッピングデータを取得してメンバ変数に格納するメソッド
   void _fetchCuppingData(String uid, String documentId) async {
 
-    // // カッピングデータ取得
-    // DocumentSnapshot snapshot = await FirebaseFirestore.instance
-    //     .collection('CuppedCoffee')
-    //     .doc(uid)
-    //     .collection('CoffeeInfo')
-    //     .doc(documentId)
-    //     .get();
-
     setState(() {
       _coffeeName = widget.snapshot['coffee_name'];
       _country = widget.snapshot['country'];
+      _variety = widget.snapshot['variety'];
+      _elevation = widget.snapshot['elevation'].round(); // double型をint型に変換
       _process = widget.snapshot['process'];
       _cleanCup = widget.snapshot['cleancup'];
       _sweetness = widget.snapshot['sweetness'];
@@ -288,6 +333,8 @@ class _CoffeePageState extends State<CoffeePage> {
       _cuppedDate = widget.snapshot['cupped_date'].toDate();
       _favorite = widget.snapshot['favorite'];
       _coffeeScore = widget.snapshot['coffee_score'];
+      _flavorText = widget.snapshot['flavor_text'];
+      _comment = widget.snapshot['comment'];
     });
   }
 
