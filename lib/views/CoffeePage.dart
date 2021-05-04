@@ -65,12 +65,9 @@ class _CoffeePageState extends State<CoffeePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Cuppers',
-          style: TextStyle(
-            color: HexColor('313131'),
-            fontSize: 25
-          ),
+        title: Container(
+          margin: EdgeInsets.fromLTRB(35, 35, 95, 35),
+          child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,
         elevation: 0.0,

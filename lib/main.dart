@@ -66,12 +66,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Cuppers',
-          style: TextStyle(
-              color: HexColor('313131'),
-              fontSize: 25
-          ),
+        title: Container(
+          margin:EdgeInsets.all(90.0),
+          child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,
         elevation: 0.0,

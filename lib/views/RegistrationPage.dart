@@ -1,4 +1,5 @@
 import 'package:cuppers_mobile/main.dart';
+import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -26,12 +27,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Cuppers',
-          style: TextStyle(
-              color: HexColor('313131'),
-              fontSize: 25
-          ),
+        title: Container(
+          margin:EdgeInsets.all(90.0),
+          child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,
         elevation: 0.0,
@@ -199,7 +197,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             style: TextStyle(color: Colors.blue),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.of(context).restorablePushNamed('/login');
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    new MaterialPageRoute(
+                                        builder: (context) => new LoginPage()),
+                                        (_) => false);
                               }
                         )
                       ]
