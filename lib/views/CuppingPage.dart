@@ -57,7 +57,7 @@ class _CuppingPageState extends State<CuppingPage> {
     _coffeeNameControllerSecond = new TextEditingController(text: _coffeeNameSecond);
     _countryControllerSecond = new TextEditingController(text: _countrySecond);
     _processControllerSecond = new TextEditingController(text: _processSecond);
-    // _varietyController =  new TextEditingController(text: _varietySecond);
+    _varietyController =  new TextEditingController(text: _varietySecond);
     _flavorTextControllerSecond = new TextEditingController(text: _flavorTextSecond);
     _commentControllerSecond = new TextEditingController(text: _commentSecond);
   }
