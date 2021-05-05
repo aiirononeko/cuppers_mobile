@@ -7,6 +7,12 @@ class AccountInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // 画面サイズを取得
+    final Size size = MediaQuery.of(context).size;
+    final double _width = size.width;
+    final double _height = size.height;
+
     return Scaffold(
         body: Container(
           child: Center(

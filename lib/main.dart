@@ -67,13 +67,13 @@ class _HomePageState extends State<HomePage> {
 
     // 画面サイズを取得
     final Size size = MediaQuery.of(context).size;
-    final double width = size.width;
-    final double height = size.height;
+    final double _width = size.width;
+    final double _height = size.height;
 
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          margin:EdgeInsets.all(90.0),
+          margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
           child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,

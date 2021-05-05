@@ -135,6 +135,11 @@ class _CuppingPageState extends State<CuppingPage> {
   @override
   Widget build(BuildContext context) {
 
+    // 画面サイズを取得
+    final Size size = MediaQuery.of(context).size;
+    final double _width = size.width;
+    final double _height = size.height;
+
     // ログイン中のユーザーIDを取得
     _uid = FirebaseAuth.instance.currentUser.uid;
 

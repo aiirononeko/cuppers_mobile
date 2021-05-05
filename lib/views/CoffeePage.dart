@@ -58,6 +58,11 @@ class _CoffeePageState extends State<CoffeePage> {
   @override
   Widget build(BuildContext context) {
 
+    // 画面サイズを取得
+    final Size size = MediaQuery.of(context).size;
+    final double _width = size.width;
+    final double _height = size.height;
+
     // レイダーチャートに表示するためのリストを作成
     _fetchListValue();
     // カッピングした日付をフォーマット
@@ -66,7 +71,7 @@ class _CoffeePageState extends State<CoffeePage> {
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          margin: EdgeInsets.fromLTRB(35, 35, 95, 35),
+          margin: EdgeInsets.fromLTRB(_width / 12, _width / 3, _width / 4, _width / 4),
           child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,
@@ -77,7 +82,7 @@ class _CoffeePageState extends State<CoffeePage> {
         child: Column(
           children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(0, 5, 15, 0),
+                margin: EdgeInsets.fromLTRB(0, _width / 16, 15, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[

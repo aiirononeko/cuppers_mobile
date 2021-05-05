@@ -53,6 +53,11 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
   @override
   Widget build(BuildContext context) {
 
+    // 画面サイズを取得
+    final Size size = MediaQuery.of(context).size;
+    final _width = size.width;
+    final _height = size.height;
+
     // ログイン中のユーザーIDを取得
     _uid = FirebaseAuth.instance.currentUser.uid;
 
@@ -72,7 +77,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, _width / 8, 0, 0),
           child: Column(
             children: <Widget>[
               Row(
@@ -80,7 +85,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                   Container(
                     width: 150,
                     height: 35,
-                    margin: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width / 7, 0, 0, 0),
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -104,7 +109,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                   Container(
                     width: 105,
                     height: 40,
-                    margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width / 22, 0, 0, 0),
                     child: DropdownButton(
                       items: _items,
                       value: _selectItem,
@@ -118,12 +123,12 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                 ],
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, _width / 22, 0, 0),
                 child: Divider(
                   color: HexColor('313131'),
                 ),
               ),
-              _buildBody(),
+              _buildBody(_width),
             ],
           )
         )
@@ -132,18 +137,18 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
   }
 
   // ボディを作成する親クラス
-  Widget _buildBody() {
+  Widget _buildBody(double width) {
 
     if (_selectItem == 1) {
-      return _buildBodyCreatedAt();
+      return _buildBodyCreatedAt(width);
     } else if (_selectItem == 2) {
-      return _buildBodyScore();
+      return _buildBodyScore(width);
     }
-    return _buildBodyFavoriteCoffee();
+    return _buildBodyFavoriteCoffee(width);
   }
 
   // 作成日順で表示する
-  Widget _buildBodyCreatedAt() {
+  Widget _buildBodyCreatedAt(double width) {
 
     if (_userUseSearchFunc == false) {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
@@ -156,7 +161,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return Text('Loading...');
-          return _buildList(snapshot.data.docs);
+          return _buildList(snapshot.data.docs, width);
         },
       );
     }
@@ -173,13 +178,13 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
-        return _buildList(snapshot.data.docs);
+        return _buildList(snapshot.data.docs, width);
       },
     );
   }
 
   // スコア順に表示する
-  Widget _buildBodyScore() {
+  Widget _buildBodyScore(double width) {
 
     if (_userUseSearchFunc == false) {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
@@ -191,7 +196,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return Text('Loading...');
-          return _buildList(snapshot.data.docs);
+          return _buildList(snapshot.data.docs, width);
         },
       );
     }
@@ -208,13 +213,13 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
-        return _buildList(snapshot.data.docs);
+        return _buildList(snapshot.data.docs, width);
       },
     );
   }
 
   // お気に入りのコーヒーのみ表示する
-  Widget _buildBodyFavoriteCoffee() {
+  Widget _buildBodyFavoriteCoffee(double width) {
 
     if (_userUseSearchFunc == false) {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
@@ -226,7 +231,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return Text('Loading...');
-          return _buildList(snapshot.data.docs);
+          return _buildList(snapshot.data.docs, width);
         },
       );
     }
@@ -243,25 +248,25 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Loading...');
-        return _buildList(snapshot.data.docs);
+        return _buildList(snapshot.data.docs, width);
       },
     );
   }
 
-  Widget _buildList(List<DocumentSnapshot> snapList) {
+  Widget _buildList(List<DocumentSnapshot> snapList, double width) {
 
     return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(18.0),
+        padding: EdgeInsets.fromLTRB(width / 28, width / 28, width / 28, width / 28),
         itemCount: snapList.length,
         itemBuilder: (context, i) {
-          return _buildListItem(snapList[i]);
+          return _buildListItem(snapList[i], width);
         }
     );
   }
 
-  Widget _buildListItem(DocumentSnapshot snap) {
+  Widget _buildListItem(DocumentSnapshot snap, double width) {
 
     Map<String, dynamic> data = snap.data();
 
@@ -275,10 +280,9 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         );
       },
       child: Container(
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(width / 30),
             color: HexColor('e7e7e7'),
             boxShadow: [
               BoxShadow(
@@ -292,15 +296,15 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           child: Row(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.fromLTRB(20, 30, 10, 30),
+                margin: EdgeInsets.fromLTRB(width / 18, width / 12, width / 40, width / 12),
                 child: Icon(
                   _checkFavoriteFlag(data),
-                  size: 30,
+                  size: width / 15,
                 )
               ),
               Container(
                 width: 220,
-                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                margin: EdgeInsets.fromLTRB(width / 40, width / 30, width / 40, 0),
                 child: Column(
                     children: <Widget>[
                       Container(
@@ -313,7 +317,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        margin: EdgeInsets.fromLTRB(0, width / 80, 0, 0),
                         child: Text(
                           data['coffee_name'],
                           style: TextStyle(
@@ -323,7 +327,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                        margin: EdgeInsets.fromLTRB(0, width / 80, 0, width / 40),
                         child: Text(
                           'made in ${data['country']}',
                           style: TextStyle(
@@ -336,14 +340,15 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                margin: EdgeInsets.fromLTRB(0, 0, width / 40, 0),
                 child: Column(
                   children: <Widget>[
                     Container(
                         child: Text(
                           'Score',
                           style: TextStyle(
-                            color: HexColor('313131')
+                            color: HexColor('313131'),
+                            fontSize: width / 28,
                           ),
                         )
                     ),
@@ -351,7 +356,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         child: Text(
                           data['coffee_score'].toString(),
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: width / 18,
                             color: HexColor('313131')
                           ),
                         )
