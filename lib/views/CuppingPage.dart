@@ -183,7 +183,7 @@ class _CuppingPageState extends State<CuppingPage> {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+              margin: EdgeInsets.fromLTRB(_width / 25, 0, _width / 25, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
@@ -196,7 +196,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 children: <Widget>[
                   _pageList[_selectIndex],
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                    margin: EdgeInsets.fromLTRB(0, _width / 12, 0, _width / 26),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -228,7 +228,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
             _coffeeIndex[_selectCoffeeIndex], // カッピングするコーヒーを切り替え
             Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+              margin: EdgeInsets.fromLTRB(0, 0, _width / 26, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
