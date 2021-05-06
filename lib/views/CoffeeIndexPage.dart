@@ -258,7 +258,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.fromLTRB(width / 28, width / 28, width / 28, width / 28),
+        padding: EdgeInsets.fromLTRB(width / 28, 0, width / 28, width / 28),
         itemCount: snapList.length,
         itemBuilder: (context, i) {
           return _buildListItem(snapList[i], width);
@@ -280,6 +280,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         );
       },
       child: Container(
+        margin: EdgeInsets.fromLTRB(0, width / 22, 0, 0),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(width / 30),
