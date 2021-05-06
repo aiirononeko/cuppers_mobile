@@ -296,7 +296,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           child: Row(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.fromLTRB(width / 18, width / 12, width / 40, width / 12),
+                margin: EdgeInsets.fromLTRB(width / 18, width / 12, width / 100, width / 12),
                 child: Icon(
                   _checkFavoriteFlag(data),
                   size: width / 15,
@@ -304,7 +304,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
               ),
               Container(
                 width: 220,
-                margin: EdgeInsets.fromLTRB(width / 40, width / 30, width / 40, 0),
+                margin: EdgeInsets.fromLTRB(width / 40, width / 30, width / 100, 0),
                 child: Column(
                     children: <Widget>[
                       Container(
