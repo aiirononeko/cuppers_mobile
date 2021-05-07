@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'dart:async';
 
+import 'package:flutter/services.dart';
+
 class CuppingPage extends StatefulWidget {
 
   @override
@@ -32,15 +34,17 @@ class _CuppingPageState extends State<CuppingPage> {
 
   TextEditingController _coffeeNameController;
   TextEditingController _countryController;
-  TextEditingController _processController;
   TextEditingController _varietyController;
+  TextEditingController _processController;
+  TextEditingController _roasterController;
   TextEditingController _flavorTextController;
   TextEditingController _commentController;
 
   TextEditingController _coffeeNameControllerSecond;
   TextEditingController _countryControllerSecond;
-  TextEditingController _processControllerSecond;
   TextEditingController _varietyControllerSecond;
+  TextEditingController _processControllerSecond;
+  TextEditingController _roasterControllerSecond;
   TextEditingController _flavorTextControllerSecond;
   TextEditingController _commentControllerSecond;
 
@@ -49,15 +53,17 @@ class _CuppingPageState extends State<CuppingPage> {
     super.initState();
     _coffeeNameController = new TextEditingController(text: _coffeeName);
     _countryController = new TextEditingController(text: _country);
-    _processController = new TextEditingController(text: _process);
     _varietyController =  new TextEditingController(text: _variety);
+    _processController = new TextEditingController(text: _process);
+    _roasterController = new TextEditingController(text: _roaster);
     _flavorTextController = new TextEditingController(text: _flavorText);
     _commentController = new TextEditingController(text: _comment);
 
     _coffeeNameControllerSecond = new TextEditingController(text: _coffeeNameSecond);
     _countryControllerSecond = new TextEditingController(text: _countrySecond);
-    _processControllerSecond = new TextEditingController(text: _processSecond);
     _varietyController =  new TextEditingController(text: _varietySecond);
+    _processControllerSecond = new TextEditingController(text: _processSecond);
+    _roasterControllerSecond = new TextEditingController(text: _roasterSecond);
     _flavorTextControllerSecond = new TextEditingController(text: _flavorTextSecond);
     _commentControllerSecond = new TextEditingController(text: _commentSecond);
   }
@@ -70,8 +76,9 @@ class _CuppingPageState extends State<CuppingPage> {
   String _coffeeName = '';
   String _country = '';
   String _variety = '';
-  double _elevation = 1500;
+  String _elevation = '0';
   String _process = '';
+  String _roaster = '';
   double _sweetness = 4.0;
   double _acidity = 4.0;
   double _cleanCup = 4.0;
@@ -86,8 +93,9 @@ class _CuppingPageState extends State<CuppingPage> {
   void _coffeeNameChanged(String str) => setState(() { _coffeeName = str; });
   void _countryChanged(String str) => setState(() { _country = str; });
   void _varietyChanged(String str) => setState(() { _variety = str; });
-  void _slideElevation(double e) => setState(() { _elevation = e; });
+  void _elevationChanged(String str) => setState(() { _elevation = str; });
   void _processChanged(String str) => setState(() { _process = str; });
+  void _roasterChanged(String str) => setState(() { _roaster = str; });
   void _slideSweetness(double e) => setState(() { _sweetness = e; });
   void _slideAcidity(double e) => setState(() { _acidity = e; });
   void _slideCleanCup(double e) => setState(() { _cleanCup = e; });
@@ -103,8 +111,9 @@ class _CuppingPageState extends State<CuppingPage> {
   String _coffeeNameSecond = '';
   String _countrySecond = '';
   String _varietySecond = '';
-  double _elevationSecond = 1500;
+  String _elevationSecond = '0';
   String _processSecond = '';
+  String _roasterSecond = '';
   double _sweetnessSecond = 4.0;
   double _aciditySecond = 4.0;
   double _cleanCupSecond = 4.0;
@@ -119,8 +128,9 @@ class _CuppingPageState extends State<CuppingPage> {
   void _coffeeNameSecondChanged(String str) => setState(() { _coffeeNameSecond = str; });
   void _countrySecondChanged(String str) => setState(() { _countrySecond = str; });
   void _varietySecondChanged(String str) => setState(() { _varietySecond = str; });
-  void _slideElevationSecond(double e) => setState(() { _elevationSecond = e; });
+  void _elevationSecondChanged(String str) => setState(() { _elevationSecond = str; });
   void _processSecondChanged(String str) => setState(() { _processSecond = str; });
+  void _roasterSecondChanged(String str) => setState(() { _roasterSecond = str; });
   void _slideSweetnessSecond(double e) => setState(() { _sweetnessSecond = e; });
   void _slideAciditySecond(double e) => setState(() { _aciditySecond = e; });
   void _slideCleanCupSecond(double e) => setState(() { _cleanCupSecond = e; });
@@ -145,14 +155,17 @@ class _CuppingPageState extends State<CuppingPage> {
 
     // カッピングページ表示項目の制御
     List<Widget> _pageList = [
-      _coffeeInfoField(), // 0
-      _firstCuppingData(), // 1
-      _secondCuppingData(), // 2
-      _thirdCuppingData(), // 3
-      _coffeeInfoFieldSecond(), // 4
-      _firstCuppingDataSecond(), // 5
-      _secondCuppingDataSecond(), // 6
-      _thirdCuppingDataSecond(), // 7
+      _firstCoffeeInfoField(_width), // 0
+      _secondCoffeeInfoField(_width), // 1
+      _firstCuppingData(_width), // 2
+      _secondCuppingData(_width), // 3
+      _thirdCuppingData(_width), // 4
+      _fourthCuppingData(_width), // 5
+      _firstCoffeeInfoFieldSecond(), // 5
+      _secondCoffeeInfoFieldSecond(), // 6
+      _firstCuppingDataSecond(), // 7
+      _secondCuppingDataSecond(), // 8
+      _thirdCuppingDataSecond(), // 9
     ];
 
     // カッピングコーヒーの制御
@@ -178,6 +191,74 @@ class _CuppingPageState extends State<CuppingPage> {
           },
         ),
       ),
+      floatingActionButton: Column(
+        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FloatingActionButton(
+            backgroundColor: HexColor('e7e7e7'),
+            onPressed: () {
+
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return AlertDialog(
+                    content: Text('カッピングを終了しますか？'),
+                    actions: <Widget>[
+                      // ボタン領域
+                      ElevatedButton(
+                        child: Text('Cancel'),
+                        style: ElevatedButton.styleFrom(
+                          primary: HexColor('313131'),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                      ElevatedButton(
+                        child: Text('OK'),
+                        style: ElevatedButton.styleFrom(
+                          primary: HexColor('313131'),
+                        ),
+                        onPressed: () {
+
+                          // 1杯目のカッピング情報を登録
+                          _realTimeCuppingData = _setCuppingData();
+                          _writeCuppingData(_realTimeCuppingData, this._uid);
+
+                          // 2杯目のコーヒーがカッピングされていた場合
+                          if (
+                          this._coffeeNameSecond != '' &&
+                              this._countrySecond != '' &&
+                              this._processSecond != ''
+                          ) {
+                            // 2杯目のカッピング情報を登録
+                            _realTimeCuppingDataSecond = _setCuppingDataSecond();
+                            _writeCuppingData(_realTimeCuppingDataSecond, this._uid);
+                          }
+
+                          // タイマーが起動していた場合
+                          if (this._timer != null) {
+                            // タイマーをストップする
+                            this._timer.cancel();
+                          }
+
+                          // ユーザー画面へ遷移
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new HomePage()),
+                                  (_) => false);
+
+                        },
+                      ),
+                    ],
+                  );
+                }
+              );
+            },
+            child: Icon(Icons.done, color: HexColor('313131')),
+          ),
+        ],
+      ),
       body: Container(
         color: HexColor('313131'),
         child: Column(
@@ -196,13 +277,13 @@ class _CuppingPageState extends State<CuppingPage> {
                 children: <Widget>[
                   _pageList[_selectIndex],
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, _width / 12, 0, _width / 26),
+                    margin: EdgeInsets.fromLTRB(0, _width / 12, 0, _width / 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         IconButton(
                             icon: const Icon(Icons.navigate_before),
-                            onPressed: _selectIndex == 0 || _selectIndex == 4 ? null : () {
+                            onPressed: _selectIndex == 0 || _selectIndex == 6 ? null : () {
                               if(_selectIndex > 0) {
                                 setState(() {
                                   _selectIndex--;
@@ -212,8 +293,8 @@ class _CuppingPageState extends State<CuppingPage> {
                         ),
                         IconButton(
                             icon: const Icon(Icons.navigate_next),
-                            onPressed: _selectIndex == 3 || _selectIndex == 7 ? null: () {
-                              if(_selectIndex < 8) {
+                            onPressed: _selectIndex == 5 || _selectIndex == 10 ? null: () {
+                              if(_selectIndex < 10) {
                                 setState(() {
                                   _selectIndex++;
                                 });
@@ -228,41 +309,43 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
             _coffeeIndex[_selectCoffeeIndex], // カッピングするコーヒーを切り替え
             Container(
-              margin: EdgeInsets.fromLTRB(0, 0, _width / 26, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.stop, color: HexColor('e7e7e7')),
-                    onPressed: () {
-                      _resetTimer();
-                    }
+                  Center(
+                   child: Text(
+                     '${this._countMinuteStr}:${this._countSecondStr}',
+                     style: TextStyle(
+                         fontSize: _width / 6,
+                         color: HexColor('e7e7e7')
+                     ),
+                   ),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.pause, color: HexColor('e7e7e7')),
-                    onPressed: () {
-                      setState(() {
-                        this._timer.cancel();
-                      });
-                    }
-                  ),
-                  Text(
-                    '${this._countMinuteStr}:${this._countSecondStr}',
-                    style: TextStyle(
-                      fontSize: 60,
-                      color: HexColor('e7e7e7')
-                    ),
-                  ),
-                  Container(
-                    width: 20,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.play_arrow, color: HexColor('e7e7e7')),
-                    onPressed: () {
-                      setState(() {
-                        this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
-                      });
-                    }
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                          icon: Icon(Icons.stop, color: HexColor('e7e7e7')),
+                          onPressed: () {
+                            _resetTimer();
+                          }
+                      ),
+                      IconButton(
+                          icon: Icon(Icons.pause, color: HexColor('e7e7e7')),
+                          onPressed: () {
+                            setState(() {
+                              this._timer.cancel();
+                            });
+                          }
+                      ),
+                      IconButton(
+                          icon: Icon(Icons.play_arrow, color: HexColor('e7e7e7')),
+                          onPressed: () {
+                            setState(() {
+                              this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+                            });
+                          }
+                      )
+                    ],
                   )
                 ],
               )
@@ -273,14 +356,14 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // コーヒー名などを入力する部分
-  Widget _coffeeInfoField() {
+  // コーヒー名などを入力する部分1
+  Widget _firstCoffeeInfoField(double width) {
     return Column(
         children: <Widget>[
           Container(
             margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
             child: Text(
-              'カッピング 1/4',
+              'カッピング 1/6',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -297,7 +380,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
+            margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
             child: TextField(
               controller: _coffeeNameController,
               decoration: InputDecoration(
@@ -309,7 +392,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
             child: TextField(
               controller: _countryController,
               decoration: InputDecoration(
@@ -321,7 +404,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+            margin: EdgeInsets.fromLTRB(50, 20, 50, 15),
             child: TextField(
               controller: _varietyController,
               decoration: InputDecoration(
@@ -331,38 +414,48 @@ class _CuppingPageState extends State<CuppingPage> {
               keyboardType: TextInputType.text,
               onChanged: _varietyChanged,
             ),
+          )
+        ]
+    );
+  }
+
+  // コーヒー名などを入力する部分2
+  Widget _secondCoffeeInfoField(double width) {
+    return Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+            child: Text(
+              'カッピング 2/6',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           Container(
-              margin: EdgeInsets.fromLTRB(50, 20, 0, 0),
-              child: Row(
-                children: <Widget>[
-                  Text('Elevation'),
-                  SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                      trackHeight: 10,
-                      thumbColor: HexColor('313131'),
-                      overlayColor: HexColor('808080').withAlpha(80),
-                      activeTrackColor: HexColor('313131'),
-                      inactiveTrackColor: HexColor('cccccc'),
-                      inactiveTickMarkColor: HexColor('313131'),
-                      activeTickMarkColor: HexColor('313131'),
-                    ),
-                    child: Slider(
-                        label: '$_elevation',
-                        min: 0,
-                        max: 3000,
-                        value: _elevation,
-                        // activeColor: Colors.orange,
-                        // inactiveColor: Colors.blue,
-                        divisions: 30,
-                        onChanged: _slideElevation
-                    ),
-                  )
-                ],
-              )
+            margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Text(
+              '各項目を評価してください',
+              style: TextStyle(
+                  fontSize: 12
+              ),
+            ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 1, 50, 0),
+            margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+            child: TextField(
+              decoration: InputDecoration(
+                  labelText: 'Elevation',
+                  hintText: '1500'
+              ),
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              onChanged: _elevationChanged,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
             child: TextField(
               controller: _processController,
               decoration: InputDecoration(
@@ -373,18 +466,30 @@ class _CuppingPageState extends State<CuppingPage> {
               onChanged: _processChanged,
             ),
           ),
+          Container(
+            margin: EdgeInsets.fromLTRB(50, 20, 50, 15),
+            child: TextField(
+              controller: _roasterController,
+              decoration: InputDecoration(
+                  labelText: 'Roaster',
+                  hintText: 'Reverbed Coffee'
+              ),
+              keyboardType: TextInputType.text,
+              onChanged: _roasterChanged,
+            ),
+          ),
         ]
     );
   }
 
   // カッピング項目入力画面1
-  Widget _firstCuppingData() {
+  Widget _firstCuppingData(double width) {
     return Column(
       children: <Widget>[
         Container(
           margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: Text(
-            'カッピング 2/4',
+            'カッピング 3/6',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -459,7 +564,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 15),
           child: Column(
             children: <Widget>[
               Text('酸'),
@@ -487,47 +592,18 @@ class _CuppingPageState extends State<CuppingPage> {
             ],
           ),
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 4),
-          child: Column(
-            children: <Widget>[
-              Text('マウスフィール'),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                  label: '$_mouseFeel',
-                  min: 0,
-                  max: 8,
-                  value: _mouseFeel,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideMouseFeel
-                ),
-              )
-            ],
-          ),
-        ),
       ],
     );
   }
 
   // カッピング項目入力画面2
-  Widget _secondCuppingData() {
+  Widget _secondCuppingData(double width) {
     return Column(
       children: <Widget>[
         Container(
           margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: Text(
-            'カッピング 3/4',
+            'カッピング 4/6',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -545,6 +621,35 @@ class _CuppingPageState extends State<CuppingPage> {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('マウスフィール'),
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
+                    label: '$_mouseFeel',
+                    min: 0,
+                    max: 8,
+                    value: _mouseFeel,
+                    // activeColor: Colors.orange,
+                    // inactiveColor: Colors.blue,
+                    divisions: 16,
+                    onChanged: _slideMouseFeel
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
           child: Column(
             children: <Widget>[
               Text('アフターテイスト'),
@@ -573,7 +678,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 15),
           child: Column(
             children: <Widget>[
               Text('フレーバー'),
@@ -601,76 +706,18 @@ class _CuppingPageState extends State<CuppingPage> {
             ],
           ),
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
-          child: Column(
-            children: <Widget>[
-              Text('バランス'),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                  label: '$_balance',
-                  min: 0,
-                  max: 8,
-                  value: _balance,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideBalance
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 4),
-          child: Column(
-            children: <Widget>[
-              Text('オーバーオール'),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                  label: '$_overall',
-                  min: 0,
-                  max: 8,
-                  value: _overall,
-                  // activeColor: Colors.orange,
-                  // inactiveColor: Colors.blue,
-                  divisions: 16,
-                  onChanged: _slideOverall
-                ),
-              )
-            ],
-          ),
-        ),
       ],
     );
   }
 
   // カッピング項目入力画面3
-  Widget _thirdCuppingData() {
+  Widget _thirdCuppingData(double width) {
     return Column(
       children: <Widget>[
         Container(
           margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: Text(
-            'カッピング 4/4',
+            'カッピング 5/6',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -687,16 +734,96 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 90, 0, 0),
-            child: Text(
-                'フレーバーテキスト'
-            )
+          margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+          child: Column(
+            children: <Widget>[
+              Text('バランス'),
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
+                    label: '$_balance',
+                    min: 0,
+                    max: 8,
+                    value: _balance,
+                    // activeColor: Colors.orange,
+                    // inactiveColor: Colors.blue,
+                    divisions: 16,
+                    onChanged: _slideBalance
+                ),
+              )
+            ],
+          ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+          margin: EdgeInsets.fromLTRB(50, 5, 50, 89),
+          child: Column(
+            children: <Widget>[
+              Text('オーバーオール'),
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 10,
+                  thumbColor: HexColor('313131'),
+                  overlayColor: HexColor('808080').withAlpha(80),
+                  activeTrackColor: HexColor('313131'),
+                  inactiveTrackColor: HexColor('cccccc'),
+                  inactiveTickMarkColor: HexColor('313131'),
+                  activeTickMarkColor: HexColor('313131'),
+                ),
+                child: Slider(
+                    label: '$_overall',
+                    min: 0,
+                    max: 8,
+                    value: _overall,
+                    // activeColor: Colors.orange,
+                    // inactiveColor: Colors.blue,
+                    divisions: 16,
+                    onChanged: _slideOverall
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  // カッピング項目入力画面3
+  Widget _fourthCuppingData(double width) {
+    return Column(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          child: Text(
+            'カッピング 6/6',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          child: Text(
+            '各項目を評価してください',
+            style: TextStyle(
+                fontSize: 12
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(50, 80, 50, 0),
           child: TextField(
             controller: _flavorTextController,
             decoration: InputDecoration(
+              labelText: 'Flavor Text',
               hintText: 'Lemon, Peach, Strawberry',
             ),
             keyboardType: TextInputType.text,
@@ -704,16 +831,11 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 37, 0, 0),
-            child: Text(
-                'コメント'
-            )
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(50, 10, 50, 60),
+          margin: EdgeInsets.fromLTRB(50, 30, 50, 54),
           child: TextField(
             controller: _commentController,
             decoration: InputDecoration(
+              labelText: 'Comment',
               hintText: 'Silky, Complex, BrightAcidity',
             ),
             keyboardType: TextInputType.text,
@@ -724,8 +846,8 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // コーヒー名などを入力する部分2
-  Widget _coffeeInfoFieldSecond() {
+  // コーヒー名などを入力する部分2_1
+  Widget _firstCoffeeInfoFieldSecond() {
     return Column(
         children: <Widget>[
           Container(
@@ -782,35 +904,36 @@ class _CuppingPageState extends State<CuppingPage> {
               keyboardType: TextInputType.text,
               onChanged: _varietySecondChanged,
             ),
+          )
+        ]
+    );
+  }
+
+  // コーヒー名などを入力する部分2_1
+  Widget _secondCoffeeInfoFieldSecond() {
+    return Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+            child: Text(
+              'カッピング 1/4',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           Container(
-              margin: EdgeInsets.fromLTRB(50, 20, 0, 0),
-              child: Row(
-                children: <Widget>[
-                  Text('Elevation'),
-                  SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                      trackHeight: 10,
-                      thumbColor: HexColor('313131'),
-                      overlayColor: HexColor('808080').withAlpha(80),
-                      activeTrackColor: HexColor('313131'),
-                      inactiveTrackColor: HexColor('cccccc'),
-                      inactiveTickMarkColor: HexColor('313131'),
-                      activeTickMarkColor: HexColor('313131'),
-                    ),
-                    child: Slider(
-                        label: '$_elevationSecond',
-                        min: 0,
-                        max: 3000,
-                        value: _elevationSecond,
-                        // activeColor: Colors.orange,
-                        // inactiveColor: Colors.blue,
-                        divisions: 30,
-                        onChanged: _slideElevationSecond
-                    ),
-                  )
-                ],
-              )
+            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
+            child: TextField(
+              decoration: InputDecoration(
+                  labelText: 'Elevation',
+                  hintText: '1500'
+              ),
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              onChanged: _elevationSecondChanged,
+            ),
           ),
           Container(
             margin: EdgeInsets.fromLTRB(50, 1, 50, 0),
@@ -1210,82 +1333,12 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 4;
+                  this._selectIndex = 5;
                   this._selectCoffeeIndex = 1;
                 });
               },
             ),
           ),
-          InkWell(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (_) {
-                  return AlertDialog(
-                    content: Text('カッピングを終了しますか？'),
-                    actions: <Widget>[
-                      // ボタン領域
-                      ElevatedButton(
-                        child: Text('Cancel'),
-                        style: ElevatedButton.styleFrom(
-                          primary: HexColor('313131'),
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      ElevatedButton(
-                        child: Text('OK'),
-                        style: ElevatedButton.styleFrom(
-                          primary: HexColor('313131'),
-                        ),
-                        onPressed: () {
-
-                          // 1杯目のカッピング情報を登録
-                          _realTimeCuppingData = _setCuppingData();
-                          _writeCuppingData(_realTimeCuppingData, this._uid);
-
-                          // 2杯目のコーヒーがカッピングされていた場合
-                          if (
-                            this._coffeeNameSecond != '' &&
-                            this._countrySecond != '' &&
-                            this._processSecond != ''
-                          ) {
-                            // 2杯目のカッピング情報を登録
-                            _realTimeCuppingDataSecond = _setCuppingDataSecond();
-                            _writeCuppingData(_realTimeCuppingDataSecond, this._uid);
-                          }
-
-                          // タイマーが起動していた場合
-                          if (this._timer != null) {
-                            // タイマーをストップする
-                            this._timer.cancel();
-                          }
-
-                          // ユーザー画面へ遷移
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => new HomePage()),
-                                  (_) => false);
-
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-            child: Container(
-              margin: EdgeInsets.fromLTRB(120, 0, 0, 0),
-                child: Text(
-                  'Cupping Done',
-                  style: TextStyle(
-                    color: HexColor('e7e7e7'),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15
-                  ),
-                ),
-            )
-          )
         ],
       )
     );
@@ -1332,77 +1385,6 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
               )
           ),
-          InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (_) {
-                    return AlertDialog(
-                      // title: Text("タイトル"),
-                      content: Text('カッピングを終了しますか？'),
-                      actions: <Widget>[
-                        // ボタン領域
-                        ElevatedButton(
-                          child: Text('Cancel'),
-                          style: ElevatedButton.styleFrom(
-                            primary: HexColor('313131'),
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        ElevatedButton(
-                          child: Text('OK'),
-                          style: ElevatedButton.styleFrom(
-                            primary: HexColor('313131'),
-                          ),
-                          onPressed: () {
-
-                            // 1杯目のカッピング情報を登録
-                            _realTimeCuppingData = _setCuppingData();
-                            _writeCuppingData(_realTimeCuppingData, this._uid);
-
-                            // 2杯目のコーヒーがカッピングされていた場合
-                            if (
-                              this._coffeeNameSecond != '' &&
-                              this._countrySecond != '' &&
-                              this._processSecond != ''
-                            ) {
-                              // 2杯目のカッピング情報を登録
-                              _realTimeCuppingDataSecond = _setCuppingDataSecond();
-                              _writeCuppingData(_realTimeCuppingDataSecond, this._uid);
-                            }
-
-                            // タイマーが起動していた場合
-                            if (this._timer != null) {
-                              // タイマーをストップする
-                              this._timer.cancel();
-                            }
-
-                            // ユーザー画面へ遷移
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new HomePage()),
-                                    (_) => false);
-
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              child: Container(
-                margin: EdgeInsets.fromLTRB(120, 0, 0, 0),
-                child: Text(
-                  'Cupping Done',
-                  style: TextStyle(
-                      color: HexColor('e7e7e7'),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15
-                  ),
-                ),
-              )
-          )
         ],
       )
     );
@@ -1415,8 +1397,9 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingData['coffee_name'] = _coffeeName;
     cuppingData['country'] = _country;
     cuppingData['variety'] = _variety;
-    cuppingData['elevation'] = _elevation;
+    cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
     cuppingData['process'] = _process;
+    cuppingData['roaster'] = _roaster;
     cuppingData['sweetness'] = _sweetness;
     cuppingData['acidity'] = _acidity;
     cuppingData['mousefeel'] = _mouseFeel;
@@ -1443,6 +1426,9 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingData['process'] == '') {
       cuppingData['process'] = 'Some Process';
     }
+    if (cuppingData['roaster'] == '') {
+      cuppingData['roaster'] = 'Some Roaster';
+    }
     if (cuppingData['flavor_text'] == '') {
       cuppingData['flavor_text'] = 'No Flavor Text';
     }
@@ -1463,8 +1449,9 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameSecond;
     cuppingDataSecond['country'] = _countrySecond;
     cuppingDataSecond['variety'] = _varietySecond;
-    cuppingDataSecond['elevation'] = _elevationSecond;
+    cuppingDataSecond['elevation'] = int.parse(_elevationSecond); // 数値型に変換
     cuppingDataSecond['process'] = _processSecond;
+    cuppingDataSecond['roaster'] = _roasterSecond;
     cuppingDataSecond['sweetness'] = _sweetnessSecond;
     cuppingDataSecond['acidity'] = _aciditySecond;
     cuppingDataSecond['mousefeel'] = _mouseFeelSecond;
@@ -1490,6 +1477,9 @@ class _CuppingPageState extends State<CuppingPage> {
     }
     if (cuppingDataSecond['process'] == '') {
       cuppingDataSecond['process'] = 'Some Process';
+    }
+    if (cuppingDataSecond['roaster'] == '') {
+      cuppingDataSecond['roaster'] = 'Some Roaster';
     }
     if (cuppingDataSecond['flavor_text'] == '') {
       cuppingDataSecond['flavor_text'] = 'No Flavor Text';
