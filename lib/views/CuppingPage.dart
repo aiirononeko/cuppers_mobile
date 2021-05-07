@@ -361,7 +361,7 @@ class _CuppingPageState extends State<CuppingPage> {
     return Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, width / 8, 0, 0),
             child: Text(
               'カッピング 1/6',
               style: TextStyle(
@@ -371,7 +371,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, width / 80, 0, 0),
             child: Text(
               '各項目を評価してください',
               style: TextStyle(
@@ -380,7 +380,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, width / 6.5, width / 6.5, 0),
             child: TextField(
               controller: _coffeeNameController,
               decoration: InputDecoration(
@@ -392,7 +392,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, width / 16, width / 6.5, 0),
             child: TextField(
               controller: _countryController,
               decoration: InputDecoration(
@@ -404,7 +404,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 20, 50, 15),
+            margin: EdgeInsets.fromLTRB(width / 6.5, width / 16, width / 6.5, width / 22),
             child: TextField(
               controller: _varietyController,
               decoration: InputDecoration(
@@ -424,7 +424,7 @@ class _CuppingPageState extends State<CuppingPage> {
     return Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, width / 8, 0, 0),
             child: Text(
               'カッピング 2/6',
               style: TextStyle(
@@ -434,7 +434,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, width / 80, 0, 0),
             child: Text(
               '各項目を評価してください',
               style: TextStyle(
@@ -443,7 +443,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, width / 6.5, width / 6.5, 0),
             child: TextField(
               decoration: InputDecoration(
                   labelText: 'Elevation',
@@ -455,7 +455,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, width / 16, width / 6.5, 0),
             child: TextField(
               controller: _processController,
               decoration: InputDecoration(
@@ -467,7 +467,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 20, 50, 15),
+            margin: EdgeInsets.fromLTRB(width / 6.5, width / 16, width / 6.5, width / 22),
             child: TextField(
               controller: _roasterController,
               decoration: InputDecoration(
@@ -487,7 +487,7 @@ class _CuppingPageState extends State<CuppingPage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, width / 8, 0, 0),
           child: Text(
             'カッピング 3/6',
             style: TextStyle(
@@ -497,7 +497,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, width / 80, 0, 0),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
@@ -506,7 +506,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, width / 6.5, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('クリーンカップ'),
@@ -535,7 +535,7 @@ class _CuppingPageState extends State<CuppingPage> {
           )
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, width / 80, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('甘さ'),
@@ -564,7 +564,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 15),
+          margin: EdgeInsets.fromLTRB(width / 6.5, width / 80, width / 6.5, width / 15.3),
           child: Column(
             children: <Widget>[
               Text('酸'),
@@ -601,7 +601,7 @@ class _CuppingPageState extends State<CuppingPage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, width / 8, 0, 0),
           child: Text(
             'カッピング 4/6',
             style: TextStyle(
@@ -611,7 +611,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, width / 80, 0, 0),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
@@ -620,7 +620,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, width / 6.5, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('マウスフィール'),
@@ -649,7 +649,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, width / 80, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('アフターテイスト'),
@@ -678,7 +678,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 15),
+          margin: EdgeInsets.fromLTRB(width / 6.5, width / 80, width / 6.5, width / 15.3),
           child: Column(
             children: <Widget>[
               Text('フレーバー'),
@@ -715,7 +715,7 @@ class _CuppingPageState extends State<CuppingPage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, width / 8, 0, 0),
           child: Text(
             'カッピング 5/6',
             style: TextStyle(
@@ -725,7 +725,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, width / 80, 0, 0),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
@@ -734,7 +734,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, width / 6.5, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('バランス'),
@@ -763,7 +763,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 89),
+          margin: EdgeInsets.fromLTRB(width / 6.5, width / 80, width / 6.5, width / 3.82),
           child: Column(
             children: <Widget>[
               Text('オーバーオール'),
@@ -800,7 +800,7 @@ class _CuppingPageState extends State<CuppingPage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, width / 8, 0, 0),
           child: Text(
             'カッピング 6/6',
             style: TextStyle(
@@ -810,7 +810,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, width / 80, 0, 0),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
@@ -819,7 +819,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 80, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, 80, width / 6.5, 0),
           child: TextField(
             controller: _flavorTextController,
             decoration: InputDecoration(
@@ -831,7 +831,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 30, 50, 54),
+          margin: EdgeInsets.fromLTRB(width / 6.5, 30, width / 6.5, width / 5.32),
           child: TextField(
             controller: _commentController,
             decoration: InputDecoration(
