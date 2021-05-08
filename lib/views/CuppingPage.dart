@@ -173,6 +173,10 @@ class _CuppingPageState extends State<CuppingPage> {
     List<Widget> _coffeeIndex = [
       _buttonOneAble(_width, _height),
       _buttonTwoAble(_width, _height),
+      _buttonThreeAble(_width, _height),
+      _buttonFourAble(_width, _height),
+      _buttonFiveAble(_width, _height),
+      _buttonSixAble(_width, _height)
     ];
 
     return Scaffold(
@@ -270,7 +274,6 @@ class _CuppingPageState extends State<CuppingPage> {
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
                 ),
                 color: HexColor('e7e7e7'),
               ),
@@ -1352,7 +1355,7 @@ class _CuppingPageState extends State<CuppingPage> {
               color: HexColor('e7e7e7'),
             ),
             child: Container(
-              margin: EdgeInsets.fromLTRB(0, 0, width / 48, height / 80),
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
               child: IconButton(
                 icon: Container(
                   margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
@@ -1363,7 +1366,7 @@ class _CuppingPageState extends State<CuppingPage> {
             )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, width / 48, height / 100),
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
             child: IconButton(
               icon: Container(
                 margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
@@ -1371,8 +1374,68 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 6;
+                  this._selectIndex = 0;
                   this._selectCoffeeIndex = 1;
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+            child: IconButton(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162007.png'),
+              ),
+              onPressed: () {
+                setState(() {
+                  // this._selectIndex = 6;
+                  this._selectCoffeeIndex = 2;
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+            child: IconButton(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162011.png'),
+              ),
+              onPressed: () {
+                setState(() {
+                  // this._selectIndex = 6;
+                  this._selectCoffeeIndex = 3;
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+            child: IconButton(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162013.png'),
+              ),
+              onPressed: () {
+                setState(() {
+                  // this._selectIndex = 6;
+                  this._selectCoffeeIndex = 4;
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+            child: IconButton(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162016.png'),
+              ),
+              onPressed: () {
+                setState(() {
+                  // this._selectIndex = 6;
+                  this._selectCoffeeIndex = 5;
                 });
               },
             ),
@@ -1389,7 +1452,7 @@ class _CuppingPageState extends State<CuppingPage> {
       child: Row(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, width / 48, height / 80),
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
             child: IconButton(
               icon: Container(
                 margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
@@ -1412,7 +1475,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 color: HexColor('e7e7e7'),
               ),
               child: Container(
-                margin: EdgeInsets.fromLTRB(0, 0, width / 48, height / 100),
+                margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
                 child: IconButton(
                   icon: Container(
                     margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
@@ -1422,8 +1485,488 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
               )
           ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+            child: IconButton(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162007.png'),
+              ),
+              onPressed: () {
+                setState(() {
+                  // this._selectIndex = 6;
+                  this._selectCoffeeIndex = 2;
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+            child: IconButton(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162011.png'),
+              ),
+              onPressed: () {
+                setState(() {
+                  // this._selectIndex = 6;
+                  this._selectCoffeeIndex = 3;
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+            child: IconButton(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162013.png'),
+              ),
+              onPressed: () {
+                setState(() {
+                  // this._selectIndex = 6;
+                  this._selectCoffeeIndex = 4;
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+            child: IconButton(
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162016.png'),
+              ),
+              onPressed: () {
+                setState(() {
+                  this._selectIndex = 6;
+                  this._selectCoffeeIndex = 5;
+                });
+              },
+            ),
+          ),
         ],
       )
+    );
+  }
+
+  Widget _buttonThreeAble(double width, double height) {
+    return Container(
+        height: height / 14.5,
+        margin: EdgeInsets.fromLTRB(width / 25, 0, width / 25, height / 100),
+        child: Row(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508161921.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 0;
+                    this._selectCoffeeIndex = 0;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162004.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 0;
+                    this._selectCoffeeIndex = 1;
+                  });
+                },
+              ),
+            ),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                  color: HexColor('e7e7e7'),
+                ),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+                  child: IconButton(
+                    icon: Container(
+                      margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                      child: Image.asset('images/sozai_cman_jp_20210508161946.png'),
+                    ),
+                    onPressed: () {},
+                  ),
+                )
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162011.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 3;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162013.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 4;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162016.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 6;
+                    this._selectCoffeeIndex = 5;
+                  });
+                },
+              ),
+            ),
+          ],
+        )
+    );
+  }
+
+  Widget _buttonFourAble(double width, double height) {
+    return Container(
+        height: height / 14.5,
+        margin: EdgeInsets.fromLTRB(width / 25, 0, width / 25, height / 100),
+        child: Row(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508161921.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 0;
+                    this._selectCoffeeIndex = 0;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162004.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 0;
+                    this._selectCoffeeIndex = 1;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162007.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 2;
+                  });
+                },
+              ),
+            ),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                  color: HexColor('e7e7e7'),
+                ),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+                  child: IconButton(
+                    icon: Container(
+                      margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                      child: Image.asset('images/sozai_cman_jp_20210508161949.png'),
+                    ),
+                    onPressed: () {},
+                  ),
+                )
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162013.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 4;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162016.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 5;
+                  });
+                },
+              ),
+            ),
+          ],
+        )
+    );
+  }
+
+  Widget _buttonFiveAble(double width, double height) {
+    return Container(
+        height: height / 14.5,
+        margin: EdgeInsets.fromLTRB(width / 25, 0, width / 25, height / 100),
+        child: Row(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508161921.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 0;
+                    this._selectCoffeeIndex = 0;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162004.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 0;
+                    this._selectCoffeeIndex = 1;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162007.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 2;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162011.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 3;
+                  });
+                },
+              ),
+            ),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                  color: HexColor('e7e7e7'),
+                ),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+                  child: IconButton(
+                    icon: Container(
+                      margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                      child: Image.asset('images/sozai_cman_jp_20210508161951.png'),
+                    ),
+                    onPressed: () {},
+                  ),
+                )
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162016.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 6;
+                    this._selectCoffeeIndex = 5;
+                  });
+                },
+              ),
+            ),
+          ],
+        )
+    );
+  }
+
+  Widget _buttonSixAble(double width, double height) {
+    return Container(
+        height: height / 14.5,
+        margin: EdgeInsets.fromLTRB(width / 25, 0, width / 25, height / 100),
+        child: Row(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508161921.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 0;
+                    this._selectCoffeeIndex = 0;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 80),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162004.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    this._selectIndex = 0;
+                    this._selectCoffeeIndex = 1;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162007.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 2;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162011.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 3;
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+              child: IconButton(
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508162013.png'),
+                ),
+                onPressed: () {
+                  setState(() {
+                    // this._selectIndex = 6;
+                    this._selectCoffeeIndex = 4;
+                  });
+                },
+              ),
+            ),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                  color: HexColor('e7e7e7'),
+                ),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, width / 39.5, height / 100),
+                  child: IconButton(
+                    icon: Container(
+                      margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                      child: Image.asset('images/sozai_cman_jp_20210508161954.png'),
+                    ),
+                    onPressed: () {},
+                  ),
+                )
+            ),
+          ],
+        )
     );
   }
 
