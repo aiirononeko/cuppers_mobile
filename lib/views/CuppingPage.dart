@@ -161,11 +161,12 @@ class _CuppingPageState extends State<CuppingPage> {
       _secondCuppingData(_width, _height), // 3
       _thirdCuppingData(_width, _height), // 4
       _fourthCuppingData(_width, _height), // 5
-      _firstCoffeeInfoFieldSecond(), // 5
-      _secondCoffeeInfoFieldSecond(), // 6
-      _firstCuppingDataSecond(), // 7
-      _secondCuppingDataSecond(), // 8
-      _thirdCuppingDataSecond(), // 9
+      _firstCoffeeInfoFieldSecond(_width, _height), // 6
+      _secondCoffeeInfoFieldSecond(_width, _height), // 7
+      _firstCuppingDataSecond(_width, _height), // 8
+      _secondCuppingDataSecond(_width, _height), // 9
+      _thirdCuppingDataSecond(_width, _height), // 10
+      _fourthCuppingDataSecond(_width, _height) // 11
     ];
 
     // カッピングコーヒーの制御
@@ -293,8 +294,8 @@ class _CuppingPageState extends State<CuppingPage> {
                         ),
                         IconButton(
                             icon: const Icon(Icons.navigate_next),
-                            onPressed: _selectIndex == 5 || _selectIndex == 10 ? null: () {
-                              if(_selectIndex < 10) {
+                            onPressed: _selectIndex == 5 || _selectIndex == 11 ? null: () {
+                              if(_selectIndex < 11) {
                                 setState(() {
                                   _selectIndex++;
                                 });
@@ -564,7 +565,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 80),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 80.5),
           child: Column(
             children: <Widget>[
               Text('酸'),
@@ -678,7 +679,7 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 80),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 80.5),
           child: Column(
             children: <Widget>[
               Text('フレーバー'),
@@ -846,31 +847,31 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // コーヒー名などを入力する部分2_1
-  Widget _firstCoffeeInfoFieldSecond() {
+  // コーヒー名などを入力する部分1_1
+  Widget _firstCoffeeInfoFieldSecond(double width, double height) {
     return Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
             child: Text(
-              'カッピング 1/4',
+              'カッピング 1/6',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: width / 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
             child: Text(
               '各項目を評価してください',
               style: TextStyle(
-                  fontSize: 12
+                  fontSize: width / 30
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
             child: TextField(
               controller: _coffeeNameControllerSecond,
               decoration: InputDecoration(
@@ -882,7 +883,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
             child: TextField(
               controller: _countryControllerSecond,
               decoration: InputDecoration(
@@ -894,7 +895,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
             child: TextField(
               controller: _varietyControllerSecond,
               decoration: InputDecoration(
@@ -909,22 +910,31 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // コーヒー名などを入力する部分2_1
-  Widget _secondCoffeeInfoFieldSecond() {
+  // コーヒー名などを入力する部分1_2
+  Widget _secondCoffeeInfoFieldSecond(double width, double height) {
     return Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
             child: Text(
-              'カッピング 1/4',
+              'カッピング 2/6',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: width / 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
+            margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+            child: Text(
+              '各項目を評価してください',
+              style: TextStyle(
+                  fontSize: width / 30
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
             child: TextField(
               decoration: InputDecoration(
                   labelText: 'Elevation',
@@ -936,7 +946,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(50, 1, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
             child: TextField(
               controller: _processControllerSecond,
               decoration: InputDecoration(
@@ -947,41 +957,53 @@ class _CuppingPageState extends State<CuppingPage> {
               onChanged: _processSecondChanged,
             ),
           ),
+          Container(
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            child: TextField(
+              controller: _roasterControllerSecond,
+              decoration: InputDecoration(
+                  labelText: 'Roaster',
+                  hintText: 'Reverbed Coffee'
+              ),
+              keyboardType: TextInputType.text,
+              onChanged: _roasterSecondChanged,
+            ),
+          ),
         ]
     );
   }
 
-  // カッピング項目入力画面2_1
-  Widget _firstCuppingDataSecond() {
+  // カッピング項目入力画面1_1
+  Widget _firstCuppingDataSecond(double width, double height) {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
           child: Text(
-            'カッピング 2/4',
+            'カッピング 3/6',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: width / 20,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
-                fontSize: 12
+                fontSize: width / 30
             ),
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
             child: Column(
               children: <Widget>[
                 Text('クリーンカップ'),
                 SliderTheme(
                   data: SliderTheme.of(context).copyWith(
-                    trackHeight: 10,
+                    trackHeight: width / 48,
                     thumbColor: HexColor('313131'),
                     overlayColor: HexColor('808080').withAlpha(80),
                     activeTrackColor: HexColor('313131'),
@@ -1004,13 +1026,13 @@ class _CuppingPageState extends State<CuppingPage> {
             )
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('甘さ'),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
+                  trackHeight: width / 48,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
@@ -1033,13 +1055,13 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 80.5),
           child: Column(
             children: <Widget>[
               Text('酸'),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
+                  trackHeight: width / 48,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
@@ -1061,14 +1083,41 @@ class _CuppingPageState extends State<CuppingPage> {
             ],
           ),
         ),
+      ],
+    );
+  }
+
+  // カッピング項目入力画面1_2
+  Widget _secondCuppingDataSecond(double width, double height) {
+    return Column(
+      children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 4),
+          margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
+          child: Text(
+            'カッピング 4/6',
+            style: TextStyle(
+              fontSize: width / 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+          child: Text(
+            '各項目を評価してください',
+            style: TextStyle(
+                fontSize: width / 30
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('マウスフィール'),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
+                  trackHeight: width / 48,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
@@ -1090,41 +1139,14 @@ class _CuppingPageState extends State<CuppingPage> {
             ],
           ),
         ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面2_2
-  Widget _secondCuppingDataSecond() {
-    return Column(
-      children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-          child: Text(
-            'カッピング 3/4',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: 12
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(50, 50, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('アフターテイスト'),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
+                  trackHeight: width / 48,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
@@ -1147,13 +1169,13 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 80.5),
           child: Column(
             children: <Widget>[
               Text('フレーバー'),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
+                  trackHeight: width / 48,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
@@ -1175,14 +1197,41 @@ class _CuppingPageState extends State<CuppingPage> {
             ],
           ),
         ),
+      ],
+    );
+  }
+
+  // カッピング項目入力画面1_3
+  Widget _thirdCuppingDataSecond(double width, double height) {
+    return Column(
+      children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 0),
+          margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
+          child: Text(
+            'カッピング 5/6',
+            style: TextStyle(
+              fontSize: width / 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+          child: Text(
+            '各項目を評価してください',
+            style: TextStyle(
+                fontSize: width / 30
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
           child: Column(
             children: <Widget>[
               Text('バランス'),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
+                  trackHeight: width / 48,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
@@ -1205,13 +1254,13 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(50, 5, 50, 4),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 9.1),
           child: Column(
             children: <Widget>[
               Text('オーバーオール'),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: 10,
+                  trackHeight: width / 48,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
@@ -1237,40 +1286,35 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // カッピング項目入力画面2_3
-  Widget _thirdCuppingDataSecond() {
+  // カッピング項目入力画面1_4
+  Widget _fourthCuppingDataSecond(double width, double height) {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
           child: Text(
-            'カッピング 4/4',
+            'カッピング 6/6',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: width / 20,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
-                fontSize: 12
+                fontSize: width / 30
             ),
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 90, 0, 0),
-            child: Text(
-                'フレーバーテキスト'
-            )
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(50, 10, 50, 0),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 10, width / 6.5, 0),
           child: TextField(
             controller: _flavorTextControllerSecond,
             decoration: InputDecoration(
+              labelText: 'Flavor Text',
               hintText: 'Lemon, Peach, Strawberry',
             ),
             keyboardType: TextInputType.text,
@@ -1278,16 +1322,11 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(0, 37, 0, 0),
-            child: Text(
-                'コメント'
-            )
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(50, 10, 50, 60),
+          margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 12.9),
           child: TextField(
             controller: _commentControllerSecond,
             decoration: InputDecoration(
+              labelText: 'Comment',
               hintText: 'Silky, Complex, BrightAcidity',
             ),
             keyboardType: TextInputType.text,
@@ -1300,6 +1339,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   Widget _buttonOneAble(double width, double height) {
     return Container(
+      height: height / 14.5,
       margin: EdgeInsets.fromLTRB(width / 25, 0, width / 25, height / 100),
       child: Row(
         children: <Widget>[
@@ -1333,7 +1373,7 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 5;
+                  this._selectIndex = 6;
                   this._selectCoffeeIndex = 1;
                 });
               },
@@ -1346,6 +1386,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   Widget _buttonTwoAble(double width, double height) {
     return Container(
+      height: height / 14.5,
       margin: EdgeInsets.fromLTRB(width / 25, 0, width / 25, height / 100),
       child: Row(
         children: <Widget>[
