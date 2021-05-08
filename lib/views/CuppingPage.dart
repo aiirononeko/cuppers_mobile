@@ -1354,10 +1354,9 @@ class _CuppingPageState extends State<CuppingPage> {
             child: Container(
               margin: EdgeInsets.fromLTRB(0, 0, width / 48, height / 80),
               child: IconButton(
-                icon: Icon(
-                  Icons.looks_one,
-                  color: HexColor('313131'),
-                  size: 40
+                icon: Container(
+                  margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                  child: Image.asset('images/sozai_cman_jp_20210508161854.png'),
                 ),
                 onPressed: () {},
               ),
@@ -1366,10 +1365,9 @@ class _CuppingPageState extends State<CuppingPage> {
           Container(
             margin: EdgeInsets.fromLTRB(0, 0, width / 48, height / 100),
             child: IconButton(
-              icon: Icon(
-                Icons.looks_two,
-                  color: HexColor('e7e7e7'),
-                size: 40
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508162004.png'),
               ),
               onPressed: () {
                 setState(() {
@@ -1393,10 +1391,9 @@ class _CuppingPageState extends State<CuppingPage> {
           Container(
             margin: EdgeInsets.fromLTRB(0, 0, width / 48, height / 80),
             child: IconButton(
-              icon: Icon(
-                Icons.looks_one,
-                color: HexColor('e7e7e7'),
-                size: 40
+              icon: Container(
+                margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                child: Image.asset('images/sozai_cman_jp_20210508161921.png'),
               ),
               onPressed: () {
                 setState(() {
@@ -1417,10 +1414,9 @@ class _CuppingPageState extends State<CuppingPage> {
               child: Container(
                 margin: EdgeInsets.fromLTRB(0, 0, width / 48, height / 100),
                 child: IconButton(
-                  icon: Icon(
-                      Icons.looks_two,
-                      color: HexColor('313131'),
-                      size: 40
+                  icon: Container(
+                    margin: EdgeInsets.fromLTRB(9, 8, 0, 0),
+                    child: Image.asset('images/sozai_cman_jp_20210508161942.png'),
                   ),
                   onPressed: () {},
                 ),
