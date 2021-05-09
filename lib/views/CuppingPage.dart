@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -31,6 +32,32 @@ class _CuppingPageState extends State<CuppingPage> {
   int _countSecond = 0;
   String _countSecondStr = '00';
   Timer _timer;
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedCountry = 'Country';
+  final List<String> _countries = [
+    'Brazil',
+    'Colombia',
+    'Indonesia',
+    'Ethiopia',
+    'Mexico',
+    'Guatemala',
+    'Peru',
+    'Honduras',
+    'Costa Rica',
+    'El Salvador',
+    'Nicaragua',
+    'Ecuador',
+    'Thai',
+    'Tanzania',
+    'Dominicana',
+    'Kenya',
+    'Burundi',
+    'Rwanda',
+    'Bolivia',
+    'Panama',
+    'Other Country'
+  ];
 
   TextEditingController _coffeeNameController;
   TextEditingController _countryController;
@@ -654,6 +681,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   // コーヒー名などを入力する部分1_1
   Widget _firstCoffeeInfoField(double width, double height) {
+
     return Column(
         children: <Widget>[
           Container(
@@ -688,19 +716,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _countryController,
-              decoration: InputDecoration(
-                  labelText: 'Country',
-                  hintText: 'Ethiopia'
+            child: InkWell(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                    child: Text(
+                      this._selectedCountry,
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: width / 24
+                      ),
+                    )
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                    child: Divider(
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
-              keyboardType: TextInputType.text,
-              onChanged: _countryChanged,
-            ),
+              onTap: () {
+                _showModalPicker(context);
+              },
+            )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
             child: TextField(
               controller: _varietyController,
               decoration: InputDecoration(
@@ -4590,6 +4634,43 @@ class _CuppingPageState extends State<CuppingPage> {
       this._countMinute = 0;
       this._countSecond = 0;
       this._countSecondStr = '00';
+    });
+  }
+
+  void _showModalPicker(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _countries.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedItemChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _countries.indexOf(_selectedCountry),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _pickerItem(String str) {
+    return Text(
+      str,
+      style: const TextStyle(fontSize: 26),
+    );
+  }
+
+  void _onSelectedItemChanged(int index) {
+    setState(() {
+      _selectedCountry = _countries[index];
     });
   }
 }
