@@ -33,32 +33,6 @@ class _CuppingPageState extends State<CuppingPage> {
   String _countSecondStr = '00';
   Timer _timer;
 
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountry = 'Country';
-  final List<String> _countries = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
   TextEditingController _coffeeNameController;
   TextEditingController _countryController;
   TextEditingController _varietyController;
@@ -382,6 +356,162 @@ class _CuppingPageState extends State<CuppingPage> {
   void _slideOverallSixth(double e) => setState(() { _overallSixth = e; });
   void _flavorTextSixthChanged(String str) => setState(() { _flavorTextSixth = str; });
   void _commentSixthChanged(String str) => setState(() { _commentSixth = str; });
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedCountry = 'Country';
+  final List<String> _countries = [
+    'Brazil',
+    'Colombia',
+    'Indonesia',
+    'Ethiopia',
+    'Mexico',
+    'Guatemala',
+    'Peru',
+    'Honduras',
+    'Costa Rica',
+    'El Salvador',
+    'Nicaragua',
+    'Ecuador',
+    'Thai',
+    'Tanzania',
+    'Dominicana',
+    'Kenya',
+    'Burundi',
+    'Rwanda',
+    'Bolivia',
+    'Panama',
+    'Other Country'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedCountrySecond = 'Country';
+  final List<String> _countriesSecond = [
+    'Brazil',
+    'Colombia',
+    'Indonesia',
+    'Ethiopia',
+    'Mexico',
+    'Guatemala',
+    'Peru',
+    'Honduras',
+    'Costa Rica',
+    'El Salvador',
+    'Nicaragua',
+    'Ecuador',
+    'Thai',
+    'Tanzania',
+    'Dominicana',
+    'Kenya',
+    'Burundi',
+    'Rwanda',
+    'Bolivia',
+    'Panama',
+    'Other Country'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedCountryThird = 'Country';
+  final List<String> _countriesThird = [
+    'Brazil',
+    'Colombia',
+    'Indonesia',
+    'Ethiopia',
+    'Mexico',
+    'Guatemala',
+    'Peru',
+    'Honduras',
+    'Costa Rica',
+    'El Salvador',
+    'Nicaragua',
+    'Ecuador',
+    'Thai',
+    'Tanzania',
+    'Dominicana',
+    'Kenya',
+    'Burundi',
+    'Rwanda',
+    'Bolivia',
+    'Panama',
+    'Other Country'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedCountryFourth = 'Country';
+  final List<String> _countriesFourth = [
+    'Brazil',
+    'Colombia',
+    'Indonesia',
+    'Ethiopia',
+    'Mexico',
+    'Guatemala',
+    'Peru',
+    'Honduras',
+    'Costa Rica',
+    'El Salvador',
+    'Nicaragua',
+    'Ecuador',
+    'Thai',
+    'Tanzania',
+    'Dominicana',
+    'Kenya',
+    'Burundi',
+    'Rwanda',
+    'Bolivia',
+    'Panama',
+    'Other Country'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedCountryFifth = 'Country';
+  final List<String> _countriesFifth = [
+    'Brazil',
+    'Colombia',
+    'Indonesia',
+    'Ethiopia',
+    'Mexico',
+    'Guatemala',
+    'Peru',
+    'Honduras',
+    'Costa Rica',
+    'El Salvador',
+    'Nicaragua',
+    'Ecuador',
+    'Thai',
+    'Tanzania',
+    'Dominicana',
+    'Kenya',
+    'Burundi',
+    'Rwanda',
+    'Bolivia',
+    'Panama',
+    'Other Country'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedCountrySixth = 'Country';
+  final List<String> _countriesSixth = [
+    'Brazil',
+    'Colombia',
+    'Indonesia',
+    'Ethiopia',
+    'Mexico',
+    'Guatemala',
+    'Peru',
+    'Honduras',
+    'Costa Rica',
+    'El Salvador',
+    'Nicaragua',
+    'Ecuador',
+    'Thai',
+    'Tanzania',
+    'Dominicana',
+    'Kenya',
+    'Burundi',
+    'Rwanda',
+    'Bolivia',
+    'Panama',
+    'Other Country'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -1223,19 +1353,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _countryControllerSecond,
-              decoration: InputDecoration(
-                  labelText: 'Country',
-                  hintText: 'Ethiopia'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _countrySecondChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedCountrySecond,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalPickerSecond(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
             child: TextField(
               controller: _varietyControllerSecond,
               decoration: InputDecoration(
@@ -1714,19 +1860,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _countryControllerThird,
-              decoration: InputDecoration(
-                  labelText: 'Country',
-                  hintText: 'Ethiopia'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _countryThirdChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedCountryThird,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalPickerThird(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
             child: TextField(
               controller: _varietyControllerThird,
               decoration: InputDecoration(
@@ -2205,19 +2367,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _countryControllerFourth,
-              decoration: InputDecoration(
-                  labelText: 'Country',
-                  hintText: 'Ethiopia'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _countryFourthChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedCountryFourth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalPickerFourth(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
             child: TextField(
               controller: _varietyControllerFourth,
               decoration: InputDecoration(
@@ -2696,19 +2874,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _countryControllerFifth,
-              decoration: InputDecoration(
-                  labelText: 'Country',
-                  hintText: 'Ethiopia'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _countryFifthChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedCountryFifth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalPickerFifth(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
             child: TextField(
               controller: _varietyControllerFifth,
               decoration: InputDecoration(
@@ -3187,19 +3381,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _countryControllerSixth,
-              decoration: InputDecoration(
-                  labelText: 'Country',
-                  hintText: 'Ethiopia'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _countrySixthChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedCountrySixth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalPickerSixth(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
             child: TextField(
               controller: _varietyControllerSixth,
               decoration: InputDecoration(
@@ -4277,7 +4487,7 @@ class _CuppingPageState extends State<CuppingPage> {
     Map<String, dynamic> cuppingData = new Map<String, dynamic>();
 
     cuppingData['coffee_name'] = _coffeeName;
-    cuppingData['country'] = _country;
+    cuppingData['country'] = _selectedCountry;
     cuppingData['variety'] = _variety;
     cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
     cuppingData['process'] = _process;
@@ -4299,7 +4509,7 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingData['coffee_name'] == '') {
       cuppingData['coffee_name'] = 'Some Coffee';
     }
-    if (cuppingData['country'] == '') {
+    if (cuppingData['country'] == 'Country') {
       cuppingData['country'] = 'Some Country';
     }
     if (cuppingData['variety'] == '') {
@@ -4329,7 +4539,7 @@ class _CuppingPageState extends State<CuppingPage> {
     Map<String, dynamic> cuppingDataSecond = new Map<String, dynamic>();
 
     cuppingDataSecond['coffee_name'] = _coffeeNameSecond;
-    cuppingDataSecond['country'] = _countrySecond;
+    cuppingDataSecond['country'] = _selectedCountrySecond;
     cuppingDataSecond['variety'] = _varietySecond;
     cuppingDataSecond['elevation'] = int.parse(_elevationSecond); // 数値型に変換
     cuppingDataSecond['process'] = _processSecond;
@@ -4351,7 +4561,7 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['coffee_name'] == '') {
       cuppingDataSecond['coffee_name'] = 'Some Coffee';
     }
-    if (cuppingDataSecond['country'] == '') {
+    if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
     if (cuppingDataSecond['variety'] == '') {
@@ -4381,7 +4591,7 @@ class _CuppingPageState extends State<CuppingPage> {
     Map<String, dynamic> cuppingDataSecond = new Map<String, dynamic>();
 
     cuppingDataSecond['coffee_name'] = _coffeeNameThird;
-    cuppingDataSecond['country'] = _countryThird;
+    cuppingDataSecond['country'] = _selectedCountryThird;
     cuppingDataSecond['variety'] = _varietyThird;
     cuppingDataSecond['elevation'] = int.parse(_elevationThird); // 数値型に変換
     cuppingDataSecond['process'] = _processThird;
@@ -4403,7 +4613,7 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['coffee_name'] == '') {
       cuppingDataSecond['coffee_name'] = 'Some Coffee';
     }
-    if (cuppingDataSecond['country'] == '') {
+    if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
     if (cuppingDataSecond['variety'] == '') {
@@ -4433,7 +4643,7 @@ class _CuppingPageState extends State<CuppingPage> {
     Map<String, dynamic> cuppingDataSecond = new Map<String, dynamic>();
 
     cuppingDataSecond['coffee_name'] = _coffeeNameFourth;
-    cuppingDataSecond['country'] = _countryFourth;
+    cuppingDataSecond['country'] = _selectedCountryFourth;
     cuppingDataSecond['variety'] = _varietyFourth;
     cuppingDataSecond['elevation'] = int.parse(_elevationFourth); // 数値型に変換
     cuppingDataSecond['process'] = _processFourth;
@@ -4455,7 +4665,7 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['coffee_name'] == '') {
       cuppingDataSecond['coffee_name'] = 'Some Coffee';
     }
-    if (cuppingDataSecond['country'] == '') {
+    if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
     if (cuppingDataSecond['variety'] == '') {
@@ -4485,7 +4695,7 @@ class _CuppingPageState extends State<CuppingPage> {
     Map<String, dynamic> cuppingDataSecond = new Map<String, dynamic>();
 
     cuppingDataSecond['coffee_name'] = _coffeeNameFifth;
-    cuppingDataSecond['country'] = _countryFifth;
+    cuppingDataSecond['country'] = _selectedCountryFifth;
     cuppingDataSecond['variety'] = _varietyFifth;
     cuppingDataSecond['elevation'] = int.parse(_elevationFifth); // 数値型に変換
     cuppingDataSecond['process'] = _processFifth;
@@ -4507,7 +4717,7 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['coffee_name'] == '') {
       cuppingDataSecond['coffee_name'] = 'Some Coffee';
     }
-    if (cuppingDataSecond['country'] == '') {
+    if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
     if (cuppingDataSecond['variety'] == '') {
@@ -4537,7 +4747,7 @@ class _CuppingPageState extends State<CuppingPage> {
     Map<String, dynamic> cuppingDataSecond = new Map<String, dynamic>();
 
     cuppingDataSecond['coffee_name'] = _coffeeNameSixth;
-    cuppingDataSecond['country'] = _countrySixth;
+    cuppingDataSecond['country'] = _selectedCountrySixth;
     cuppingDataSecond['variety'] = _varietySixth;
     cuppingDataSecond['elevation'] = int.parse(_elevationSixth); // 数値型に変換
     cuppingDataSecond['process'] = _processSixth;
@@ -4559,7 +4769,7 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['coffee_name'] == '') {
       cuppingDataSecond['coffee_name'] = 'Some Coffee';
     }
-    if (cuppingDataSecond['country'] == '') {
+    if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
     if (cuppingDataSecond['variety'] == '') {
@@ -4637,6 +4847,19 @@ class _CuppingPageState extends State<CuppingPage> {
     });
   }
 
+  Widget _pickerItem(String str) {
+    return Text(
+      str,
+      style: const TextStyle(fontSize: 26),
+    );
+  }
+
+  void _onSelectedItemChanged(int index) {
+    setState(() {
+      _selectedCountry = _countries[index];
+    });
+  }
+
   void _showModalPicker(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
@@ -4661,17 +4884,154 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  Widget _pickerItem(String str) {
-    return Text(
-      str,
-      style: const TextStyle(fontSize: 26),
+  void _onSelectedItemChangedSecond(int index) {
+    setState(() {
+      _selectedCountrySecond = _countriesSecond[index];
+    });
+  }
+
+  void _showModalPickerSecond(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _countriesSecond.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedItemChangedSecond,
+              scrollController: FixedExtentScrollController(
+                initialItem: _countriesSecond.indexOf(_selectedCountrySecond),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
-  void _onSelectedItemChanged(int index) {
+  void _onSelectedItemChangedThird(int index) {
     setState(() {
-      _selectedCountry = _countries[index];
+      _selectedCountryThird = _countriesThird[index];
     });
+  }
+
+  void _showModalPickerThird(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _countriesThird.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedItemChangedThird,
+              scrollController: FixedExtentScrollController(
+                initialItem: _countriesThird.indexOf(_selectedCountryThird),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedItemChangedFourth(int index) {
+    setState(() {
+      _selectedCountryFourth = _countriesFourth[index];
+    });
+  }
+
+  void _showModalPickerFourth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _countriesFourth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedItemChangedFourth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _countriesFourth.indexOf(_selectedCountryFourth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedItemChangedFifth(int index) {
+    setState(() {
+      _selectedCountryFifth = _countriesFifth[index];
+    });
+  }
+
+  void _showModalPickerFifth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _countriesFifth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedItemChangedFifth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _countriesFifth.indexOf(_selectedCountryFifth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedItemChangedSixth(int index) {
+    setState(() {
+      _selectedCountrySixth = _countriesSixth[index];
+    });
+  }
+
+  void _showModalPickerSixth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _countriesSixth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedItemChangedSixth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _countriesSixth.indexOf(_selectedCountrySixth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
