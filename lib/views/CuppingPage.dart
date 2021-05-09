@@ -626,7 +626,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
                           // 2杯目のコーヒーがカッピングされていた場合
                           if (this._coffeeNameSecond != '' &&
-                              this._countrySecond != ''
+                              this._selectedCountrySecond != 'Country'
                               // this._varietySecond != '' &&
                               // this._processSecond != '' &&
                               // this._elevationSecond != '0' &&
@@ -638,7 +638,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
                             // 3杯目のコーヒーがカッピングされていた場合
                             if (this._coffeeNameThird != '' &&
-                                this._countryThird != ''
+                                this._selectedCountryThird != 'Country'
                                 // this._varietyThird != '' &&
                                 // this._processThird != '' &&
                                 // this._elevationThird != '0' &&
@@ -650,7 +650,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
                               // 4杯目のコーヒーがカッピングされていた場合
                               if (this._coffeeNameFourth != '' &&
-                                  this._countryFourth != ''
+                                  this._selectedCountryFourth != 'Country'
                                   // this._varietyFourth != '' &&
                                   // this._processFourth != '' &&
                                   // this._elevationFourth != '0' &&
@@ -662,7 +662,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
                                 // 5杯目のコーヒーがカッピングされていた場合
                                 if (this._coffeeNameFifth != '' &&
-                                    this._countryFifth != ''
+                                    this._selectedCountryFifth != 'Country'
                                     // this._varietyFifth != '' &&
                                     // this._processFifth != '' &&
                                     // this._elevationFifth != '0' &&
@@ -674,7 +674,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
                                   // 6杯目のコーヒーがカッピングされていた場合
                                   if (this._coffeeNameSixth != '' &&
-                                      this._countrySixth != ''
+                                      this._selectedCountrySixth != 'Country'
                                       // this._varietySixth != '' &&
                                       // this._processSixth != '' &&
                                       // this._elevationSixth != '0' &&
