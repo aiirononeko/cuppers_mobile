@@ -534,7 +534,8 @@ class _CuppingPageState extends State<CuppingPage> {
     'Arusha',
     'Geisha',
     'SL28',
-    'SL34'
+    'SL34',
+    'Other Variety'
   ];
 
   // ドラムピッカー用のリスト型変数
@@ -558,7 +559,8 @@ class _CuppingPageState extends State<CuppingPage> {
     'Arusha',
     'Geisha',
     'SL28',
-    'SL34'
+    'SL34',
+    'Other Variety'
   ];
 
   // ドラムピッカー用のリスト型変数
@@ -582,7 +584,8 @@ class _CuppingPageState extends State<CuppingPage> {
     'Arusha',
     'Geisha',
     'SL28',
-    'SL34'
+    'SL34',
+    'Other Variety'
   ];
 
   // ドラムピッカー用のリスト型変数
@@ -606,7 +609,8 @@ class _CuppingPageState extends State<CuppingPage> {
     'Arusha',
     'Geisha',
     'SL28',
-    'SL34'
+    'SL34',
+    'Other Variety'
   ];
 
   // ドラムピッカー用のリスト型変数
@@ -630,7 +634,8 @@ class _CuppingPageState extends State<CuppingPage> {
     'Arusha',
     'Geisha',
     'SL28',
-    'SL34'
+    'SL34',
+    'Other Variety'
   ];
 
   // ドラムピッカー用のリスト型変数
@@ -654,7 +659,134 @@ class _CuppingPageState extends State<CuppingPage> {
     'Arusha',
     'Geisha',
     'SL28',
-    'SL34'
+    'SL34',
+    'Other Variety'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedProcess = 'Process';
+  final List<String> _processes = [
+    'Washed',
+    'Fully Washed',
+    'Natural',
+    'Pulped Natural',
+    'Honey Process',
+    'White Honey',
+    'Golden Honey',
+    'Yellow Honey',
+    'Red Honey',
+    'Black Honey',
+    'Traditional Sumatran Process',
+    'Anaerobic',
+    'Anaerobic Natural',
+    'Anaerobic Washed',
+    'Anaerobic Honey',
+    'Other Process'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedProcessSecond = 'Process';
+  final List<String> _processesSecond = [
+    'Washed',
+    'Fully Washed',
+    'Natural',
+    'Pulped Natural',
+    'Honey Process',
+    'White Honey',
+    'Golden Honey',
+    'Yellow Honey',
+    'Red Honey',
+    'Black Honey',
+    'Traditional Sumatran Process',
+    'Anaerobic',
+    'Anaerobic Natural',
+    'Anaerobic Washed',
+    'Anaerobic Honey',
+    'Other Process'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedProcessThird = 'Process';
+  final List<String> _processesThird = [
+    'Washed',
+    'Fully Washed',
+    'Natural',
+    'Pulped Natural',
+    'Honey Process',
+    'White Honey',
+    'Golden Honey',
+    'Yellow Honey',
+    'Red Honey',
+    'Black Honey',
+    'Traditional Sumatran Process',
+    'Anaerobic',
+    'Anaerobic Natural',
+    'Anaerobic Washed',
+    'Anaerobic Honey',
+    'Other Process'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedProcessFourth = 'Process';
+  final List<String> _processesFourth = [
+    'Washed',
+    'Fully Washed',
+    'Natural',
+    'Pulped Natural',
+    'Honey Process',
+    'White Honey',
+    'Golden Honey',
+    'Yellow Honey',
+    'Red Honey',
+    'Black Honey',
+    'Traditional Sumatran Process',
+    'Anaerobic',
+    'Anaerobic Natural',
+    'Anaerobic Washed',
+    'Anaerobic Honey',
+    'Other Process'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedProcessFifth = 'Process';
+  final List<String> _processesFifth = [
+    'Washed',
+    'Fully Washed',
+    'Natural',
+    'Pulped Natural',
+    'Honey Process',
+    'White Honey',
+    'Golden Honey',
+    'Yellow Honey',
+    'Red Honey',
+    'Black Honey',
+    'Traditional Sumatran Process',
+    'Anaerobic',
+    'Anaerobic Natural',
+    'Anaerobic Washed',
+    'Anaerobic Honey',
+    'Other Process'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedProcessSixth = 'Process';
+  final List<String> _processesSixth = [
+    'Washed',
+    'Fully Washed',
+    'Natural',
+    'Pulped Natural',
+    'Honey Process',
+    'White Honey',
+    'Golden Honey',
+    'Yellow Honey',
+    'Red Honey',
+    'Black Honey',
+    'Traditional Sumatran Process',
+    'Anaerobic',
+    'Anaerobic Natural',
+    'Anaerobic Washed',
+    'Anaerobic Honey',
+    'Other Process'
   ];
 
   @override
@@ -1086,19 +1218,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _processController,
-              decoration: InputDecoration(
-                  labelText: 'Process',
-                  hintText: 'Full Washed'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _processChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedProcess,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalProcessesPicker(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 66, width / 6.5, height / 41),
             child: TextField(
               controller: _roasterController,
               decoration: InputDecoration(
@@ -1609,19 +1757,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _processControllerSecond,
-              decoration: InputDecoration(
-                  labelText: 'Process',
-                  hintText: 'Full Washed'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _processSecondChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedProcessSecond,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalProcessesPickerSecond(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 66, width / 6.5, height / 41),
             child: TextField(
               controller: _roasterControllerSecond,
               decoration: InputDecoration(
@@ -2132,19 +2296,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _processControllerThird,
-              decoration: InputDecoration(
-                  labelText: 'Process',
-                  hintText: 'Full Washed'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _processThirdChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedProcessThird,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalProcessesPickerThird(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 66, width / 6.5, height / 41),
             child: TextField(
               controller: _roasterControllerThird,
               decoration: InputDecoration(
@@ -2655,19 +2835,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _processControllerFourth,
-              decoration: InputDecoration(
-                  labelText: 'Process',
-                  hintText: 'Full Washed'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _processFourthChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedProcessFourth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalProcessesPickerFourth(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 66, width / 6.5, height / 41),
             child: TextField(
               controller: _roasterControllerFourth,
               decoration: InputDecoration(
@@ -3178,19 +3374,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _processControllerFifth,
-              decoration: InputDecoration(
-                  labelText: 'Process',
-                  hintText: 'Full Washed'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _processFifthChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedProcessFifth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalProcessesPickerFifth(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 66, width / 6.5, height / 41),
             child: TextField(
               controller: _roasterControllerFifth,
               decoration: InputDecoration(
@@ -3701,19 +3913,35 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, 0),
-            child: TextField(
-              controller: _processControllerSixth,
-              decoration: InputDecoration(
-                  labelText: 'Process',
-                  hintText: 'Full Washed'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _processSixthChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        child: Text(
+                          this._selectedProcessSixth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalProcessesPickerSixth(context);
+                },
+              )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width / 6.5, height / 66, width / 6.5, height / 41),
             child: TextField(
               controller: _roasterControllerSixth,
               decoration: InputDecoration(
@@ -4730,7 +4958,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingData['country'] = _selectedCountry;
     cuppingData['variety'] = _selectedVariety;
     cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
-    cuppingData['process'] = _process;
+    cuppingData['process'] = _selectedProcess;
     cuppingData['roaster'] = _roaster;
     cuppingData['sweetness'] = _sweetness;
     cuppingData['acidity'] = _acidity;
@@ -4782,7 +5010,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['country'] = _selectedCountrySecond;
     cuppingDataSecond['variety'] = _selectedVarietySecond;
     cuppingDataSecond['elevation'] = int.parse(_elevationSecond); // 数値型に変換
-    cuppingDataSecond['process'] = _processSecond;
+    cuppingDataSecond['process'] = _selectedProcessSecond;
     cuppingDataSecond['roaster'] = _roasterSecond;
     cuppingDataSecond['sweetness'] = _sweetnessSecond;
     cuppingDataSecond['acidity'] = _aciditySecond;
@@ -4834,7 +5062,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['country'] = _selectedCountryThird;
     cuppingDataSecond['variety'] = _selectedVarietyThird;
     cuppingDataSecond['elevation'] = int.parse(_elevationThird); // 数値型に変換
-    cuppingDataSecond['process'] = _processThird;
+    cuppingDataSecond['process'] = _selectedProcessThird;
     cuppingDataSecond['roaster'] = _roasterThird;
     cuppingDataSecond['sweetness'] = _sweetnessThird;
     cuppingDataSecond['acidity'] = _acidityThird;
@@ -4886,7 +5114,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['country'] = _selectedCountryFourth;
     cuppingDataSecond['variety'] = _selectedVarietyFourth;
     cuppingDataSecond['elevation'] = int.parse(_elevationFourth); // 数値型に変換
-    cuppingDataSecond['process'] = _processFourth;
+    cuppingDataSecond['process'] = _selectedProcessFourth;
     cuppingDataSecond['roaster'] = _roasterFourth;
     cuppingDataSecond['sweetness'] = _sweetnessFourth;
     cuppingDataSecond['acidity'] = _acidityFourth;
@@ -4938,7 +5166,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['country'] = _selectedCountryFifth;
     cuppingDataSecond['variety'] = _selectedVarietyFifth;
     cuppingDataSecond['elevation'] = int.parse(_elevationFifth); // 数値型に変換
-    cuppingDataSecond['process'] = _processFifth;
+    cuppingDataSecond['process'] = _selectedProcessFifth;
     cuppingDataSecond['roaster'] = _roasterFifth;
     cuppingDataSecond['sweetness'] = _sweetnessFifth;
     cuppingDataSecond['acidity'] = _acidityFifth;
@@ -4990,7 +5218,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['country'] = _selectedCountrySixth;
     cuppingDataSecond['variety'] = _selectedVarietySixth;
     cuppingDataSecond['elevation'] = int.parse(_elevationSixth); // 数値型に変換
-    cuppingDataSecond['process'] = _processSixth;
+    cuppingDataSecond['process'] = _selectedProcessSixth;
     cuppingDataSecond['roaster'] = _roasterSixth;
     cuppingDataSecond['sweetness'] = _sweetnessSixth;
     cuppingDataSecond['acidity'] = _aciditySixth;
@@ -5446,6 +5674,186 @@ class _CuppingPageState extends State<CuppingPage> {
               onSelectedItemChanged: _onSelectedVarietyChangedSixth,
               scrollController: FixedExtentScrollController(
                 initialItem: _varietiesSixth.indexOf(_selectedVarietySixth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedProcessChanged(int index) {
+    setState(() {
+      _selectedProcess = _processes[index];
+    });
+  }
+
+  void _showModalProcessesPicker(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _processes.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedProcessChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _processes.indexOf(_selectedProcess),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedProcessChangedSecond(int index) {
+    setState(() {
+      _selectedProcessSecond = _processesSecond[index];
+    });
+  }
+
+  void _showModalProcessesPickerSecond(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _processesSecond.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedProcessChangedSecond,
+              scrollController: FixedExtentScrollController(
+                initialItem: _processesSecond.indexOf(_selectedProcessSecond),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedProcessChangedThird(int index) {
+    setState(() {
+      _selectedProcessThird = _processesThird[index];
+    });
+  }
+
+  void _showModalProcessesPickerThird(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _processesThird.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedProcessChangedThird,
+              scrollController: FixedExtentScrollController(
+                initialItem: _processesThird.indexOf(_selectedProcessThird),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedProcessChangedFourth(int index) {
+    setState(() {
+      _selectedProcessFourth = _processesFourth[index];
+    });
+  }
+
+  void _showModalProcessesPickerFourth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _processesFourth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedProcessChangedFourth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _processesFourth.indexOf(_selectedProcessFourth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedProcessChangedFifth(int index) {
+    setState(() {
+      _selectedProcessFifth = _processesFifth[index];
+    });
+  }
+
+  void _showModalProcessesPickerFifth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _processesFifth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedProcessChangedFifth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _processesFifth.indexOf(_selectedProcessFifth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedProcessChangedSixth(int index) {
+    setState(() {
+      _selectedProcessSixth = _processesSixth[index];
+    });
+  }
+
+  void _showModalProcessesPickerSixth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _processesSixth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedProcessChangedSixth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _processesSixth.indexOf(_selectedProcessSixth),
               ),
             ),
           ),
