@@ -104,7 +104,7 @@ class _CoffeePageState extends State<CoffeePage> {
         child: Column(
           children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(0, _width / 12, _width / 26, 0),
+                margin: EdgeInsets.fromLTRB(0, _height / 40, _width / 26, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
@@ -112,7 +112,26 @@ class _CoffeePageState extends State<CoffeePage> {
                       child: IconButton(
                         icon: Icon(Icons.ios_share),
                         onPressed: () {
-                          // TODO ボタンを押下した際の処理を追加
+
+                          // TODO 本実装
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('シェア機能は開発中です。実装完了まで今しばらくお待ちください。'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    child: Text('OK'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+
                         },
                       ),
                     ),
@@ -123,6 +142,14 @@ class _CoffeePageState extends State<CoffeePage> {
                               _switchFavoriteFlag(_favorite, widget.documentId, _uid);
                             }
                         )
+                    ),
+                    Container(
+                      child: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          // TODO ボタンを押下した際の処理を追加
+                        },
+                      ),
                     ),
                     Container(
                         child: IconButton(
