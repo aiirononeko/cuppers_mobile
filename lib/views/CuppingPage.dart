@@ -34,55 +34,37 @@ class _CuppingPageState extends State<CuppingPage> {
   Timer _timer;
 
   TextEditingController _coffeeNameController;
-  TextEditingController _countryController;
-  TextEditingController _varietyController;
   TextEditingController _elevationController;
-  TextEditingController _processController;
   TextEditingController _roasterController;
   TextEditingController _flavorTextController;
   TextEditingController _commentController;
 
   TextEditingController _coffeeNameControllerSecond;
-  TextEditingController _countryControllerSecond;
-  TextEditingController _varietyControllerSecond;
   TextEditingController _elevationControllerSecond;
-  TextEditingController _processControllerSecond;
   TextEditingController _roasterControllerSecond;
   TextEditingController _flavorTextControllerSecond;
   TextEditingController _commentControllerSecond;
 
   TextEditingController _coffeeNameControllerThird;
-  TextEditingController _countryControllerThird;
-  TextEditingController _varietyControllerThird;
   TextEditingController _elevationControllerThird;
-  TextEditingController _processControllerThird;
   TextEditingController _roasterControllerThird;
   TextEditingController _flavorTextControllerThird;
   TextEditingController _commentControllerThird;
 
   TextEditingController _coffeeNameControllerFourth;
-  TextEditingController _countryControllerFourth;
-  TextEditingController _varietyControllerFourth;
   TextEditingController _elevationControllerFourth;
-  TextEditingController _processControllerFourth;
   TextEditingController _roasterControllerFourth;
   TextEditingController _flavorTextControllerFourth;
   TextEditingController _commentControllerFourth;
 
   TextEditingController _coffeeNameControllerFifth;
-  TextEditingController _countryControllerFifth;
-  TextEditingController _varietyControllerFifth;
   TextEditingController _elevationControllerFifth;
-  TextEditingController _processControllerFifth;
   TextEditingController _roasterControllerFifth;
   TextEditingController _flavorTextControllerFifth;
   TextEditingController _commentControllerFifth;
 
   TextEditingController _coffeeNameControllerSixth;
-  TextEditingController _countryControllerSixth;
-  TextEditingController _varietyControllerSixth;
   TextEditingController _elevationControllerSixth;
-  TextEditingController _processControllerSixth;
   TextEditingController _roasterControllerSixth;
   TextEditingController _flavorTextControllerSixth;
   TextEditingController _commentControllerSixth;
@@ -91,55 +73,37 @@ class _CuppingPageState extends State<CuppingPage> {
   void initState() {
     super.initState();
     _coffeeNameController = new TextEditingController(text: _coffeeName);
-    _countryController = new TextEditingController(text: _country);
-    _varietyController =  new TextEditingController(text: _variety);
     _elevationController =  new TextEditingController(text: _elevation);
-    _processController = new TextEditingController(text: _process);
     _roasterController = new TextEditingController(text: _roaster);
     _flavorTextController = new TextEditingController(text: _flavorText);
     _commentController = new TextEditingController(text: _comment);
 
     _coffeeNameControllerSecond = new TextEditingController(text: _coffeeNameSecond);
-    _countryControllerSecond = new TextEditingController(text: _countrySecond);
-    _varietyControllerSecond =  new TextEditingController(text: _varietySecond);
     _elevationControllerSecond =  new TextEditingController(text: _elevationSecond);
-    _processControllerSecond = new TextEditingController(text: _processSecond);
     _roasterControllerSecond = new TextEditingController(text: _roasterSecond);
     _flavorTextControllerSecond = new TextEditingController(text: _flavorTextSecond);
     _commentControllerSecond = new TextEditingController(text: _commentSecond);
 
     _coffeeNameControllerThird = new TextEditingController(text: _coffeeNameThird);
-    _countryControllerThird = new TextEditingController(text: _countryThird);
-    _varietyControllerThird =  new TextEditingController(text: _varietyThird);
     _elevationControllerThird =  new TextEditingController(text: _elevationThird);
-    _processControllerThird = new TextEditingController(text: _processThird);
     _roasterControllerThird = new TextEditingController(text: _roasterThird);
     _flavorTextControllerThird = new TextEditingController(text: _flavorTextThird);
     _commentControllerThird = new TextEditingController(text: _commentThird);
 
     _coffeeNameControllerFourth = new TextEditingController(text: _coffeeNameFourth);
-    _countryControllerFourth = new TextEditingController(text: _countryFourth);
-    _varietyControllerFourth =  new TextEditingController(text: _varietyFourth);
     _elevationControllerFourth =  new TextEditingController(text: _elevationFourth);
-    _processControllerFourth = new TextEditingController(text: _processFourth);
     _roasterControllerFourth = new TextEditingController(text: _roasterFourth);
     _flavorTextControllerFourth = new TextEditingController(text: _flavorTextFourth);
     _commentControllerFourth = new TextEditingController(text: _commentFourth);
 
     _coffeeNameControllerFifth = new TextEditingController(text: _coffeeNameFifth);
-    _countryControllerFifth = new TextEditingController(text: _countryFifth);
-    _varietyControllerFifth =  new TextEditingController(text: _varietyFifth);
     _elevationControllerFifth =  new TextEditingController(text: _elevationFifth);
-    _processControllerFifth = new TextEditingController(text: _processFifth);
     _roasterControllerFifth = new TextEditingController(text: _roasterFifth);
     _flavorTextControllerFifth = new TextEditingController(text: _flavorTextFifth);
     _commentControllerFifth = new TextEditingController(text: _commentFifth);
 
     _coffeeNameControllerSixth = new TextEditingController(text: _coffeeNameSixth);
-    _countryControllerSixth = new TextEditingController(text: _countrySixth);
-    _varietyControllerSixth =  new TextEditingController(text: _varietySixth);
     _elevationControllerSixth =  new TextEditingController(text: _elevationSixth);
-    _processControllerSixth = new TextEditingController(text: _processSixth);
     _roasterControllerSixth = new TextEditingController(text: _roasterSixth);
     _flavorTextControllerSixth = new TextEditingController(text: _flavorTextSixth);
     _commentControllerSixth = new TextEditingController(text: _commentSixth);
@@ -154,10 +118,7 @@ class _CuppingPageState extends State<CuppingPage> {
   Map<String, dynamic> _realTimeCuppingDataSixth = new Map<String, dynamic>();
 
   String _coffeeName = '';
-  String _country = '';
-  String _variety = '';
-  String _elevation = '0';
-  String _process = '';
+  String _elevation = '';
   String _roaster = '';
   double _sweetness = 4.0;
   double _acidity = 4.0;
@@ -171,10 +132,7 @@ class _CuppingPageState extends State<CuppingPage> {
   String _comment = '';
 
   void _coffeeNameChanged(String str) => setState(() { _coffeeName = str; });
-  void _countryChanged(String str) => setState(() { _country = str; });
-  void _varietyChanged(String str) => setState(() { _variety = str; });
   void _elevationChanged(String str) => setState(() { _elevation = str; });
-  void _processChanged(String str) => setState(() { _process = str; });
   void _roasterChanged(String str) => setState(() { _roaster = str; });
   void _slideSweetness(double e) => setState(() { _sweetness = e; });
   void _slideAcidity(double e) => setState(() { _acidity = e; });
@@ -188,10 +146,7 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentChanged(String str) => setState(() { _comment = str; });
 
   String _coffeeNameSecond = '';
-  String _countrySecond = '';
-  String _varietySecond = '';
-  String _elevationSecond = '0';
-  String _processSecond = '';
+  String _elevationSecond = '';
   String _roasterSecond = '';
   double _sweetnessSecond = 4.0;
   double _aciditySecond = 4.0;
@@ -205,10 +160,7 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentSecond = '';
 
   void _coffeeNameSecondChanged(String str) => setState(() { _coffeeNameSecond = str; });
-  void _countrySecondChanged(String str) => setState(() { _countrySecond = str; });
-  void _varietySecondChanged(String str) => setState(() { _varietySecond = str; });
   void _elevationSecondChanged(String str) => setState(() { _elevationSecond = str; });
-  void _processSecondChanged(String str) => setState(() { _processSecond = str; });
   void _roasterSecondChanged(String str) => setState(() { _roasterSecond = str; });
   void _slideSweetnessSecond(double e) => setState(() { _sweetnessSecond = e; });
   void _slideAciditySecond(double e) => setState(() { _aciditySecond = e; });
@@ -222,10 +174,7 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentSecondChanged(String str) => setState(() { _commentSecond = str; });
 
   String _coffeeNameThird = '';
-  String _countryThird = '';
-  String _varietyThird = '';
-  String _elevationThird = '0';
-  String _processThird = '';
+  String _elevationThird = '';
   String _roasterThird = '';
   double _sweetnessThird = 4.0;
   double _acidityThird = 4.0;
@@ -239,10 +188,7 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentThird = '';
 
   void _coffeeNameThirdChanged(String str) => setState(() { _coffeeNameThird = str; });
-  void _countryThirdChanged(String str) => setState(() { _countryThird = str; });
-  void _varietyThirdChanged(String str) => setState(() { _varietyThird = str; });
   void _elevationThirdChanged(String str) => setState(() { _elevationThird = str; });
-  void _processThirdChanged(String str) => setState(() { _processThird = str; });
   void _roasterThirdChanged(String str) => setState(() { _roasterThird = str; });
   void _slideSweetnessThird(double e) => setState(() { _sweetnessThird = e; });
   void _slideAcidityThird(double e) => setState(() { _acidityThird = e; });
@@ -256,10 +202,7 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentThirdChanged(String str) => setState(() { _commentThird = str; });
 
   String _coffeeNameFourth = '';
-  String _countryFourth = '';
-  String _varietyFourth = '';
-  String _elevationFourth = '0';
-  String _processFourth = '';
+  String _elevationFourth = '';
   String _roasterFourth = '';
   double _sweetnessFourth = 4.0;
   double _acidityFourth = 4.0;
@@ -273,10 +216,7 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentFourth = '';
 
   void _coffeeNameFourthChanged(String str) => setState(() { _coffeeNameFourth = str; });
-  void _countryFourthChanged(String str) => setState(() { _countryFourth = str; });
-  void _varietyFourthChanged(String str) => setState(() { _varietyFourth = str; });
   void _elevationFourthChanged(String str) => setState(() { _elevationFourth = str; });
-  void _processFourthChanged(String str) => setState(() { _processFourth = str; });
   void _roasterFourthChanged(String str) => setState(() { _roasterFourth = str; });
   void _slideSweetnessFourth(double e) => setState(() { _sweetnessFourth = e; });
   void _slideAcidityFourth(double e) => setState(() { _acidityFourth = e; });
@@ -290,10 +230,7 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentFourthChanged(String str) => setState(() { _commentFourth = str; });
 
   String _coffeeNameFifth = '';
-  String _countryFifth = '';
-  String _varietyFifth = '';
-  String _elevationFifth = '0';
-  String _processFifth = '';
+  String _elevationFifth = '';
   String _roasterFifth = '';
   double _sweetnessFifth = 4.0;
   double _acidityFifth = 4.0;
@@ -307,10 +244,7 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentFifth = '';
 
   void _coffeeNameFifthChanged(String str) => setState(() { _coffeeNameFifth = str; });
-  void _countryFifthChanged(String str) => setState(() { _countryFifth = str; });
-  void _varietyFifthChanged(String str) => setState(() { _varietyFifth = str; });
   void _elevationFifthChanged(String str) => setState(() { _elevationFifth = str; });
-  void _processFifthChanged(String str) => setState(() { _processFifth = str; });
   void _roasterFifthChanged(String str) => setState(() { _roasterFifth = str; });
   void _slideSweetnessFifth(double e) => setState(() { _sweetnessFifth = e; });
   void _slideAcidityFifth(double e) => setState(() { _acidityFifth = e; });
@@ -324,10 +258,7 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentFifthChanged(String str) => setState(() { _commentFifth = str; });
 
   String _coffeeNameSixth = '';
-  String _countrySixth = '';
-  String _varietySixth = '';
-  String _elevationSixth = '0';
-  String _processSixth = '';
+  String _elevationSixth = '';
   String _roasterSixth = '';
   double _sweetnessSixth = 4.0;
   double _aciditySixth = 4.0;
@@ -341,10 +272,7 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentSixth = '';
 
   void _coffeeNameSixthChanged(String str) => setState(() { _coffeeNameSixth = str; });
-  void _countrySixthChanged(String str) => setState(() { _countrySixth = str; });
-  void _varietySixthChanged(String str) => setState(() { _varietySixth = str; });
   void _elevationSixthChanged(String str) => setState(() { _elevationSixth = str; });
-  void _processSixthChanged(String str) => setState(() { _processSixth = str; });
   void _roasterSixthChanged(String str) => setState(() { _roasterSixth = str; });
   void _slideSweetnessSixth(double e) => setState(() { _sweetnessSixth = e; });
   void _slideAciditySixth(double e) => setState(() { _aciditySixth = e; });
@@ -4957,7 +4885,11 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingData['coffee_name'] = _coffeeName;
     cuppingData['country'] = _selectedCountry;
     cuppingData['variety'] = _selectedVariety;
-    cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
+    if (_elevation == '') {
+      cuppingData['elevation'] = 0;
+    } else {
+      cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
+    }
     cuppingData['process'] = _selectedProcess;
     cuppingData['roaster'] = _roaster;
     cuppingData['sweetness'] = _sweetness;
@@ -5009,7 +4941,11 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameSecond;
     cuppingDataSecond['country'] = _selectedCountrySecond;
     cuppingDataSecond['variety'] = _selectedVarietySecond;
-    cuppingDataSecond['elevation'] = int.parse(_elevationSecond); // 数値型に変換
+    if (_elevationSecond == '') {
+      cuppingDataSecond['elevation'] = 0;
+    } else {
+      cuppingDataSecond['elevation'] = int.parse(_elevationSecond); // 数値型に変換
+    }
     cuppingDataSecond['process'] = _selectedProcessSecond;
     cuppingDataSecond['roaster'] = _roasterSecond;
     cuppingDataSecond['sweetness'] = _sweetnessSecond;
@@ -5061,7 +4997,11 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameThird;
     cuppingDataSecond['country'] = _selectedCountryThird;
     cuppingDataSecond['variety'] = _selectedVarietyThird;
-    cuppingDataSecond['elevation'] = int.parse(_elevationThird); // 数値型に変換
+    if (_elevationThird == '') {
+      cuppingDataSecond['elevation'] = 0;
+    } else {
+      cuppingDataSecond['elevation'] = int.parse(_elevationThird); // 数値型に変換
+    }
     cuppingDataSecond['process'] = _selectedProcessThird;
     cuppingDataSecond['roaster'] = _roasterThird;
     cuppingDataSecond['sweetness'] = _sweetnessThird;
@@ -5113,7 +5053,11 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameFourth;
     cuppingDataSecond['country'] = _selectedCountryFourth;
     cuppingDataSecond['variety'] = _selectedVarietyFourth;
-    cuppingDataSecond['elevation'] = int.parse(_elevationFourth); // 数値型に変換
+    if (_elevationFourth == '') {
+      cuppingDataSecond['elevation'] = 0;
+    } else {
+      cuppingDataSecond['elevation'] = int.parse(_elevationFourth); // 数値型に変換
+    }
     cuppingDataSecond['process'] = _selectedProcessFourth;
     cuppingDataSecond['roaster'] = _roasterFourth;
     cuppingDataSecond['sweetness'] = _sweetnessFourth;
@@ -5165,7 +5109,11 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameFifth;
     cuppingDataSecond['country'] = _selectedCountryFifth;
     cuppingDataSecond['variety'] = _selectedVarietyFifth;
-    cuppingDataSecond['elevation'] = int.parse(_elevationFifth); // 数値型に変換
+    if (_elevationFifth == '') {
+      cuppingDataSecond['elevation'] = 0;
+    } else {
+      cuppingDataSecond['elevation'] = int.parse(_elevationFifth); // 数値型に変換
+    }
     cuppingDataSecond['process'] = _selectedProcessFifth;
     cuppingDataSecond['roaster'] = _roasterFifth;
     cuppingDataSecond['sweetness'] = _sweetnessFifth;
@@ -5217,7 +5165,11 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameSixth;
     cuppingDataSecond['country'] = _selectedCountrySixth;
     cuppingDataSecond['variety'] = _selectedVarietySixth;
-    cuppingDataSecond['elevation'] = int.parse(_elevationSixth); // 数値型に変換
+    if (_elevationSixth == '') {
+      cuppingDataSecond['elevation'] = 0;
+    } else {
+      cuppingDataSecond['elevation'] = int.parse(_elevationSixth); // 数値型に変換
+    }
     cuppingDataSecond['process'] = _selectedProcessSixth;
     cuppingDataSecond['roaster'] = _roasterSixth;
     cuppingDataSecond['sweetness'] = _sweetnessSixth;
