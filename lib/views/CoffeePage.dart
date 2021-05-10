@@ -351,7 +351,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, _width / 16, _width / 10),
+                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, _width / 16, _height / 14),
                     child: Text(
                       '$_comment',
                       style: TextStyle(
