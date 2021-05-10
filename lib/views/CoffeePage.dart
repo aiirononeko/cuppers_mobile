@@ -27,6 +27,7 @@ class _CoffeePageState extends State<CoffeePage> {
   String _variety;
   int _elevation;
   String _process;
+  String _roaster;
   double _cleanCup;
   double _sweetness;
   double _acidity;
@@ -226,7 +227,7 @@ class _CoffeePageState extends State<CoffeePage> {
                 children: <Widget>[
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 12, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width / 12, _height / 44, 0, 0),
                     child: Text(
                       _cuppedDateStr,
                       style: TextStyle(
@@ -259,6 +260,16 @@ class _CoffeePageState extends State<CoffeePage> {
                     margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, 0, 0),
                     child: Text(
                       'Made in $_country',
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, 0, 0),
+                    child: Text(
+                      'Roasted by $_roaster',
                       style: TextStyle(
                           fontSize: 20
                       ),
@@ -377,6 +388,7 @@ class _CoffeePageState extends State<CoffeePage> {
       _variety = widget.snapshot['variety'];
       _elevation = widget.snapshot['elevation'].round(); // double型をint型に変換
       _process = widget.snapshot['process'];
+      _roaster = widget.snapshot['roaster'];
       _cleanCup = widget.snapshot['cleancup'];
       _sweetness = widget.snapshot['sweetness'];
       _acidity = widget.snapshot['acidity'];
