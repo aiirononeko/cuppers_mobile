@@ -513,6 +513,150 @@ class _CuppingPageState extends State<CuppingPage> {
     'Other Country'
   ];
 
+  // ドラムピッカー用のリスト型変数
+  String _selectedVariety = 'Variety';
+  final List<String> _varieties = [
+    'Typica',
+    'Bourbon',
+    'Yellow Bourbon',
+    'Red Bourbon',
+    'Cattura',
+    'Mundo Novo',
+    'Catuai',
+    'MaragoGype',
+    'San Ramon',
+    'Purpurascens',
+    'Kent',
+    'Pacas',
+    'Akkaya',
+    'Pacamara',
+    'Villa Sarchi',
+    'Arusha',
+    'Geisha',
+    'SL28',
+    'SL34'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedVarietySecond = 'Variety';
+  final List<String> _varietiesSecond = [
+    'Typica',
+    'Bourbon',
+    'Yellow Bourbon',
+    'Red Bourbon',
+    'Cattura',
+    'Mundo Novo',
+    'Catuai',
+    'MaragoGype',
+    'San Ramon',
+    'Purpurascens',
+    'Kent',
+    'Pacas',
+    'Akkaya',
+    'Pacamara',
+    'Villa Sarchi',
+    'Arusha',
+    'Geisha',
+    'SL28',
+    'SL34'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedVarietyThird = 'Variety';
+  final List<String> _varietiesThird = [
+    'Typica',
+    'Bourbon',
+    'Yellow Bourbon',
+    'Red Bourbon',
+    'Cattura',
+    'Mundo Novo',
+    'Catuai',
+    'MaragoGype',
+    'San Ramon',
+    'Purpurascens',
+    'Kent',
+    'Pacas',
+    'Akkaya',
+    'Pacamara',
+    'Villa Sarchi',
+    'Arusha',
+    'Geisha',
+    'SL28',
+    'SL34'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedVarietyFourth = 'Variety';
+  final List<String> _varietiesFourth = [
+    'Typica',
+    'Bourbon',
+    'Yellow Bourbon',
+    'Red Bourbon',
+    'Cattura',
+    'Mundo Novo',
+    'Catuai',
+    'MaragoGype',
+    'San Ramon',
+    'Purpurascens',
+    'Kent',
+    'Pacas',
+    'Akkaya',
+    'Pacamara',
+    'Villa Sarchi',
+    'Arusha',
+    'Geisha',
+    'SL28',
+    'SL34'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedVarietyFifth = 'Variety';
+  final List<String> _varietiesFifth = [
+    'Typica',
+    'Bourbon',
+    'Yellow Bourbon',
+    'Red Bourbon',
+    'Cattura',
+    'Mundo Novo',
+    'Catuai',
+    'MaragoGype',
+    'San Ramon',
+    'Purpurascens',
+    'Kent',
+    'Pacas',
+    'Akkaya',
+    'Pacamara',
+    'Villa Sarchi',
+    'Arusha',
+    'Geisha',
+    'SL28',
+    'SL34'
+  ];
+
+  // ドラムピッカー用のリスト型変数
+  String _selectedVarietySixth = 'Variety';
+  final List<String> _varietiesSixth = [
+    'Typica',
+    'Bourbon',
+    'Yellow Bourbon',
+    'Red Bourbon',
+    'Cattura',
+    'Mundo Novo',
+    'Catuai',
+    'MaragoGype',
+    'San Ramon',
+    'Purpurascens',
+    'Kent',
+    'Pacas',
+    'Akkaya',
+    'Pacamara',
+    'Villa Sarchi',
+    'Arusha',
+    'Geisha',
+    'SL28',
+    'SL34'
+  ];
+
   @override
   Widget build(BuildContext context) {
 
@@ -869,22 +1013,38 @@ class _CuppingPageState extends State<CuppingPage> {
                 ],
               ),
               onTap: () {
-                _showModalPicker(context);
+                _showModalCountriesPicker(context);
               },
             )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
-            child: TextField(
-              controller: _varietyController,
-              decoration: InputDecoration(
-                  labelText: 'Variety',
-                  hintText: 'Bourbon'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _varietyChanged,
-            ),
-          )
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 26, width / 6.5, 0),
+                        child: Text(
+                          this._selectedVariety,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 60, width / 6.5, height / 71),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalVarietiesPicker(context);
+                },
+              )
+          ),
         ]
     );
   }
@@ -1376,22 +1536,38 @@ class _CuppingPageState extends State<CuppingPage> {
                   ],
                 ),
                 onTap: () {
-                  _showModalPickerSecond(context);
+                  _showModalCountriesPickerSecond(context);
                 },
               )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
-            child: TextField(
-              controller: _varietyControllerSecond,
-              decoration: InputDecoration(
-                  labelText: 'Variety',
-                  hintText: 'Bourbon'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _varietySecondChanged,
-            ),
-          )
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 26, width / 6.5, 0),
+                        child: Text(
+                          this._selectedVarietySecond,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 60, width / 6.5, height / 71),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalVarietiesPickerSecond(context);
+                },
+              )
+          ),
         ]
     );
   }
@@ -1883,22 +2059,38 @@ class _CuppingPageState extends State<CuppingPage> {
                   ],
                 ),
                 onTap: () {
-                  _showModalPickerThird(context);
+                  _showModalCountriesPickerThird(context);
                 },
               )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
-            child: TextField(
-              controller: _varietyControllerThird,
-              decoration: InputDecoration(
-                  labelText: 'Variety',
-                  hintText: 'Bourbon'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _varietyThirdChanged,
-            ),
-          )
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 26, width / 6.5, 0),
+                        child: Text(
+                          this._selectedVarietyThird,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 60, width / 6.5, height / 71),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalVarietiesPickerThird(context);
+                },
+              )
+          ),
         ]
     );
   }
@@ -2390,22 +2582,38 @@ class _CuppingPageState extends State<CuppingPage> {
                   ],
                 ),
                 onTap: () {
-                  _showModalPickerFourth(context);
+                  _showModalCountriesPickerFourth(context);
                 },
               )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
-            child: TextField(
-              controller: _varietyControllerFourth,
-              decoration: InputDecoration(
-                  labelText: 'Variety',
-                  hintText: 'Bourbon'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _varietyFourthChanged,
-            ),
-          )
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 26, width / 6.5, 0),
+                        child: Text(
+                          this._selectedVarietyFourth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 60, width / 6.5, height / 71),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalVarietiesPickerFourth(context);
+                },
+              )
+          ),
         ]
     );
   }
@@ -2897,22 +3105,38 @@ class _CuppingPageState extends State<CuppingPage> {
                   ],
                 ),
                 onTap: () {
-                  _showModalPickerFifth(context);
+                  _showModalCountriesPickerFifth(context);
                 },
               )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
-            child: TextField(
-              controller: _varietyControllerFifth,
-              decoration: InputDecoration(
-                  labelText: 'Variety',
-                  hintText: 'Bourbon'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _varietyFifthChanged,
-            ),
-          )
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 26, width / 6.5, 0),
+                        child: Text(
+                          this._selectedVarietyFifth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 60, width / 6.5, height / 71),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalVarietiesPickerFifth(context);
+                },
+              )
+          ),
         ]
     );
   }
@@ -3404,22 +3628,38 @@ class _CuppingPageState extends State<CuppingPage> {
                   ],
                 ),
                 onTap: () {
-                  _showModalPickerSixth(context);
+                  _showModalCountriesPickerSixth(context);
                 },
               )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 65, width / 6.5, height / 41),
-            child: TextField(
-              controller: _varietyControllerSixth,
-              decoration: InputDecoration(
-                  labelText: 'Variety',
-                  hintText: 'Bourbon'
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _varietySixthChanged,
-            ),
-          )
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 26, width / 6.5, 0),
+                        child: Text(
+                          this._selectedVarietySixth,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: width / 24
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 60, width / 6.5, height / 71),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalVarietiesPickerSixth(context);
+                },
+              )
+          ),
         ]
     );
   }
@@ -4488,7 +4728,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
     cuppingData['coffee_name'] = _coffeeName;
     cuppingData['country'] = _selectedCountry;
-    cuppingData['variety'] = _variety;
+    cuppingData['variety'] = _selectedVariety;
     cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
     cuppingData['process'] = _process;
     cuppingData['roaster'] = _roaster;
@@ -4540,7 +4780,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
     cuppingDataSecond['coffee_name'] = _coffeeNameSecond;
     cuppingDataSecond['country'] = _selectedCountrySecond;
-    cuppingDataSecond['variety'] = _varietySecond;
+    cuppingDataSecond['variety'] = _selectedVarietySecond;
     cuppingDataSecond['elevation'] = int.parse(_elevationSecond); // 数値型に変換
     cuppingDataSecond['process'] = _processSecond;
     cuppingDataSecond['roaster'] = _roasterSecond;
@@ -4592,7 +4832,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
     cuppingDataSecond['coffee_name'] = _coffeeNameThird;
     cuppingDataSecond['country'] = _selectedCountryThird;
-    cuppingDataSecond['variety'] = _varietyThird;
+    cuppingDataSecond['variety'] = _selectedVarietyThird;
     cuppingDataSecond['elevation'] = int.parse(_elevationThird); // 数値型に変換
     cuppingDataSecond['process'] = _processThird;
     cuppingDataSecond['roaster'] = _roasterThird;
@@ -4644,7 +4884,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
     cuppingDataSecond['coffee_name'] = _coffeeNameFourth;
     cuppingDataSecond['country'] = _selectedCountryFourth;
-    cuppingDataSecond['variety'] = _varietyFourth;
+    cuppingDataSecond['variety'] = _selectedVarietyFourth;
     cuppingDataSecond['elevation'] = int.parse(_elevationFourth); // 数値型に変換
     cuppingDataSecond['process'] = _processFourth;
     cuppingDataSecond['roaster'] = _roasterFourth;
@@ -4696,7 +4936,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
     cuppingDataSecond['coffee_name'] = _coffeeNameFifth;
     cuppingDataSecond['country'] = _selectedCountryFifth;
-    cuppingDataSecond['variety'] = _varietyFifth;
+    cuppingDataSecond['variety'] = _selectedVarietyFifth;
     cuppingDataSecond['elevation'] = int.parse(_elevationFifth); // 数値型に変換
     cuppingDataSecond['process'] = _processFifth;
     cuppingDataSecond['roaster'] = _roasterFifth;
@@ -4748,7 +4988,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
     cuppingDataSecond['coffee_name'] = _coffeeNameSixth;
     cuppingDataSecond['country'] = _selectedCountrySixth;
-    cuppingDataSecond['variety'] = _varietySixth;
+    cuppingDataSecond['variety'] = _selectedVarietySixth;
     cuppingDataSecond['elevation'] = int.parse(_elevationSixth); // 数値型に変換
     cuppingDataSecond['process'] = _processSixth;
     cuppingDataSecond['roaster'] = _roasterSixth;
@@ -4860,7 +5100,7 @@ class _CuppingPageState extends State<CuppingPage> {
     });
   }
 
-  void _showModalPicker(BuildContext context) {
+  void _showModalCountriesPicker(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -4890,7 +5130,7 @@ class _CuppingPageState extends State<CuppingPage> {
     });
   }
 
-  void _showModalPickerSecond(BuildContext context) {
+  void _showModalCountriesPickerSecond(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -4920,7 +5160,7 @@ class _CuppingPageState extends State<CuppingPage> {
     });
   }
 
-  void _showModalPickerThird(BuildContext context) {
+  void _showModalCountriesPickerThird(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -4950,7 +5190,7 @@ class _CuppingPageState extends State<CuppingPage> {
     });
   }
 
-  void _showModalPickerFourth(BuildContext context) {
+  void _showModalCountriesPickerFourth(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -4980,7 +5220,7 @@ class _CuppingPageState extends State<CuppingPage> {
     });
   }
 
-  void _showModalPickerFifth(BuildContext context) {
+  void _showModalCountriesPickerFifth(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -5010,7 +5250,7 @@ class _CuppingPageState extends State<CuppingPage> {
     });
   }
 
-  void _showModalPickerSixth(BuildContext context) {
+  void _showModalCountriesPickerSixth(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -5026,6 +5266,186 @@ class _CuppingPageState extends State<CuppingPage> {
               onSelectedItemChanged: _onSelectedItemChangedSixth,
               scrollController: FixedExtentScrollController(
                 initialItem: _countriesSixth.indexOf(_selectedCountrySixth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedVarietyChanged(int index) {
+    setState(() {
+      _selectedVariety = _varieties[index];
+    });
+  }
+
+  void _showModalVarietiesPicker(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _varieties.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedVarietyChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _varieties.indexOf(_selectedVariety),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedVarietyChangedSecond(int index) {
+    setState(() {
+      _selectedVarietySecond = _varietiesSecond[index];
+    });
+  }
+
+  void _showModalVarietiesPickerSecond(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _varietiesSecond.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedVarietyChangedSecond,
+              scrollController: FixedExtentScrollController(
+                initialItem: _varietiesSecond.indexOf(_selectedVarietySecond),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedVarietyChangedThird(int index) {
+    setState(() {
+      _selectedVarietyThird = _varietiesThird[index];
+    });
+  }
+
+  void _showModalVarietiesPickerThird(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _varietiesThird.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedVarietyChangedThird,
+              scrollController: FixedExtentScrollController(
+                initialItem: _varietiesThird.indexOf(_selectedVarietyThird),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedVarietyChangedFourth(int index) {
+    setState(() {
+      _selectedVarietyFourth = _varietiesFourth[index];
+    });
+  }
+
+  void _showModalVarietiesPickerFourth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _varietiesFourth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedVarietyChangedFourth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _varietiesFourth.indexOf(_selectedVarietyFourth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedVarietyChangedFifth(int index) {
+    setState(() {
+      _selectedVarietyFifth = _varietiesFifth[index];
+    });
+  }
+
+  void _showModalVarietiesPickerFifth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _varietiesFifth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedVarietyChangedFifth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _varietiesFifth.indexOf(_selectedVarietyFifth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedVarietyChangedSixth(int index) {
+    setState(() {
+      _selectedVarietySixth = _varietiesSixth[index];
+    });
+  }
+
+  void _showModalVarietiesPickerSixth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _varietiesSixth.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedVarietyChangedSixth,
+              scrollController: FixedExtentScrollController(
+                initialItem: _varietiesSixth.indexOf(_selectedVarietySixth),
               ),
             ),
           ),
