@@ -71,15 +71,15 @@ class _HomePageState extends State<HomePage> {
     final double _height = size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Container(
-          margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
-          child: Image.asset('images/cuppers_logo_apart-05.png'),
-        ),
-        backgroundColor: Colors.white24,
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
+      // appBar: AppBar(
+      //   title: Container(
+      //     margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
+      //     child: Image.asset('images/cuppers_logo_apart-05.png'),
+      //   ),
+      //   backgroundColor: Colors.white24,
+      //   elevation: 0.0,
+      //   iconTheme: IconThemeData(color: Colors.black),
+      // ),
       body: _pageList[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [

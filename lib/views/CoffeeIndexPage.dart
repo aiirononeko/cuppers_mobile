@@ -62,6 +62,76 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     _uid = FirebaseAuth.instance.currentUser.uid;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
+              child: Image.asset('images/cuppers_logo_apart-05.png'),
+            )
+          ],
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(80),
+          child:  AppBar(
+            title: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 150,
+                      height: 35,
+                      // margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Search',
+                        ),
+                        onChanged: (value) {
+                          if (value != '') {
+                            setState(() {
+                              _searchValue = value;
+                              _userUseSearchFunc = true;
+                            });
+                          } else {
+                            setState(() {
+                              _searchValue = value;
+                              _userUseSearchFunc = false;
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: _width / 20,
+                    ),
+                    Container(
+                      width: 105,
+                      height: 35,
+                      child: DropdownButton(
+                        items: _items,
+                        value: _selectItem,
+                        onChanged: (value) => {
+                          setState(() {
+                            _selectItem = value;
+                          }),
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            backgroundColor: Colors.white24,
+            elevation: 0.0,
+            iconTheme: IconThemeData(color: Colors.black),
+          ),
+        ),
+        backgroundColor: Colors.white24,
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
       floatingActionButton: Column(
         verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
         mainAxisSize: MainAxisSize.min,
@@ -77,53 +147,9 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.fromLTRB(0, _width / 8, 0, 0),
           child: Column(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: 150,
-                    height: 35,
-                    margin: EdgeInsets.fromLTRB(_width / 7, 0, 0, 0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Search',
-                      ),
-                      onChanged: (value) {
-                        if (value != '') {
-                          setState(() {
-                            _searchValue = value;
-                            _userUseSearchFunc = true;
-                          });
-                        } else {
-                          setState(() {
-                            _searchValue = value;
-                            _userUseSearchFunc = false;
-                          });
-                        }
-                      },
-                    ),
-                  ),
-                  Container(
-                    width: 105,
-                    height: 40,
-                    margin: EdgeInsets.fromLTRB(_width / 22, 0, 0, 0),
-                    child: DropdownButton(
-                      items: _items,
-                      value: _selectItem,
-                      onChanged: (value) => {
-                        setState(() {
-                          _selectItem = value;
-                        }),
-                      },
-                    ),
-                  ),
-                ],
-              ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, _width / 22, 0, 0),
                 child: Divider(
                   color: HexColor('313131'),
                 ),

@@ -76,8 +76,9 @@ class _CoffeePageState extends State<CoffeePage> {
         elevation: 0.0,
         automaticallyImplyLeading: false,
         title: Container(
-          margin: EdgeInsets.fromLTRB(0, _width / 12, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, _height / 30, 0, 0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -92,133 +93,135 @@ class _CoffeePageState extends State<CoffeePage> {
                     ),
                   ),
                   Container(
-                    width: 150,
-                    margin: EdgeInsets.fromLTRB(_width / 8, _width / 8, _width / 8, _width / 8),
+                    width: _width / 2.4,
+                    margin: EdgeInsets.fromLTRB(_width / 8, _height / 22, _width / 8, _height / 22),
                     child: Image.asset('images/cuppers_logo_apart-05.png'),
                   )
                 ],
               ),
             ],
           )
-        )
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(80),
+          child: Container(
+            margin: EdgeInsets.fromLTRB(0, _height / 40, _width / 26, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  child: IconButton(
+                    icon: Icon(Icons.ios_share),
+                    onPressed: () {
+
+                      // TODO 本実装
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return AlertDialog(
+                            content: Text('シェア機能は開発中です。実装完了まで今しばらくお待ちください。'),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                child: Text('OK'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: HexColor('313131'),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+
+                    },
+                  ),
+                ),
+                Container(
+                    child: IconButton(
+                        icon: _getFavoriteFlag(_favorite),
+                        onPressed: () {
+                          _switchFavoriteFlag(_favorite, widget.documentId, _uid);
+                        }
+                    )
+                ),
+                Container(
+                  child: IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () {
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditingCoffeePage(widget.snapshot, widget.documentId)
+                          )
+                      );
+
+                    },
+                  ),
+                ),
+                Container(
+                  child: IconButton(
+                    icon: Icon(Icons.delete_outline_sharp),
+                    onPressed: () {
+
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return AlertDialog(
+                            content: Text('カッピング情報を削除しますか？'),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                child: Text('Cancel'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: HexColor('313131'),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              ElevatedButton(
+                                child: Text('OK'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: HexColor('313131'),
+                                ),
+                                onPressed: () {
+
+                                  // カッピングデータを削除
+                                  FirebaseFirestore.instance
+                                      .collection('CuppedCoffee')
+                                      .doc(_uid)
+                                      .collection('CoffeeInfo')
+                                      .doc(widget.documentId)
+                                      .delete();
+
+                                  // ユーザー画面へ遷移
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      new MaterialPageRoute(
+                                          builder: (context) => new HomePage()),
+                                          (_) => false);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  )
+                )
+              ],
+            )
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(0, _height / 40, _width / 26, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Container(
-                      child: IconButton(
-                        icon: Icon(Icons.ios_share),
-                        onPressed: () {
-
-                          // TODO 本実装
-                          showDialog(
-                            context: context,
-                            builder: (_) {
-                              return AlertDialog(
-                                content: Text('シェア機能は開発中です。実装完了まで今しばらくお待ちください。'),
-                                actions: <Widget>[
-                                  ElevatedButton(
-                                    child: Text('OK'),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: HexColor('313131'),
-                                    ),
-                                    onPressed: () => Navigator.pop(context),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-
-                        },
-                      ),
-                    ),
-                    Container(
-                        child: IconButton(
-                            icon: _getFavoriteFlag(_favorite),
-                            onPressed: () {
-                              _switchFavoriteFlag(_favorite, widget.documentId, _uid);
-                            }
-                        )
-                    ),
-                    Container(
-                      child: IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EditingCoffeePage(widget.snapshot, widget.documentId)
-                              )
-                          );
-
-                        },
-                      ),
-                    ),
-                    Container(
-                        child: IconButton(
-                          icon: Icon(Icons.delete_outline_sharp),
-                          onPressed: () {
-
-                            showDialog(
-                              context: context,
-                              builder: (_) {
-                                return AlertDialog(
-                                  content: Text('カッピング情報を削除しますか？'),
-                                  actions: <Widget>[
-                                    ElevatedButton(
-                                      child: Text('Cancel'),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: HexColor('313131'),
-                                      ),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                    ElevatedButton(
-                                      child: Text('OK'),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: HexColor('313131'),
-                                      ),
-                                      onPressed: () {
-
-                                        // カッピングデータを削除
-                                        FirebaseFirestore.instance
-                                            .collection('CuppedCoffee')
-                                            .doc(_uid)
-                                            .collection('CoffeeInfo')
-                                            .doc(widget.documentId)
-                                            .delete();
-
-                                        // ユーザー画面へ遷移
-                                        Navigator.pushAndRemoveUntil(
-                                            context,
-                                            new MaterialPageRoute(
-                                                builder: (context) => new HomePage()),
-                                                (_) => false);
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                        )
-                    )
-                  ],
-                )
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Divider(
                 color: Colors.black,
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(0, _width / 40, 0, 0),
+              margin: EdgeInsets.fromLTRB(0, _height / 180, 0, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 color: HexColor('e7e7e7'),
