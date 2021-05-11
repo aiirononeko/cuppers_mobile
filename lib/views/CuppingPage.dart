@@ -4912,10 +4912,10 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingData['country'] == 'Country') {
       cuppingData['country'] = 'Some Country';
     }
-    if (cuppingData['variety'] == '') {
+    if (cuppingData['variety'] == 'Variety') {
       cuppingData['variety'] = 'Some Variety';
     }
-    if (cuppingData['process'] == '') {
+    if (cuppingData['process'] == 'Process') {
       cuppingData['process'] = 'Some Process';
     }
     if (cuppingData['roaster'] == '') {
@@ -4968,10 +4968,10 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
-    if (cuppingDataSecond['variety'] == '') {
+    if (cuppingDataSecond['variety'] == 'Variety') {
       cuppingDataSecond['variety'] = 'Some Variety';
     }
-    if (cuppingDataSecond['process'] == '') {
+    if (cuppingDataSecond['process'] == 'Process') {
       cuppingDataSecond['process'] = 'Some Process';
     }
     if (cuppingDataSecond['roaster'] == '') {
@@ -5024,10 +5024,10 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
-    if (cuppingDataSecond['variety'] == '') {
+    if (cuppingDataSecond['variety'] == 'Variety') {
       cuppingDataSecond['variety'] = 'Some Variety';
     }
-    if (cuppingDataSecond['process'] == '') {
+    if (cuppingDataSecond['process'] == 'Process') {
       cuppingDataSecond['process'] = 'Some Process';
     }
     if (cuppingDataSecond['roaster'] == '') {
@@ -5080,10 +5080,10 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
-    if (cuppingDataSecond['variety'] == '') {
+    if (cuppingDataSecond['variety'] == 'Variety') {
       cuppingDataSecond['variety'] = 'Some Variety';
     }
-    if (cuppingDataSecond['process'] == '') {
+    if (cuppingDataSecond['process'] == 'Process') {
       cuppingDataSecond['process'] = 'Some Process';
     }
     if (cuppingDataSecond['roaster'] == '') {
@@ -5136,10 +5136,10 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
-    if (cuppingDataSecond['variety'] == '') {
+    if (cuppingDataSecond['variety'] == 'Variety') {
       cuppingDataSecond['variety'] = 'Some Variety';
     }
-    if (cuppingDataSecond['process'] == '') {
+    if (cuppingDataSecond['process'] == 'Process') {
       cuppingDataSecond['process'] = 'Some Process';
     }
     if (cuppingDataSecond['roaster'] == '') {
@@ -5192,10 +5192,10 @@ class _CuppingPageState extends State<CuppingPage> {
     if (cuppingDataSecond['country'] == 'Country') {
       cuppingDataSecond['country'] = 'Some Country';
     }
-    if (cuppingDataSecond['variety'] == '') {
+    if (cuppingDataSecond['variety'] == 'Variety') {
       cuppingDataSecond['variety'] = 'Some Variety';
     }
-    if (cuppingDataSecond['process'] == '') {
+    if (cuppingDataSecond['process'] == 'Process') {
       cuppingDataSecond['process'] = 'Some Process';
     }
     if (cuppingDataSecond['roaster'] == '') {

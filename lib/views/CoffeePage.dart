@@ -6,6 +6,7 @@ import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:intl/intl.dart';
 
 import '../main.dart';
+import 'EditingCoffeePage.dart';
 
 // カッピング情報詳細画面
 class CoffeePage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _CoffeePageState extends State<CoffeePage> {
   String _variety;
   int _elevation;
   String _process;
+  String _roaster;
   double _cleanCup;
   double _sweetness;
   double _acidity;
@@ -104,7 +106,7 @@ class _CoffeePageState extends State<CoffeePage> {
         child: Column(
           children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(0, _width / 12, _width / 26, 0),
+                margin: EdgeInsets.fromLTRB(0, _height / 40, _width / 26, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
@@ -112,7 +114,26 @@ class _CoffeePageState extends State<CoffeePage> {
                       child: IconButton(
                         icon: Icon(Icons.ios_share),
                         onPressed: () {
-                          // TODO ボタンを押下した際の処理を追加
+
+                          // TODO 本実装
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('シェア機能は開発中です。実装完了まで今しばらくお待ちください。'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    child: Text('OK'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+
                         },
                       ),
                     ),
@@ -123,6 +144,21 @@ class _CoffeePageState extends State<CoffeePage> {
                               _switchFavoriteFlag(_favorite, widget.documentId, _uid);
                             }
                         )
+                    ),
+                    Container(
+                      child: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditingCoffeePage(widget.snapshot, widget.documentId)
+                              )
+                          );
+
+                        },
+                      ),
                     ),
                     Container(
                         child: IconButton(
@@ -199,7 +235,7 @@ class _CoffeePageState extends State<CoffeePage> {
                 children: <Widget>[
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 12, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width / 12, _height / 44, 0, 0),
                     child: Text(
                       _cuppedDateStr,
                       style: TextStyle(
@@ -232,6 +268,16 @@ class _CoffeePageState extends State<CoffeePage> {
                     margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, 0, 0),
                     child: Text(
                       'Made in $_country',
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, 0, 0),
+                    child: Text(
+                      'Roasted by $_roaster',
                       style: TextStyle(
                           fontSize: 20
                       ),
@@ -324,7 +370,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, _width / 16, _width / 10),
+                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, _width / 16, _height / 14),
                     child: Text(
                       '$_comment',
                       style: TextStyle(
@@ -350,6 +396,7 @@ class _CoffeePageState extends State<CoffeePage> {
       _variety = widget.snapshot['variety'];
       _elevation = widget.snapshot['elevation'].round(); // double型をint型に変換
       _process = widget.snapshot['process'];
+      _roaster = widget.snapshot['roaster'];
       _cleanCup = widget.snapshot['cleancup'];
       _sweetness = widget.snapshot['sweetness'];
       _acidity = widget.snapshot['acidity'];
