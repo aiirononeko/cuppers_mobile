@@ -6,6 +6,7 @@ import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:intl/intl.dart';
 
 import '../main.dart';
+import 'EditingCoffeePage.dart';
 
 // カッピング情報詳細画面
 class CoffeePage extends StatefulWidget {
@@ -148,7 +149,14 @@ class _CoffeePageState extends State<CoffeePage> {
                       child: IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          // TODO ボタンを押下した際の処理を追加
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditingCoffeePage(widget.snapshot, widget.documentId)
+                              )
+                          );
+
                         },
                       ),
                     ),
