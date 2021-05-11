@@ -208,7 +208,7 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
                             ),
                             onPressed: () {
 
-                              // 1杯目のカッピング情報を登録
+                              // カッピング情報を更新
                               _realTimeCuppingData = _setCuppingData();
                               _updateCuppingData(_realTimeCuppingData, this._uid, widget.documentId);
 
@@ -262,7 +262,6 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
                                   setState(() {
                                     _selectIndex++;
                                   });
-                                  print(_selectIndex);
                                 }
                             ),
                           ],
