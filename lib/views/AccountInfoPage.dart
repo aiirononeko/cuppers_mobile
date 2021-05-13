@@ -35,7 +35,7 @@ class AccountInfoPage extends StatelessWidget {
                 child: Text(
                   'ログアウト',
                   style: TextStyle(
-                    color: Colors.black38,
+                    color: HexColor('313131'),
                     fontSize: 25,
                   ),
                 ),
