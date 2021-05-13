@@ -16,7 +16,8 @@ class AccountInfoPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Container(
-            margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
+            height: _height * 0.025,
+            margin: EdgeInsets.fromLTRB(0, _height * 0.01, 0, 0),
             child: Image.asset('images/cuppers_logo_apart-05.png'),
           ),
           backgroundColor: Colors.white24,
