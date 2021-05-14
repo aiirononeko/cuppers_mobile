@@ -235,21 +235,27 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
             child: Column(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.fromLTRB(_width / 25, _height / 120, _width / 25, 0),
+                  height: _height * 0.73,
+                  margin: EdgeInsets.fromLTRB(_width * 0.05, 0, _width * 0.05, 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: HexColor('e7e7e7'),
                   ),
                   child: Column(
                     children: <Widget>[
-                      _pageList[_selectIndex],
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, _height / 26, 0, _height / 30),
+                        height: _height * 0.63,
+                        child: _pageList[_selectIndex],
+                      ),
+                      Container(
+                        // margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             IconButton(
-                                icon: const Icon(Icons.navigate_before),
+                                icon: const Icon(
+                                  Icons.navigate_before,
+                                ),
                                 onPressed: _selectIndex == 0 ? null : () {
                                   setState(() {
                                     _selectIndex--;
@@ -257,7 +263,9 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
                                 }
                             ),
                             IconButton(
-                                icon: const Icon(Icons.navigate_next),
+                                icon: const Icon(
+                                  Icons.navigate_next,
+                                ),
                                 onPressed: _selectIndex == 5 ? null: () {
                                   setState(() {
                                     _selectIndex++;
@@ -305,31 +313,34 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     return Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, height * 0.08, 0, height * 0.01),
             child: Text(
               'カッピング 1/6',
               style: TextStyle(
-                fontSize: width / 20,
+                fontSize: height * 0.03,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
             child: Text(
               '各項目を評価してください',
               style: TextStyle(
-                  fontSize: width / 30
+                  fontSize: height * 0.02
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
+            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
             child: TextField(
               controller: _coffeeNameController,
               decoration: InputDecoration(
                 labelText: 'Coffee Name',
                 hintText: 'Yirgacheffe Konga',
+              ),
+              style: TextStyle(
+                fontSize: height * 0.02
               ),
               keyboardType: TextInputType.text,
               onChanged: _coffeeNameChanged,
@@ -341,17 +352,17 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
                   children: <Widget>[
                     Container(
                         width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
                         child: Text(
                           this._selectedCountry,
                           style: TextStyle(
                               color: Colors.black54,
-                              fontSize: width / 24
+                              fontSize: height * 0.02
                           ),
                         )
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
                       child: Divider(
                         color: Colors.black,
                       ),
@@ -369,17 +380,17 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
                   children: <Widget>[
                     Container(
                         width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 26, width / 6.5, 0),
+                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.014),
                         child: Text(
                           this._selectedVariety,
                           style: TextStyle(
                               color: Colors.black54,
-                              fontSize: width / 24
+                              fontSize: height * 0.02
                           ),
                         )
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 60, width / 6.5, height / 71),
+                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
                       child: Divider(
                         color: Colors.black,
                       ),
@@ -400,31 +411,34 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     return Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, height * 0.08, 0, height * 0.01),
             child: Text(
               'カッピング 2/6',
               style: TextStyle(
-                fontSize: width / 20,
+                fontSize: height * 0.03,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
             child: Text(
               '各項目を評価してください',
               style: TextStyle(
-                  fontSize: width / 30
+                  fontSize: height * 0.02
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
+            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
             child: TextField(
               controller: _elevationController,
               decoration: InputDecoration(
                   labelText: 'Elevation',
                   hintText: '1500'
+              ),
+              style: TextStyle(
+                fontSize: height * 0.02
               ),
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -437,17 +451,17 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
                   children: <Widget>[
                     Container(
                         width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width / 6.5, height / 20, width / 6.5, 0),
+                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
                         child: Text(
                           this._selectedProcess,
                           style: TextStyle(
                               color: Colors.black54,
-                              fontSize: width / 24
+                              fontSize: height * 0.02
                           ),
                         )
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(width / 6.5, height / 70, width / 6.5, 0),
+                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
                       child: Divider(
                         color: Colors.black,
                       ),
@@ -460,12 +474,15 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
               )
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 66, width / 6.5, height / 41),
+            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
             child: TextField(
               controller: _roasterController,
               decoration: InputDecoration(
                   labelText: 'Roaster',
                   hintText: 'Reverbed Coffee'
+              ),
+              style: TextStyle(
+                fontSize: height * 0.02
               ),
               keyboardType: TextInputType.text,
               onChanged: _roasterChanged,
@@ -480,37 +497,42 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, height * 0.08, 0, height * 0.01),
           child: Text(
             'カッピング 3/6',
             style: TextStyle(
-              fontSize: width / 20,
+              fontSize: height * 0.03,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
-                fontSize: width / 30
+                fontSize: height * 0.02
             ),
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
+            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.045),
             child: Column(
               children: <Widget>[
-                Text('クリーンカップ'),
+                Text(
+                  'CleanCup',
+                  style: TextStyle(
+                    fontSize: height * 0.015
+                  ),
+                ),
                 SliderTheme(
                   data: SliderTheme.of(context).copyWith(
-                    trackHeight: width / 48,
+                    trackHeight: height * 0.01,
                     thumbColor: HexColor('313131'),
                     overlayColor: HexColor('808080').withAlpha(80),
                     activeTrackColor: HexColor('313131'),
                     inactiveTrackColor: HexColor('cccccc'),
-                    inactiveTickMarkColor: HexColor('313131'),
+                    inactiveTickMarkColor: HexColor('cccccc'),
                     activeTickMarkColor: HexColor('313131'),
                   ),
                   child: Slider(
@@ -528,18 +550,23 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
             )
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, 0),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.045),
           child: Column(
             children: <Widget>[
-              Text('甘さ'),
+              Text(
+                'Sweetness',
+                style: TextStyle(
+                    fontSize: height * 0.015
+                ),
+              ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: width / 48,
+                  trackHeight: height * 0.01,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
                   inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
+                  inactiveTickMarkColor: HexColor('cccccc'),
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
@@ -557,18 +584,23 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 80.5),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
           child: Column(
             children: <Widget>[
-              Text('酸'),
+              Text(
+                'Acidity',
+                style: TextStyle(
+                    fontSize: height * 0.015
+                ),
+              ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: width / 48,
+                  trackHeight: height * 0.01,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
                   inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
+                  inactiveTickMarkColor: HexColor('cccccc'),
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
@@ -594,37 +626,42 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, height * 0.08, 0, height * 0.01),
           child: Text(
             'カッピング 4/6',
             style: TextStyle(
-              fontSize: width / 20,
+              fontSize: height * 0.03,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
-                fontSize: width / 30
+                fontSize: height * 0.02
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.045),
           child: Column(
             children: <Widget>[
-              Text('マウスフィール'),
+              Text(
+                'MouseFeel',
+                style: TextStyle(
+                    fontSize: height * 0.015
+                ),
+              ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: width / 48,
+                  trackHeight: height * 0.01,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
                   inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
+                  inactiveTickMarkColor: HexColor('cccccc'),
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
@@ -642,18 +679,23 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, 0),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.045),
           child: Column(
             children: <Widget>[
-              Text('アフターテイスト'),
+              Text(
+                'AfterTaste',
+                style: TextStyle(
+                    fontSize: height * 0.015
+                ),
+              ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: width / 48,
+                  trackHeight: height * 0.01,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
                   inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
+                  inactiveTickMarkColor: HexColor('cccccc'),
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
@@ -671,18 +713,23 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 80.5),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
           child: Column(
             children: <Widget>[
-              Text('フレーバー'),
+              Text(
+                'Flavor',
+                style: TextStyle(
+                    fontSize: height * 0.015
+                ),
+              ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: width / 48,
+                  trackHeight: height * 0.01,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
                   inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
+                  inactiveTickMarkColor: HexColor('cccccc'),
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
@@ -708,37 +755,42 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, height * 0.08, 0, height * 0.01),
           child: Text(
             'カッピング 5/6',
             style: TextStyle(
-              fontSize: width / 20,
+              fontSize: height * 0.03,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
-                fontSize: width / 30
+                fontSize: height * 0.02
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 18, width / 6.5, 0),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.045),
           child: Column(
             children: <Widget>[
-              Text('バランス'),
+              Text(
+                'Balance',
+                style: TextStyle(
+                    fontSize: height * 0.015
+                ),
+              ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: width / 48,
+                  trackHeight: height * 0.01,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
                   inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
+                  inactiveTickMarkColor: HexColor('cccccc'),
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
@@ -756,18 +808,23 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 80, width / 6.5, height / 9.1),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.045),
           child: Column(
             children: <Widget>[
-              Text('オーバーオール'),
+              Text(
+                'OverAll',
+                style: TextStyle(
+                    fontSize: height * 0.015
+                ),
+              ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  trackHeight: width / 48,
+                  trackHeight: height * 0.01,
                   thumbColor: HexColor('313131'),
                   overlayColor: HexColor('808080').withAlpha(80),
                   activeTrackColor: HexColor('313131'),
                   inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('313131'),
+                  inactiveTickMarkColor: HexColor('cccccc'),
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
@@ -793,43 +850,49 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(0, height / 18, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, height * 0.08, 0, height * 0.01),
           child: Text(
             'カッピング 6/6',
             style: TextStyle(
-              fontSize: width / 20,
+              fontSize: height * 0.03,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(0, height / 120, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
           child: Text(
             '各項目を評価してください',
             style: TextStyle(
-                fontSize: width / 30
+                fontSize: height * 0.02
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 10, width / 6.5, 0),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.05),
           child: TextField(
             controller: _flavorTextController,
             decoration: InputDecoration(
               labelText: 'Flavor Text',
               hintText: 'Lemon, Peach, Strawberry',
             ),
+            style: TextStyle(
+                fontSize: height * 0.02
+            ),
             keyboardType: TextInputType.text,
             onChanged: _flavorTextChanged,
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(width / 6.5, height / 40, width / 6.5, height / 12.9),
+          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
           child: TextField(
             controller: _commentController,
             decoration: InputDecoration(
               labelText: 'Comment',
               hintText: 'Silky, Complex, BrightAcidity',
+            ),
+            style: TextStyle(
+                fontSize: height * 0.02
             ),
             keyboardType: TextInputType.text,
             onChanged: _commentChanged,
