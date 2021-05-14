@@ -248,7 +248,6 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
                         child: _pageList[_selectIndex],
                       ),
                       Container(
-                        // margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
