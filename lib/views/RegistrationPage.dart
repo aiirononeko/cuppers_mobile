@@ -34,7 +34,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
+          height: _height * 0.025,
+          margin: EdgeInsets.fromLTRB(0, _height * 0.01, 0, 0),
           child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,
@@ -47,24 +48,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
             children: <Widget>[
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.fromLTRB(_width / 12, _width / 3.8, _width / 12, 0),
+                margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.1, _width * 0.1, _height * 0.01),
                 child: Text(
                   'さあ、',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: _width / 18,
+                      fontSize: _height * 0.025,
                       fontWeight: FontWeight.bold
                   ),
                 ),
               ),
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 7),
+                margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.08),
                 child: Text(
                   'カッピングを始めよう！',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: _width / 18,
+                      fontSize: _height * 0.025,
                       fontWeight: FontWeight.bold
                   ),
                 ),
@@ -74,13 +75,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                        margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
+                        margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.05),
                         child: TextFormField(
                           enabled: true,
                           decoration: const InputDecoration(
                             icon: Icon(Icons.email),
                             hintText: 'example@xxx.com',
                             labelText: 'Email',
+                          ),
+                          style: TextStyle(
+                              fontSize: _height * 0.02
                           ),
                           validator: (value) {
                             if (value.isEmpty) {
@@ -95,7 +99,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         )
                     ),
                     Container(
-                        margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 7),
+                        margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.05),
                         child: TextFormField(
                           enabled: true,
                           obscureText: true,
@@ -103,6 +107,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             icon: Icon(Icons.lock),
                             hintText: 'password',
                             labelText: 'Password',
+                          ),
+                          style: TextStyle(
+                              fontSize: _height * 0.02
                           ),
                           validator: (value) {
                             if (value.isEmpty) {
@@ -117,25 +124,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         )
                     ),
                     Container(
-                        margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 50),
+                        margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.01),
                         child: RichText(
                             text: TextSpan(
                                 children: [
                                   TextSpan(
                                       text: '利用規約',
-                                      style: TextStyle(color: Colors.blue),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () async {
-                                          // await launch('https://cuppers-mobile.web.app/');
-                                        }
-                                  ),
-                                  TextSpan(
-                                      text: '、 ',
-                                      style: TextStyle(color: Colors.black)
-                                  ),
-                                  TextSpan(
-                                      text: 'プライバシーポリシー',
-                                      style: TextStyle(color: Colors.blue),
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: _height * 0.017
+                                      ),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () async {
                                           if (await canLaunch('https://cuppers-mobile.web.app/')) {
@@ -144,8 +142,31 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                         }
                                   ),
                                   TextSpan(
-                                      text: 'に ',
-                                      style: TextStyle(color: Colors.black)
+                                      text: '、 ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: _height * 0.017
+                                      )
+                                  ),
+                                  TextSpan(
+                                      text: 'プライバシーポリシー',
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: _height * 0.017
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () async {
+                                          if (await canLaunch('https://cuppers-mobile.web.app/')) {
+                                            await launch('https://cuppers-mobile.web.app/');
+                                          }
+                                        }
+                                  ),
+                                  TextSpan(
+                                      text: 'に',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: _height * 0.017
+                                      )
                                   )
                                 ]
                             )
@@ -153,23 +174,26 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                     Container(
                       width: double.infinity,
-                      margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
+                      margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.035),
                       child: Text(
                         '同意して新規登録する',
+                        style: TextStyle(
+                          fontSize: _height * 0.017
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     Container(
-                      width: 300,
-                      height: 50,
-                      margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
+                      width: _width * 0.5,
+                      height: _height * 0.06,
+                      margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.05),
                       child: ElevatedButton(
                         child: Text(
                           '新規登録',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            letterSpacing: 4,
-                            fontSize: _width / 23
+                            letterSpacing: _height * 0.005,
+                            fontSize: _height * 0.02
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -197,11 +221,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       children: [
                         TextSpan(
                             text: 'すでにアカウントをお持ちの場合 ',
-                            style: TextStyle(color: Colors.black)
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: _height * 0.017
+                            ),
                         ),
                         TextSpan(
                             text: 'ログイン',
-                            style: TextStyle(color: Colors.blue),
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: _height * 0.017
+                            ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 Navigator.pushAndRemoveUntil(

@@ -33,7 +33,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          margin: EdgeInsets.fromLTRB(_width / 4, _width / 3, _width / 4, _width / 4),
+          height: _height * 0.025,
+          margin: EdgeInsets.fromLTRB(0, _height * 0.01, 0, 0),
           child: Image.asset('images/cuppers_logo_apart-05.png'),
         ),
         backgroundColor: Colors.white24,
@@ -46,12 +47,12 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.fromLTRB(_width / 12, _width / 2.8, _width / 12, _width / 7),
+                margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.15, _width * 0.1, _height * 0.08),
                 child: Text(
                   'ログインしましょう',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: _width / 18,
+                      fontSize: _height * 0.025,
                       fontWeight: FontWeight.bold
                   ),
                 ),
@@ -61,13 +62,16 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                          margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
+                          margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.05),
                           child: TextFormField(
                             enabled: true,
                             decoration: const InputDecoration(
                               icon: Icon(Icons.email),
                               hintText: 'example@xxx.com',
                               labelText: 'Email',
+                            ),
+                            style: TextStyle(
+                              fontSize: _height * 0.02
                             ),
                             onChanged: _handleEmail,
                             validator: (value) {
@@ -82,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                           )
                       ),
                       Container(
-                          margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 7),
+                          margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.08),
                           child: TextFormField(
                             enabled: true,
                             obscureText: true,
@@ -90,6 +94,9 @@ class _LoginPageState extends State<LoginPage> {
                               icon: Icon(Icons.lock),
                               hintText: 'password',
                               labelText: 'Password',
+                            ),
+                            style: TextStyle(
+                                fontSize: _height * 0.02
                             ),
                             onChanged: _handlePassword,
                             validator: (value) {
@@ -101,16 +108,16 @@ class _LoginPageState extends State<LoginPage> {
                           )
                       ),
                       Container(
-                        width: _width / 1.3,
-                        height: _height / 15,
-                        margin: EdgeInsets.fromLTRB(_width / 12, 0, _width / 12, _width / 12),
+                        width: _width * 0.5,
+                        height: _height * 0.06,
+                        margin: EdgeInsets.fromLTRB(_width * 0.1, 0, _width * 0.1, _height * 0.05),
                         child: new ElevatedButton(
                           child: Text(
                             'ログイン',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              letterSpacing: 3,
-                              fontSize: _width / 25
+                              letterSpacing: _height * 0.005,
+                              fontSize: _height * 0.02
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -138,11 +145,17 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           TextSpan(
                               text: 'アカウントをお持ちでない場合 ',
-                              style: TextStyle(color: Colors.black)
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: _height * 0.017
+                              )
                           ),
                           TextSpan(
                               text: '新規登録',
-                              style: TextStyle(color: Colors.blue),
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: _height * 0.017
+                              ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
                                   Navigator.pushAndRemoveUntil(

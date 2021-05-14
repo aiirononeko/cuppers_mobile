@@ -72,40 +72,28 @@ class _CoffeePageState extends State<CoffeePage> {
 
     return Scaffold(
       appBar: AppBar(
+        title: Container(
+          height: _height * 0.025,
+          margin: EdgeInsets.fromLTRB(0, _height * 0.01, 0, 0),
+          child: Image.asset('images/cuppers_logo_apart-05.png'),
+        ),
         backgroundColor: Colors.white24,
         elevation: 0.0,
-        automaticallyImplyLeading: false,
-        title: Container(
-          margin: EdgeInsets.fromLTRB(0, _height / 30, 0, 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: Icon(
-                      Icons.arrow_back_ios_sharp,
-                      color: HexColor('313131'),
-                      size: _width / 16,
-                    ),
-                  ),
-                  Container(
-                    width: _width / 2.4,
-                    margin: EdgeInsets.fromLTRB(_width / 8, _height / 22, _width / 8, _height / 22),
-                    child: Image.asset('images/cuppers_logo_apart-05.png'),
-                  )
-                ],
-              ),
-            ],
-          )
+        leading: Container(
+          height: _height * 0.025,
+          margin: EdgeInsets.fromLTRB(0, _height * 0.01, 0, 0),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios_sharp),
+            color: Colors.black,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(80),
+          preferredSize: Size.fromHeight(_height * 0.08),
           child: Container(
-            margin: EdgeInsets.fromLTRB(0, _height / 40, _width / 26, 0),
+            margin: EdgeInsets.fromLTRB(0, 0, _width * 0.05, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -132,7 +120,6 @@ class _CoffeePageState extends State<CoffeePage> {
                           );
                         },
                       );
-
                     },
                   ),
                 ),
@@ -221,7 +208,7 @@ class _CoffeePageState extends State<CoffeePage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(0, _height / 180, 0, 0),
+              margin: EdgeInsets.fromLTRB(0, _height * 0.015, 0, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 color: HexColor('e7e7e7'),
@@ -238,61 +225,57 @@ class _CoffeePageState extends State<CoffeePage> {
                 children: <Widget>[
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _height / 44, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.03, _width * 0.1, 0),
                     child: Text(
                       _cuppedDateStr,
                       style: TextStyle(
-                          fontSize: 16
+                          fontSize: _height * 0.02
                       ),
                     ),
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, 0),
                     child: Text(
                       '$_coffeeName $_process $_variety',
                       style: TextStyle(
-                          fontSize: 30
+                          fontSize: _height * 0.035
                       ),
                     ),
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 30, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, 0),
                     child: Text(
                       'Elevation: ${_elevation}m',
                       style: TextStyle(
-                          fontSize: 20
+                          fontSize: _height * 0.02
                       ),
                     ),
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, 0),
                     child: Text(
                       'Made in $_country',
                       style: TextStyle(
-                          fontSize: 20
+                          fontSize: _height * 0.02
                       ),
                     ),
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, _height * 0.01),
                     child: Text(
                       'Roasted by $_roaster',
                       style: TextStyle(
-                          fontSize: 20
+                          fontSize: _height * 0.02
                       ),
                     ),
                   ),
-                  // 余白が作れないため、コンテナウィジェットで代用
                   Container(
-                      height: 10
-                  ),
-                  Container(
-                      width: 300,
-                      height: 300,
+                      width: _width * 0.8,
+                      height: _height * 0.38,
                       child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Center(
@@ -317,14 +300,14 @@ class _CoffeePageState extends State<CoffeePage> {
                       )
                   ),
                   Container(
-                      margin: EdgeInsets.fromLTRB(_width / 1.8, 0, 0, 0),
+                      margin: EdgeInsets.fromLTRB(_width * 0.65, 0, 0, 0),
                       child: Column(
                         children: <Widget>[
                           Container(
                             child: Text(
                               'Score',
                               style: TextStyle(
-                                  fontSize: 20
+                                  fontSize: _height * 0.02
                               ),
                             ),
                           ),
@@ -332,7 +315,7 @@ class _CoffeePageState extends State<CoffeePage> {
                             child: Text(
                               '$_coffeeScore',
                               style: TextStyle(
-                                  fontSize: 40
+                                  fontSize: _height * 0.05
                               ),
                             ),
                           ),
@@ -341,43 +324,41 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 10, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.03, _width * 0.1, 0),
                     child: Text(
-                      'フレーバーテキスト',
+                      'Flavor Text',
                       style: TextStyle(
-                        fontSize: _width / 24,
-                        fontWeight: FontWeight.bold
+                        fontSize: _height * 0.015,
                       ),
                     ),
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, _width / 80, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, 0),
                     child: Text(
                       '$_flavorText',
                       style: TextStyle(
-                        fontSize: _width / 20
+                        fontSize: _height * 0.02
                       ),
                     ),
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 12, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.03, 0, 0),
                     child: Text(
-                      'カッピングコメント',
+                      'Comment',
                       style: TextStyle(
-                        fontSize: _width / 24,
-                        fontWeight: FontWeight.bold
-                      ),
+                        fontSize: _height * 0.015,
+                      )
                     ),
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width / 12, _width / 40, _width / 16, _height / 14),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, _height * 0.1),
                     child: Text(
                       '$_comment',
                       style: TextStyle(
-                          fontSize: _width / 20
+                          fontSize: _height * 0.02
                       ),
                     ),
                   )
