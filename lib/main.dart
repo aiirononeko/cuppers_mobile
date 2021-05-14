@@ -7,6 +7,7 @@ import './views/LoginPage.dart';
 import './views/CoffeeIndexPage.dart';
 import './views/CuppingPage.dart';
 import './views/AccountInfoPage.dart';
+import './services/MyFirebaseAuth.dart';
 
 void main() async {
 
@@ -28,20 +29,9 @@ class MyApp extends StatelessWidget {
         '/registration': (_) => new RegistrationPage(), // アカウント登録画面
         '/cupping': (_) => new CuppingPage(), // カッピング画面
       },
-      home: _checkCurrentUser(),
+      home: HomePage(),
       debugShowCheckedModeBanner: false
     );
-  }
-}
-
-// ログイン状態をチェックして表示を切り替え
-StatefulWidget _checkCurrentUser() {
-
-  User user = FirebaseAuth.instance.currentUser;
-  if (user == null) {
-    return LoginPage();
-  } else {
-    return HomePage();
   }
 }
 
@@ -53,10 +43,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  // 表示中の Widget を取り出すための index としての int 型の mutable な stored property
+  MyFirebaseAuth _myFirebaseAuth = new MyFirebaseAuth();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // ログイン中のユーザー情報を取得
+    User _currentUser = FirebaseAuth.instance.currentUser;
+
+    if (_currentUser == null) {
+
+      // ログインしていなかった場合、匿名ユーザーとして登録
+      _myFirebaseAuth.createAnonymousUserAndLogin();
+    }
+  }
+
+  // 表示中のWidgetを取り出すためのindex
   int _selectedIndex = 0;
 
-  // 表示する Widget の一覧
+  // 表示するWidgetの一覧
   static List<Widget> _pageList = [
     CoffeeIndexPage(),
     AccountInfoPage()
@@ -65,22 +71,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    // 画面サイズを取得
-    final Size size = MediaQuery.of(context).size;
-    final double _width = size.width;
-    final double _height = size.height;
-
     return Scaffold(
       body: _pageList[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: '',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
-            label: '',
+            label: 'Account',
           ),
         ],
         currentIndex: _selectedIndex,

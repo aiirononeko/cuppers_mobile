@@ -7,6 +7,23 @@ import '../main.dart';
 
 class MyFirebaseAuth {
 
+  // 匿名ユーザーとしてユーザー登録・ログイン処理をするメソッド
+  Future createAnonymousUserAndLogin() async {
+
+    try {
+
+      // 匿名ユーザーとして仮登録
+      UserCredential credential = await FirebaseAuth.instance.signInAnonymously();
+
+    } on FirebaseAuthException catch(e) {
+
+      // TODO エラーハンドリング
+
+    } catch(e) {
+      print(e);
+    }
+  }
+
   // ユーザー登録処理・ログイン処理をするメソッド
   Future createUserAndLogin(String email, String password, BuildContext context) async {
 
