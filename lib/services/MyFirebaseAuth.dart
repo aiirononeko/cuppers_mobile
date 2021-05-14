@@ -8,7 +8,7 @@ import '../main.dart';
 class MyFirebaseAuth {
 
   // 匿名ユーザーとしてユーザー登録・ログイン処理をするメソッド
-  Future createAnonymousUserAndLogin() async {
+  static Future createAnonymousUserAndLogin() async {
 
     try {
 

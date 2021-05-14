@@ -48,18 +48,18 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       ));
   }
 
-  User _user;
+  String _uid;
 
   @override
   Widget build(BuildContext context) {
+
+    // ログイン中のユーザーIDを取得
+    _uid = FirebaseAuth.instance.currentUser.uid;
 
     // 画面サイズを取得
     final Size size = MediaQuery.of(context).size;
     final _width = size.width;
     final _height = size.height;
-
-    // ログイン中のユーザーIDを取得
-    _user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       appBar: AppBar(
@@ -179,7 +179,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
         stream: FirebaseFirestore.instance
             .collection('CuppedCoffee')
-            .doc(this._user.uid)
+            .doc(this._uid)
             .collection('CoffeeInfo')
             .orderBy('cupped_date', descending: true)
             .snapshots(),
@@ -223,7 +223,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
           .collection('CuppedCoffee')
-          .doc(this._user.uid)
+          .doc(this._uid)
           .collection('CoffeeInfo')
           .orderBy('coffee_name')
           .startAt([this._searchValue])
@@ -272,7 +272,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
         stream: FirebaseFirestore.instance
             .collection('CuppedCoffee')
-            .doc(this._user.uid)
+            .doc(this._uid)
             .collection('CoffeeInfo')
             .orderBy('coffee_score', descending: true)
             .snapshots(),
@@ -316,7 +316,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
           .collection('CuppedCoffee')
-          .doc(this._user.uid)
+          .doc(this._uid)
           .collection('CoffeeInfo')
           .orderBy('coffee_name')
           .startAt([this._searchValue])
@@ -365,7 +365,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
         stream: FirebaseFirestore.instance
             .collection('CuppedCoffee')
-            .doc(this._user.uid)
+            .doc(this._uid)
             .collection('CoffeeInfo')
             .where('favorite', isEqualTo: true)
             .snapshots(),
@@ -409,7 +409,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
           .collection('CuppedCoffee')
-          .doc(this._user.uid)
+          .doc(this._uid)
           .collection('CoffeeInfo')
           .orderBy('coffee_name')
           .startAt([this._searchValue])

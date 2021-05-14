@@ -48,15 +48,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
-    // ログイン中のユーザー情報を取得
-    User _currentUser = FirebaseAuth.instance.currentUser;
-
-    if (_currentUser == null) {
-
-      // ログインしていなかった場合、匿名ユーザーとして登録
-      _myFirebaseAuth.createAnonymousUserAndLogin();
-    }
   }
 
   // 表示中のWidgetを取り出すためのindex
