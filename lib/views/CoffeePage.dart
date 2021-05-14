@@ -225,7 +225,7 @@ class _CoffeePageState extends State<CoffeePage> {
                 children: <Widget>[
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.03, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.03, _width * 0.1, 0),
                     child: Text(
                       _cuppedDateStr,
                       style: TextStyle(
@@ -235,7 +235,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, 0),
                     child: Text(
                       '$_coffeeName $_process $_variety',
                       style: TextStyle(
@@ -245,7 +245,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, 0),
                     child: Text(
                       'Elevation: ${_elevation}m',
                       style: TextStyle(
@@ -255,7 +255,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, 0),
                     child: Text(
                       'Made in $_country',
                       style: TextStyle(
@@ -265,7 +265,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, 0, _height * 0.01),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, _height * 0.01),
                     child: Text(
                       'Roasted by $_roaster',
                       style: TextStyle(
@@ -324,7 +324,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.03, 0, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.03, _width * 0.1, 0),
                     child: Text(
                       'Flavor Text',
                       style: TextStyle(
@@ -334,7 +334,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width / 80, 0),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, 0),
                     child: Text(
                       '$_flavorText',
                       style: TextStyle(
@@ -354,7 +354,7 @@ class _CoffeePageState extends State<CoffeePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width / 16, _height / 14),
+                    margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, _width * 0.1, _height * 0.1),
                     child: Text(
                       '$_comment',
                       style: TextStyle(
