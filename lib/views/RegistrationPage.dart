@@ -83,6 +83,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             hintText: 'example@xxx.com',
                             labelText: 'Email',
                           ),
+                          style: TextStyle(
+                              fontSize: _height * 0.02
+                          ),
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'メールアドレスを入力してください';
@@ -104,6 +107,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             icon: Icon(Icons.lock),
                             hintText: 'password',
                             labelText: 'Password',
+                          ),
+                          style: TextStyle(
+                              fontSize: _height * 0.02
                           ),
                           validator: (value) {
                             if (value.isEmpty) {

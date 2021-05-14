@@ -70,6 +70,9 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: 'example@xxx.com',
                               labelText: 'Email',
                             ),
+                            style: TextStyle(
+                              fontSize: _height * 0.02
+                            ),
                             onChanged: _handleEmail,
                             validator: (value) {
                               if (value.isEmpty) {
@@ -91,6 +94,9 @@ class _LoginPageState extends State<LoginPage> {
                               icon: Icon(Icons.lock),
                               hintText: 'password',
                               labelText: 'Password',
+                            ),
+                            style: TextStyle(
+                                fontSize: _height * 0.02
                             ),
                             onChanged: _handlePassword,
                             validator: (value) {
