@@ -48,18 +48,18 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
       ));
   }
 
-  String _uid = '';
+  String _uid;
 
   @override
   Widget build(BuildContext context) {
+
+    // ログイン中のユーザーIDを取得
+    _uid = FirebaseAuth.instance.currentUser.uid;
 
     // 画面サイズを取得
     final Size size = MediaQuery.of(context).size;
     final _width = size.width;
     final _height = size.height;
-
-    // ログイン中のユーザーIDを取得
-    _uid = FirebaseAuth.instance.currentUser.uid;
 
     return Scaffold(
       appBar: AppBar(
@@ -182,10 +182,38 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
             .doc(this._uid)
             .collection('CoffeeInfo')
             .orderBy('cupped_date', descending: true)
-        // .where('coffee_name', isEqualTo: 'Some Coffee')
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return Text('Loading...');
+          if (!snapshot.hasData) {
+
+            return Container(
+              height: height * 0.65,
+              alignment: Alignment.center,
+              child: Text(
+                'Loading ...',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    color: HexColor('313131')
+                ),
+              ),
+            );
+          }
+
+          // カッピングしたコーヒーがなかった場合
+          if (snapshot.data.docs.length == 0) {
+
+            return Container(
+              height: height * 0.65,
+              alignment: Alignment.center,
+              child: Text(
+                  'カッピングしたコーヒーはありません',
+                style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+                ),
+              ),
+            );
+          }
           return _buildList(snapshot.data.docs, width, height);
         },
       );
@@ -202,7 +230,36 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .endAt([this._searchValue + '\uf8ff'])
           .snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return Text('Loading...');
+        if (!snapshot.hasData) {
+
+          return Container(
+            height: height * 0.65,
+            alignment: Alignment.center,
+            child: Text(
+              'Loading ...',
+              style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+              ),
+            ),
+          );
+        }
+
+        // カッピングしたコーヒーがなかった場合
+        if (snapshot.data.docs.length == 0) {
+
+          return Container(
+            height: height * 0.65,
+            alignment: Alignment.center,
+            child: Text(
+              '検索されたコーヒーはありません',
+              style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+              ),
+            ),
+          );
+        }
         return _buildList(snapshot.data.docs, width, height);
       },
     );
@@ -220,7 +277,36 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
             .orderBy('coffee_score', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return Text('Loading...');
+          if (!snapshot.hasData) {
+
+            return Container(
+              height: height * 0.65,
+              alignment: Alignment.center,
+              child: Text(
+                'Loading ...',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    color: HexColor('313131')
+                ),
+              ),
+            );
+          }
+
+          // カッピングしたコーヒーがなかった場合
+          if (snapshot.data.docs.length == 0) {
+
+            return Container(
+              height: height * 0.65,
+              alignment: Alignment.center,
+              child: Text(
+                'カッピングしたコーヒーはありません',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    color: HexColor('313131')
+                ),
+              ),
+            );
+          }
           return _buildList(snapshot.data.docs, width, height);
         },
       );
@@ -237,7 +323,36 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .endAt([this._searchValue + '\uf8ff'])
           .snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return Text('Loading...');
+        if (!snapshot.hasData) {
+
+          return Container(
+            height: height * 0.65,
+            alignment: Alignment.center,
+            child: Text(
+              'Loading ...',
+              style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+              ),
+            ),
+          );
+        }
+
+        // カッピングしたコーヒーがなかった場合
+        if (snapshot.data.docs.length == 0) {
+
+          return Container(
+            height: height * 0.65,
+            alignment: Alignment.center,
+            child: Text(
+              '検索されたコーヒーはありません',
+              style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+              ),
+            ),
+          );
+        }
         return _buildList(snapshot.data.docs, width, height);
       },
     );
@@ -255,7 +370,36 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
             .where('favorite', isEqualTo: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return Text('Loading...');
+          if (!snapshot.hasData) {
+
+            return Container(
+              height: height * 0.65,
+              alignment: Alignment.center,
+              child: Text(
+                'Loading ...',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    color: HexColor('313131')
+                ),
+              ),
+            );
+          }
+
+          // カッピングしたコーヒーがなかった場合
+          if (snapshot.data.docs.length == 0) {
+
+            return Container(
+              height: height * 0.65,
+              alignment: Alignment.center,
+              child: Text(
+                'お気に入りのコーヒーはありません',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    color: HexColor('313131')
+                ),
+              ),
+            );
+          }
           return _buildList(snapshot.data.docs, width, height);
         },
       );
@@ -272,7 +416,36 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           .endAt([this._searchValue + '\uf8ff'])
           .snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return Text('Loading...');
+        if (!snapshot.hasData) {
+
+          return Container(
+            height: height * 0.65,
+            alignment: Alignment.center,
+            child: Text(
+              'Loading ...',
+              style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+              ),
+            ),
+          );
+        }
+
+        // カッピングしたコーヒーがなかった場合
+        if (snapshot.data.docs.length == 0) {
+
+          return Container(
+            height: height * 0.65,
+            alignment: Alignment.center,
+            child: Text(
+              '検索されたコーヒーはありません',
+              style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+              ),
+            ),
+          );
+        }
         return _buildList(snapshot.data.docs, width, height);
       },
     );

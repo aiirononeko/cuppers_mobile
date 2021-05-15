@@ -1,4 +1,3 @@
-import 'package:cuppers_mobile/main.dart';
 import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -234,11 +233,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.pushAndRemoveUntil(
+
+                                // ログイン画面に遷移
+                                Navigator.push(
                                     context,
-                                    new MaterialPageRoute(
-                                        builder: (context) => new LoginPage()),
-                                        (_) => false);
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()
+                                    )
+                                );
                               }
                         )
                       ]

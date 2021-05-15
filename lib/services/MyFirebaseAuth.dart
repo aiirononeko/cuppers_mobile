@@ -7,22 +7,43 @@ import '../main.dart';
 
 class MyFirebaseAuth {
 
-  // ユーザー登録処理・ログイン処理をするメソッド
-  Future createUserAndLogin(String email, String password, BuildContext context) async {
+  // 匿名ユーザーとしてユーザー登録・ログイン処理をするメソッド
+  static Future createAnonymousUserAndLogin() async {
 
     try {
 
-      // ユーザー登録処理
-      UserCredential credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password
+      // 匿名ユーザーとして仮登録
+      await FirebaseAuth.instance.signInAnonymously();
+
+    } on FirebaseAuthException catch(e) {
+
+      // TODO エラーハンドリング
+
+    } catch(e) {
+      print(e);
+    }
+  }
+
+  // ユーザー登録処理・ログイン処理をするメソッド
+  Future createUserAndLogin(String email, String password, BuildContext context) async {
+
+    UserCredential _credential;
+    EmailAuthCredential _authCredential;
+
+    try {
+
+      _authCredential = EmailAuthProvider.credential(
+        email: email, password: password
       );
+
+      // 匿名ユーザーから永続可能なアカウントへ切り替え
+      _credential = await FirebaseAuth.instance.currentUser.linkWithCredential(_authCredential);
 
       // TODO FirebaseFunctionsで自動実行されるようにする
       // ユーザー情報をFirestoreに登録
       await FirebaseFirestore.instance
         .collection('Users')
-        .add({'uid': credential.user.uid, 'email': email});
+        .add({'uid': _credential.user.uid, 'email': email});
 
       // ログイン処理
       await loginAndMoveUserPage(email, password, context);
