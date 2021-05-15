@@ -36,10 +36,15 @@ dependencies:
   flutter_radar_chart: ^0.2.0
   intl: ^0.16.1
   url_launcher: ^3.0.3
+  flutter_native_splash: ^1.1.8+4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  image: "images/cuppers_logo_apart_アートボード 1.png"
+  color: "e7e7e7"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
