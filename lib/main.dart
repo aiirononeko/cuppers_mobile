@@ -14,6 +14,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  // 初回起動時(未ログイン)の場合
+  if (FirebaseAuth.instance.currentUser == null) {
+    // 匿名ユーザーとしてログイン
+    await MyFirebaseAuth.createAnonymousUserAndLogin();
+  }
+
   runApp(MyApp());
 }
 
@@ -42,8 +48,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  MyFirebaseAuth _myFirebaseAuth = new MyFirebaseAuth();
 
   @override
   void initState() {
