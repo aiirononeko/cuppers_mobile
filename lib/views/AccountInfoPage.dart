@@ -1,3 +1,4 @@
+import 'package:cuppers_mobile/services/HexColor.dart';
 import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -182,17 +183,4 @@ class AccountInfoPage extends StatelessWidget {
       );
     }
   }
-}
-
-// カラーコードで色を表示するためのクラス
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll('#', '');
-    if (hexColor.length == 6) {
-      hexColor = 'FF' + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
-
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }

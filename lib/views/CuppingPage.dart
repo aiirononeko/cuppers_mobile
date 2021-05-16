@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/main.dart';
+import 'package:cuppers_mobile/services/HexColor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,37 +35,31 @@ class _CuppingPageState extends State<CuppingPage> {
   Timer _timer;
 
   TextEditingController _coffeeNameController;
-  TextEditingController _elevationController;
   TextEditingController _roasterController;
   TextEditingController _flavorTextController;
   TextEditingController _commentController;
 
   TextEditingController _coffeeNameControllerSecond;
-  TextEditingController _elevationControllerSecond;
   TextEditingController _roasterControllerSecond;
   TextEditingController _flavorTextControllerSecond;
   TextEditingController _commentControllerSecond;
 
   TextEditingController _coffeeNameControllerThird;
-  TextEditingController _elevationControllerThird;
   TextEditingController _roasterControllerThird;
   TextEditingController _flavorTextControllerThird;
   TextEditingController _commentControllerThird;
 
   TextEditingController _coffeeNameControllerFourth;
-  TextEditingController _elevationControllerFourth;
   TextEditingController _roasterControllerFourth;
   TextEditingController _flavorTextControllerFourth;
   TextEditingController _commentControllerFourth;
 
   TextEditingController _coffeeNameControllerFifth;
-  TextEditingController _elevationControllerFifth;
   TextEditingController _roasterControllerFifth;
   TextEditingController _flavorTextControllerFifth;
   TextEditingController _commentControllerFifth;
 
   TextEditingController _coffeeNameControllerSixth;
-  TextEditingController _elevationControllerSixth;
   TextEditingController _roasterControllerSixth;
   TextEditingController _flavorTextControllerSixth;
   TextEditingController _commentControllerSixth;
@@ -73,37 +68,31 @@ class _CuppingPageState extends State<CuppingPage> {
   void initState() {
     super.initState();
     _coffeeNameController = new TextEditingController(text: _coffeeName);
-    _elevationController =  new TextEditingController(text: _elevation);
     _roasterController = new TextEditingController(text: _roaster);
     _flavorTextController = new TextEditingController(text: _flavorText);
     _commentController = new TextEditingController(text: _comment);
 
     _coffeeNameControllerSecond = new TextEditingController(text: _coffeeNameSecond);
-    _elevationControllerSecond =  new TextEditingController(text: _elevationSecond);
     _roasterControllerSecond = new TextEditingController(text: _roasterSecond);
     _flavorTextControllerSecond = new TextEditingController(text: _flavorTextSecond);
     _commentControllerSecond = new TextEditingController(text: _commentSecond);
 
     _coffeeNameControllerThird = new TextEditingController(text: _coffeeNameThird);
-    _elevationControllerThird =  new TextEditingController(text: _elevationThird);
     _roasterControllerThird = new TextEditingController(text: _roasterThird);
     _flavorTextControllerThird = new TextEditingController(text: _flavorTextThird);
     _commentControllerThird = new TextEditingController(text: _commentThird);
 
     _coffeeNameControllerFourth = new TextEditingController(text: _coffeeNameFourth);
-    _elevationControllerFourth =  new TextEditingController(text: _elevationFourth);
     _roasterControllerFourth = new TextEditingController(text: _roasterFourth);
     _flavorTextControllerFourth = new TextEditingController(text: _flavorTextFourth);
     _commentControllerFourth = new TextEditingController(text: _commentFourth);
 
     _coffeeNameControllerFifth = new TextEditingController(text: _coffeeNameFifth);
-    _elevationControllerFifth =  new TextEditingController(text: _elevationFifth);
     _roasterControllerFifth = new TextEditingController(text: _roasterFifth);
     _flavorTextControllerFifth = new TextEditingController(text: _flavorTextFifth);
     _commentControllerFifth = new TextEditingController(text: _commentFifth);
 
     _coffeeNameControllerSixth = new TextEditingController(text: _coffeeNameSixth);
-    _elevationControllerSixth =  new TextEditingController(text: _elevationSixth);
     _roasterControllerSixth = new TextEditingController(text: _roasterSixth);
     _flavorTextControllerSixth = new TextEditingController(text: _flavorTextSixth);
     _commentControllerSixth = new TextEditingController(text: _commentSixth);
@@ -118,7 +107,6 @@ class _CuppingPageState extends State<CuppingPage> {
   Map<String, dynamic> _realTimeCuppingDataSixth = new Map<String, dynamic>();
 
   String _coffeeName = '';
-  String _elevation = '';
   String _roaster = '';
   double _sweetness = 4.0;
   double _acidity = 4.0;
@@ -132,7 +120,6 @@ class _CuppingPageState extends State<CuppingPage> {
   String _comment = '';
 
   void _coffeeNameChanged(String str) => setState(() { _coffeeName = str; });
-  void _elevationChanged(String str) => setState(() { _elevation = str; });
   void _roasterChanged(String str) => setState(() { _roaster = str; });
   void _slideSweetness(double e) => setState(() { _sweetness = e; });
   void _slideAcidity(double e) => setState(() { _acidity = e; });
@@ -146,7 +133,6 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentChanged(String str) => setState(() { _comment = str; });
 
   String _coffeeNameSecond = '';
-  String _elevationSecond = '';
   String _roasterSecond = '';
   double _sweetnessSecond = 4.0;
   double _aciditySecond = 4.0;
@@ -160,7 +146,6 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentSecond = '';
 
   void _coffeeNameSecondChanged(String str) => setState(() { _coffeeNameSecond = str; });
-  void _elevationSecondChanged(String str) => setState(() { _elevationSecond = str; });
   void _roasterSecondChanged(String str) => setState(() { _roasterSecond = str; });
   void _slideSweetnessSecond(double e) => setState(() { _sweetnessSecond = e; });
   void _slideAciditySecond(double e) => setState(() { _aciditySecond = e; });
@@ -174,7 +159,6 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentSecondChanged(String str) => setState(() { _commentSecond = str; });
 
   String _coffeeNameThird = '';
-  String _elevationThird = '';
   String _roasterThird = '';
   double _sweetnessThird = 4.0;
   double _acidityThird = 4.0;
@@ -188,7 +172,6 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentThird = '';
 
   void _coffeeNameThirdChanged(String str) => setState(() { _coffeeNameThird = str; });
-  void _elevationThirdChanged(String str) => setState(() { _elevationThird = str; });
   void _roasterThirdChanged(String str) => setState(() { _roasterThird = str; });
   void _slideSweetnessThird(double e) => setState(() { _sweetnessThird = e; });
   void _slideAcidityThird(double e) => setState(() { _acidityThird = e; });
@@ -202,7 +185,6 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentThirdChanged(String str) => setState(() { _commentThird = str; });
 
   String _coffeeNameFourth = '';
-  String _elevationFourth = '';
   String _roasterFourth = '';
   double _sweetnessFourth = 4.0;
   double _acidityFourth = 4.0;
@@ -216,7 +198,6 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentFourth = '';
 
   void _coffeeNameFourthChanged(String str) => setState(() { _coffeeNameFourth = str; });
-  void _elevationFourthChanged(String str) => setState(() { _elevationFourth = str; });
   void _roasterFourthChanged(String str) => setState(() { _roasterFourth = str; });
   void _slideSweetnessFourth(double e) => setState(() { _sweetnessFourth = e; });
   void _slideAcidityFourth(double e) => setState(() { _acidityFourth = e; });
@@ -230,7 +211,6 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentFourthChanged(String str) => setState(() { _commentFourth = str; });
 
   String _coffeeNameFifth = '';
-  String _elevationFifth = '';
   String _roasterFifth = '';
   double _sweetnessFifth = 4.0;
   double _acidityFifth = 4.0;
@@ -244,7 +224,6 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentFifth = '';
 
   void _coffeeNameFifthChanged(String str) => setState(() { _coffeeNameFifth = str; });
-  void _elevationFifthChanged(String str) => setState(() { _elevationFifth = str; });
   void _roasterFifthChanged(String str) => setState(() { _roasterFifth = str; });
   void _slideSweetnessFifth(double e) => setState(() { _sweetnessFifth = e; });
   void _slideAcidityFifth(double e) => setState(() { _acidityFifth = e; });
@@ -258,7 +237,6 @@ class _CuppingPageState extends State<CuppingPage> {
   void _commentFifthChanged(String str) => setState(() { _commentFifth = str; });
 
   String _coffeeNameSixth = '';
-  String _elevationSixth = '';
   String _roasterSixth = '';
   double _sweetnessSixth = 4.0;
   double _aciditySixth = 4.0;
@@ -272,7 +250,6 @@ class _CuppingPageState extends State<CuppingPage> {
   String _commentSixth = '';
 
   void _coffeeNameSixthChanged(String str) => setState(() { _coffeeNameSixth = str; });
-  void _elevationSixthChanged(String str) => setState(() { _elevationSixth = str; });
   void _roasterSixthChanged(String str) => setState(() { _roasterSixth = str; });
   void _slideSweetnessSixth(double e) => setState(() { _sweetnessSixth = e; });
   void _slideAciditySixth(double e) => setState(() { _aciditySixth = e; });
@@ -285,8 +262,13 @@ class _CuppingPageState extends State<CuppingPage> {
   void _flavorTextSixthChanged(String str) => setState(() { _flavorTextSixth = str; });
   void _commentSixthChanged(String str) => setState(() { _commentSixth = str; });
 
-  // ドラムピッカー用のリスト型変数
+  // ドラムピッカー用の変数
   String _selectedCountry = 'Country';
+  String _selectedCountrySecond = 'Country';
+  String _selectedCountryThird = 'Country';
+  String _selectedCountryFourth = 'Country';
+  String _selectedCountryFifth = 'Country';
+  String _selectedCountrySixth = 'Country';
   final List<String> _countries = [
     'Brazil',
     'Colombia',
@@ -311,138 +293,13 @@ class _CuppingPageState extends State<CuppingPage> {
     'Other Country'
   ];
 
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountrySecond = 'Country';
-  final List<String> _countriesSecond = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountryThird = 'Country';
-  final List<String> _countriesThird = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountryFourth = 'Country';
-  final List<String> _countriesFourth = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountryFifth = 'Country';
-  final List<String> _countriesFifth = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountrySixth = 'Country';
-  final List<String> _countriesSixth = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
+  // ドラムピッカー用の変数
   String _selectedVariety = 'Variety';
+  String _selectedVarietySecond = 'Variety';
+  String _selectedVarietyThird = 'Variety';
+  String _selectedVarietyFourth = 'Variety';
+  String _selectedVarietyFifth = 'Variety';
+  String _selectedVarietySixth = 'Variety';
   final List<String> _varieties = [
     'Typica',
     'Bourbon',
@@ -466,239 +323,45 @@ class _CuppingPageState extends State<CuppingPage> {
     'Other Variety'
   ];
 
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietySecond = 'Variety';
-  final List<String> _varietiesSecond = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
+  // ドラムピッカー用の変数
+  String _selectedElevation = 'Elevation';
+  String _selectedElevationSecond = 'Elevation';
+  String _selectedElevationThird = 'Elevation';
+  String _selectedElevationFourth = 'Elevation';
+  String _selectedElevationFifth = 'Elevation';
+  String _selectedElevationSixth = 'Elevation';
+  final List<String> _elevations = [
+    '500',
+    '600',
+    '700',
+    '800',
+    '900',
+    '1000',
+    '1100',
+    '1200',
+    '1300',
+    '1400',
+    '1500',
+    '1600',
+    '1700',
+    '1800',
+    '1900',
+    '2000',
+    '2100',
+    '2200',
+    '2300',
+    '2400',
+    '2500',
   ];
 
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietyThird = 'Variety';
-  final List<String> _varietiesThird = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietyFourth = 'Variety';
-  final List<String> _varietiesFourth = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietyFifth = 'Variety';
-  final List<String> _varietiesFifth = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietySixth = 'Variety';
-  final List<String> _varietiesSixth = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
+  // ドラムピッカー用の変数
   String _selectedProcess = 'Process';
-  final List<String> _processes = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessSecond = 'Process';
-  final List<String> _processesSecond = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessThird = 'Process';
-  final List<String> _processesThird = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessFourth = 'Process';
-  final List<String> _processesFourth = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessFifth = 'Process';
-  final List<String> _processesFifth = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessSixth = 'Process';
-  final List<String> _processesSixth = [
+  final List<String> _processes = [
     'Washed',
     'Fully Washed',
     'Natural',
@@ -728,44 +391,178 @@ class _CuppingPageState extends State<CuppingPage> {
     // ログイン中のユーザーIDを取得
     _uid = FirebaseAuth.instance.currentUser.uid;
 
+    final node = FocusScope.of(context);
+
     // カッピングページ表示項目の制御
     List<Widget> _pageList = [
-      _firstCoffeeInfoField(_width, _height), // 0
-      _secondCoffeeInfoField(_width, _height), // 1
-      _firstCuppingData(_width, _height), // 2
-      _secondCuppingData(_width, _height), // 3
-      _thirdCuppingData(_width, _height), // 4
-      _fourthCuppingData(_width, _height), // 5
-      _firstCoffeeInfoFieldSecond(_width, _height), // 6
-      _secondCoffeeInfoFieldSecond(_width, _height), // 7
-      _firstCuppingDataSecond(_width, _height), // 8
-      _secondCuppingDataSecond(_width, _height), // 9
-      _thirdCuppingDataSecond(_width, _height), // 10
-      _fourthCuppingDataSecond(_width, _height), // 11
-      _firstCoffeeInfoFieldThird(_width, _height), // 12
-      _secondCoffeeInfoFieldThird(_width, _height), // 13
-      _firstCuppingDataThird(_width, _height), // 14
-      _secondCuppingDataThird(_width, _height), // 15
-      _thirdCuppingDataThird(_width, _height), // 16
-      _fourthCuppingDataThird(_width, _height), // 17
-      _firstCoffeeInfoFieldFourth(_width, _height), // 18
-      _secondCoffeeInfoFieldFourth(_width, _height), // 19
-      _firstCuppingDataFourth(_width, _height), // 20
-      _secondCuppingDataFourth(_width, _height), // 21
-      _thirdCuppingDataFourth(_width, _height), // 22
-      _fourthCuppingDataFourth(_width, _height), // 23
-      _firstCoffeeInfoFieldFifth(_width, _height), // 24
-      _secondCoffeeInfoFieldFifth(_width, _height), // 25
-      _firstCuppingDataFifth(_width, _height), // 26
-      _secondCuppingDataFifth(_width, _height), // 27
-      _thirdCuppingDataFifth(_width, _height), // 28
-      _fourthCuppingDataFifth(_width, _height), // 29
-      _firstCoffeeInfoFieldSixth(_width, _height), // 30
-      _secondCoffeeInfoFieldSixth(_width, _height), // 31
-      _firstCuppingDataSixth(_width, _height), // 32
-      _secondCuppingDataSixth(_width, _height), // 33
-      _thirdCuppingDataSixth(_width, _height), // 34
-      _fourthCuppingDataSixth(_width, _height), // 35
+
+      /** 1杯目のコーヒー */
+      _firstCuppingDataField(
+          _width, _height, _coffeeNameController, _coffeeNameChanged,
+          _selectedCountry, _showModalCountriesPicker,
+          _selectedVariety, _showModalVarietiesPicker, node
+      ), // 0
+      _secondCuppingDataField(
+          _width, _height, _selectedElevation, _showModalElevationsPicker,
+          _selectedProcess, _showModalProcessesPicker,
+          _roasterController, _roasterChanged, node
+      ), // 1
+      _thirdCuppingDataField(
+          _width, _height, _cleanCup, _slideCleanCup,
+          _sweetness, _slideSweetness, _acidity, _slideAcidity
+      ), // 2
+      _fourthCuppingDataField(
+          _width, _height, _mouseFeel, _slideMouseFeel,
+          _afterTaste, _slideAfterTaste, _flavor, _slideFlavor
+      ), // 3
+      _fifthCuppingDataField(
+          _width, _height, _balance, _slideBalance,
+          _overall, _slideOverall
+      ), // 4
+      _sixthCuppingDataField(
+          _width, _height, _flavorTextController, _flavorTextChanged,
+          _commentController, _commentChanged, node
+      ), // 5
+
+      /** 2杯目のコーヒー */
+      _firstCuppingDataField(
+          _width, _height, _coffeeNameControllerSecond, _coffeeNameSecondChanged,
+          _selectedCountrySecond, _showModalCountriesPickerSecond,
+          _selectedVarietySecond, _showModalVarietiesPickerSecond, node
+      ), // 6
+      _secondCuppingDataField(
+          _width, _height, _selectedElevationSecond, _showModalElevationsPickerSecond,
+          _selectedProcessSecond, _showModalProcessesPickerSecond,
+          _roasterControllerSecond, _roasterSecondChanged, node
+      ), // 7
+      _thirdCuppingDataField(
+          _width, _height, _cleanCupSecond, _slideCleanCupSecond,
+          _sweetnessSecond, _slideSweetnessSecond, _aciditySecond, _slideAciditySecond
+      ), // 8
+      _fourthCuppingDataField(
+          _width, _height, _mouseFeelSecond, _slideMouseFeelSecond,
+          _afterTasteSecond, _slideAfterTasteSecond, _flavorSecond, _slideFlavorSecond
+      ), // 9
+      _fifthCuppingDataField(
+          _width, _height, _balanceSecond, _slideBalanceSecond,
+          _overallSecond, _slideOverallSecond
+      ), // 10
+      _sixthCuppingDataField(
+          _width, _height, _flavorTextControllerSecond, _flavorTextSecondChanged,
+          _commentControllerSecond, _commentSecondChanged, node
+      ), // 11
+
+      /** 3杯目のコーヒー */
+      _firstCuppingDataField(
+          _width, _height, _coffeeNameControllerThird, _coffeeNameThirdChanged,
+          _selectedCountryThird, _showModalCountriesPickerThird,
+          _selectedVarietyThird, _showModalVarietiesPickerThird, node
+      ), // 12
+      _secondCuppingDataField(
+          _width, _height, _selectedElevationThird, _showModalElevationsPickerThird,
+          _selectedProcessThird, _showModalProcessesPickerThird,
+          _roasterControllerThird, _roasterThirdChanged, node
+      ), // 13
+      _thirdCuppingDataField(
+          _width, _height, _cleanCupThird, _slideCleanCupThird,
+          _sweetnessThird, _slideSweetnessThird, _acidityThird, _slideAcidityThird
+      ), // 14
+      _fourthCuppingDataField(
+          _width, _height, _mouseFeelThird, _slideMouseFeelThird,
+          _afterTasteThird, _slideAfterTasteThird, _flavorThird, _slideFlavorThird
+      ), // 15
+      _fifthCuppingDataField(
+          _width, _height, _balanceThird, _slideBalanceThird,
+          _overallThird, _slideOverallThird
+      ), // 16
+      _sixthCuppingDataField(
+          _width, _height, _flavorTextControllerThird, _flavorTextThirdChanged,
+          _commentControllerThird, _commentThirdChanged, node
+      ), // 17
+
+      /** 4杯目のコーヒー */
+      _firstCuppingDataField(
+          _width, _height, _coffeeNameControllerFourth, _coffeeNameFourthChanged,
+          _selectedCountryFourth, _showModalCountriesPickerFourth,
+          _selectedVarietyFourth, _showModalVarietiesPickerFourth, node
+      ), // 18
+      _secondCuppingDataField(
+          _width, _height, _selectedElevationFourth, _showModalElevationsPickerFourth,
+          _selectedProcessFourth, _showModalProcessesPickerFourth,
+          _roasterControllerFourth, _roasterFourthChanged, node
+      ), // 19
+      _thirdCuppingDataField(
+          _width, _height, _cleanCupFourth, _slideCleanCupFourth,
+          _sweetnessFourth, _slideSweetnessFourth, _acidityFourth, _slideAcidityFourth
+      ), // 20
+      _fourthCuppingDataField(
+          _width, _height, _mouseFeelFourth, _slideMouseFeelFourth,
+          _afterTasteFourth, _slideAfterTasteFourth, _flavorFourth, _slideFlavorFourth
+      ), // 21
+      _fifthCuppingDataField(
+          _width, _height, _balanceFourth, _slideBalanceFourth,
+          _overallFourth, _slideOverallFourth
+      ), // 22
+      _sixthCuppingDataField(
+          _width, _height, _flavorTextControllerFourth, _flavorTextFourthChanged,
+          _commentControllerFourth, _commentFourthChanged, node
+      ), // 23
+
+      /** 5杯目のコーヒー */
+      _firstCuppingDataField(
+          _width, _height, _coffeeNameControllerFifth, _coffeeNameFifthChanged,
+          _selectedCountryFifth, _showModalCountriesPickerFifth,
+          _selectedVarietyFifth, _showModalVarietiesPickerFifth, node
+      ), // 24
+      _secondCuppingDataField(
+          _width, _height, _selectedElevationFifth, _showModalElevationsPickerFifth,
+          _selectedProcessFifth, _showModalProcessesPickerFifth,
+          _roasterControllerFifth, _roasterFifthChanged, node
+      ), // 25
+      _thirdCuppingDataField(
+          _width, _height, _cleanCupFifth, _slideCleanCupFifth,
+          _sweetnessFifth, _slideSweetnessFifth, _acidityFifth, _slideAcidityFifth
+      ), // 26
+      _fourthCuppingDataField(
+          _width, _height, _mouseFeelFifth, _slideMouseFeelFifth,
+          _afterTasteFifth, _slideAfterTasteFifth, _flavorFifth, _slideFlavorFifth
+      ), // 27
+      _fifthCuppingDataField(
+          _width, _height, _balanceFifth, _slideBalanceFifth,
+          _overallFifth, _slideOverallFifth
+      ), // 28
+      _sixthCuppingDataField(
+          _width, _height, _flavorTextControllerFifth, _flavorTextFifthChanged,
+          _commentControllerFifth, _commentFifthChanged, node
+      ), // 29
+
+      /** 6杯目のコーヒー */
+      _firstCuppingDataField(
+          _width, _height, _coffeeNameControllerSixth, _coffeeNameSixthChanged,
+          _selectedCountrySixth, _showModalCountriesPickerSixth,
+          _selectedVarietySixth, _showModalVarietiesPickerSixth, node
+      ), // 30
+      _secondCuppingDataField(
+          _width, _height, _selectedElevationSixth, _showModalElevationsPickerSixth,
+          _selectedProcessSixth, _showModalProcessesPickerSixth,
+          _roasterControllerSixth, _roasterSixthChanged, node
+      ), // 31
+      _thirdCuppingDataField(
+          _width, _height, _cleanCupSixth, _slideCleanCupSixth,
+          _sweetnessSixth, _slideSweetnessSixth, _aciditySixth, _slideAciditySixth
+      ), // 32
+      _fourthCuppingDataField(
+          _width, _height, _mouseFeelSixth, _slideMouseFeelSixth,
+          _afterTasteSixth, _slideAfterTasteSixth, _flavorSixth, _slideFlavorSixth
+      ), // 33
+      _fifthCuppingDataField(
+          _width, _height, _balanceSixth, _slideBalanceSixth,
+          _overallSixth, _slideOverallSixth
+      ), // 34
+      _sixthCuppingDataField(
+          _width, _height, _flavorTextControllerSixth, _flavorTextSixthChanged,
+          _commentControllerSixth, _commentSixthChanged, node
+      ), // 35
     ];
 
     // カッピングコーヒーの制御
@@ -1004,7 +801,11 @@ class _CuppingPageState extends State<CuppingPage> {
                           icon: Icon(Icons.play_arrow, color: HexColor('e7e7e7')),
                           onPressed: () {
                             setState(() {
-                              this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+
+                              // タイマーが起動していなかった場合、タイマーを起動
+                              if (this._timer == null) {
+                                this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+                              }
                             });
                           }
                       )
@@ -1019,8 +820,17 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // コーヒー名などを入力する部分1_1
-  Widget _firstCoffeeInfoField(double width, double height) {
+  // カッピングデータ入力Widget (CoffeeName, Country, Variety)
+  Widget _firstCuppingDataField(
+      double width,
+      double height,
+      TextEditingController coffeeNameController,
+      Function coffeeNameChangeFunction,
+      String selectedCountry,
+      Function countriesPicker,
+      String selectedVariety,
+      Function varietiesPicker,
+      FocusNode node) {
 
     return Column(
         children: <Widget>[
@@ -1046,7 +856,7 @@ class _CuppingPageState extends State<CuppingPage> {
           Container(
             margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
             child: TextField(
-              controller: _coffeeNameController,
+              controller: coffeeNameController,
               decoration: InputDecoration(
                 labelText: 'Coffee Name',
                 hintText: 'Yirgacheffe Konga',
@@ -1055,7 +865,9 @@ class _CuppingPageState extends State<CuppingPage> {
                   fontSize: height * 0.02
               ),
               keyboardType: TextInputType.text,
-              onChanged: _coffeeNameChanged,
+              onChanged: coffeeNameChangeFunction,
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => node.nextFocus(),
             ),
           ),
           Container(
@@ -1066,7 +878,7 @@ class _CuppingPageState extends State<CuppingPage> {
                         width: double.infinity,
                         margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
                         child: Text(
-                          this._selectedCountry,
+                          selectedCountry,
                           style: TextStyle(
                               color: Colors.black54,
                               fontSize: height * 0.02
@@ -1082,7 +894,7 @@ class _CuppingPageState extends State<CuppingPage> {
                   ],
                 ),
                 onTap: () {
-                  _showModalCountriesPicker(context);
+                  countriesPicker(context);
                 },
               )
           ),
@@ -1094,7 +906,7 @@ class _CuppingPageState extends State<CuppingPage> {
                         width: double.infinity,
                         margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.014),
                         child: Text(
-                          this._selectedVariety,
+                          selectedVariety,
                           style: TextStyle(
                               color: Colors.black54,
                               fontSize: height * 0.02
@@ -1110,7 +922,7 @@ class _CuppingPageState extends State<CuppingPage> {
                   ],
                 ),
                 onTap: () {
-                  _showModalVarietiesPicker(context);
+                  varietiesPicker(context);
                 },
               )
           ),
@@ -1118,8 +930,18 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // コーヒー名などを入力する部分1_2
-  Widget _secondCoffeeInfoField(double width, double height) {
+  // カッピングデータ入力Widget (Elevation, Process, Roaster)
+  Widget _secondCuppingDataField(
+      double width,
+      double height,
+      String selectedElevation,
+      Function elevationsPicker,
+      String selectedProcess,
+      Function processesPicker,
+      TextEditingController roasterController,
+      Function roasterChangeFunction,
+      FocusNode node) {
+
     return Column(
         children: <Widget>[
           Container(
@@ -1133,28 +955,12 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
             child: Text(
               '各項目を評価してください',
               style: TextStyle(
                   fontSize: height * 0.015
               ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _elevationController,
-              decoration: InputDecoration(
-                  labelText: 'Elevation',
-                  hintText: '1500'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: _elevationChanged,
             ),
           ),
           Container(
@@ -1165,7 +971,35 @@ class _CuppingPageState extends State<CuppingPage> {
                         width: double.infinity,
                         margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
                         child: Text(
-                          this._selectedProcess,
+                          selectedElevation,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: height * 0.02
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  elevationsPicker(context);
+                },
+              )
+          ),
+          Container(
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
+                        child: Text(
+                          selectedProcess,
                           style: TextStyle(
                               color: Colors.black54,
                               fontSize: height * 0.02
@@ -1181,14 +1015,14 @@ class _CuppingPageState extends State<CuppingPage> {
                   ],
                 ),
                 onTap: () {
-                  _showModalProcessesPicker(context);
+                  processesPicker(context);
                 },
               )
           ),
           Container(
             margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
             child: TextField(
-              controller: _roasterController,
+              controller: roasterController,
               decoration: InputDecoration(
                   labelText: 'Roaster',
                   hintText: 'Reverbed Coffee'
@@ -1197,15 +1031,26 @@ class _CuppingPageState extends State<CuppingPage> {
                   fontSize: height * 0.02
               ),
               keyboardType: TextInputType.text,
-              onChanged: _roasterChanged,
+              onChanged: roasterChangeFunction,
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => node.nextFocus(),
             ),
           ),
         ]
     );
   }
 
-  // カッピング項目入力画面1_1
-  Widget _firstCuppingData(double width, double height) {
+  // カッピングデータ入力Widget (CleanCup, Sweetness, Acidity)
+  Widget _thirdCuppingDataField(
+      double width,
+      double height,
+      double cleanCup,
+      Function slideCleanCupFunction,
+      double sweetness,
+      Function slideSweetnessFunction,
+      double acidity,
+      Function slideAcidityFunction) {
+
     return Column(
       children: <Widget>[
         Container(
@@ -1248,14 +1093,14 @@ class _CuppingPageState extends State<CuppingPage> {
                     activeTickMarkColor: HexColor('313131'),
                   ),
                   child: Slider(
-                      label: '$_cleanCup',
+                      label: '$cleanCup',
                       min: 0,
                       max: 8,
-                      value: _cleanCup,
+                      value: cleanCup,
                       // activeColor: Colors.orange,
                       // inactiveColor: Colors.blue,
                       divisions: 16,
-                      onChanged: _slideCleanCup
+                      onChanged: slideCleanCupFunction
                   ),
                 )
               ],
@@ -1282,14 +1127,14 @@ class _CuppingPageState extends State<CuppingPage> {
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
-                    label: '$_sweetness',
+                    label: '$sweetness',
                     min: 0,
                     max: 8,
-                    value: _sweetness,
+                    value: sweetness,
                     // activeColor: Colors.orange,
                     // inactiveColor: Colors.blue,
                     divisions: 16,
-                    onChanged: _slideSweetness
+                    onChanged: slideSweetnessFunction
                 ),
               )
             ],
@@ -1316,14 +1161,14 @@ class _CuppingPageState extends State<CuppingPage> {
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
-                    label: '$_acidity',
+                    label: '$acidity',
                     min: 0,
                     max: 8,
-                    value: _acidity,
+                    value: acidity,
                     // activeColor: Colors.orange,
                     // inactiveColor: Colors.blue,
                     divisions: 16,
-                    onChanged: _slideAcidity
+                    onChanged: slideAcidityFunction
                 ),
               )
             ],
@@ -1333,8 +1178,17 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // カッピング項目入力画面1_2
-  Widget _secondCuppingData(double width, double height) {
+  // カッピングデータ入力Widget (MouseFeel, AfterTaste, Flavor)
+  Widget _fourthCuppingDataField(
+      double width,
+      double height,
+      double mouseFeel,
+      Function slideMouseFeelFunction,
+      double afterTaste,
+      Function slideAfterTasteFunction,
+      double flavor,
+      Function slideFlavorFunction) {
+
     return Column(
       children: <Widget>[
         Container(
@@ -1377,14 +1231,14 @@ class _CuppingPageState extends State<CuppingPage> {
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
-                    label: '$_mouseFeel',
+                    label: '$mouseFeel',
                     min: 0,
                     max: 8,
-                    value: _mouseFeel,
+                    value: mouseFeel,
                     // activeColor: Colors.orange,
                     // inactiveColor: Colors.blue,
                     divisions: 16,
-                    onChanged: _slideMouseFeel
+                    onChanged: slideMouseFeelFunction
                 ),
               )
             ],
@@ -1411,14 +1265,14 @@ class _CuppingPageState extends State<CuppingPage> {
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
-                    label: '$_afterTaste',
+                    label: '$afterTaste',
                     min: 0,
                     max: 8,
-                    value: _afterTaste,
+                    value: afterTaste,
                     // activeColor: Colors.orange,
                     // inactiveColor: Colors.blue,
                     divisions: 16,
-                    onChanged: _slideAfterTaste
+                    onChanged: slideAfterTasteFunction
                 ),
               )
             ],
@@ -1445,14 +1299,14 @@ class _CuppingPageState extends State<CuppingPage> {
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
-                    label: '$_flavor',
+                    label: '$flavor',
                     min: 0,
                     max: 8,
-                    value: _flavor,
+                    value: flavor,
                     // activeColor: Colors.orange,
                     // inactiveColor: Colors.blue,
                     divisions: 16,
-                    onChanged: _slideFlavor
+                    onChanged: slideFlavorFunction
                 ),
               )
             ],
@@ -1462,8 +1316,15 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // カッピング項目入力画面1_3
-  Widget _thirdCuppingData(double width, double height) {
+  // カッピングデータ入力Widget (Balance, Overall)
+  Widget _fifthCuppingDataField(
+      double width,
+      double height,
+      double balance,
+      Function slideBalanceFunction,
+      double overall,
+      Function slideOverallFunction) {
+
     return Column(
       children: <Widget>[
         Container(
@@ -1506,14 +1367,14 @@ class _CuppingPageState extends State<CuppingPage> {
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
-                    label: '$_balance',
+                    label: '$balance',
                     min: 0,
                     max: 8,
-                    value: _balance,
+                    value: balance,
                     // activeColor: Colors.orange,
                     // inactiveColor: Colors.blue,
                     divisions: 16,
-                    onChanged: _slideBalance
+                    onChanged: slideBalanceFunction
                 ),
               )
             ],
@@ -1540,14 +1401,14 @@ class _CuppingPageState extends State<CuppingPage> {
                   activeTickMarkColor: HexColor('313131'),
                 ),
                 child: Slider(
-                    label: '$_overall',
+                    label: '$overall',
                     min: 0,
                     max: 8,
-                    value: _overall,
+                    value: overall,
                     // activeColor: Colors.orange,
                     // inactiveColor: Colors.blue,
                     divisions: 16,
-                    onChanged: _slideOverall
+                    onChanged: slideOverallFunction
                 ),
               )
             ],
@@ -1557,8 +1418,16 @@ class _CuppingPageState extends State<CuppingPage> {
     );
   }
 
-  // カッピング項目入力画面1_4
-  Widget _fourthCuppingData(double width, double height) {
+  // カッピングデータ入力Widget (FlavorText, Comment)
+  Widget _sixthCuppingDataField(
+      double width,
+      double height,
+      TextEditingController flavorTextController,
+      Function flavorTextChangeFunction,
+      TextEditingController commentController,
+      Function commentChangeFunction,
+      FocusNode node) {
+
     return Column(
       children: <Widget>[
         Container(
@@ -1583,7 +1452,7 @@ class _CuppingPageState extends State<CuppingPage> {
         Container(
           margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.05),
           child: TextField(
-            controller: _flavorTextController,
+            controller: flavorTextController,
             decoration: InputDecoration(
               labelText: 'Flavor Text',
               hintText: 'Lemon, Peach, Strawberry',
@@ -1592,13 +1461,15 @@ class _CuppingPageState extends State<CuppingPage> {
                 fontSize: height * 0.02
             ),
             keyboardType: TextInputType.text,
-            onChanged: _flavorTextChanged,
+            onChanged: flavorTextChangeFunction,
+            textInputAction: TextInputAction.next,
+            onEditingComplete: () => node.nextFocus(),
           ),
         ),
         Container(
           margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
           child: TextField(
-            controller: _commentController,
+            controller: commentController,
             decoration: InputDecoration(
               labelText: 'Comment',
               hintText: 'Silky, Complex, BrightAcidity',
@@ -1607,2982 +1478,9 @@ class _CuppingPageState extends State<CuppingPage> {
                 fontSize: height * 0.02
             ),
             keyboardType: TextInputType.text,
-            onChanged: _commentChanged,
-          ),
-        )
-      ],
-    );
-  }
-
-  // コーヒー名などを入力する部分2_1
-  Widget _firstCoffeeInfoFieldSecond(double width, double height) {
-
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 1/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _coffeeNameControllerSecond,
-              decoration: InputDecoration(
-                labelText: 'Coffee Name',
-                hintText: 'Yirgacheffe Konga',
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _coffeeNameSecondChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedCountrySecond,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalCountriesPickerSecond(context);
-                },
-              )
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.014),
-                        child: Text(
-                          this._selectedVarietySecond,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalVarietiesPickerSecond(context);
-                },
-              )
-          ),
-        ]
-    );
-  }
-
-  // コーヒー名などを入力する部分2_2
-  Widget _secondCoffeeInfoFieldSecond(double width, double height) {
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 2/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _elevationControllerSecond,
-              decoration: InputDecoration(
-                  labelText: 'Elevation',
-                  hintText: '1500'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: _elevationSecondChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedProcessSecond,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalProcessesPickerSecond(context);
-                },
-              )
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-            child: TextField(
-              controller: _roasterControllerSecond,
-              decoration: InputDecoration(
-                  labelText: 'Roaster',
-                  hintText: 'Reverbed Coffee'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _roasterSecondChanged,
-            ),
-          ),
-        ]
-    );
-  }
-
-  // カッピング項目入力画面2_1
-  Widget _firstCuppingDataSecond(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 3/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  'CleanCup',
-                  style: TextStyle(
-                      fontSize: height * 0.015
-                  ),
-                ),
-                SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: height * 0.01,
-                    thumbColor: HexColor('313131'),
-                    overlayColor: HexColor('808080').withAlpha(80),
-                    activeTrackColor: HexColor('313131'),
-                    inactiveTrackColor: HexColor('cccccc'),
-                    inactiveTickMarkColor: HexColor('cccccc'),
-                    activeTickMarkColor: HexColor('313131'),
-                  ),
-                  child: Slider(
-                      label: '$_cleanCupSecond',
-                      min: 0,
-                      max: 8,
-                      value: _cleanCupSecond,
-                      // activeColor: Colors.orange,
-                      // inactiveColor: Colors.blue,
-                      divisions: 16,
-                      onChanged: _slideCleanCupSecond
-                  ),
-                )
-              ],
-            )
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Sweetness',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_sweetnessSecond',
-                    min: 0,
-                    max: 8,
-                    value: _sweetnessSecond,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideSweetnessSecond
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Acidity',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_aciditySecond',
-                    min: 0,
-                    max: 8,
-                    value: _aciditySecond,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAciditySecond
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面2_2
-  Widget _secondCuppingDataSecond(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 4/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'MouseFeel',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_mouseFeelSecond',
-                    min: 0,
-                    max: 8,
-                    value: _mouseFeelSecond,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideMouseFeelSecond
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'AfterTaste',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_afterTasteSecond',
-                    min: 0,
-                    max: 8,
-                    value: _afterTasteSecond,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAfterTasteSecond
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Flavor',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_flavorSecond',
-                    min: 0,
-                    max: 8,
-                    value: _flavorSecond,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideFlavorSecond
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面2_3
-  Widget _thirdCuppingDataSecond(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 5/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Balance',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_balanceSecond',
-                    min: 0,
-                    max: 8,
-                    value: _balanceSecond,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideBalanceSecond
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'OverAll',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_overallSecond',
-                    min: 0,
-                    max: 8,
-                    value: _overallSecond,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideOverallSecond
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面2_4
-  Widget _fourthCuppingDataSecond(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 6/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.05),
-          child: TextField(
-            controller: _flavorTextControllerSecond,
-            decoration: InputDecoration(
-              labelText: 'Flavor Text',
-              hintText: 'Lemon, Peach, Strawberry',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _flavorTextSecondChanged,
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: TextField(
-            controller: _commentControllerSecond,
-            decoration: InputDecoration(
-              labelText: 'Comment',
-              hintText: 'Silky, Complex, BrightAcidity',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _commentSecondChanged,
-          ),
-        )
-      ],
-    );
-  }
-
-  // コーヒー名などを入力する部分3_1
-  Widget _firstCoffeeInfoFieldThird(double width, double height) {
-
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 1/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _coffeeNameControllerThird,
-              decoration: InputDecoration(
-                labelText: 'Coffee Name',
-                hintText: 'Yirgacheffe Konga',
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _coffeeNameThirdChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedCountryThird,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalCountriesPickerThird(context);
-                },
-              )
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.014),
-                        child: Text(
-                          this._selectedVarietyThird,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalVarietiesPickerThird(context);
-                },
-              )
-          ),
-        ]
-    );
-  }
-
-  // コーヒー名などを入力する部分3_2
-  Widget _secondCoffeeInfoFieldThird(double width, double height) {
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 2/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _elevationControllerThird,
-              decoration: InputDecoration(
-                  labelText: 'Elevation',
-                  hintText: '1500'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: _elevationThirdChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedProcessThird,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalProcessesPickerThird(context);
-                },
-              )
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-            child: TextField(
-              controller: _roasterControllerThird,
-              decoration: InputDecoration(
-                  labelText: 'Roaster',
-                  hintText: 'Reverbed Coffee'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _roasterThirdChanged,
-            ),
-          ),
-        ]
-    );
-  }
-
-  // カッピング項目入力画面3_1
-  Widget _firstCuppingDataThird(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 3/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  'CleanCup',
-                  style: TextStyle(
-                      fontSize: height * 0.015
-                  ),
-                ),
-                SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: height * 0.01,
-                    thumbColor: HexColor('313131'),
-                    overlayColor: HexColor('808080').withAlpha(80),
-                    activeTrackColor: HexColor('313131'),
-                    inactiveTrackColor: HexColor('cccccc'),
-                    inactiveTickMarkColor: HexColor('cccccc'),
-                    activeTickMarkColor: HexColor('313131'),
-                  ),
-                  child: Slider(
-                      label: '$_cleanCupThird',
-                      min: 0,
-                      max: 8,
-                      value: _cleanCupThird,
-                      // activeColor: Colors.orange,
-                      // inactiveColor: Colors.blue,
-                      divisions: 16,
-                      onChanged: _slideCleanCupThird
-                  ),
-                )
-              ],
-            )
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Sweetness',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_sweetnessThird',
-                    min: 0,
-                    max: 8,
-                    value: _sweetnessThird,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideSweetnessThird
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Acidity',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_acidityThird',
-                    min: 0,
-                    max: 8,
-                    value: _acidityThird,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAcidityThird
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面3_2
-  Widget _secondCuppingDataThird(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 4/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'MouseFeel',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_mouseFeelThird',
-                    min: 0,
-                    max: 8,
-                    value: _mouseFeelThird,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideMouseFeelThird
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'AfterTaste',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_afterTasteThird',
-                    min: 0,
-                    max: 8,
-                    value: _afterTasteThird,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAfterTasteThird
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Flavor',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_flavorThird',
-                    min: 0,
-                    max: 8,
-                    value: _flavorThird,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideFlavorThird
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面3_3
-  Widget _thirdCuppingDataThird(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 5/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Balance',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_balanceThird',
-                    min: 0,
-                    max: 8,
-                    value: _balanceThird,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideBalanceThird
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'OverAll',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_overallThird',
-                    min: 0,
-                    max: 8,
-                    value: _overallThird,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideOverallThird
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面3_4
-  Widget _fourthCuppingDataThird(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 6/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.05),
-          child: TextField(
-            controller: _flavorTextControllerThird,
-            decoration: InputDecoration(
-              labelText: 'Flavor Text',
-              hintText: 'Lemon, Peach, Strawberry',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _flavorTextThirdChanged,
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: TextField(
-            controller: _commentControllerThird,
-            decoration: InputDecoration(
-              labelText: 'Comment',
-              hintText: 'Silky, Complex, BrightAcidity',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _commentThirdChanged,
-          ),
-        )
-      ],
-    );
-  }
-
-  // コーヒー名などを入力する部分4_1
-  Widget _firstCoffeeInfoFieldFourth(double width, double height) {
-
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 1/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _coffeeNameControllerFourth,
-              decoration: InputDecoration(
-                labelText: 'Coffee Name',
-                hintText: 'Yirgacheffe Konga',
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _coffeeNameFourthChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedCountryFourth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalCountriesPickerFourth(context);
-                },
-              )
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.014),
-                        child: Text(
-                          this._selectedVarietyFourth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalVarietiesPickerFourth(context);
-                },
-              )
-          ),
-        ]
-    );
-  }
-
-  // コーヒー名などを入力する部分4_2
-  Widget _secondCoffeeInfoFieldFourth(double width, double height) {
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 2/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _elevationControllerFourth,
-              decoration: InputDecoration(
-                  labelText: 'Elevation',
-                  hintText: '1500'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: _elevationFourthChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedProcessFourth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalProcessesPickerFourth(context);
-                },
-              )
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-            child: TextField(
-              controller: _roasterControllerFourth,
-              decoration: InputDecoration(
-                  labelText: 'Roaster',
-                  hintText: 'Reverbed Coffee'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _roasterFourthChanged,
-            ),
-          ),
-        ]
-    );
-  }
-
-  // カッピング項目入力画面4_1
-  Widget _firstCuppingDataFourth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 3/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  'CleanCup',
-                  style: TextStyle(
-                      fontSize: height * 0.015
-                  ),
-                ),
-                SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: height * 0.01,
-                    thumbColor: HexColor('313131'),
-                    overlayColor: HexColor('808080').withAlpha(80),
-                    activeTrackColor: HexColor('313131'),
-                    inactiveTrackColor: HexColor('cccccc'),
-                    inactiveTickMarkColor: HexColor('cccccc'),
-                    activeTickMarkColor: HexColor('313131'),
-                  ),
-                  child: Slider(
-                      label: '$_cleanCupFourth',
-                      min: 0,
-                      max: 8,
-                      value: _cleanCupFourth,
-                      // activeColor: Colors.orange,
-                      // inactiveColor: Colors.blue,
-                      divisions: 16,
-                      onChanged: _slideCleanCupFourth
-                  ),
-                )
-              ],
-            )
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Sweetness',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_sweetnessFourth',
-                    min: 0,
-                    max: 8,
-                    value: _sweetnessFourth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideSweetnessFourth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Acidity',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_acidityFourth',
-                    min: 0,
-                    max: 8,
-                    value: _acidityFourth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAcidityFourth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面4_2
-  Widget _secondCuppingDataFourth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 4/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'MouseFeel',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_mouseFeelFourth',
-                    min: 0,
-                    max: 8,
-                    value: _mouseFeelFourth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideMouseFeelFourth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'AfterTaste',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_afterTasteFourth',
-                    min: 0,
-                    max: 8,
-                    value: _afterTasteFourth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAfterTasteFourth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Flavor',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_flavorFourth',
-                    min: 0,
-                    max: 8,
-                    value: _flavorFourth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideFlavorFourth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面4_3
-  Widget _thirdCuppingDataFourth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 5/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Balance',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_balanceFourth',
-                    min: 0,
-                    max: 8,
-                    value: _balanceFourth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideBalanceFourth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'OverAll',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_overallFourth',
-                    min: 0,
-                    max: 8,
-                    value: _overallFourth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideOverallFourth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面4_4
-  Widget _fourthCuppingDataFourth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 6/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.05),
-          child: TextField(
-            controller: _flavorTextControllerFourth,
-            decoration: InputDecoration(
-              labelText: 'Flavor Text',
-              hintText: 'Lemon, Peach, Strawberry',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _flavorTextFourthChanged,
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: TextField(
-            controller: _commentControllerFourth,
-            decoration: InputDecoration(
-              labelText: 'Comment',
-              hintText: 'Silky, Complex, BrightAcidity',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _commentFourthChanged,
-          ),
-        )
-      ],
-    );
-  }
-
-  // コーヒー名などを入力する部分5_1
-  Widget _firstCoffeeInfoFieldFifth(double width, double height) {
-
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 1/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _coffeeNameControllerFifth,
-              decoration: InputDecoration(
-                labelText: 'Coffee Name',
-                hintText: 'Yirgacheffe Konga',
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _coffeeNameFifthChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedCountryFifth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalCountriesPickerFifth(context);
-                },
-              )
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.014),
-                        child: Text(
-                          this._selectedVarietyFifth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalVarietiesPickerFifth(context);
-                },
-              )
-          ),
-        ]
-    );
-  }
-
-  // コーヒー名などを入力する部分5_2
-  Widget _secondCoffeeInfoFieldFifth(double width, double height) {
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 2/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _elevationControllerFifth,
-              decoration: InputDecoration(
-                  labelText: 'Elevation',
-                  hintText: '1500'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: _elevationFifthChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedProcessFifth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalProcessesPickerFifth(context);
-                },
-              )
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-            child: TextField(
-              controller: _roasterControllerFifth,
-              decoration: InputDecoration(
-                  labelText: 'Roaster',
-                  hintText: 'Reverbed Coffee'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _roasterFifthChanged,
-            ),
-          ),
-        ]
-    );
-  }
-
-  // カッピング項目入力画面5_1
-  Widget _firstCuppingDataFifth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 3/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  'CleanCup',
-                  style: TextStyle(
-                      fontSize: height * 0.015
-                  ),
-                ),
-                SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: height * 0.01,
-                    thumbColor: HexColor('313131'),
-                    overlayColor: HexColor('808080').withAlpha(80),
-                    activeTrackColor: HexColor('313131'),
-                    inactiveTrackColor: HexColor('cccccc'),
-                    inactiveTickMarkColor: HexColor('cccccc'),
-                    activeTickMarkColor: HexColor('313131'),
-                  ),
-                  child: Slider(
-                      label: '$_cleanCupFifth',
-                      min: 0,
-                      max: 8,
-                      value: _cleanCupFifth,
-                      // activeColor: Colors.orange,
-                      // inactiveColor: Colors.blue,
-                      divisions: 16,
-                      onChanged: _slideCleanCupFifth
-                  ),
-                )
-              ],
-            )
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Sweetness',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_sweetnessFifth',
-                    min: 0,
-                    max: 8,
-                    value: _sweetnessFifth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideSweetnessFifth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Acidity',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_acidityFifth',
-                    min: 0,
-                    max: 8,
-                    value: _acidityFifth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAcidityFifth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面5_2
-  Widget _secondCuppingDataFifth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 4/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'MouseFeel',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_mouseFeelFifth',
-                    min: 0,
-                    max: 8,
-                    value: _mouseFeelFifth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideMouseFeelFifth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'AfterTaste',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_afterTasteFifth',
-                    min: 0,
-                    max: 8,
-                    value: _afterTasteFifth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAfterTasteFifth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Flavor',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_flavorFifth',
-                    min: 0,
-                    max: 8,
-                    value: _flavorFifth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideFlavorFifth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面5_3
-  Widget _thirdCuppingDataFifth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 5/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Balance',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_balanceFifth',
-                    min: 0,
-                    max: 8,
-                    value: _balanceFifth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideBalanceFifth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'OverAll',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_overallFifth',
-                    min: 0,
-                    max: 8,
-                    value: _overallFifth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideOverallFifth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面5_4
-  Widget _fourthCuppingDataFifth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 6/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.05),
-          child: TextField(
-            controller: _flavorTextControllerFifth,
-            decoration: InputDecoration(
-              labelText: 'Flavor Text',
-              hintText: 'Lemon, Peach, Strawberry',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _flavorTextFifthChanged,
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: TextField(
-            controller: _commentControllerFifth,
-            decoration: InputDecoration(
-              labelText: 'Comment',
-              hintText: 'Silky, Complex, BrightAcidity',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _commentFifthChanged,
-          ),
-        )
-      ],
-    );
-  }
-
-  // コーヒー名などを入力する部分6_1
-  Widget _firstCoffeeInfoFieldSixth(double width, double height) {
-
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 1/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _coffeeNameControllerSixth,
-              decoration: InputDecoration(
-                labelText: 'Coffee Name',
-                hintText: 'Yirgacheffe Konga',
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _coffeeNameSixthChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedCountrySixth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalCountriesPickerSixth(context);
-                },
-              )
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.014),
-                        child: Text(
-                          this._selectedVarietySixth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalVarietiesPickerSixth(context);
-                },
-              )
-          ),
-        ]
-    );
-  }
-
-  // コーヒー名などを入力する部分6_2
-  Widget _secondCoffeeInfoFieldSixth(double width, double height) {
-    return Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-            child: Text(
-              'カッピング 2/6',
-              style: TextStyle(
-                fontSize: height * 0.025,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-            child: Text(
-              '各項目を評価してください',
-              style: TextStyle(
-                  fontSize: height * 0.015
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _elevationControllerSixth,
-              decoration: InputDecoration(
-                  labelText: 'Elevation',
-                  hintText: '1500'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: _elevationSixthChanged,
-            ),
-          ),
-          Container(
-              child: InkWell(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
-                        child: Text(
-                          this._selectedProcessSixth,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: height * 0.02
-                          ),
-                        )
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-                      child: Divider(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  _showModalProcessesPickerSixth(context);
-                },
-              )
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-            child: TextField(
-              controller: _roasterControllerSixth,
-              decoration: InputDecoration(
-                  labelText: 'Roaster',
-                  hintText: 'Reverbed Coffee'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.text,
-              onChanged: _roasterSixthChanged,
-            ),
-          ),
-        ]
-    );
-  }
-
-  // カッピング項目入力画面6_1
-  Widget _firstCuppingDataSixth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 3/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  'CleanCup',
-                  style: TextStyle(
-                      fontSize: height * 0.015
-                  ),
-                ),
-                SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: height * 0.01,
-                    thumbColor: HexColor('313131'),
-                    overlayColor: HexColor('808080').withAlpha(80),
-                    activeTrackColor: HexColor('313131'),
-                    inactiveTrackColor: HexColor('cccccc'),
-                    inactiveTickMarkColor: HexColor('cccccc'),
-                    activeTickMarkColor: HexColor('313131'),
-                  ),
-                  child: Slider(
-                      label: '$_cleanCupSixth',
-                      min: 0,
-                      max: 8,
-                      value: _cleanCupSixth,
-                      // activeColor: Colors.orange,
-                      // inactiveColor: Colors.blue,
-                      divisions: 16,
-                      onChanged: _slideCleanCupSixth
-                  ),
-                )
-              ],
-            )
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Sweetness',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_sweetnessSixth',
-                    min: 0,
-                    max: 8,
-                    value: _sweetnessSixth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideSweetnessSixth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Acidity',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_aciditySixth',
-                    min: 0,
-                    max: 8,
-                    value: _aciditySixth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAciditySixth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面6_2
-  Widget _secondCuppingDataSixth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 4/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'MouseFeel',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_mouseFeelSixth',
-                    min: 0,
-                    max: 8,
-                    value: _mouseFeelSixth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideMouseFeelSixth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'AfterTaste',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_afterTasteSixth',
-                    min: 0,
-                    max: 8,
-                    value: _afterTasteSixth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideAfterTasteSixth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Flavor',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_flavorSixth',
-                    min: 0,
-                    max: 8,
-                    value: _flavorSixth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideFlavorSixth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面6_3
-  Widget _thirdCuppingDataSixth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 5/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Balance',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_balanceSixth',
-                    min: 0,
-                    max: 8,
-                    value: _balanceSixth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideBalanceSixth
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.03),
-          child: Column(
-            children: <Widget>[
-              Text(
-                'OverAll',
-                style: TextStyle(
-                    fontSize: height * 0.015
-                ),
-              ),
-              SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: height * 0.01,
-                  thumbColor: HexColor('313131'),
-                  overlayColor: HexColor('808080').withAlpha(80),
-                  activeTrackColor: HexColor('313131'),
-                  inactiveTrackColor: HexColor('cccccc'),
-                  inactiveTickMarkColor: HexColor('cccccc'),
-                  activeTickMarkColor: HexColor('313131'),
-                ),
-                child: Slider(
-                    label: '$_overallSixth',
-                    min: 0,
-                    max: 8,
-                    value: _overallSixth,
-                    // activeColor: Colors.orange,
-                    // inactiveColor: Colors.blue,
-                    divisions: 16,
-                    onChanged: _slideOverallSixth
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // カッピング項目入力画面6_4
-  Widget _fourthCuppingDataSixth(double width, double height) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(0, height * 0.06, 0, height * 0.01),
-          child: Text(
-            'カッピング 6/6',
-            style: TextStyle(
-              fontSize: height * 0.025,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-          child: Text(
-            '各項目を評価してください',
-            style: TextStyle(
-                fontSize: height * 0.015
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.05),
-          child: TextField(
-            controller: _flavorTextControllerSixth,
-            decoration: InputDecoration(
-              labelText: 'Flavor Text',
-              hintText: 'Lemon, Peach, Strawberry',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _flavorTextSixthChanged,
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, 0),
-          child: TextField(
-            controller: _commentControllerSixth,
-            decoration: InputDecoration(
-              labelText: 'Comment',
-              hintText: 'Silky, Complex, BrightAcidity',
-            ),
-            style: TextStyle(
-                fontSize: height * 0.02
-            ),
-            keyboardType: TextInputType.text,
-            onChanged: _commentSixthChanged,
+            onChanged: commentChangeFunction,
+            textInputAction: TextInputAction.done,
+            onEditingComplete: () => node.nextFocus(),
           ),
         )
       ],
@@ -5221,10 +2119,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingData['coffee_name'] = _coffeeName;
     cuppingData['country'] = _selectedCountry;
     cuppingData['variety'] = _selectedVariety;
-    if (_elevation == '') {
+    if (_selectedElevation == 'Elevation') {
       cuppingData['elevation'] = 0;
     } else {
-      cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
+      cuppingData['elevation'] = int.parse(_selectedElevation); // 数値型に変換
     }
     cuppingData['process'] = _selectedProcess;
     cuppingData['roaster'] = _roaster;
@@ -5277,10 +2175,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameSecond;
     cuppingDataSecond['country'] = _selectedCountrySecond;
     cuppingDataSecond['variety'] = _selectedVarietySecond;
-    if (_elevationSecond == '') {
+    if (_selectedElevationSecond == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationSecond); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationSecond); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessSecond;
     cuppingDataSecond['roaster'] = _roasterSecond;
@@ -5333,10 +2231,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameThird;
     cuppingDataSecond['country'] = _selectedCountryThird;
     cuppingDataSecond['variety'] = _selectedVarietyThird;
-    if (_elevationThird == '') {
+    if (_selectedElevationThird == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationThird); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationThird); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessThird;
     cuppingDataSecond['roaster'] = _roasterThird;
@@ -5389,10 +2287,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameFourth;
     cuppingDataSecond['country'] = _selectedCountryFourth;
     cuppingDataSecond['variety'] = _selectedVarietyFourth;
-    if (_elevationFourth == '') {
+    if (_selectedElevationFourth == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationFourth); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationFourth); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessFourth;
     cuppingDataSecond['roaster'] = _roasterFourth;
@@ -5445,10 +2343,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameFifth;
     cuppingDataSecond['country'] = _selectedCountryFifth;
     cuppingDataSecond['variety'] = _selectedVarietyFifth;
-    if (_elevationFifth == '') {
+    if (_selectedElevationFifth == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationFifth); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationFifth); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessFifth;
     cuppingDataSecond['roaster'] = _roasterFifth;
@@ -5501,10 +2399,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameSixth;
     cuppingDataSecond['country'] = _selectedCountrySixth;
     cuppingDataSecond['variety'] = _selectedVarietySixth;
-    if (_elevationSixth == '') {
+    if (_selectedElevationSixth == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationSixth); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationSixth); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessSixth;
     cuppingDataSecond['roaster'] = _roasterSixth;
@@ -5642,7 +2540,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedSecond(int index) {
     setState(() {
-      _selectedCountrySecond = _countriesSecond[index];
+      _selectedCountrySecond = _countries[index];
     });
   }
 
@@ -5658,10 +2556,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesSecond.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedSecond,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesSecond.indexOf(_selectedCountrySecond),
+                initialItem: _countries.indexOf(_selectedCountrySecond),
               ),
             ),
           ),
@@ -5672,7 +2570,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedThird(int index) {
     setState(() {
-      _selectedCountryThird = _countriesThird[index];
+      _selectedCountryThird = _countries[index];
     });
   }
 
@@ -5688,10 +2586,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesThird.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedThird,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesThird.indexOf(_selectedCountryThird),
+                initialItem: _countries.indexOf(_selectedCountryThird),
               ),
             ),
           ),
@@ -5702,7 +2600,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedFourth(int index) {
     setState(() {
-      _selectedCountryFourth = _countriesFourth[index];
+      _selectedCountryFourth = _countries[index];
     });
   }
 
@@ -5718,10 +2616,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesFourth.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedFourth,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesFourth.indexOf(_selectedCountryFourth),
+                initialItem: _countries.indexOf(_selectedCountryFourth),
               ),
             ),
           ),
@@ -5732,7 +2630,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedFifth(int index) {
     setState(() {
-      _selectedCountryFifth = _countriesFifth[index];
+      _selectedCountryFifth = _countries[index];
     });
   }
 
@@ -5748,10 +2646,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesFifth.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedFifth,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesFifth.indexOf(_selectedCountryFifth),
+                initialItem: _countries.indexOf(_selectedCountryFifth),
               ),
             ),
           ),
@@ -5762,7 +2660,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedSixth(int index) {
     setState(() {
-      _selectedCountrySixth = _countriesSixth[index];
+      _selectedCountrySixth = _countries[index];
     });
   }
 
@@ -5778,10 +2676,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesSixth.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedSixth,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesSixth.indexOf(_selectedCountrySixth),
+                initialItem: _countries.indexOf(_selectedCountrySixth),
               ),
             ),
           ),
@@ -5822,7 +2720,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedSecond(int index) {
     setState(() {
-      _selectedVarietySecond = _varietiesSecond[index];
+      _selectedVarietySecond = _varieties[index];
     });
   }
 
@@ -5838,10 +2736,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesSecond.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedSecond,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesSecond.indexOf(_selectedVarietySecond),
+                initialItem: _varieties.indexOf(_selectedVarietySecond),
               ),
             ),
           ),
@@ -5852,7 +2750,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedThird(int index) {
     setState(() {
-      _selectedVarietyThird = _varietiesThird[index];
+      _selectedVarietyThird = _varieties[index];
     });
   }
 
@@ -5868,10 +2766,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesThird.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedThird,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesThird.indexOf(_selectedVarietyThird),
+                initialItem: _varieties.indexOf(_selectedVarietyThird),
               ),
             ),
           ),
@@ -5882,7 +2780,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedFourth(int index) {
     setState(() {
-      _selectedVarietyFourth = _varietiesFourth[index];
+      _selectedVarietyFourth = _varieties[index];
     });
   }
 
@@ -5898,10 +2796,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesFourth.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedFourth,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesFourth.indexOf(_selectedVarietyFourth),
+                initialItem: _varieties.indexOf(_selectedVarietyFourth),
               ),
             ),
           ),
@@ -5912,7 +2810,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedFifth(int index) {
     setState(() {
-      _selectedVarietyFifth = _varietiesFifth[index];
+      _selectedVarietyFifth = _varieties[index];
     });
   }
 
@@ -5928,10 +2826,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesFifth.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedFifth,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesFifth.indexOf(_selectedVarietyFifth),
+                initialItem: _varieties.indexOf(_selectedVarietyFifth),
               ),
             ),
           ),
@@ -5942,7 +2840,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedSixth(int index) {
     setState(() {
-      _selectedVarietySixth = _varietiesSixth[index];
+      _selectedVarietySixth = _varieties[index];
     });
   }
 
@@ -5958,10 +2856,190 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesSixth.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedSixth,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesSixth.indexOf(_selectedVarietySixth),
+                initialItem: _varieties.indexOf(_selectedVarietySixth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationChanged(int index) {
+    setState(() {
+      _selectedElevation = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPicker(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevation),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationSecondChanged(int index) {
+    setState(() {
+      _selectedElevationSecond = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerSecond(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationSecondChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationSecond),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationThirdChanged(int index) {
+    setState(() {
+      _selectedElevationThird = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerThird(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationThirdChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationThird),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationFourthChanged(int index) {
+    setState(() {
+      _selectedElevationFourth = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerFourth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationFourthChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationFourth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationFifthChanged(int index) {
+    setState(() {
+      _selectedElevationFifth = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerFifth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationFifthChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationFifth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationSixthChanged(int index) {
+    setState(() {
+      _selectedElevationSixth = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerSixth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationSixthChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationSixth),
               ),
             ),
           ),
@@ -6002,7 +3080,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedSecond(int index) {
     setState(() {
-      _selectedProcessSecond = _processesSecond[index];
+      _selectedProcessSecond = _processes[index];
     });
   }
 
@@ -6018,10 +3096,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesSecond.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedSecond,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesSecond.indexOf(_selectedProcessSecond),
+                initialItem: _processes.indexOf(_selectedProcessSecond),
               ),
             ),
           ),
@@ -6032,7 +3110,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedThird(int index) {
     setState(() {
-      _selectedProcessThird = _processesThird[index];
+      _selectedProcessThird = _processes[index];
     });
   }
 
@@ -6048,10 +3126,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesThird.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedThird,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesThird.indexOf(_selectedProcessThird),
+                initialItem: _processes.indexOf(_selectedProcessThird),
               ),
             ),
           ),
@@ -6062,7 +3140,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedFourth(int index) {
     setState(() {
-      _selectedProcessFourth = _processesFourth[index];
+      _selectedProcessFourth = _processes[index];
     });
   }
 
@@ -6078,10 +3156,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesFourth.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedFourth,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesFourth.indexOf(_selectedProcessFourth),
+                initialItem: _processes.indexOf(_selectedProcessFourth),
               ),
             ),
           ),
@@ -6092,7 +3170,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedFifth(int index) {
     setState(() {
-      _selectedProcessFifth = _processesFifth[index];
+      _selectedProcessFifth = _processes[index];
     });
   }
 
@@ -6108,10 +3186,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesFifth.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedFifth,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesFifth.indexOf(_selectedProcessFifth),
+                initialItem: _processes.indexOf(_selectedProcessFifth),
               ),
             ),
           ),
@@ -6122,7 +3200,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedSixth(int index) {
     setState(() {
-      _selectedProcessSixth = _processesSixth[index];
+      _selectedProcessSixth = _processes[index];
     });
   }
 
@@ -6138,10 +3216,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesSixth.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedSixth,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesSixth.indexOf(_selectedProcessSixth),
+                initialItem: _processes.indexOf(_selectedProcessSixth),
               ),
             ),
           ),
@@ -6149,17 +3227,4 @@ class _CuppingPageState extends State<CuppingPage> {
       },
     );
   }
-}
-
-// カラーコードで色を表示するためのクラス
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll('#', '');
-    if (hexColor.length == 6) {
-      hexColor = 'FF' + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
-
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
