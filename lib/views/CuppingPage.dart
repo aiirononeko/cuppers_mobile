@@ -1004,7 +1004,11 @@ class _CuppingPageState extends State<CuppingPage> {
                           icon: Icon(Icons.play_arrow, color: HexColor('e7e7e7')),
                           onPressed: () {
                             setState(() {
-                              this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+
+                              // タイマーが起動していなかった場合、タイマーを起動
+                              if (this._timer == null) {
+                                this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+                              }
                             });
                           }
                       )
