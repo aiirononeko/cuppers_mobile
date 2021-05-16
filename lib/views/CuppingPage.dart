@@ -285,8 +285,13 @@ class _CuppingPageState extends State<CuppingPage> {
   void _flavorTextSixthChanged(String str) => setState(() { _flavorTextSixth = str; });
   void _commentSixthChanged(String str) => setState(() { _commentSixth = str; });
 
-  // ドラムピッカー用のリスト型変数
+  // ドラムピッカー用の変数
   String _selectedCountry = 'Country';
+  String _selectedCountrySecond = 'Country';
+  String _selectedCountryThird = 'Country';
+  String _selectedCountryFourth = 'Country';
+  String _selectedCountryFifth = 'Country';
+  String _selectedCountrySixth = 'Country';
   final List<String> _countries = [
     'Brazil',
     'Colombia',
@@ -311,138 +316,13 @@ class _CuppingPageState extends State<CuppingPage> {
     'Other Country'
   ];
 
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountrySecond = 'Country';
-  final List<String> _countriesSecond = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountryThird = 'Country';
-  final List<String> _countriesThird = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountryFourth = 'Country';
-  final List<String> _countriesFourth = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountryFifth = 'Country';
-  final List<String> _countriesFifth = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedCountrySixth = 'Country';
-  final List<String> _countriesSixth = [
-    'Brazil',
-    'Colombia',
-    'Indonesia',
-    'Ethiopia',
-    'Mexico',
-    'Guatemala',
-    'Peru',
-    'Honduras',
-    'Costa Rica',
-    'El Salvador',
-    'Nicaragua',
-    'Ecuador',
-    'Thai',
-    'Tanzania',
-    'Dominicana',
-    'Kenya',
-    'Burundi',
-    'Rwanda',
-    'Bolivia',
-    'Panama',
-    'Other Country'
-  ];
-
-  // ドラムピッカー用のリスト型変数
+  // ドラムピッカー用の変数
   String _selectedVariety = 'Variety';
+  String _selectedVarietySecond = 'Variety';
+  String _selectedVarietyThird = 'Variety';
+  String _selectedVarietyFourth = 'Variety';
+  String _selectedVarietyFifth = 'Variety';
+  String _selectedVarietySixth = 'Variety';
   final List<String> _varieties = [
     'Typica',
     'Bourbon',
@@ -466,239 +346,14 @@ class _CuppingPageState extends State<CuppingPage> {
     'Other Variety'
   ];
 
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietySecond = 'Variety';
-  final List<String> _varietiesSecond = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietyThird = 'Variety';
-  final List<String> _varietiesThird = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietyFourth = 'Variety';
-  final List<String> _varietiesFourth = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietyFifth = 'Variety';
-  final List<String> _varietiesFifth = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
-  String _selectedVarietySixth = 'Variety';
-  final List<String> _varietiesSixth = [
-    'Typica',
-    'Bourbon',
-    'Yellow Bourbon',
-    'Red Bourbon',
-    'Cattura',
-    'Mundo Novo',
-    'Catuai',
-    'MaragoGype',
-    'San Ramon',
-    'Purpurascens',
-    'Kent',
-    'Pacas',
-    'Akkaya',
-    'Pacamara',
-    'Villa Sarchi',
-    'Arusha',
-    'Geisha',
-    'SL28',
-    'SL34',
-    'Other Variety'
-  ];
-
-  // ドラムピッカー用のリスト型変数
+  // ドラムピッカー用の変数
   String _selectedProcess = 'Process';
-  final List<String> _processes = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessSecond = 'Process';
-  final List<String> _processesSecond = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessThird = 'Process';
-  final List<String> _processesThird = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessFourth = 'Process';
-  final List<String> _processesFourth = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessFifth = 'Process';
-  final List<String> _processesFifth = [
-    'Washed',
-    'Fully Washed',
-    'Natural',
-    'Pulped Natural',
-    'Honey Process',
-    'White Honey',
-    'Golden Honey',
-    'Yellow Honey',
-    'Red Honey',
-    'Black Honey',
-    'Traditional Sumatran Process',
-    'Anaerobic',
-    'Anaerobic Natural',
-    'Anaerobic Washed',
-    'Anaerobic Honey',
-    'Other Process'
-  ];
-
-  // ドラムピッカー用のリスト型変数
   String _selectedProcessSixth = 'Process';
-  final List<String> _processesSixth = [
+  final List<String> _processes = [
     'Washed',
     'Fully Washed',
     'Natural',
@@ -2840,7 +2495,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedSecond(int index) {
     setState(() {
-      _selectedCountrySecond = _countriesSecond[index];
+      _selectedCountrySecond = _countries[index];
     });
   }
 
@@ -2856,10 +2511,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesSecond.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedSecond,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesSecond.indexOf(_selectedCountrySecond),
+                initialItem: _countries.indexOf(_selectedCountrySecond),
               ),
             ),
           ),
@@ -2870,7 +2525,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedThird(int index) {
     setState(() {
-      _selectedCountryThird = _countriesThird[index];
+      _selectedCountryThird = _countries[index];
     });
   }
 
@@ -2886,10 +2541,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesThird.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedThird,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesThird.indexOf(_selectedCountryThird),
+                initialItem: _countries.indexOf(_selectedCountryThird),
               ),
             ),
           ),
@@ -2900,7 +2555,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedFourth(int index) {
     setState(() {
-      _selectedCountryFourth = _countriesFourth[index];
+      _selectedCountryFourth = _countries[index];
     });
   }
 
@@ -2916,10 +2571,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesFourth.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedFourth,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesFourth.indexOf(_selectedCountryFourth),
+                initialItem: _countries.indexOf(_selectedCountryFourth),
               ),
             ),
           ),
@@ -2930,7 +2585,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedFifth(int index) {
     setState(() {
-      _selectedCountryFifth = _countriesFifth[index];
+      _selectedCountryFifth = _countries[index];
     });
   }
 
@@ -2946,10 +2601,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesFifth.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedFifth,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesFifth.indexOf(_selectedCountryFifth),
+                initialItem: _countries.indexOf(_selectedCountryFifth),
               ),
             ),
           ),
@@ -2960,7 +2615,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedItemChangedSixth(int index) {
     setState(() {
-      _selectedCountrySixth = _countriesSixth[index];
+      _selectedCountrySixth = _countries[index];
     });
   }
 
@@ -2976,10 +2631,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _countriesSixth.map(_pickerItem).toList(),
+              children: _countries.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedItemChangedSixth,
               scrollController: FixedExtentScrollController(
-                initialItem: _countriesSixth.indexOf(_selectedCountrySixth),
+                initialItem: _countries.indexOf(_selectedCountrySixth),
               ),
             ),
           ),
@@ -3020,7 +2675,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedSecond(int index) {
     setState(() {
-      _selectedVarietySecond = _varietiesSecond[index];
+      _selectedVarietySecond = _varieties[index];
     });
   }
 
@@ -3036,10 +2691,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesSecond.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedSecond,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesSecond.indexOf(_selectedVarietySecond),
+                initialItem: _varieties.indexOf(_selectedVarietySecond),
               ),
             ),
           ),
@@ -3050,7 +2705,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedThird(int index) {
     setState(() {
-      _selectedVarietyThird = _varietiesThird[index];
+      _selectedVarietyThird = _varieties[index];
     });
   }
 
@@ -3066,10 +2721,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesThird.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedThird,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesThird.indexOf(_selectedVarietyThird),
+                initialItem: _varieties.indexOf(_selectedVarietyThird),
               ),
             ),
           ),
@@ -3080,7 +2735,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedFourth(int index) {
     setState(() {
-      _selectedVarietyFourth = _varietiesFourth[index];
+      _selectedVarietyFourth = _varieties[index];
     });
   }
 
@@ -3096,10 +2751,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesFourth.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedFourth,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesFourth.indexOf(_selectedVarietyFourth),
+                initialItem: _varieties.indexOf(_selectedVarietyFourth),
               ),
             ),
           ),
@@ -3110,7 +2765,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedFifth(int index) {
     setState(() {
-      _selectedVarietyFifth = _varietiesFifth[index];
+      _selectedVarietyFifth = _varieties[index];
     });
   }
 
@@ -3126,10 +2781,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesFifth.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedFifth,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesFifth.indexOf(_selectedVarietyFifth),
+                initialItem: _varieties.indexOf(_selectedVarietyFifth),
               ),
             ),
           ),
@@ -3140,7 +2795,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedVarietyChangedSixth(int index) {
     setState(() {
-      _selectedVarietySixth = _varietiesSixth[index];
+      _selectedVarietySixth = _varieties[index];
     });
   }
 
@@ -3156,10 +2811,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _varietiesSixth.map(_pickerItem).toList(),
+              children: _varieties.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedVarietyChangedSixth,
               scrollController: FixedExtentScrollController(
-                initialItem: _varietiesSixth.indexOf(_selectedVarietySixth),
+                initialItem: _varieties.indexOf(_selectedVarietySixth),
               ),
             ),
           ),
@@ -3200,7 +2855,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedSecond(int index) {
     setState(() {
-      _selectedProcessSecond = _processesSecond[index];
+      _selectedProcessSecond = _processes[index];
     });
   }
 
@@ -3216,10 +2871,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesSecond.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedSecond,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesSecond.indexOf(_selectedProcessSecond),
+                initialItem: _processes.indexOf(_selectedProcessSecond),
               ),
             ),
           ),
@@ -3230,7 +2885,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedThird(int index) {
     setState(() {
-      _selectedProcessThird = _processesThird[index];
+      _selectedProcessThird = _processes[index];
     });
   }
 
@@ -3246,10 +2901,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesThird.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedThird,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesThird.indexOf(_selectedProcessThird),
+                initialItem: _processes.indexOf(_selectedProcessThird),
               ),
             ),
           ),
@@ -3260,7 +2915,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedFourth(int index) {
     setState(() {
-      _selectedProcessFourth = _processesFourth[index];
+      _selectedProcessFourth = _processes[index];
     });
   }
 
@@ -3276,10 +2931,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesFourth.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedFourth,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesFourth.indexOf(_selectedProcessFourth),
+                initialItem: _processes.indexOf(_selectedProcessFourth),
               ),
             ),
           ),
@@ -3290,7 +2945,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedFifth(int index) {
     setState(() {
-      _selectedProcessFifth = _processesFifth[index];
+      _selectedProcessFifth = _processes[index];
     });
   }
 
@@ -3306,10 +2961,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesFifth.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedFifth,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesFifth.indexOf(_selectedProcessFifth),
+                initialItem: _processes.indexOf(_selectedProcessFifth),
               ),
             ),
           ),
@@ -3320,7 +2975,7 @@ class _CuppingPageState extends State<CuppingPage> {
 
   void _onSelectedProcessChangedSixth(int index) {
     setState(() {
-      _selectedProcessSixth = _processesSixth[index];
+      _selectedProcessSixth = _processes[index];
     });
   }
 
@@ -3336,10 +2991,10 @@ class _CuppingPageState extends State<CuppingPage> {
             },
             child: CupertinoPicker(
               itemExtent: 40,
-              children: _processesSixth.map(_pickerItem).toList(),
+              children: _processes.map(_pickerItem).toList(),
               onSelectedItemChanged: _onSelectedProcessChangedSixth,
               scrollController: FixedExtentScrollController(
-                initialItem: _processesSixth.indexOf(_selectedProcessSixth),
+                initialItem: _processes.indexOf(_selectedProcessSixth),
               ),
             ),
           ),
