@@ -348,6 +348,37 @@ class _CuppingPageState extends State<CuppingPage> {
   ];
 
   // ドラムピッカー用の変数
+  String _selectedElevation = 'Elevation';
+  String _selectedElevationSecond = 'Elevation';
+  String _selectedElevationThird = 'Elevation';
+  String _selectedElevationFourth = 'Elevation';
+  String _selectedElevationFifth = 'Elevation';
+  String _selectedElevationSixth = 'Elevation';
+  final List<String> _elevations = [
+    '500',
+    '600',
+    '700',
+    '800',
+    '900',
+    '1000',
+    '1100',
+    '1200',
+    '1300',
+    '1400',
+    '1500',
+    '1600',
+    '1700',
+    '1800',
+    '1900',
+    '2000',
+    '2100',
+    '2200',
+    '2300',
+    '2400',
+    '2500',
+  ];
+
+  // ドラムピッカー用の変数
   String _selectedProcess = 'Process';
   String _selectedProcessSecond = 'Process';
   String _selectedProcessThird = 'Process';
@@ -396,7 +427,7 @@ class _CuppingPageState extends State<CuppingPage> {
           _selectedVariety, _showModalVarietiesPicker, node
       ), // 0
       _secondCuppingDataField(
-          _width, _height, _elevationController, _elevationChanged,
+          _width, _height, _selectedElevation, _showModalElevationsPicker,
           _selectedProcess, _showModalProcessesPicker,
           _roasterController, _roasterChanged, node
       ), // 1
@@ -424,7 +455,7 @@ class _CuppingPageState extends State<CuppingPage> {
           _selectedVarietySecond, _showModalVarietiesPickerSecond, node
       ), // 6
       _secondCuppingDataField(
-          _width, _height, _elevationControllerSecond, _elevationSecondChanged,
+          _width, _height, _selectedElevationSecond, _showModalElevationsPickerSecond,
           _selectedProcessSecond, _showModalProcessesPickerSecond,
           _roasterControllerSecond, _roasterSecondChanged, node
       ), // 7
@@ -452,7 +483,7 @@ class _CuppingPageState extends State<CuppingPage> {
           _selectedVarietyThird, _showModalVarietiesPickerThird, node
       ), // 12
       _secondCuppingDataField(
-          _width, _height, _elevationControllerThird, _elevationThirdChanged,
+          _width, _height, _selectedElevationThird, _showModalElevationsPickerThird,
           _selectedProcessThird, _showModalProcessesPickerThird,
           _roasterControllerThird, _roasterThirdChanged, node
       ), // 13
@@ -480,7 +511,7 @@ class _CuppingPageState extends State<CuppingPage> {
           _selectedVarietyFourth, _showModalVarietiesPickerFourth, node
       ), // 18
       _secondCuppingDataField(
-          _width, _height, _elevationControllerFourth, _elevationFourthChanged,
+          _width, _height, _selectedElevationFourth, _showModalElevationsPickerFourth,
           _selectedProcessFourth, _showModalProcessesPickerFourth,
           _roasterControllerFourth, _roasterFourthChanged, node
       ), // 19
@@ -508,7 +539,7 @@ class _CuppingPageState extends State<CuppingPage> {
           _selectedVarietyFifth, _showModalVarietiesPickerFifth, node
       ), // 24
       _secondCuppingDataField(
-          _width, _height, _elevationControllerFifth, _elevationFifthChanged,
+          _width, _height, _selectedElevationFifth, _showModalElevationsPickerFifth,
           _selectedProcessFifth, _showModalProcessesPickerFifth,
           _roasterControllerFifth, _roasterFifthChanged, node
       ), // 25
@@ -536,7 +567,7 @@ class _CuppingPageState extends State<CuppingPage> {
           _selectedVarietySixth, _showModalVarietiesPickerSixth, node
       ), // 30
       _secondCuppingDataField(
-          _width, _height, _elevationControllerSixth, _elevationSixthChanged,
+          _width, _height, _selectedElevationSixth, _showModalElevationsPickerSixth,
           _selectedProcessSixth, _showModalProcessesPickerSixth,
           _roasterControllerSixth, _roasterSixthChanged, node
       ), // 31
@@ -927,8 +958,8 @@ class _CuppingPageState extends State<CuppingPage> {
   Widget _secondCuppingDataField(
       double width,
       double height,
-      TextEditingController elevationController,
-      Function elevationChangeFunction,
+      String selectedElevation,
+      Function elevationsPicker,
       String selectedProcess,
       Function processesPicker,
       TextEditingController roasterController,
@@ -948,7 +979,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
             child: Text(
               '各項目を評価してください',
               style: TextStyle(
@@ -957,22 +988,32 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: elevationController,
-              decoration: InputDecoration(
-                  labelText: 'Elevation',
-                  hintText: '1500'
-              ),
-              style: TextStyle(
-                  fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: elevationChangeFunction,
-              textInputAction: TextInputAction.done,
-              onEditingComplete: () => node.nextFocus(),
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
+                        child: Text(
+                          selectedElevation,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: height * 0.02
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  elevationsPicker(context);
+                },
+              )
           ),
           Container(
               child: InkWell(
@@ -2102,10 +2143,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingData['coffee_name'] = _coffeeName;
     cuppingData['country'] = _selectedCountry;
     cuppingData['variety'] = _selectedVariety;
-    if (_elevation == '') {
+    if (_selectedElevation == 'Elevation') {
       cuppingData['elevation'] = 0;
     } else {
-      cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
+      cuppingData['elevation'] = int.parse(_selectedElevation); // 数値型に変換
     }
     cuppingData['process'] = _selectedProcess;
     cuppingData['roaster'] = _roaster;
@@ -2158,7 +2199,7 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameSecond;
     cuppingDataSecond['country'] = _selectedCountrySecond;
     cuppingDataSecond['variety'] = _selectedVarietySecond;
-    if (_elevationSecond == '') {
+    if (_elevationSecond == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
       cuppingDataSecond['elevation'] = int.parse(_elevationSecond); // 数値型に変換
@@ -2214,10 +2255,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameThird;
     cuppingDataSecond['country'] = _selectedCountryThird;
     cuppingDataSecond['variety'] = _selectedVarietyThird;
-    if (_elevationThird == '') {
+    if (_selectedElevationThird == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationThird); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationThird); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessThird;
     cuppingDataSecond['roaster'] = _roasterThird;
@@ -2270,10 +2311,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameFourth;
     cuppingDataSecond['country'] = _selectedCountryFourth;
     cuppingDataSecond['variety'] = _selectedVarietyFourth;
-    if (_elevationFourth == '') {
+    if (_selectedElevationFourth == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationFourth); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationFourth); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessFourth;
     cuppingDataSecond['roaster'] = _roasterFourth;
@@ -2326,10 +2367,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameFifth;
     cuppingDataSecond['country'] = _selectedCountryFifth;
     cuppingDataSecond['variety'] = _selectedVarietyFifth;
-    if (_elevationFifth == '') {
+    if (_selectedElevationFifth == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationFifth); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationFifth); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessFifth;
     cuppingDataSecond['roaster'] = _roasterFifth;
@@ -2382,10 +2423,10 @@ class _CuppingPageState extends State<CuppingPage> {
     cuppingDataSecond['coffee_name'] = _coffeeNameSixth;
     cuppingDataSecond['country'] = _selectedCountrySixth;
     cuppingDataSecond['variety'] = _selectedVarietySixth;
-    if (_elevationSixth == '') {
+    if (_selectedElevationSixth == 'Elevation') {
       cuppingDataSecond['elevation'] = 0;
     } else {
-      cuppingDataSecond['elevation'] = int.parse(_elevationSixth); // 数値型に変換
+      cuppingDataSecond['elevation'] = int.parse(_selectedElevationSixth); // 数値型に変換
     }
     cuppingDataSecond['process'] = _selectedProcessSixth;
     cuppingDataSecond['roaster'] = _roasterSixth;
@@ -2843,6 +2884,186 @@ class _CuppingPageState extends State<CuppingPage> {
               onSelectedItemChanged: _onSelectedVarietyChangedSixth,
               scrollController: FixedExtentScrollController(
                 initialItem: _varieties.indexOf(_selectedVarietySixth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationChanged(int index) {
+    setState(() {
+      _selectedElevation = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPicker(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevation),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationSecondChanged(int index) {
+    setState(() {
+      _selectedElevationSecond = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerSecond(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationSecondChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationSecond),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationThirdChanged(int index) {
+    setState(() {
+      _selectedElevationThird = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerThird(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationThirdChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationThird),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationFourthChanged(int index) {
+    setState(() {
+      _selectedElevationFourth = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerFourth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationFourthChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationFourth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationFifthChanged(int index) {
+    setState(() {
+      _selectedElevationFifth = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerFifth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationFifthChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationFifth),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onSelectedElevationSixthChanged(int index) {
+    setState(() {
+      _selectedElevationSixth = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPickerSixth(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationSixthChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevationSixth),
               ),
             ),
           ),
