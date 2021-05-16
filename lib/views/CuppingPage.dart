@@ -1462,7 +1462,7 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
             keyboardType: TextInputType.text,
             onChanged: flavorTextChangeFunction,
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
             onEditingComplete: () => node.nextFocus(),
           ),
         ),
