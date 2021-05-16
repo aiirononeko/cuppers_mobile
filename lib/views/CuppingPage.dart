@@ -384,17 +384,21 @@ class _CuppingPageState extends State<CuppingPage> {
     // ログイン中のユーザーIDを取得
     _uid = FirebaseAuth.instance.currentUser.uid;
 
+    final node = FocusScope.of(context);
+
     // カッピングページ表示項目の制御
     List<Widget> _pageList = [
 
       /** 1杯目のコーヒー */
       _firstCuppingDataField(
           _width, _height, _coffeeNameController, _coffeeNameChanged,
-          _selectedCountry, _showModalCountriesPicker, _selectedVariety, _showModalVarietiesPicker
+          _selectedCountry, _showModalCountriesPicker,
+          _selectedVariety, _showModalVarietiesPicker, node
       ), // 0
       _secondCuppingDataField(
           _width, _height, _elevationController, _elevationChanged,
-          _selectedProcess, _showModalProcessesPicker, _roasterController, _roasterChanged
+          _selectedProcess, _showModalProcessesPicker,
+          _roasterController, _roasterChanged, node
       ), // 1
       _thirdCuppingDataField(
           _width, _height, _cleanCup, _slideCleanCup,
@@ -410,17 +414,19 @@ class _CuppingPageState extends State<CuppingPage> {
       ), // 4
       _sixthCuppingDataField(
           _width, _height, _flavorTextController, _flavorTextChanged,
-          _commentController, _commentChanged
+          _commentController, _commentChanged, node
       ), // 5
 
       /** 2杯目のコーヒー */
       _firstCuppingDataField(
           _width, _height, _coffeeNameControllerSecond, _coffeeNameSecondChanged,
-          _selectedCountrySecond, _showModalCountriesPickerSecond, _selectedVarietySecond, _showModalVarietiesPickerSecond
+          _selectedCountrySecond, _showModalCountriesPickerSecond,
+          _selectedVarietySecond, _showModalVarietiesPickerSecond, node
       ), // 6
       _secondCuppingDataField(
           _width, _height, _elevationControllerSecond, _elevationSecondChanged,
-          _selectedProcessSecond, _showModalProcessesPickerSecond, _roasterControllerSecond, _roasterSecondChanged
+          _selectedProcessSecond, _showModalProcessesPickerSecond,
+          _roasterControllerSecond, _roasterSecondChanged, node
       ), // 7
       _thirdCuppingDataField(
           _width, _height, _cleanCupSecond, _slideCleanCupSecond,
@@ -436,17 +442,19 @@ class _CuppingPageState extends State<CuppingPage> {
       ), // 10
       _sixthCuppingDataField(
           _width, _height, _flavorTextControllerSecond, _flavorTextSecondChanged,
-          _commentControllerSecond, _commentSecondChanged
+          _commentControllerSecond, _commentSecondChanged, node
       ), // 11
 
       /** 3杯目のコーヒー */
       _firstCuppingDataField(
           _width, _height, _coffeeNameControllerThird, _coffeeNameThirdChanged,
-          _selectedCountryThird, _showModalCountriesPickerThird, _selectedVarietyThird, _showModalVarietiesPickerThird
+          _selectedCountryThird, _showModalCountriesPickerThird,
+          _selectedVarietyThird, _showModalVarietiesPickerThird, node
       ), // 12
       _secondCuppingDataField(
           _width, _height, _elevationControllerThird, _elevationThirdChanged,
-          _selectedProcessThird, _showModalProcessesPickerThird, _roasterControllerThird, _roasterThirdChanged
+          _selectedProcessThird, _showModalProcessesPickerThird,
+          _roasterControllerThird, _roasterThirdChanged, node
       ), // 13
       _thirdCuppingDataField(
           _width, _height, _cleanCupThird, _slideCleanCupThird,
@@ -462,17 +470,19 @@ class _CuppingPageState extends State<CuppingPage> {
       ), // 16
       _sixthCuppingDataField(
           _width, _height, _flavorTextControllerThird, _flavorTextThirdChanged,
-          _commentControllerThird, _commentThirdChanged
+          _commentControllerThird, _commentThirdChanged, node
       ), // 17
 
       /** 4杯目のコーヒー */
       _firstCuppingDataField(
           _width, _height, _coffeeNameControllerFourth, _coffeeNameFourthChanged,
-          _selectedCountryFourth, _showModalCountriesPickerFourth, _selectedVarietyFourth, _showModalVarietiesPickerFourth
+          _selectedCountryFourth, _showModalCountriesPickerFourth,
+          _selectedVarietyFourth, _showModalVarietiesPickerFourth, node
       ), // 18
       _secondCuppingDataField(
           _width, _height, _elevationControllerFourth, _elevationFourthChanged,
-          _selectedProcessFourth, _showModalProcessesPickerFourth, _roasterControllerFourth, _roasterFourthChanged
+          _selectedProcessFourth, _showModalProcessesPickerFourth,
+          _roasterControllerFourth, _roasterFourthChanged, node
       ), // 19
       _thirdCuppingDataField(
           _width, _height, _cleanCupFourth, _slideCleanCupFourth,
@@ -488,17 +498,19 @@ class _CuppingPageState extends State<CuppingPage> {
       ), // 22
       _sixthCuppingDataField(
           _width, _height, _flavorTextControllerFourth, _flavorTextFourthChanged,
-          _commentControllerFourth, _commentFourthChanged
+          _commentControllerFourth, _commentFourthChanged, node
       ), // 23
 
       /** 5杯目のコーヒー */
       _firstCuppingDataField(
           _width, _height, _coffeeNameControllerFifth, _coffeeNameFifthChanged,
-          _selectedCountryFifth, _showModalCountriesPickerFifth, _selectedVarietyFifth, _showModalVarietiesPickerFifth
+          _selectedCountryFifth, _showModalCountriesPickerFifth,
+          _selectedVarietyFifth, _showModalVarietiesPickerFifth, node
       ), // 24
       _secondCuppingDataField(
           _width, _height, _elevationControllerFifth, _elevationFifthChanged,
-          _selectedProcessFifth, _showModalProcessesPickerFifth, _roasterControllerFifth, _roasterFifthChanged
+          _selectedProcessFifth, _showModalProcessesPickerFifth,
+          _roasterControllerFifth, _roasterFifthChanged, node
       ), // 25
       _thirdCuppingDataField(
           _width, _height, _cleanCupFifth, _slideCleanCupFifth,
@@ -514,17 +526,19 @@ class _CuppingPageState extends State<CuppingPage> {
       ), // 28
       _sixthCuppingDataField(
           _width, _height, _flavorTextControllerFifth, _flavorTextFifthChanged,
-          _commentControllerFifth, _commentFifthChanged
+          _commentControllerFifth, _commentFifthChanged, node
       ), // 29
 
       /** 6杯目のコーヒー */
       _firstCuppingDataField(
           _width, _height, _coffeeNameControllerSixth, _coffeeNameSixthChanged,
-          _selectedCountrySixth, _showModalCountriesPickerSixth, _selectedVarietySixth, _showModalVarietiesPickerSixth
+          _selectedCountrySixth, _showModalCountriesPickerSixth,
+          _selectedVarietySixth, _showModalVarietiesPickerSixth, node
       ), // 30
       _secondCuppingDataField(
           _width, _height, _elevationControllerSixth, _elevationSixthChanged,
-          _selectedProcessSixth, _showModalProcessesPickerSixth, _roasterControllerSixth, _roasterSixthChanged
+          _selectedProcessSixth, _showModalProcessesPickerSixth,
+          _roasterControllerSixth, _roasterSixthChanged, node
       ), // 31
       _thirdCuppingDataField(
           _width, _height, _cleanCupSixth, _slideCleanCupSixth,
@@ -540,7 +554,7 @@ class _CuppingPageState extends State<CuppingPage> {
       ), // 34
       _sixthCuppingDataField(
           _width, _height, _flavorTextControllerSixth, _flavorTextSixthChanged,
-          _commentControllerSixth, _commentSixthChanged
+          _commentControllerSixth, _commentSixthChanged, node
       ), // 35
     ];
 
@@ -808,7 +822,8 @@ class _CuppingPageState extends State<CuppingPage> {
       String selectedCountry,
       Function countriesPicker,
       String selectedVariety,
-      Function varietiesPicker) {
+      Function varietiesPicker,
+      FocusNode node) {
 
     return Column(
         children: <Widget>[
@@ -844,6 +859,8 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: coffeeNameChangeFunction,
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => node.nextFocus(),
             ),
           ),
           Container(
@@ -915,7 +932,8 @@ class _CuppingPageState extends State<CuppingPage> {
       String selectedProcess,
       Function processesPicker,
       TextEditingController roasterController,
-      Function roasterChangeFunction) {
+      Function roasterChangeFunction,
+      FocusNode node) {
 
     return Column(
         children: <Widget>[
@@ -952,6 +970,8 @@ class _CuppingPageState extends State<CuppingPage> {
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onChanged: elevationChangeFunction,
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => node.nextFocus(),
             ),
           ),
           Container(
@@ -995,6 +1015,8 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: roasterChangeFunction,
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => node.nextFocus(),
             ),
           ),
         ]
@@ -1386,7 +1408,8 @@ class _CuppingPageState extends State<CuppingPage> {
       TextEditingController flavorTextController,
       Function flavorTextChangeFunction,
       TextEditingController commentController,
-      Function commentChangeFunction) {
+      Function commentChangeFunction,
+      FocusNode node) {
 
     return Column(
       children: <Widget>[
@@ -1422,6 +1445,8 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
             keyboardType: TextInputType.text,
             onChanged: flavorTextChangeFunction,
+            textInputAction: TextInputAction.next,
+            onEditingComplete: () => node.nextFocus(),
           ),
         ),
         Container(
@@ -1437,6 +1462,8 @@ class _CuppingPageState extends State<CuppingPage> {
             ),
             keyboardType: TextInputType.text,
             onChanged: commentChangeFunction,
+            textInputAction: TextInputAction.done,
+            onEditingComplete: () => node.nextFocus(),
           ),
         )
       ],
