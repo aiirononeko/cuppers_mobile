@@ -198,7 +198,37 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
           leading: new IconButton(
             icon: new Icon(Icons.close, color: Colors.white),
             onPressed: () {
-              Navigator.pop(context);
+
+              showDialog(
+                  context: context,
+                  builder: (_) {
+                    return AlertDialog(
+                      content: Text('編集内容を保存せずに中止しますか？'),
+                      actions: <Widget>[
+                        // ボタン領域
+                        ElevatedButton(
+                          child: Text('Cancel'),
+                          style: ElevatedButton.styleFrom(
+                            primary: HexColor('313131'),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                        ElevatedButton(
+                          child: Text('OK'),
+                          style: ElevatedButton.styleFrom(
+                            primary: HexColor('313131'),
+                          ),
+                          onPressed: () {
+
+                            int count = 0;
+                            Navigator.popUntil(context, (_) => count++ >= 2);
+
+                          },
+                        ),
+                      ],
+                    );
+                  }
+              );
             },
           ),
         ),
