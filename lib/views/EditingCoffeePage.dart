@@ -23,13 +23,11 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
   String _uid;
 
   TextEditingController _coffeeNameController;
-  TextEditingController _elevationController;
   TextEditingController _roasterController;
   TextEditingController _flavorTextController;
   TextEditingController _commentController;
 
   String _coffeeName;
-  String _elevation;
   String _roaster;
   double _sweetness;
   double _acidity;
@@ -93,6 +91,32 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     'Other Variety'
   ];
 
+  // ドラムピッカー用の変数
+  String _selectedElevation = 'Elevation';
+  final List<String> _elevations = [
+    '500',
+    '600',
+    '700',
+    '800',
+    '900',
+    '1000',
+    '1100',
+    '1200',
+    '1300',
+    '1400',
+    '1500',
+    '1600',
+    '1700',
+    '1800',
+    '1900',
+    '2000',
+    '2100',
+    '2200',
+    '2300',
+    '2400',
+    '2500',
+  ];
+
   // ドラムピッカー用のリスト型変数
   String _selectedProcess = 'Process';
   final List<String> _processes = [
@@ -121,7 +145,6 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     _fetchCuppingData();
 
     _coffeeNameController = new TextEditingController(text: _coffeeName);
-    _elevationController =  new TextEditingController(text: _elevation);
     _roasterController = new TextEditingController(text: _roaster);
     _flavorTextController = new TextEditingController(text: _flavorText);
     _commentController = new TextEditingController(text: _comment);
@@ -131,7 +154,6 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
   }
 
   void _coffeeNameChanged(String str) => setState(() { _coffeeName = str; });
-  void _elevationChanged(String str) => setState(() { _elevation = str; });
   void _roasterChanged(String str) => setState(() { _roaster = str; });
   void _slideSweetness(double e) => setState(() { _sweetness = e; });
   void _slideAcidity(double e) => setState(() { _acidity = e; });
@@ -284,29 +306,6 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     );
   }
 
-  // カッピングデータを取得してメンバ変数に格納するメソッド
-  void _fetchCuppingData() async {
-
-    setState(() {
-      _coffeeName = widget.snapshot['coffee_name'];
-      _selectedCountry = widget.snapshot['country'];
-      _selectedVariety = widget.snapshot['variety'];
-      _elevation = widget.snapshot['elevation'].toString(); // int型をString型に変換
-      _selectedProcess = widget.snapshot['process'];
-      _roaster = widget.snapshot['roaster'];
-      _cleanCup = widget.snapshot['cleancup'];
-      _sweetness = widget.snapshot['sweetness'];
-      _acidity = widget.snapshot['acidity'];
-      _mouseFeel = widget.snapshot['mousefeel'];
-      _flavor = widget.snapshot['flavor'];
-      _afterTaste = widget.snapshot['aftertaste'];
-      _balance = widget.snapshot['balance'];
-      _overall = widget.snapshot['overall'];
-      _flavorText = widget.snapshot['flavor_text'];
-      _comment = widget.snapshot['comment'];
-    });
-  }
-
   // コーヒー名などを入力する部分1_1
   Widget _firstCoffeeInfoField(double width, double height) {
 
@@ -421,7 +420,7 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.08),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.11),
             child: Text(
               '各項目を評価してください',
               style: TextStyle(
@@ -430,20 +429,32 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.065),
-            child: TextField(
-              controller: _elevationController,
-              decoration: InputDecoration(
-                  labelText: 'Elevation',
-                  hintText: '1500'
-              ),
-              style: TextStyle(
-                fontSize: height * 0.02
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: _elevationChanged,
-            ),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.01),
+                        child: Text(
+                          this._selectedElevation,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: height * 0.02
+                          ),
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(width * 0.15, 0, width * 0.15, height * 0.055),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showModalElevationsPicker(context);
+                },
+              )
           ),
           Container(
               child: InkWell(
@@ -969,6 +980,36 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     );
   }
 
+  void _onSelectedElevationChanged(int index) {
+    setState(() {
+      _selectedElevation = _elevations[index];
+    });
+  }
+
+  void _showModalElevationsPicker(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 3,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CupertinoPicker(
+              itemExtent: 40,
+              children: _elevations.map(_pickerItem).toList(),
+              onSelectedItemChanged: _onSelectedElevationChanged,
+              scrollController: FixedExtentScrollController(
+                initialItem: _elevations.indexOf(_selectedElevation),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void _onSelectedProcessChanged(int index) {
     setState(() {
       _selectedProcess = _processes[index];
@@ -999,6 +1040,29 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     );
   }
 
+  // カッピングデータを取得してメンバ変数に格納するメソッド
+  void _fetchCuppingData() async {
+
+    setState(() {
+      _coffeeName = widget.snapshot['coffee_name'];
+      _selectedCountry = widget.snapshot['country'];
+      _selectedVariety = widget.snapshot['variety'];
+      _selectedElevation = widget.snapshot['elevation'].toString(); // int型をString型に変換
+      _selectedProcess = widget.snapshot['process'];
+      _roaster = widget.snapshot['roaster'];
+      _cleanCup = widget.snapshot['cleancup'];
+      _sweetness = widget.snapshot['sweetness'];
+      _acidity = widget.snapshot['acidity'];
+      _mouseFeel = widget.snapshot['mousefeel'];
+      _flavor = widget.snapshot['flavor'];
+      _afterTaste = widget.snapshot['aftertaste'];
+      _balance = widget.snapshot['balance'];
+      _overall = widget.snapshot['overall'];
+      _flavorText = widget.snapshot['flavor_text'];
+      _comment = widget.snapshot['comment'];
+    });
+  }
+
   // カッピングしたデータをMap型に詰め直すメソッド1
   Map<String, dynamic> _setCuppingData() {
     Map<String, dynamic> cuppingData = new Map<String, dynamic>();
@@ -1006,10 +1070,10 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
     cuppingData['coffee_name'] = _coffeeName;
     cuppingData['country'] = _selectedCountry;
     cuppingData['variety'] = _selectedVariety;
-    if (_elevation == '') {
+    if (_selectedElevation == '') {
       cuppingData['elevation'] = 0;
     } else {
-      cuppingData['elevation'] = int.parse(_elevation); // 数値型に変換
+      cuppingData['elevation'] = int.parse(_selectedElevation); // 数値型に変換
     }
     cuppingData['process'] = _selectedProcess;
     cuppingData['roaster'] = _roaster;
