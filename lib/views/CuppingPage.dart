@@ -590,11 +590,46 @@ class _CuppingPageState extends State<CuppingPage> {
         leading: new IconButton(
           icon: new Icon(Icons.close, color: Colors.white),
           onPressed: () {
-            if (this._timer != null) {
-              // タイマーをストップする
-              this._timer.cancel();
-            }
-            Navigator.pop(context);
+
+            showDialog(
+                context: context,
+                builder: (_) {
+                  return AlertDialog(
+                    content: Text('カッピング内容を保存せずに中止しますか？'),
+                    actions: <Widget>[
+                      // ボタン領域
+                      ElevatedButton(
+                        child: Text('Cancel'),
+                        style: ElevatedButton.styleFrom(
+                          primary: HexColor('313131'),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                      ElevatedButton(
+                        child: Text('OK'),
+                        style: ElevatedButton.styleFrom(
+                          primary: HexColor('313131'),
+                        ),
+                        onPressed: () {
+
+                          if (this._timer != null) {
+                            // タイマーをストップする
+                            this._timer.cancel();
+                          }
+
+                          // ユーザー画面へ遷移
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new HomePage()),
+                                  (_) => false);
+
+                        },
+                      ),
+                    ],
+                  );
+                }
+            );
           },
         ),
       ),
