@@ -720,139 +720,137 @@ class _CuppingPageState extends State<CuppingPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-            color: HexColor('313131'),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: _height * 0.6,
-                  margin: EdgeInsets.fromLTRB(_width * 0.05, 0, _width * 0.05, 0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                    color: HexColor('e7e7e7'),
+      body: Container(
+        color: HexColor('313131'),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: _height * 0.6,
+              margin: EdgeInsets.fromLTRB(_width * 0.05, 0, _width * 0.05, 0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+                color: HexColor('e7e7e7'),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: _height * 0.52,
+                    child: _pageList[_selectIndex],
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: _height * 0.52,
-                        child: _pageList[_selectIndex],
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            IconButton(
-                                icon: const Icon(Icons.navigate_before),
-                                onPressed: _selectIndex == 0 || _selectIndex == 6 || _selectIndex == 12 || _selectIndex == 18 || _selectIndex == 24 || _selectIndex == 30 ? null : () {
-                                  if(_selectIndex > 0) {
-                                    setState(() {
-                                      _selectIndex--;
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                            icon: const Icon(Icons.navigate_before),
+                            onPressed: _selectIndex == 0 || _selectIndex == 6 || _selectIndex == 12 || _selectIndex == 18 || _selectIndex == 24 || _selectIndex == 30 ? null : () {
+                              if(_selectIndex > 0) {
+                                setState(() {
+                                  _selectIndex--;
 
-                                      // カッピング場所を保存
-                                      if (_selectIndex < 6) {
-                                        _selectButtonOneCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 12) {
-                                        _selectButtonTwoCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 18) {
-                                        _selectButtonThreeCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 24) {
-                                        _selectButtonFourCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 30) {
-                                        _selectButtonFiveCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 36) {
-                                        _selectButtonSixCoffeeIndex = _selectIndex;
-                                      }
-                                    });
+                                  // カッピング場所を保存
+                                  if (_selectIndex < 6) {
+                                    _selectButtonOneCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 12) {
+                                    _selectButtonTwoCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 18) {
+                                    _selectButtonThreeCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 24) {
+                                    _selectButtonFourCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 30) {
+                                    _selectButtonFiveCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 36) {
+                                    _selectButtonSixCoffeeIndex = _selectIndex;
                                   }
-                                }
-                            ),
-                            IconButton(
-                                icon: const Icon(Icons.navigate_next),
-                                onPressed: _selectIndex == 5 || _selectIndex == 11 || _selectIndex == 17 || _selectIndex == 23 || _selectIndex == 29 || _selectIndex == 35 ? null: () {
-                                  if(_selectIndex < 35) {
-                                    setState(() {
-                                      _selectIndex++;
-
-                                      // カッピング場所を保存
-                                      if (_selectIndex < 6) {
-                                        _selectButtonOneCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 12) {
-                                        _selectButtonTwoCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 18) {
-                                        _selectButtonThreeCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 24) {
-                                        _selectButtonFourCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 30) {
-                                        _selectButtonFiveCoffeeIndex = _selectIndex;
-                                      } else if (_selectIndex < 36) {
-                                        _selectButtonSixCoffeeIndex = _selectIndex;
-                                      }
-                                    });
-                                  }
-                                }
-                            ),
-                          ],
+                                });
+                              }
+                            }
                         ),
+                        IconButton(
+                            icon: const Icon(Icons.navigate_next),
+                            onPressed: _selectIndex == 5 || _selectIndex == 11 || _selectIndex == 17 || _selectIndex == 23 || _selectIndex == 29 || _selectIndex == 35 ? null: () {
+                              if(_selectIndex < 35) {
+                                setState(() {
+                                  _selectIndex++;
+
+                                  // カッピング場所を保存
+                                  if (_selectIndex < 6) {
+                                    _selectButtonOneCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 12) {
+                                    _selectButtonTwoCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 18) {
+                                    _selectButtonThreeCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 24) {
+                                    _selectButtonFourCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 30) {
+                                    _selectButtonFiveCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 36) {
+                                    _selectButtonSixCoffeeIndex = _selectIndex;
+                                  }
+                                });
+                              }
+                            }
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: _coffeeIndex[_selectCoffeeIndex], // カッピングするコーヒーを切り替え,
+            ),
+            Container(
+              height: _height * 0.18,
+              child: Column(
+                children: <Widget>[
+                  Center(
+                   child: Text(
+                     '${this._countMinuteStr}:${this._countSecondStr}',
+                     style: TextStyle(
+                         fontSize: _height * 0.08,
+                         color: HexColor('e7e7e7')
+                     ),
+                   ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                          icon: Icon(Icons.stop, color: HexColor('e7e7e7')),
+                          onPressed: () {
+                            _resetTimer();
+                          }
+                      ),
+                      IconButton(
+                          icon: Icon(Icons.pause, color: HexColor('e7e7e7')),
+                          onPressed: () {
+                            setState(() {
+                              this._timer.cancel();
+                            });
+                          }
+                      ),
+                      IconButton(
+                          icon: Icon(Icons.play_arrow, color: HexColor('e7e7e7')),
+                          onPressed: () {
+                            setState(() {
+
+                              // タイマーが起動していなかった場合、タイマーを起動
+                              if (this._timer == null) {
+                                this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
+                              }
+                            });
+                          }
                       )
                     ],
-                  ),
-                ),
-                Container(
-                  child: _coffeeIndex[_selectCoffeeIndex], // カッピングするコーヒーを切り替え,
-                ),
-                Container(
-                    height: _height * 0.18,
-                    child: Column(
-                      children: <Widget>[
-                        Center(
-                          child: Text(
-                            '${this._countMinuteStr}:${this._countSecondStr}',
-                            style: TextStyle(
-                                fontSize: _height * 0.08,
-                                color: HexColor('e7e7e7')
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            IconButton(
-                                icon: Icon(Icons.stop, color: HexColor('e7e7e7')),
-                                onPressed: () {
-                                  _resetTimer();
-                                }
-                            ),
-                            IconButton(
-                                icon: Icon(Icons.pause, color: HexColor('e7e7e7')),
-                                onPressed: () {
-                                  setState(() {
-                                    this._timer.cancel();
-                                  });
-                                }
-                            ),
-                            IconButton(
-                                icon: Icon(Icons.play_arrow, color: HexColor('e7e7e7')),
-                                onPressed: () {
-                                  setState(() {
-
-                                    // タイマーが起動していなかった場合、タイマーを起動
-                                    if (this._timer == null) {
-                                      this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
-                                    }
-                                  });
-                                }
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                ),
-              ],
-            )
+                  )
+                ],
+              )
+            ),
+          ],
         )
       )
     );
