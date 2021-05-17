@@ -244,7 +244,7 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
                     context: context,
                     builder: (_) {
                       return AlertDialog(
-                        content: Text('カッピングを終了しますか？'),
+                        content: Text('編集を終了しますか？'),
                         actions: <Widget>[
                           // ボタン領域
                           ElevatedButton(
