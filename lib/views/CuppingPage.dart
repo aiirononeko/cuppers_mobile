@@ -26,6 +26,12 @@ class _CuppingPageState extends State<CuppingPage> {
 
   // カッピングコーヒー切り替え機能で使用する変数
   int _selectCoffeeIndex = 0;
+  int _selectButtonOneCoffeeIndex = 0;
+  int _selectButtonTwoCoffeeIndex = 6;
+  int _selectButtonThreeCoffeeIndex = 12;
+  int _selectButtonFourCoffeeIndex = 18;
+  int _selectButtonFiveCoffeeIndex = 24;
+  int _selectButtonSixCoffeeIndex = 30;
 
   // タイマー機能で使用する変数
   int _countMinute = 0;
@@ -744,6 +750,21 @@ class _CuppingPageState extends State<CuppingPage> {
                               if(_selectIndex > 0) {
                                 setState(() {
                                   _selectIndex--;
+
+                                  // カッピング場所を保存
+                                  if (_selectIndex < 6) {
+                                    _selectButtonOneCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 12) {
+                                    _selectButtonTwoCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 18) {
+                                    _selectButtonThreeCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 24) {
+                                    _selectButtonFourCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 30) {
+                                    _selectButtonFiveCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 36) {
+                                    _selectButtonSixCoffeeIndex = _selectIndex;
+                                  }
                                 });
                               }
                             }
@@ -754,6 +775,21 @@ class _CuppingPageState extends State<CuppingPage> {
                               if(_selectIndex < 35) {
                                 setState(() {
                                   _selectIndex++;
+
+                                  // カッピング場所を保存
+                                  if (_selectIndex < 6) {
+                                    _selectButtonOneCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 12) {
+                                    _selectButtonTwoCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 18) {
+                                    _selectButtonThreeCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 24) {
+                                    _selectButtonFourCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 30) {
+                                    _selectButtonFiveCoffeeIndex = _selectIndex;
+                                  } else if (_selectIndex < 36) {
+                                    _selectButtonSixCoffeeIndex = _selectIndex;
+                                  }
                                 });
                               }
                             }
@@ -1520,7 +1556,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 6;
+                    this._selectIndex = _selectButtonTwoCoffeeIndex;
                     this._selectCoffeeIndex = 1;
                   });
                 },
@@ -1535,7 +1571,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 12;
+                    this._selectIndex = _selectButtonThreeCoffeeIndex;
                     this._selectCoffeeIndex = 2;
                   });
                 },
@@ -1550,7 +1586,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 18;
+                    this._selectIndex = _selectButtonFourCoffeeIndex;
                     this._selectCoffeeIndex = 3;
                   });
                 },
@@ -1565,7 +1601,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 24;
+                    this._selectIndex = _selectButtonFiveCoffeeIndex;
                     this._selectCoffeeIndex = 4;
                   });
                 },
@@ -1580,7 +1616,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 30;
+                    this._selectIndex = _selectButtonSixCoffeeIndex;
                     this._selectCoffeeIndex = 5;
                   });
                 },
@@ -1606,7 +1642,7 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 0;
+                  this._selectIndex = _selectButtonOneCoffeeIndex;
                   this._selectCoffeeIndex = 0;
                 });
               },
@@ -1640,7 +1676,7 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 12;
+                  this._selectIndex = _selectButtonThreeCoffeeIndex;
                   this._selectCoffeeIndex = 2;
                 });
               },
@@ -1655,7 +1691,7 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 18;
+                  this._selectIndex = _selectButtonFourCoffeeIndex;
                   this._selectCoffeeIndex = 3;
                 });
               },
@@ -1670,7 +1706,7 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 24;
+                  this._selectIndex = _selectButtonFiveCoffeeIndex;
                   this._selectCoffeeIndex = 4;
                 });
               },
@@ -1685,7 +1721,7 @@ class _CuppingPageState extends State<CuppingPage> {
               ),
               onPressed: () {
                 setState(() {
-                  this._selectIndex = 30;
+                  this._selectIndex = _selectButtonSixCoffeeIndex;
                   this._selectCoffeeIndex = 5;
                 });
               },
@@ -1710,7 +1746,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 0;
+                    this._selectIndex = _selectButtonOneCoffeeIndex;
                     this._selectCoffeeIndex = 0;
                   });
                 },
@@ -1725,7 +1761,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 6;
+                    this._selectIndex = _selectButtonTwoCoffeeIndex;
                     this._selectCoffeeIndex = 1;
                   });
                 },
@@ -1759,7 +1795,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 18;
+                    this._selectIndex = _selectButtonFourCoffeeIndex;
                     this._selectCoffeeIndex = 3;
                   });
                 },
@@ -1774,7 +1810,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 24;
+                    this._selectIndex = _selectButtonFiveCoffeeIndex;
                     this._selectCoffeeIndex = 4;
                   });
                 },
@@ -1789,7 +1825,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 30;
+                    this._selectIndex = _selectButtonSixCoffeeIndex;
                     this._selectCoffeeIndex = 5;
                   });
                 },
@@ -1814,7 +1850,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 0;
+                    this._selectIndex = _selectButtonOneCoffeeIndex;
                     this._selectCoffeeIndex = 0;
                   });
                 },
@@ -1829,7 +1865,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 6;
+                    this._selectIndex = _selectButtonTwoCoffeeIndex;
                     this._selectCoffeeIndex = 1;
                   });
                 },
@@ -1844,7 +1880,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 12;
+                    this._selectIndex = _selectButtonThreeCoffeeIndex;
                     this._selectCoffeeIndex = 2;
                   });
                 },
@@ -1878,7 +1914,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 24;
+                    this._selectIndex = _selectButtonFiveCoffeeIndex;
                     this._selectCoffeeIndex = 4;
                   });
                 },
@@ -1893,7 +1929,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 30;
+                    this._selectIndex = _selectButtonSixCoffeeIndex;
                     this._selectCoffeeIndex = 5;
                   });
                 },
@@ -1918,7 +1954,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 0;
+                    this._selectIndex = _selectButtonOneCoffeeIndex;
                     this._selectCoffeeIndex = 0;
                   });
                 },
@@ -1933,7 +1969,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 6;
+                    this._selectIndex = _selectButtonTwoCoffeeIndex;
                     this._selectCoffeeIndex = 1;
                   });
                 },
@@ -1948,7 +1984,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 12;
+                    this._selectIndex = _selectButtonThreeCoffeeIndex;
                     this._selectCoffeeIndex = 2;
                   });
                 },
@@ -1963,7 +1999,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 18;
+                    this._selectIndex = _selectButtonFourCoffeeIndex;
                     this._selectCoffeeIndex = 3;
                   });
                 },
@@ -1997,7 +2033,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 30;
+                    this._selectIndex = _selectButtonSixCoffeeIndex;
                     this._selectCoffeeIndex = 5;
                   });
                 },
@@ -2022,7 +2058,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 0;
+                    this._selectIndex = _selectButtonOneCoffeeIndex;
                     this._selectCoffeeIndex = 0;
                   });
                 },
@@ -2037,7 +2073,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 6;
+                    this._selectIndex = _selectButtonTwoCoffeeIndex;
                     this._selectCoffeeIndex = 1;
                   });
                 },
@@ -2052,7 +2088,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 12;
+                    this._selectIndex = _selectButtonThreeCoffeeIndex;
                     this._selectCoffeeIndex = 2;
                   });
                 },
@@ -2067,7 +2103,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 18;
+                    this._selectIndex = _selectButtonFourCoffeeIndex;
                     this._selectCoffeeIndex = 3;
                   });
                 },
@@ -2082,7 +2118,7 @@ class _CuppingPageState extends State<CuppingPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    this._selectIndex = 24;
+                    this._selectIndex = _selectButtonFiveCoffeeIndex;
                     this._selectCoffeeIndex = 4;
                   });
                 },
