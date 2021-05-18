@@ -41,6 +41,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^4.0.0
 
 flutter_native_splash:
   image: "images/cuppers_logo_apart_アートボード 1.png"
