@@ -44,7 +44,7 @@ class _SnsCoffeeIndexPageState extends State<SnsCoffeeIndexPage> {
         value: 2,
       ))
       ..add(DropdownMenuItem(
-        child: Text('お気に入り'),
+        child: Text('いいね'),
         value: 3,
       ));
   }

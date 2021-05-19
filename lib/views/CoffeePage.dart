@@ -43,6 +43,7 @@ class _CoffeePageState extends State<CoffeePage> {
   double _coffeeScore;
   String _flavorText;
   String _comment;
+  bool _isPublic;
 
   List<List<int>> _chartValueList = [];
 
@@ -100,27 +101,72 @@ class _CoffeePageState extends State<CoffeePage> {
               children: <Widget>[
                 Container(
                   child: IconButton(
-                    icon: Icon(Icons.ios_share),
+                    icon: _getPublicIcon(),
                     onPressed: () {
 
-                      // TODO 本実装
-                      showDialog(
-                        context: context,
-                        builder: (_) {
-                          return AlertDialog(
-                            content: Text('シェア機能は開発中です。実装完了まで今しばらくお待ちください。'),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                child: Text('OK'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: HexColor('313131'),
+                      if (_isPublic) {
+
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              content: Text('このカッピングデータを非公開にしますか？'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: Text('OK'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: HexColor('313131'),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+
+                                      _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
+                                      Navigator.pop(context);
+                                    });
+                                  }
                                 ),
-                                onPressed: () => Navigator.pop(context),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                                ElevatedButton(
+                                  child: Text('Cancel'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: HexColor('313131'),
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              content: Text('このカッピングデータを公開しますか？'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: Text('OK'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: HexColor('313131'),
+                                  ),
+                                  onPressed: () {
+
+                                    _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                ElevatedButton(
+                                  child: Text('Cancel'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: HexColor('313131'),
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                 ),
@@ -395,6 +441,13 @@ class _CoffeePageState extends State<CoffeePage> {
       _coffeeScore = widget.snapshot['coffee_score'];
       _flavorText = widget.snapshot['flavor_text'];
       _comment = widget.snapshot['comment'];
+
+      // 後付け機能のためトランザクションが起きないようにする
+      if (widget.snapshot['public'] != null) {
+        _isPublic = widget.snapshot['public'];
+      } else {
+        _isPublic = false;
+      }
     });
   }
 
@@ -445,6 +498,36 @@ class _CoffeePageState extends State<CoffeePage> {
     }
   }
 
+  // 公開設定をを更新するメソッド
+  void _switchPublicSetting(bool public, String documentId, String uid) {
+
+    if (public) {
+      FirebaseFirestore.instance
+          .collection('CuppedCoffee')
+          .doc(uid)
+          .collection('CoffeeInfo')
+          .doc(documentId)
+          .update({'public': false});
+
+      setState(() {
+        _isPublic = false;
+      });
+
+    } else {
+      FirebaseFirestore.instance
+          .collection('CuppedCoffee')
+          .doc(uid)
+          .collection('CoffeeInfo')
+          .doc(documentId)
+          .update({'public': true});
+
+      setState(() {
+        _isPublic = true;
+      });
+
+    }
+  }
+
   // お気に入りか否かを判定してアイコンを返却するメソッド
   Icon _getFavoriteFlag(bool flag) {
 
@@ -452,6 +535,16 @@ class _CoffeePageState extends State<CoffeePage> {
       return Icon(Icons.star);
     } else {
       return Icon(Icons.star_border);
+    }
+  }
+
+  // カッピングデータの公開設定を判定してアイコンを返却するメソッド
+  Icon _getPublicIcon() {
+
+    if (_isPublic) {
+      return Icon(Icons.public);
+    } else {
+      return Icon(Icons.public_off);
     }
   }
 }
