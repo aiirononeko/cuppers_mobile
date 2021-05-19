@@ -113,24 +113,24 @@ class _CoffeePageState extends State<CoffeePage> {
                               content: Text('このカッピングデータを非公開にしますか？'),
                               actions: <Widget>[
                                 ElevatedButton(
-                                  child: Text('OK'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: HexColor('313131'),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-
-                                      _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
-                                      Navigator.pop(context);
-                                    });
-                                  }
-                                ),
-                                ElevatedButton(
                                   child: Text('Cancel'),
                                   style: ElevatedButton.styleFrom(
                                     primary: HexColor('313131'),
                                   ),
                                   onPressed: () => Navigator.pop(context),
+                                ),
+                                ElevatedButton(
+                                    child: Text('OK'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+
+                                        _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
+                                        Navigator.pop(context);
+                                      });
+                                    }
                                 ),
                               ],
                             );
@@ -145,6 +145,13 @@ class _CoffeePageState extends State<CoffeePage> {
                               content: Text('このカッピングデータを公開しますか？'),
                               actions: <Widget>[
                                 ElevatedButton(
+                                  child: Text('Cancel'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: HexColor('313131'),
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                                ElevatedButton(
                                   child: Text('OK'),
                                   style: ElevatedButton.styleFrom(
                                     primary: HexColor('313131'),
@@ -154,13 +161,6 @@ class _CoffeePageState extends State<CoffeePage> {
                                     _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
                                     Navigator.pop(context);
                                   },
-                                ),
-                                ElevatedButton(
-                                  child: Text('Cancel'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: HexColor('313131'),
-                                  ),
-                                  onPressed: () => Navigator.pop(context),
                                 ),
                               ],
                             );
