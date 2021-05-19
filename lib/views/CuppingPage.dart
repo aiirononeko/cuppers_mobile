@@ -39,6 +39,7 @@ class _CuppingPageState extends State<CuppingPage> {
   int _countSecond = 0;
   String _countSecondStr = '00';
   Timer _timer;
+  bool _isTimerCounting = false;
 
   TextEditingController _coffeeNameController;
   TextEditingController _roasterController;
@@ -857,6 +858,8 @@ class _CuppingPageState extends State<CuppingPage> {
                       IconButton(
                           icon: Icon(Icons.stop, color: HexColor('e7e7e7')),
                           onPressed: () {
+
+                            this._isTimerCounting = false;
                             _resetTimer();
                           }
                       ),
@@ -864,7 +867,12 @@ class _CuppingPageState extends State<CuppingPage> {
                           icon: Icon(Icons.pause, color: HexColor('e7e7e7')),
                           onPressed: () {
                             setState(() {
-                              this._timer.cancel();
+
+                              // タイマーが起動している場合、タイマーを停止
+                              if (this._isTimerCounting) {
+                                this._isTimerCounting = false;
+                                this._timer.cancel();
+                              }
                             });
                           }
                       ),
@@ -874,7 +882,8 @@ class _CuppingPageState extends State<CuppingPage> {
                             setState(() {
 
                               // タイマーが起動していなかった場合、タイマーを起動
-                              if (this._timer == null) {
+                              if (!this._isTimerCounting) {
+                                this._isTimerCounting = true;
                                 this._timer = Timer.periodic(Duration(seconds: 1), _onTimer);
                               }
                             });
@@ -2566,7 +2575,11 @@ class _CuppingPageState extends State<CuppingPage> {
   // タイマーをリセットするメソッド
   void _resetTimer() {
     setState(() {
+      this._timer.cancel();
+      this._timer = null;
+
       this._countMinute = 0;
+      this._countMinuteStr = '00';
       this._countSecond = 0;
       this._countSecondStr = '00';
     });
