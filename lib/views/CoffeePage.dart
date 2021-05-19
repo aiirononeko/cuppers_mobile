@@ -124,12 +124,11 @@ class _CoffeePageState extends State<CoffeePage> {
                                     style: ElevatedButton.styleFrom(
                                       primary: HexColor('313131'),
                                     ),
-                                    onPressed: () {
-                                      setState(() {
+                                    onPressed: () async {
 
-                                        _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
-                                        Navigator.pop(context);
-                                      });
+                                      _deleteCuppingDataToPublicCollection(widget.documentId);
+                                      _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
+                                      Navigator.pop(context);
                                     }
                                 ),
                               ],
@@ -158,6 +157,7 @@ class _CoffeePageState extends State<CoffeePage> {
                                   ),
                                   onPressed: () {
 
+                                    _addCuppingDataToPublicCollection(widget.snapshot, widget.documentId, this._uid);
                                     _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
                                     Navigator.pop(context);
                                   },
@@ -499,32 +499,62 @@ class _CoffeePageState extends State<CoffeePage> {
   }
 
   // 公開設定をを更新するメソッド
-  void _switchPublicSetting(bool public, String documentId, String uid) {
+  void _switchPublicSetting(bool public, String documentId, String uid) async {
 
     if (public) {
-      FirebaseFirestore.instance
+
+      // データを更新
+      await FirebaseFirestore.instance
           .collection('CuppedCoffee')
           .doc(uid)
           .collection('CoffeeInfo')
           .doc(documentId)
           .update({'public': false});
 
+      // ステートの値を変更
       setState(() {
         _isPublic = false;
       });
 
     } else {
-      FirebaseFirestore.instance
+
+      // データを更新
+      await FirebaseFirestore.instance
           .collection('CuppedCoffee')
           .doc(uid)
           .collection('CoffeeInfo')
           .doc(documentId)
           .update({'public': true});
 
+      // ステートの値を変更
       setState(() {
         _isPublic = true;
       });
 
+    }
+  }
+
+  // 公開専用のカッピングデータを格納するコレクションにデータを追加するメソッド
+  void _addCuppingDataToPublicCollection(Map<String, dynamic> cuppingData, String documentId, String uid) async {
+
+    cuppingData['uid'] = uid;
+
+    final _ref = FirebaseFirestore.instance.collection('PublicCuppedCoffee');
+
+    Future<DocumentSnapshot> snapshot = _ref.doc(documentId).get();
+    if (snapshot != null) {
+      _ref.doc(documentId).set(cuppingData);
+    }
+  }
+
+  // 公開専用のカッピングデータを格納するコレクションからデータを削除するメソッド
+  void _deleteCuppingDataToPublicCollection(String documentId) async {
+
+    final _ref = FirebaseFirestore.instance.collection('PublicCuppedCoffee');
+
+    Future<DocumentSnapshot> snapshot = _ref.doc(documentId).get();
+    if (snapshot != null) {
+      _ref.doc(documentId).delete();
     }
   }
 
