@@ -6,6 +6,7 @@ import './views/RegistrationPage.dart';
 import './views/LoginPage.dart';
 import './views/CoffeeIndexPage.dart';
 import './views/CuppingPage.dart';
+import './views/SnsCoffeeIndexPage.dart';
 import './views/AccountInfoPage.dart';
 import './services/MyFirebaseAuth.dart';
 
@@ -60,6 +61,7 @@ class _HomePageState extends State<HomePage> {
   // 表示するWidgetの一覧
   static List<Widget> _pageList = [
     CoffeeIndexPage(),
+    SnsCoffeeIndexPage(),
     AccountInfoPage()
   ];
 
@@ -73,6 +75,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.question_answer_sharp),
+            label: 'SNS',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
