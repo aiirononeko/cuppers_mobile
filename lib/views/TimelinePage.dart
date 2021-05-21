@@ -7,15 +7,15 @@ import 'package:intl/intl.dart';
 import './CoffeePage.dart';
 
 // 他のユーザーがカッピングしたコーヒーを一覧表示するページ
-class SnsCoffeeIndexPage extends StatefulWidget {
+class TimelinePage extends StatefulWidget {
 
   @override
-  _SnsCoffeeIndexPageState createState() {
-    return _SnsCoffeeIndexPageState();
+  _TimelinePageState createState() {
+    return _TimelinePageState();
   }
 }
 
-class _SnsCoffeeIndexPageState extends State<SnsCoffeeIndexPage> {
+class _TimelinePageState extends State<TimelinePage> {
 
   List<DropdownMenuItem<int>> _items = [];
   int _selectItem = 1;
