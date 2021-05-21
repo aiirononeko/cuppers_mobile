@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import './CoffeePage.dart';
+import 'TimelineCoffeePage.dart';
 
 // 他のユーザーがカッピングしたコーヒーを一覧表示するページ
 class TimelinePage extends StatefulWidget {
@@ -44,7 +44,7 @@ class _TimelinePageState extends State<TimelinePage> {
         value: 2,
       ))
       ..add(DropdownMenuItem(
-        child: Text('いいね'),
+        child: Text('いいね数'),
         value: 3,
       ));
   }
@@ -179,7 +179,7 @@ class _TimelinePageState extends State<TimelinePage> {
     if (_userUseSearchFunc == false) {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
         stream: FirebaseFirestore.instance
-            .collection('PublicCuppedCoffee')
+            .collection('TimelineCuppedCoffee')
             .orderBy('cupped_date', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -221,7 +221,7 @@ class _TimelinePageState extends State<TimelinePage> {
     // 検索ボックスを使用している場合は検索された文字列のデータを表示する
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
-          .collection('PublicCuppedCoffee')
+          .collection('TimelineCuppedCoffee')
           .orderBy('coffee_name')
           .startAt([this._searchValue])
           .endAt([this._searchValue + '\uf8ff'])
@@ -268,7 +268,7 @@ class _TimelinePageState extends State<TimelinePage> {
     if (_userUseSearchFunc == false) {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
         stream: FirebaseFirestore.instance
-            .collection('PublicCuppedCoffee')
+            .collection('TimelineCuppedCoffee')
             .orderBy('coffee_score', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -310,7 +310,7 @@ class _TimelinePageState extends State<TimelinePage> {
     // 検索ボックスを使用している場合は検索された文字列のデータを表示する
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
-          .collection('PublicCuppedCoffee')
+          .collection('TimelineCuppedCoffee')
           .orderBy('coffee_name')
           .startAt([this._searchValue])
           .endAt([this._searchValue + '\uf8ff'])
@@ -358,7 +358,7 @@ class _TimelinePageState extends State<TimelinePage> {
     if (_userUseSearchFunc == false) {
       return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
         stream: FirebaseFirestore.instance
-            .collection('PublicCuppedCoffee')
+            .collection('TimelineCuppedCoffee')
             // .where('favorite', isEqualTo: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -400,7 +400,7 @@ class _TimelinePageState extends State<TimelinePage> {
     // 検索ボックスを使用している場合は検索された文字列のデータを表示する
     return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
       stream: FirebaseFirestore.instance
-          .collection('PublicCuppedCoffee')
+          .collection('TimelineCuppedCoffee')
           .orderBy('coffee_name')
           .startAt([this._searchValue])
           .endAt([this._searchValue + '\uf8ff'])
@@ -463,7 +463,7 @@ class _TimelinePageState extends State<TimelinePage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => CoffeePage(data, snap.id)
+                  builder: (context) => TimelineCoffeePage(data, snap.id)
               )
           );
         },
@@ -489,7 +489,7 @@ class _TimelinePageState extends State<TimelinePage> {
                   Container(
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Icon(
-                        _checkFavoriteFlag(data),
+                        Icons.person,
                         size: height * 0.03,
                       )
                   ),
@@ -561,14 +561,5 @@ class _TimelinePageState extends State<TimelinePage> {
             )
         )
     );
-  }
-
-  // お気に入りかどうかを判定してアイコンを変更するメソッド
-  IconData _checkFavoriteFlag(Map<String, dynamic> data) {
-    if (data['favorite']) {
-      return Icons.star;
-    } else {
-      return Icons.star_border;
-    }
   }
 }

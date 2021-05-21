@@ -539,7 +539,7 @@ class _CoffeePageState extends State<CoffeePage> {
 
     cuppingData['uid'] = uid;
 
-    final _ref = FirebaseFirestore.instance.collection('PublicCuppedCoffee');
+    final _ref = FirebaseFirestore.instance.collection('TimelineCuppedCoffee');
 
     Future<DocumentSnapshot> snapshot = _ref.doc(documentId).get();
     if (snapshot != null) {
@@ -550,7 +550,7 @@ class _CoffeePageState extends State<CoffeePage> {
   // 公開専用のカッピングデータを格納するコレクションからデータを削除するメソッド
   void _deleteCuppingDataToPublicCollection(String documentId) async {
 
-    final _ref = FirebaseFirestore.instance.collection('PublicCuppedCoffee');
+    final _ref = FirebaseFirestore.instance.collection('TimelineCuppedCoffee');
 
     Future<DocumentSnapshot> snapshot = _ref.doc(documentId).get();
     if (snapshot != null) {
@@ -571,10 +571,10 @@ class _CoffeePageState extends State<CoffeePage> {
   // カッピングデータの公開設定を判定してアイコンを返却するメソッド
   Icon _getPublicIcon() {
 
-    if (_isPublic) {
-      return Icon(Icons.public);
-    } else {
+    if (!_isPublic) {
       return Icon(Icons.public_off);
+    } else {
+      return Icon(Icons.public);
     }
   }
 }
