@@ -514,7 +514,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         child: Text(
                           DateFormat('yyyy-MM-dd').format(data['cupped_date'].toDate()).toString(),
                           style: TextStyle(
-                            fontSize: height * 0.01,
+                            fontSize: height * 0.013,
                             color: HexColor('313131')
                           ),
                         ),
