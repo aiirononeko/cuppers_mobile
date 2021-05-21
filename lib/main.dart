@@ -77,8 +77,8 @@ class _HomePageState extends State<HomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.question_answer_sharp),
-            label: 'SNS',
+            icon: Icon(Icons.timeline_sharp),
+            label: 'Timeline',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
