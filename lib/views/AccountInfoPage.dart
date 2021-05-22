@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/services/HexColor.dart';
 import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,8 +6,41 @@ import 'package:flutter/material.dart';
 
 import 'RegistrationPage.dart';
 
+class AccountInfoPage extends StatefulWidget {
+
+  @override
+  _AccountInfoPageState createState() => _AccountInfoPageState();
+}
+
 // アカウント情報表示画面
-class AccountInfoPage extends StatelessWidget {
+class _AccountInfoPageState extends State<AccountInfoPage> {
+
+  final _focusNode = FocusNode();
+
+  final _uid = FirebaseAuth.instance.currentUser.uid;
+
+  String _userName;
+  TextEditingController _userNameController;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus) {
+        fetchUserName();
+      }
+    });
+
+    _userNameController = new TextEditingController(text: _userName);
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _userNameChanged(String str) => setState(() { _userName = str; });
 
   @override
   Widget build(BuildContext context) {
@@ -133,6 +167,35 @@ class AccountInfoPage extends StatelessWidget {
                 ),
               ),
               Container(
+                width: width * 0.35,
+                height: height * 0.25,
+                decoration: BoxDecoration(
+                  color: HexColor('313131'),
+                  shape: BoxShape.circle,
+                    // image: DecorationImage(
+                    //     fit: BoxFit.fill,
+                    //     image: AssetImage("images/testdata1.jpg")
+                    // )
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(width * 0.2, 0, width * 0.2, height * 0.03),
+                child: TextField(
+                  controller: _userNameController,
+                  decoration: InputDecoration(
+                    labelText: 'ユーザーネーム',
+                    hintText: 'カッピング太郎',
+                  ),
+                  style: TextStyle(
+                      fontSize: height * 0.015
+                  ),
+                  keyboardType: TextInputType.text,
+                  onChanged: _userNameChanged,
+                  textInputAction: TextInputAction.done,
+                  focusNode: _focusNode,
+                ),
+              ),
+              Container(
                 width: double.infinity,
                 margin: EdgeInsets.fromLTRB(width * 0.05, height * 0.015, 0, height * 0.015),
                 child: Text(
@@ -182,5 +245,14 @@ class AccountInfoPage extends StatelessWidget {
           )
       );
     }
+  }
+
+  // ユーザーネームを登録するメソッド
+  void fetchUserName() async {
+
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(_uid)
+        .update({ 'name': _userName });
   }
 }
