@@ -31,7 +31,9 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
       }
     });
 
-    _userNameController = new TextEditingController(text: _userName);
+    _getUserName().then((_) {
+      _userNameController = new TextEditingController(text: _userName);
+    });
   }
 
   @override
@@ -187,7 +189,7 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
                     hintText: 'カッピング太郎',
                   ),
                   style: TextStyle(
-                      fontSize: height * 0.015
+                      fontSize: height * 0.02
                   ),
                   keyboardType: TextInputType.text,
                   onChanged: _userNameChanged,
@@ -245,6 +247,23 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
           )
       );
     }
+  }
+
+  // ユーザーネームを取得するメソッド
+  Future _getUserName() async {
+
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(this._uid)
+        .get();
+
+    setState(() {
+      if (snapshot.data()['name'] != null) {
+        _userName = snapshot.data()['name'];
+      } else {
+        _userName = '';
+      }
+    });
   }
 
   // ユーザーネームを登録するメソッド
