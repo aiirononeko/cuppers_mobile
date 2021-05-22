@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/services/HexColor.dart';
 import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'RegistrationPage.dart';
 
@@ -16,6 +18,9 @@ class AccountInfoPage extends StatefulWidget {
 class _AccountInfoPageState extends State<AccountInfoPage> {
 
   final _focusNode = FocusNode();
+
+  File _image;
+  final picker = ImagePicker();
 
   final _uid = FirebaseAuth.instance.currentUser.uid;
 
@@ -168,18 +173,7 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
                   color: HexColor('313131'),
                 ),
               ),
-              Container(
-                width: width * 0.35,
-                height: height * 0.25,
-                decoration: BoxDecoration(
-                  color: HexColor('313131'),
-                  shape: BoxShape.circle,
-                    // image: DecorationImage(
-                    //     fit: BoxFit.fill,
-                    //     image: AssetImage("images/testdata1.jpg")
-                    // )
-                ),
-              ),
+              _userImageWidget(width, height),
               Container(
                 margin: EdgeInsets.fromLTRB(width * 0.2, 0, width * 0.2, height * 0.03),
                 child: TextField(
@@ -247,6 +241,62 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
           )
       );
     }
+  }
+
+  Widget _userImageWidget(double width, double height) {
+
+    if (_image != null) {
+
+      return InkWell(
+        onTap: () {
+          getImageFromGallery();
+        },
+        child: Container(
+          width: width * 0.45,
+          height: height * 0.3,
+          decoration: BoxDecoration(
+            // border: Border.all(color: HexColor('313131')),
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: Image.file(_image).image
+              )
+          ),
+        ),
+      );
+    } else {
+
+      return InkWell(
+        onTap: () {
+          getImageFromGallery();
+        },
+        child: Container(
+          width: width * 0.45,
+          height: height * 0.3,
+          decoration: BoxDecoration(
+            border: Border.all(color: HexColor('313131')),
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              '画像を選択してください',
+              style: TextStyle(
+                  color: HexColor('313131')
+              ),
+            ),
+          )
+        ),
+      );
+    }
+  }
+
+  // ギャラリーから画像を取得するメソッド
+  Future getImageFromGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = File(pickedFile.path);
+    });
   }
 
   // ユーザーネームを取得するメソッド

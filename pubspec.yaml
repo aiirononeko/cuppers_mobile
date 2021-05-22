@@ -37,6 +37,7 @@ dependencies:
   intl: ^0.16.1
   url_launcher: ^3.0.3
   flutter_native_splash: ^1.1.8+4
+  image_picker: ^0.6.7+22
 
 dev_dependencies:
   flutter_test:
