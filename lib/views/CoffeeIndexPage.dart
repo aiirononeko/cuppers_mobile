@@ -40,7 +40,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         value: 1,
       ))
       ..add(DropdownMenuItem(
-        child: Text('評価が高い'),
+        child: Text('スコアが高い'),
         value: 2,
       ))
       ..add(DropdownMenuItem(

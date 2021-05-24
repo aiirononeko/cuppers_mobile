@@ -40,12 +40,16 @@ class _TimelinePageState extends State<TimelinePage> {
         value: 1,
       ))
       ..add(DropdownMenuItem(
-        child: Text('評価が高い'),
+        child: Text('スコアが高い'),
         value: 2,
       ))
       ..add(DropdownMenuItem(
-        child: Text('いいね数'),
+        child: Text('人気が高い'),
         value: 3,
+      ))
+      ..add(DropdownMenuItem(
+        child: Text('いいね'),
+        value: 4,
       ));
   }
 
@@ -170,8 +174,10 @@ class _TimelinePageState extends State<TimelinePage> {
       return _buildBodyCreatedAt(width, height);
     } else if (_selectItem == 2) {
       return _buildBodyScore(width, height);
+    } else if (_selectItem == 3) {
+      return _buildBodyFavoriteCoffee(width, height);
     }
-    return _buildBodyFavoriteCoffee(width, height);
+    return _buildBodyThumbUpCoffee(width, height);
   }
 
   // 作成日順で表示する
@@ -385,7 +391,96 @@ class _TimelinePageState extends State<TimelinePage> {
               height: height * 0.65,
               alignment: Alignment.center,
               child: Text(
-                'お気に入りのコーヒーはありません',
+                'いいねされたコーヒーはありません',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    color: HexColor('313131')
+                ),
+              ),
+            );
+          }
+          return _buildList(snapshot.data.docs, width, height);
+        },
+      );
+    }
+
+    // 検索ボックスを使用している場合は検索された文字列のデータを表示する
+    return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
+      stream: FirebaseFirestore.instance
+          .collection('TimelineCuppedCoffee')
+          .orderBy('coffee_name')
+          .startAt([this._searchValue])
+          .endAt([this._searchValue + '\uf8ff'])
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+
+          return Container(
+            height: height * 0.65,
+            alignment: Alignment.center,
+            child: Text(
+              'Loading ...',
+              style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+              ),
+            ),
+          );
+        }
+
+        // カッピングしたコーヒーがなかった場合
+        if (snapshot.data.docs.length == 0) {
+
+          return Container(
+            height: height * 0.65,
+            alignment: Alignment.center,
+            child: Text(
+              '検索されたコーヒーはありません',
+              style: TextStyle(
+                  fontSize: height * 0.02,
+                  color: HexColor('313131')
+              ),
+            ),
+          );
+        }
+        return _buildList(snapshot.data.docs, width, height);
+      },
+    );
+  }
+
+  // いいねしたコーヒーを表示する
+  Widget _buildBodyThumbUpCoffee(double width, height) {
+
+    if (_userUseSearchFunc == false) {
+      return StreamBuilder<QuerySnapshot>(  // Streamを監視して、イベントが通知される度にWidgetを更新する
+        stream: FirebaseFirestore.instance
+            .collection('TimelineCuppedCoffee')
+            .where('thumbUp', arrayContains: this._uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+
+            return Container(
+              height: height * 0.65,
+              alignment: Alignment.center,
+              child: Text(
+                'Loading ...',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    color: HexColor('313131')
+                ),
+              ),
+            );
+          }
+
+          // カッピングしたコーヒーがなかった場合
+          if (snapshot.data.docs.length == 0) {
+
+            return Container(
+              height: height * 0.65,
+              alignment: Alignment.center,
+              child: Text(
+                'いいねしたコーヒーはありません',
                 style: TextStyle(
                     fontSize: height * 0.02,
                     color: HexColor('313131')
