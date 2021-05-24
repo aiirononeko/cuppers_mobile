@@ -431,20 +431,15 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
     } else {
 
       return Container(
-          width: width * 0.45,
-          height: height * 0.3,
-          decoration: BoxDecoration(
-            border: Border.all(color: HexColor('313131')),
+        width: width * 0.45,
+        height: height * 0.3,
+        decoration: BoxDecoration(
             shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Text(
-              '画像を選択してください',
-              style: TextStyle(
-                  color: HexColor('313131')
-              ),
-            ),
-          )
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: Image.asset('images/cuppers_logo_apart_アートボード 1.png').image
+            )
+        ),
       );
     }
   }
