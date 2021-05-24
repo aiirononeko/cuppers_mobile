@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/services/HexColor.dart';
+import 'package:cuppers_mobile/views/RegistrationPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -104,68 +105,106 @@ class _CoffeePageState extends State<CoffeePage> {
                     icon: _getPublicIcon(),
                     onPressed: () {
 
-                      if (_isPublic) {
+                      if (FirebaseAuth.instance.currentUser.isAnonymous) {
 
                         showDialog(
-                          context: context,
-                          builder: (_) {
-                            return AlertDialog(
-                              content: Text('このカッピングデータを非公開にしますか？'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  child: Text('Cancel'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: HexColor('313131'),
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('ユーザー登録をしてカッピングしたコーヒーを公開しましょう'),
+                                actions: <Widget>[
+                                  // ボタン領域
+                                  ElevatedButton(
+                                    child: Text('今はしない'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
                                   ),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                                ElevatedButton(
+                                  ElevatedButton(
+                                    child: Text('ユーザー登録'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () {
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => RegistrationPage()
+                                          )
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            }
+                        );
+                      } else {
+
+                        if (_isPublic) {
+
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('このカッピングデータを非公開にしますか？'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    child: Text('Cancel'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                  ElevatedButton(
+                                      child: Text('OK'),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: HexColor('313131'),
+                                      ),
+                                      onPressed: () async {
+
+                                        _deleteCuppingDataToPublicCollection(widget.documentId);
+                                        _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
+                                        Navigator.pop(context);
+                                      }
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('このカッピングデータを公開しますか？'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    child: Text('Cancel'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                  ElevatedButton(
                                     child: Text('OK'),
                                     style: ElevatedButton.styleFrom(
                                       primary: HexColor('313131'),
                                     ),
-                                    onPressed: () async {
+                                    onPressed: () {
 
-                                      _deleteCuppingDataToPublicCollection(widget.documentId);
+                                      _addCuppingDataToPublicCollection(widget.snapshot, widget.documentId, this._uid);
                                       _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
                                       Navigator.pop(context);
-                                    }
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      } else {
-
-                        showDialog(
-                          context: context,
-                          builder: (_) {
-                            return AlertDialog(
-                              content: Text('このカッピングデータを公開しますか？'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  child: Text('Cancel'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: HexColor('313131'),
+                                    },
                                   ),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                                ElevatedButton(
-                                  child: Text('OK'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: HexColor('313131'),
-                                  ),
-                                  onPressed: () {
-
-                                    _addCuppingDataToPublicCollection(widget.snapshot, widget.documentId, this._uid);
-                                    _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                                ],
+                              );
+                            },
+                          );
+                        }
                       }
                     },
                   ),
