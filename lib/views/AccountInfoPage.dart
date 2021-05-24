@@ -1,9 +1,12 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/services/HexColor.dart';
 import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'RegistrationPage.dart';
@@ -22,6 +25,8 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
   File _image;
   final picker = ImagePicker();
 
+  Image _img;
+
   final _uid = FirebaseAuth.instance.currentUser.uid;
 
   String _userName;
@@ -35,6 +40,8 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
         fetchUserName();
       }
     });
+
+    _downloadFile();
 
     _getUserName().then((_) {
       _userNameController = new TextEditingController(text: _userName);
@@ -290,13 +297,39 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
     }
   }
 
+  // Storageからプロフィール画像を取得するメソッド
+  Future<void> _downloadFile() async {
+
+    StorageReference ref = FirebaseStorage().ref().child(this._uid);
+    final String url = await ref.getDownloadURL();
+
+    final byteData = await rootBundle.load(url);
+    final file = File(CachedNetworkImageProvider(url).url);
+    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+    // final img = new Image(image: new CachedNetworkImageProvider(url));
+
+    setState(() {
+      // _img = img;
+      _image = file;
+    });
+  }
+
   // ギャラリーから画像を取得するメソッド
   Future getImageFromGallery() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
       _image = File(pickedFile.path);
+      _fetchUserImage(_image);
     });
+  }
+
+  // プロフィール画像を登録するメソッド
+  void _fetchUserImage(File file) async {
+
+    final StorageReference ref = FirebaseStorage.instance.ref();
+    await ref.child(this._uid).putFile(File(file.path)).onComplete;
   }
 
   // ユーザーネームを取得するメソッド
