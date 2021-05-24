@@ -44,6 +44,7 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
   bool _isThumbUp;
   String _cupperUid;
   String _name;
+  int _thumbUpCount;
 
   List<List<int>> _chartValueList = [];
 
@@ -334,8 +335,10 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
 
       if (widget.snapshot['thumbUp'] != null) {
         _thumbUp = widget.snapshot['thumbUp'];
+        _thumbUpCount = widget.snapshot['thumbUp'].length;
       } else {
         _thumbUp = [];
+        _thumbUpCount = 0;
       }
 
       _isThumbUp = _thumbUp.contains(uid);
@@ -371,7 +374,11 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
   // いいねフラグを更新するメソッド
   void _switchThumbUpIcon(bool thumbUp, String documentId, String uid) {
 
+    int count;
+
     if (!thumbUp) {
+
+      count = _thumbUpCount + 1;
 
       // いいねリストにuidを追加
       _thumbUp.add(uid);
@@ -379,13 +386,16 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
       FirebaseFirestore.instance
           .collection('TimelineCuppedCoffee')
           .doc(documentId)
-          .update({'thumbUp': _thumbUp});
+          .update({'thumbUp': _thumbUp, 'thumbUpCount': count});
 
       setState(() {
         _isThumbUp = true;
+        _thumbUpCount = count;
       });
 
     } else {
+
+      count = _thumbUpCount - 1;
 
       // いいねリストからuidを削除
       _thumbUp.removeAt(_thumbUp.indexOf(uid));
@@ -393,10 +403,11 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
       FirebaseFirestore.instance
           .collection('TimelineCuppedCoffee')
           .doc(documentId)
-          .update({'thumbUp': _thumbUp});
+          .update({'thumbUp': _thumbUp, 'thumbUpCount': count});
 
       setState(() {
         _isThumbUp = false;
+        _thumbUpCount = count;
       });
 
     }

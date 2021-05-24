@@ -351,8 +351,7 @@ class _TimelinePageState extends State<TimelinePage> {
     );
   }
 
-  // TODO 本実装
-  // いいねしたコーヒーのみ表示する
+  // いいね数が多い順に表示する
   Widget _buildBodyFavoriteCoffee(double width, height) {
 
     if (_userUseSearchFunc == false) {
@@ -360,6 +359,7 @@ class _TimelinePageState extends State<TimelinePage> {
         stream: FirebaseFirestore.instance
             .collection('TimelineCuppedCoffee')
             // .where('favorite', isEqualTo: true)
+            .orderBy('thumbUpCount', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
