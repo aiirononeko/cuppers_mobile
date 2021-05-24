@@ -488,7 +488,7 @@ class _TimelinePageState extends State<TimelinePage> {
                 children: <Widget>[
                   Container(
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: _getTimelineIcon(height)
+                      child: _getTimelineIcon(height, data['thumbUp'])
                   ),
                   Container(
                     width: width * 0.65,
@@ -562,11 +562,18 @@ class _TimelinePageState extends State<TimelinePage> {
 
   // TODO 本実装
   // タイムラインに表示するアイコンを判定するメソッド
-  Widget _getTimelineIcon(double height) {
+  Widget _getTimelineIcon(double height, List thumbUp) {
 
-    return Icon(
-      Icons.person,
-      size: height * 0.03,
-    );
+    if (thumbUp.contains(this._uid)) {
+      return Icon(
+        Icons.thumb_up,
+        size: height * 0.03,
+      );
+    } else {
+      return Icon(
+        Icons.thumb_up_outlined,
+        size: height * 0.03,
+      );
+    }
   }
 }
