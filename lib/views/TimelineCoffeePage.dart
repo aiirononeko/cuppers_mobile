@@ -435,6 +435,7 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
         height: height * 0.3,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
+            color: Colors.white24,
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: Image.asset('images/cuppers_logo_apart_アートボード 1.png').image
