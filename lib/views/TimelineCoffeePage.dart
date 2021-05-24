@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/services/HexColor.dart';
+import 'package:cuppers_mobile/services/MyFirebaseStorage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -41,10 +42,14 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
   String _comment;
   List _thumbUp;
   bool _isThumbUp;
+  String _cupperUid;
+  String _name;
 
   List<List<int>> _chartValueList = [];
 
   String _cuppedDateStr = '';
+
+  Image _img;
 
   @override
   void initState() {
@@ -54,6 +59,14 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
     _uid = FirebaseAuth.instance.currentUser.uid;
     // カッピング情報をステートに保存
     _fetchCuppingData(_uid, widget.documentId);
+    // カッピングした人のユーザーネームを取得
+    _getUserName();
+
+    MyFirebaseStorage.downloadFile(_cupperUid).then((img) {
+      setState(() {
+        _img = img;
+      });
+    });
   }
 
   @override
@@ -273,19 +286,18 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
                         ),
                       ),
                       Container(
-                        // width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.03, 0, 0),
-                        child: Text(
-                            'Cupper is ',
-                            style: TextStyle(
-                              fontSize: _height * 0.035,
-                            )
-                        ),
+                        margin: EdgeInsets.fromLTRB(0, _height * 0.03, 0, 0),
+                        child: _userImageWidget(_width, _height),
                       ),
                       Container(
                         // width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(_width * 0.1, _height * 0.015, 0, 0),
-                        child: Icon(Icons.person, size: _height * 0.1)
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, _height * 0.1),
+                        child: Text(
+                            'Cupper is $_name',
+                            style: TextStyle(
+                              fontSize: _height * 0.03,
+                            )
+                        ),
                       ),
                     ],
                   ),
@@ -318,6 +330,7 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
       _coffeeScore = widget.snapshot['coffee_score'];
       _flavorText = widget.snapshot['flavor_text'];
       _comment = widget.snapshot['comment'];
+      _cupperUid = widget.snapshot['uid'];
 
       if (widget.snapshot['thumbUp'] != null) {
         _thumbUp = widget.snapshot['thumbUp'];
@@ -387,5 +400,58 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
       });
 
     }
+  }
+
+  Widget _userImageWidget(double width, double height) {
+
+    if (_img != null) {
+
+      return Container(
+        width: width * 0.45,
+        height: height * 0.3,
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: _img.image
+            )
+        ),
+      );
+    } else {
+
+      return Container(
+          width: width * 0.45,
+          height: height * 0.3,
+          decoration: BoxDecoration(
+            border: Border.all(color: HexColor('313131')),
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              '画像を選択してください',
+              style: TextStyle(
+                  color: HexColor('313131')
+              ),
+            ),
+          )
+      );
+    }
+  }
+
+  // ユーザーネームを取得するメソッド
+  Future _getUserName() async {
+
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(this._cupperUid)
+        .get();
+
+    setState(() {
+      if (snapshot.data()['name'] != null) {
+        _name = snapshot.data()['name'];
+      } else {
+        _name = 'Unknown';
+      }
+    });
   }
 }

@@ -488,10 +488,7 @@ class _TimelinePageState extends State<TimelinePage> {
                 children: <Widget>[
                   Container(
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: Icon(
-                        Icons.person,
-                        size: height * 0.03,
-                      )
+                      child: _getTimelineIcon(height)
                   ),
                   Container(
                     width: width * 0.65,
@@ -560,6 +557,16 @@ class _TimelinePageState extends State<TimelinePage> {
               ),
             )
         )
+    );
+  }
+
+  // TODO 本実装
+  // タイムラインに表示するアイコンを判定するメソッド
+  Widget _getTimelineIcon(double height) {
+
+    return Icon(
+      Icons.person,
+      size: height * 0.03,
     );
   }
 }
