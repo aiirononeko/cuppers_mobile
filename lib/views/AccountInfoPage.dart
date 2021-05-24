@@ -260,10 +260,9 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
           width: width * 0.45,
           height: height * 0.3,
           decoration: BoxDecoration(
-            // border: Border.all(color: HexColor('313131')),
               shape: BoxShape.circle,
               image: DecorationImage(
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   image: _img.image
               )
           ),
