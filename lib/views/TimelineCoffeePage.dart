@@ -111,6 +111,15 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Container(
+                        child: Text(
+                            '$_thumbUpCount likes',
+                          style: TextStyle(
+                            fontSize: _height * 0.025,
+                            letterSpacing: _height * 0.001
+                          ),
+                        )
+                    ),
+                    Container(
                         child: IconButton(
                             icon: _getThumbUpIcon(_isThumbUp),
                             onPressed: () {
