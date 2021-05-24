@@ -22,10 +22,8 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
 
   final _focusNode = FocusNode();
 
-  File _image;
-  final picker = ImagePicker();
-
   Image _img;
+  final picker = ImagePicker();
 
   final _uid = FirebaseAuth.instance.currentUser.uid;
 
@@ -252,7 +250,7 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
 
   Widget _userImageWidget(double width, double height) {
 
-    if (_image != null) {
+    if (_img != null) {
 
       return InkWell(
         onTap: () {
@@ -266,7 +264,7 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
               shape: BoxShape.circle,
               image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: Image.file(_image).image
+                  image: _img.image
               )
           ),
         ),
@@ -301,18 +299,21 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
   Future<void> _downloadFile() async {
 
     StorageReference ref = FirebaseStorage().ref().child(this._uid);
-    final String url = await ref.getDownloadURL();
 
-    final byteData = await rootBundle.load(url);
-    final file = File(CachedNetworkImageProvider(url).url);
-    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    try {
 
-    // final img = new Image(image: new CachedNetworkImageProvider(url));
+      final String url = await ref.getDownloadURL();
+      final img = new Image(image: new CachedNetworkImageProvider(url));
 
-    setState(() {
-      // _img = img;
-      _image = file;
-    });
+      setState(() {
+        _img = img;
+      });
+
+    } catch(e) {
+
+      // TODO エラーハンドリング実装
+      return null;
+    }
   }
 
   // ギャラリーから画像を取得するメソッド
@@ -320,8 +321,8 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
-      _image = File(pickedFile.path);
-      _fetchUserImage(_image);
+      _img = Image.file(File(pickedFile.path));
+      _fetchUserImage(File(pickedFile.path));
     });
   }
 
