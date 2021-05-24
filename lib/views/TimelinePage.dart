@@ -150,6 +150,7 @@ class _TimelinePageState extends State<TimelinePage> {
                 child: Column(
                   children: <Widget>[
                     Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, _height * 0.015),
                       child: Divider(
                         color: HexColor('313131'),
                       ),
@@ -468,7 +469,7 @@ class _TimelinePageState extends State<TimelinePage> {
           );
         },
         child: Container(
-            margin: EdgeInsets.fromLTRB(0, height * 0.02, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(height * 0.01),
@@ -560,9 +561,15 @@ class _TimelinePageState extends State<TimelinePage> {
     );
   }
 
-  // TODO 本実装
   // タイムラインに表示するアイコンを判定するメソッド
   Widget _getTimelineIcon(double height, List thumbUp) {
+
+    if (thumbUp == null) {
+      return Icon(
+        Icons.thumb_up_outlined,
+        size: height * 0.03,
+      );
+    }
 
     if (thumbUp.contains(this._uid)) {
       return Icon(

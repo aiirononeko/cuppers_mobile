@@ -150,6 +150,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           child: Column(
             children: <Widget>[
               Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, _height * 0.015),
                 child: Divider(
                   color: HexColor('313131'),
                 ),
@@ -479,7 +480,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         );
       },
       child: Container(
-        margin: EdgeInsets.fromLTRB(0, height * 0.02, 0, 0),
+        margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(height * 0.01),
