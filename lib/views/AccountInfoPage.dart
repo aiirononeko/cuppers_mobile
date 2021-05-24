@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/services/HexColor.dart';
+import 'package:cuppers_mobile/services/MyFirebaseStorage.dart';
 import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -22,10 +22,10 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
 
   final _focusNode = FocusNode();
 
+  String _uid;
+
   Image _img;
   final picker = ImagePicker();
-
-  final _uid = FirebaseAuth.instance.currentUser.uid;
 
   String _userName;
   TextEditingController _userNameController;
@@ -39,7 +39,12 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
       }
     });
 
-    _downloadFile();
+    _uid = FirebaseAuth.instance.currentUser.uid;
+    MyFirebaseStorage.downloadFile(_uid).then((img) {
+      setState(() {
+        _img = img;
+      });
+    });
 
     _getUserName().then((_) {
       _userNameController = new TextEditingController(text: _userName);
@@ -291,27 +296,6 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
           )
         ),
       );
-    }
-  }
-
-  // Storageからプロフィール画像を取得するメソッド
-  Future<void> _downloadFile() async {
-
-    StorageReference ref = FirebaseStorage().ref().child(this._uid);
-
-    try {
-
-      final String url = await ref.getDownloadURL();
-      final img = new Image(image: new CachedNetworkImageProvider(url));
-
-      setState(() {
-        _img = img;
-      });
-
-    } catch(e) {
-
-      // TODO エラーハンドリング実装
-      return null;
     }
   }
 
