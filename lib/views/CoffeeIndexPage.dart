@@ -40,7 +40,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         value: 1,
       ))
       ..add(DropdownMenuItem(
-        child: Text('評価が高い'),
+        child: Text('スコアが高い'),
         value: 2,
       ))
       ..add(DropdownMenuItem(
@@ -150,6 +150,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
           child: Column(
             children: <Widget>[
               Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, _height * 0.015),
                 child: Divider(
                   color: HexColor('313131'),
                 ),
@@ -479,7 +480,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
         );
       },
       child: Container(
-        margin: EdgeInsets.fromLTRB(0, height * 0.02, 0, 0),
+        margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(height * 0.01),
@@ -514,7 +515,7 @@ class _CoffeeIndexPageState extends State<CoffeeIndexPage> {
                         child: Text(
                           DateFormat('yyyy-MM-dd').format(data['cupped_date'].toDate()).toString(),
                           style: TextStyle(
-                            fontSize: height * 0.01,
+                            fontSize: height * 0.013,
                             color: HexColor('313131')
                           ),
                         ),

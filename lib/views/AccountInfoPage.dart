@@ -1,12 +1,63 @@
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/services/HexColor.dart';
+import 'package:cuppers_mobile/services/MyFirebaseStorage.dart';
 import 'package:cuppers_mobile/views/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'RegistrationPage.dart';
 
+class AccountInfoPage extends StatefulWidget {
+
+  @override
+  _AccountInfoPageState createState() => _AccountInfoPageState();
+}
+
 // アカウント情報表示画面
-class AccountInfoPage extends StatelessWidget {
+class _AccountInfoPageState extends State<AccountInfoPage> {
+
+  final _focusNode = FocusNode();
+
+  String _uid;
+
+  Image _img;
+  final picker = ImagePicker();
+
+  String _userName;
+  TextEditingController _userNameController;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus) {
+        fetchUserName();
+      }
+    });
+
+    _uid = FirebaseAuth.instance.currentUser.uid;
+    MyFirebaseStorage.downloadFile(_uid).then((img) {
+      setState(() {
+        _img = img;
+      });
+    });
+
+    _getUserName().then((_) {
+      _userNameController = new TextEditingController(text: _userName);
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _userNameChanged(String str) => setState(() { _userName = str; });
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +183,24 @@ class AccountInfoPage extends StatelessWidget {
                   color: HexColor('313131'),
                 ),
               ),
+              _userImageWidget(width, height),
+              Container(
+                margin: EdgeInsets.fromLTRB(width * 0.2, 0, width * 0.2, height * 0.03),
+                child: TextField(
+                  controller: _userNameController,
+                  decoration: InputDecoration(
+                    labelText: 'ユーザーネーム',
+                    hintText: 'カッピング太郎',
+                  ),
+                  style: TextStyle(
+                      fontSize: height * 0.02
+                  ),
+                  keyboardType: TextInputType.text,
+                  onChanged: _userNameChanged,
+                  textInputAction: TextInputAction.done,
+                  focusNode: _focusNode,
+                ),
+              ),
               Container(
                 width: double.infinity,
                 margin: EdgeInsets.fromLTRB(width * 0.05, height * 0.015, 0, height * 0.015),
@@ -182,5 +251,94 @@ class AccountInfoPage extends StatelessWidget {
           )
       );
     }
+  }
+
+  Widget _userImageWidget(double width, double height) {
+
+    if (_img != null) {
+
+      return InkWell(
+        onTap: () {
+          getImageFromGallery();
+        },
+        child: Container(
+          width: width * 0.45,
+          height: height * 0.3,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: _img.image
+              )
+          ),
+        ),
+      );
+    } else {
+
+      return InkWell(
+        onTap: () {
+          getImageFromGallery();
+        },
+        child: Container(
+          width: width * 0.45,
+          height: height * 0.3,
+          decoration: BoxDecoration(
+            border: Border.all(color: HexColor('313131')),
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              '画像を選択してください',
+              style: TextStyle(
+                  color: HexColor('313131')
+              ),
+            ),
+          )
+        ),
+      );
+    }
+  }
+
+  // ギャラリーから画像を取得するメソッド
+  Future getImageFromGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _img = Image.file(File(pickedFile.path));
+      _fetchUserImage(File(pickedFile.path));
+    });
+  }
+
+  // プロフィール画像を登録するメソッド
+  void _fetchUserImage(File file) async {
+
+    final StorageReference ref = FirebaseStorage.instance.ref();
+    await ref.child(this._uid).putFile(File(file.path)).onComplete;
+  }
+
+  // ユーザーネームを取得するメソッド
+  Future _getUserName() async {
+
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(this._uid)
+        .get();
+
+    setState(() {
+      if (snapshot.data()['name'] != null) {
+        _userName = snapshot.data()['name'];
+      } else {
+        _userName = '';
+      }
+    });
+  }
+
+  // ユーザーネームを登録するメソッド
+  void fetchUserName() async {
+
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(_uid)
+        .update({ 'name': _userName });
   }
 }

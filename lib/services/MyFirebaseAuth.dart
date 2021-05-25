@@ -43,7 +43,8 @@ class MyFirebaseAuth {
       // ユーザー情報をFirestoreに登録
       await FirebaseFirestore.instance
         .collection('Users')
-        .add({'uid': _credential.user.uid, 'email': email});
+        .doc(_credential.user.uid)
+        .set({'uid': _credential.user.uid, 'email': email});
 
       // ログイン処理
       await loginAndMoveUserPage(email, password, context);

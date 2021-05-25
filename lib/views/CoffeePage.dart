@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuppers_mobile/services/HexColor.dart';
+import 'package:cuppers_mobile/views/RegistrationPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +44,7 @@ class _CoffeePageState extends State<CoffeePage> {
   double _coffeeScore;
   String _flavorText;
   String _comment;
+  bool _isPublic;
 
   List<List<int>> _chartValueList = [];
 
@@ -100,27 +102,110 @@ class _CoffeePageState extends State<CoffeePage> {
               children: <Widget>[
                 Container(
                   child: IconButton(
-                    icon: Icon(Icons.ios_share),
+                    icon: _getPublicIcon(),
                     onPressed: () {
 
-                      // TODO 本実装
-                      showDialog(
-                        context: context,
-                        builder: (_) {
-                          return AlertDialog(
-                            content: Text('シェア機能は開発中です。実装完了まで今しばらくお待ちください。'),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                child: Text('OK'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: HexColor('313131'),
-                                ),
-                                onPressed: () => Navigator.pop(context),
-                              ),
-                            ],
+                      if (FirebaseAuth.instance.currentUser.isAnonymous) {
+
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('ユーザー登録をしてカッピングしたコーヒーを公開しましょう'),
+                                actions: <Widget>[
+                                  // ボタン領域
+                                  ElevatedButton(
+                                    child: Text('今はしない'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                  ElevatedButton(
+                                    child: Text('ユーザー登録'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () {
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => RegistrationPage()
+                                          )
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            }
+                        );
+                      } else {
+
+                        if (_isPublic) {
+
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('このカッピングデータを非公開にしますか？'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    child: Text('Cancel'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                  ElevatedButton(
+                                      child: Text('OK'),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: HexColor('313131'),
+                                      ),
+                                      onPressed: () async {
+
+                                        _deleteCuppingDataToPublicCollection(widget.documentId);
+                                        _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
+                                        Navigator.pop(context);
+                                      }
+                                  ),
+                                ],
+                              );
+                            },
                           );
-                        },
-                      );
+                        } else {
+
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('このカッピングデータを公開しますか？'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    child: Text('Cancel'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                  ElevatedButton(
+                                    child: Text('OK'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: HexColor('313131'),
+                                    ),
+                                    onPressed: () {
+
+                                      _addCuppingDataToPublicCollection(widget.snapshot, widget.documentId, this._uid);
+                                      _switchPublicSetting(this._isPublic, widget.documentId, this._uid);
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      }
                     },
                   ),
                 ),
@@ -395,6 +480,13 @@ class _CoffeePageState extends State<CoffeePage> {
       _coffeeScore = widget.snapshot['coffee_score'];
       _flavorText = widget.snapshot['flavor_text'];
       _comment = widget.snapshot['comment'];
+
+      // 後付け機能のためトランザクションが起きないようにする
+      if (widget.snapshot['public'] != null) {
+        _isPublic = widget.snapshot['public'];
+      } else {
+        _isPublic = false;
+      }
     });
   }
 
@@ -445,6 +537,66 @@ class _CoffeePageState extends State<CoffeePage> {
     }
   }
 
+  // 公開設定をを更新するメソッド
+  void _switchPublicSetting(bool public, String documentId, String uid) async {
+
+    if (public) {
+
+      // データを更新
+      await FirebaseFirestore.instance
+          .collection('CuppedCoffee')
+          .doc(uid)
+          .collection('CoffeeInfo')
+          .doc(documentId)
+          .update({'public': false});
+
+      // ステートの値を変更
+      setState(() {
+        _isPublic = false;
+      });
+
+    } else {
+
+      // データを更新
+      await FirebaseFirestore.instance
+          .collection('CuppedCoffee')
+          .doc(uid)
+          .collection('CoffeeInfo')
+          .doc(documentId)
+          .update({'public': true});
+
+      // ステートの値を変更
+      setState(() {
+        _isPublic = true;
+      });
+
+    }
+  }
+
+  // 公開専用のカッピングデータを格納するコレクションにデータを追加するメソッド
+  void _addCuppingDataToPublicCollection(Map<String, dynamic> cuppingData, String documentId, String uid) async {
+
+    cuppingData['uid'] = uid;
+
+    final _ref = FirebaseFirestore.instance.collection('TimelineCuppedCoffee');
+
+    Future<DocumentSnapshot> snapshot = _ref.doc(documentId).get();
+    if (snapshot != null) {
+      _ref.doc(documentId).set(cuppingData);
+    }
+  }
+
+  // 公開専用のカッピングデータを格納するコレクションからデータを削除するメソッド
+  void _deleteCuppingDataToPublicCollection(String documentId) async {
+
+    final _ref = FirebaseFirestore.instance.collection('TimelineCuppedCoffee');
+
+    Future<DocumentSnapshot> snapshot = _ref.doc(documentId).get();
+    if (snapshot != null) {
+      _ref.doc(documentId).delete();
+    }
+  }
+
   // お気に入りか否かを判定してアイコンを返却するメソッド
   Icon _getFavoriteFlag(bool flag) {
 
@@ -452,6 +604,16 @@ class _CoffeePageState extends State<CoffeePage> {
       return Icon(Icons.star);
     } else {
       return Icon(Icons.star_border);
+    }
+  }
+
+  // カッピングデータの公開設定を判定してアイコンを返却するメソッド
+  Icon _getPublicIcon() {
+
+    if (!_isPublic) {
+      return Icon(Icons.public_off);
+    } else {
+      return Icon(Icons.public);
     }
   }
 }
