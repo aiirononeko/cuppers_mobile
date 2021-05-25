@@ -300,8 +300,7 @@ class _TimelineCoffeePageState extends State<TimelineCoffeePage> {
                         child: _userImageWidget(_width, _height),
                       ),
                       Container(
-                        // width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(0, 0, 0, _height * 0.1),
+                        margin: EdgeInsets.fromLTRB(0, _height * 0.025, 0, _height * 0.1),
                         child: Text(
                             'Cupper is $_name',
                             style: TextStyle(
