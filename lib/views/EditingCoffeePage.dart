@@ -39,6 +39,7 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
   double _overall;
   String _flavorText;
   String _comment;
+  bool _isPublic;
 
   // ドラムピッカー用のリスト型変数
   String _selectedCountry = 'Country';
@@ -1090,6 +1091,12 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
       _overall = widget.snapshot['overall'];
       _flavorText = widget.snapshot['flavor_text'];
       _comment = widget.snapshot['comment'];
+
+      if (widget.snapshot['public'] != null) {
+        _isPublic = widget.snapshot['public'];
+      } else {
+        _isPublic = false;
+      }
     });
   }
 
@@ -1157,5 +1164,12 @@ class _EditingCoffeePageState extends State<EditingCoffeePage> {
         .collection('CoffeeInfo')
         .doc(documentId)
         .update(cuppingData);
+
+    if (_isPublic) {
+      await FirebaseFirestore.instance
+          .collection('TimelineCuppedCoffee')
+          .doc(documentId)
+          .update(cuppingData);
+    }
   }
 }
